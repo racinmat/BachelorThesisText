@@ -1273,7 +1273,7 @@ target "http://www.codeproject.com/Articles/20027/JSON-Spirit-A-C-JSON-Parser-Ge
 \end_inset
 
  library.
- Last external library is 
+ Another external library is 
 \begin_inset CommandInset href
 LatexCommand href
 name "V-Collide"
@@ -1302,7 +1302,12 @@ target "https://github.com/racinmat/VCollide2"
 \end_layout
 
 \begin_layout Standard
+Last use external library is QT, which was used to create platform independent
+ GUI.
+\end_layout
 
+\begin_layout Section
+Code structure 
 \end_layout
 
 \begin_layout Bibliography
@@ -1336,16 +1341,6 @@ https://dspace.cvut.cz/bitstream/handle/10467/61814/F3-DP-2015-Vana-Petr-thesis.
 
 \begin_layout Standard
 \begin_inset Newpage cleardoublepage
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset include
-LatexCommand include
-filename "prilohy.lyx"
-
 \end_inset
 
 
