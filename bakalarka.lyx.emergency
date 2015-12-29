@@ -1215,64 +1215,27 @@ status open
 
 \end_layout
 
-\begin_layout Chapter
-\begin_inset Argument 1
+\begin_layout Standard
+\begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-Implementation
+Vlastní text je vložen Vložit -> Soubor -> Dokument potomka.
+ Kapitoly je tak možné editovat každou zvlášť, což je výhodné u rozsáhlejších
+ prací.
+ Jinou možností je psát text přímo sem.
 \end_layout
 
 \end_inset
 
-Implementation
-\end_layout
 
-\begin_layout Standard
-This part will cover implementation of algorithm, which was used for simulations.
- Whole codebase can be found at 
-\begin_inset CommandInset href
-LatexCommand href
-name "this github repository"
-target "https://github.com/racinmat/AutonomousSurveillanceBachelorThesis"
+\begin_inset CommandInset include
+LatexCommand include
+filename "text.lyx"
 
 \end_inset
 
-.
-\end_layout
 
-\begin_layout Section
-External libraries
-\end_layout
-
-\begin_layout Standard
-In implementation are used some external libries.
- Every used library is mentioned here.
-\begin_inset CommandInset href
-LatexCommand href
-name "Boost libraries"
-target "http://www.boost.org/"
-
-\end_inset
-
- is used for smart pointers, libraries for Dubins maneuvers are from Master
- Thesis by Petr Váňa
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Dubins-thesis"
-
-\end_inset
-
-.
- Generating of JSON from C++ object is done via 
-\begin_inset CommandInset href
-LatexCommand href
-name "Json Spirit"
-target "http://www.codeproject.com/Articles/20027/JSON-Spirit-A-C-JSON-Parser-Generator-Implemented"
-
-\end_inset
-
- library.
 \end_layout
 
 \begin_layout Standard
