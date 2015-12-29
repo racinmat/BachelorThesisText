@@ -1246,7 +1246,8 @@ External libraries
 \end_layout
 
 \begin_layout Standard
-In implementation are used 
+In implementation are used some external libries.
+ Every used library is mentioned here.
 \begin_inset CommandInset href
 LatexCommand href
 name "Boost libraries"
@@ -1254,8 +1255,8 @@ target "http://www.boost.org/"
 
 \end_inset
 
- for smart pointers, libraries for Dubins maneuvers are from Master Thesis
- by Petr Váňa
+ is used for smart pointers, libraries for Dubins maneuvers are from Master
+ Thesis by Petr Váňa
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Dubins-thesis"
@@ -1263,43 +1264,41 @@ key "Dubins-thesis"
 \end_inset
 
 .
+ Generating of JSON from C++ object is done via 
+\begin_inset CommandInset href
+LatexCommand href
+name "Json Spirit"
+target "http://www.codeproject.com/Articles/20027/JSON-Spirit-A-C-JSON-Parser-Generator-Implemented"
+
+\end_inset
+
+ library.
+ Last external library is 
+\begin_inset CommandInset href
+LatexCommand href
+name "V-Collide"
+target "http://gamma.cs.unc.edu/V-COLLIDE/"
+
+\end_inset
+
+ from The University of North Carolina at Chapel Hill.
  
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
+Because V-Collide sources were written in 1997 and because I used C++11
+ compiler to compile my source codes, I had to rewrite part of this library
+ for compatibility and to make public API easier to use.
+ Modifications can be seen in 
+\begin_inset CommandInset href
+LatexCommand href
+name "this github repository"
+target "https://github.com/racinmat/VCollide2"
 
-\begin_layout Plain Layout
+\end_inset
 
-\series bold
-\size huge
-Seznam literatury
-\end_layout
-
-\begin_layout Plain Layout
-Pokud použijete 
-\emph on
-styl
-\emph default
+.
  
-\begin_inset Quotes gld
-\end_inset
-
-Bibliografie
-\begin_inset Quotes grd
-\end_inset
-
-, tak bibliografii generovanou BibTeXem smažte (a naopak)!!!!!
-\end_layout
-
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard

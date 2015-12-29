@@ -1273,118 +1273,35 @@ target "http://www.codeproject.com/Articles/20027/JSON-Spirit-A-C-JSON-Parser-Ge
 \end_inset
 
  library.
-\end_layout
+ Last external library is 
+\begin_inset CommandInset href
+LatexCommand href
+name "V-Collide"
+target "http://gamma.cs.unc.edu/V-COLLIDE/"
 
-\begin_layout Standard
-\begin_inset Note Note
-status open
+\end_inset
 
-\begin_layout Plain Layout
-
-\series bold
-\size huge
-Seznam literatury
-\end_layout
-
-\begin_layout Plain Layout
-Pokud použijete 
-\emph on
-styl
-\emph default
+ from The University of North Carolina at Chapel Hill.
  
-\begin_inset Quotes gld
-\end_inset
-
-Bibliografie
-\begin_inset Quotes grd
-\end_inset
-
-, tak bibliografii generovanou BibTeXem smažte (a naopak)!!!!!
-\end_layout
-
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
-\begin_inset CommandInset bibtex
-LatexCommand bibtex
-bibfiles "bakalarka"
-options "csplainnat"
+Because V-Collide sources were written in 1997 and because I used C++11
+ compiler to compile my source codes, I had to rewrite part of this library
+ for compatibility and to make public API easier to use.
+ Modifications can be seen in 
+\begin_inset CommandInset href
+LatexCommand href
+name "this github repository"
+target "https://github.com/racinmat/VCollide2"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-Tento seznam literatury byl vytvořen pomocí 
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-
-\backslash
-BibTeX 
-\end_layout
-
-\end_inset
-
-u s použitím stylu 
-\family typewriter
-csplainnat
-\family default
 .
- Citace jsou automaticky seřazeny podle abecedy.
+ 
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-addcontentsline{toc}{chapter}{
-\end_layout
-
-\end_inset
-
-Literatura
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\end_inset
-
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Tento příkaz přidá Literaturu do obsahu
-\end_layout
-
-\end_inset
-
 
 \end_layout
 
