@@ -1,0 +1,176 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass scrreprt
+\begin_preamble
+%<-------------------------------společná nastavení------------------------------>
+\usepackage{color}%kvůli barvám ČVUT
+\usepackage{multicol}
+
+
+
+
+%<-----------------------------volání stylů----------------------------------------->
+% (znak % je označení komentáře: co je za ním, není aktivní)
+
+%<--------matematické písmo--------------------------------------->
+%\usepackage[helvet]{packages/sfmath}%matematika ala helvetica
+
+
+
+
+%<------------------------------záhlaví stránek------------------------------------>
+%\usepackage{packages/bc-headings}
+\usepackage{packages/bc-fancyhdr}
+
+%<------------------------------hlavičky kapitol------------------------------------>
+%\usepackage{packages/bc-neueskapitel}
+\usepackage{packages/bc-fancychap}
+\end_preamble
+\options openright,cleardoubleempty,BCOR10mm
+\use_default_options false
+\maintain_unincluded_children false
+\language czech
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman tgpagella
+\font_sans tgheros
+\font_typewriter tgcursor
+\font_math eulervm
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize a4paper
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 0
+\use_package mathdots 0
+\use_package mathtools 1
+\use_package mhchem 0
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language german
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Závěr 
+\end_layout
+
+\end_inset
+
+Dobrá rada na závěr
+\end_layout
+
+\begin_layout Standard
+LyX je vynikající editor, který vám usnadní napsání rozsáhlejší práce typu
+ bakalářka nebo diplomka.
+ Editor si hravě poradí s komplikovanými úlohami jako je vkládání křížových
+ odkazů, vytvoření seznamu literatury a citování literatury v textu, vytvoření
+ obsahu a rejstříku.
+ Bez většího úsilí bude vaše práce  typograficky na úrovni.
+\end_layout
+
+\begin_layout Standard
+Používáte-li 
+\begin_inset Marginal
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+\size giant
+!
+\end_layout
+
+\end_inset
+
+LyX jen na psaní bakalářky, 
+\emph on
+nesnažte se
+\emph default
+ naučit vše, co umí! Zabralo by to více času než celá bakalářka! Naučte
+ se jen pár nezbytností a pište a pište a pište! Až budete mít dopsán a
+ zkontrolován text, můžete si pohrát s výběrem vzhledu vhodného pro vaši
+ práci, s výběrem písma, typu záhlaví stránek, hlaviček kapitol atd.
+ Teprve nakonec udělejte závěrečnou typografickou revizi textu.
+ Zejména zkontrolujte polohu plovoucích objektů (případně je přemístěte
+ na
+\begin_inset space ~
+\end_inset
+
+vhodnější místo), zkontrolujte předložky na
+\begin_inset space ~
+\end_inset
+
+konci řádku a odstraňte vdovy a sirotky (osamělé řádky)
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Nejsnáze je lze odstranit tak, že z textu vypustíte (nebo do něj přidáte)
+ pár slov či vět anebo úpravou odstavců.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\end_body
+\end_document

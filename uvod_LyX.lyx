@@ -1,0 +1,1029 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass scrreprt
+\begin_preamble
+%<-------------------------------společná nastavení------------------------------>
+
+\usepackage{multicol}
+\newcommand{\BibTeX}{{\sc Bib}\TeX}%BibTeX logo
+
+
+
+%<-----------------------------volání stylů----------------------------------------->
+% (znak % je označení komentáře: co je za ním, není aktivní)
+
+%<--------matematické písmo--------------------------------------->
+
+%\usepackage[helvet]{packages/sfmath}%matematika ala helvetica
+
+%<------------------------------záhlaví stránek------------------------------------>
+%\usepackage{packages/bc-headings}
+\usepackage{packages/bc-fancyhdr}
+
+%<------------------------------hlavičky kapitol------------------------------------>
+%\usepackage{packages/bc-neueskapitel}
+%\usepackage{packages/bc-fancychap}
+\end_preamble
+\options czech,openright,cleardoubleempty,BCOR10mm,DIV10
+\use_default_options false
+\maintain_unincluded_children false
+\language czech
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman lmodern
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize a4paper
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 0
+\use_package mathdots 0
+\use_package mathtools 1
+\use_package mhchem 0
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language german
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Úvod do Lyxu
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Je-li název hodně dlouhý, vložte krátký titulek Vložit -> Krátký titulek,
+ ten se pak použije v obsahu a v hlavičkách
+\end_layout
+
+\end_inset
+
+Šíleně stručný úvod do LyXu
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Název kapitoly se stane názvem kapitoly poté co v něm umístíte kurzor a
+ v roletce vlevo nahoře v hlavním menu LyXu vyberete 
+\begin_inset Quotes gld
+\end_inset
+
+Kapitola
+\begin_inset Quotes grd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Instalace
+\end_layout
+
+\begin_layout Standard
+Instalace LyXu je dnes už poměrně jednoduchou záležitostí i na Windows.
+ Z volitelných instalací doporučuji zaškrtnout JabRef.
+ Během instalace MikTeXu jsme dotázáni, zda si přejeme, aby chybějící balíčky
+ byly doinstalovány 
+\emph on
+on-the-fly
+\emph default
+, doporučuji zaškrtnout 
+\emph on
+ano
+\emph default
+.
+ 
+\end_layout
+
+\begin_layout Section
+Práce s LyXem
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Tento úvod si neklade za cíl nahradit stávající návody a nápovědy pro LyX:
+ najdete je jednak v
+\begin_inset space ~
+\end_inset
+
+samotném LyXu (mám ale dojem, že návod k LyXu 2.1 je z nějaké starší verze),
+ a také na webových stránkách projektu
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "LyXVisualTour"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Framed
+position "t"
+hor_pos "c"
+has_inner_box 0
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\noindent
+Podrobnější návod jak co udělat se objeví ve formě poznámek po otevření
+ zdrojového souboru tohoto dokumentu (
+\family typewriter
+uvod_LyX.lyx
+\family default
+) v Lyxu!
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+\begin_inset Quotes gld
+\end_inset
+
+Hello world!
+\begin_inset Quotes grd
+\end_inset
+
+ nebo-li první dokument
+\end_layout
+
+\begin_layout Standard
+Otevřte nový dokument (
+\family typewriter
+Soubor
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+Nový
+\family default
+) a napište Hello world! Stiskněte 
+\family typewriter
+CTRL+R
+\family default
+ a nebo klikněte 
+\family typewriter
+Dokument 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ Prohlížet [pdf (pdflatex)]
+\family default
+.
+ Za chvíli se vytvoří a otevře 
+\family typewriter
+pdf
+\family default
+ soubor s textem 
+\begin_inset Quotes gld
+\end_inset
+
+Hello world!
+\begin_inset Quotes grd
+\end_inset
+
+.
+ To je váš první dokument.
+ Pdf dokument se vytváří pomocí tzv.
+ konvertorů, v tomto případě jste použili konvertor 
+\family typewriter
+pdflatex
+\family default
+.
+ Novější konvertory (XeTeX, LuaTeX) poskytují některé nové možnosti (např.
+ použití systémových písem), ale sám s nimi nemám velké zkušenosti.
+ Tento návod, stejně jako celá šablona, je určen spíše pro 
+\family typewriter
+pdflatex
+\family default
+, což vám ovšem nebrání v experimentování!
+\end_layout
+
+\begin_layout Subsection
+Styly, aneb zapomeňte na formátování
+\end_layout
+
+\begin_layout Standard
+První zlozvyk, který se při práci s LyXem musíte odnaučit, je zvyk individuálně
+ formátovat nadpisy a odstavce a seznamy, zkrátka vše co by se mělo formátovat
+ na globální úrovni, tj.
+ na
+\begin_inset space ~
+\end_inset
+
+úrovni dokumentu.
+ V LyXu opravdu jen výjimečně určujeme, že 
+\emph on
+tento text
+\emph default
+ má být psán tím a tím písmem, určité velikosti a řezu.
+ Místo toho prostě určíme: toto je nadpis té a té úrovně, toto je číslovaný
+ seznam a toto je základní (standardní) text.
+ Jak se to dělá je základní a nejdůležitější znalost v LyXu.
+ Do textu umístěte kurzor a v roletce (vlevo nahoře) vyberte příslušný 
+\emph on
+styl
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+Místo roletky (ta je docela dlouhá a málo přehledná) je výhodnější používat
+ klávesové zkratky.
+ Příkazem Alt+p se aktivuje možnost definovat styl odstavce, ve kterém je
+ kurzor.
+ Dělá se to stiskem další klávesy.
+ Seznam těch nejdůležitějších je hned na začátku tabulky
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "tab:zkratky"
+
+\end_inset
+
+ přílohy.
+ To, jak má který styl vypadat, je definováno na úrovni třídy dokumentu
+ a je lepší tyto definice neměnit, pokud nevíte přesně jak a proč.
+ V této šabloně je doporučeno měnit pouze používaná písma a hlavičky kapitol.
+ Jak, to je vysvětleno v sekci
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Změna-vzhledu"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Vkládání číslovaných objektů
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Podkapitola = 
+\begin_inset Quotes gld
+\end_inset
+
+Sekce
+\begin_inset Quotes grd
+\end_inset
+
+ v roletce vlevo nahoře
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Vkládání obrázků a tabulek
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Vložení obrázku či tabulky: Vložit -> Plovoucí objekt -> Obrázek (tabulka).
+ Do rámečku s kurzorem vepsat popis obrázku, pak kliknout před popis 
+\begin_inset Quotes gld
+\end_inset
+
+Obrázek č.
+ x
+\begin_inset Quotes grd
+\end_inset
+
+ a Vložit -> Obrázek..., vybrat soubor s obrázkem (Procházet) a upravit rozměry
+ obrázku.
+\end_layout
+
+\begin_layout Plain Layout
+Vložení obrázku či tabulky obtékané textem: Vložit -> Plovoucí objekt ->
+ Obtékání, pak Vložit -> Obrázek (nebo tabulku) a upravit rozměry (levé
+ ucho myši) a parametry obtékání
+\end_layout
+
+\end_inset
+
+
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename obrazky/lev.png
+	lyxscale 40
+	width 30text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Lev obtékaný textem.
+ Obtékaným obrázkům se ale raději vyhněte.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Lev"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ Obrázek lze vložit téměř v jakémkoliv formátu.
+ Vektorové obrázky (grafy a diagramy z
+\begin_inset space ~
+\end_inset
+
+Inkscapu, Wordu, Excelu atp.), převeďte před použitím na pdf.
+ Jen tak dostanete perfektní výsledek a malou velikost výstupního souboru.
+ Tak je tomu i
+\begin_inset space ~
+\end_inset
+
+v
+\begin_inset space ~
+\end_inset
+
+případě obrázku
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Před křížový odkaz vkládáme nezlomitelnou mezeru (Ctrl+mezerník)
+\end_layout
+
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "fig:LevII"
+
+\end_inset
+
+.
+ Obrázek má jen 28 kB, přesto jej můžete zvětšit třeba na A0 -- všimněte
+ si přitom toho malého textu pod levým dolním okrajem, písmo je stále krásné
+ i při zvětšování obrázku.
+ Pokud byste použili bitmapový obrázek (bmp, jpg, png), nebyl by text patrně
+ vůbec čitelný! 
+\end_layout
+
+\begin_layout Subsubsection
+Citování literatury
+\end_layout
+
+\begin_layout Standard
+Důležitou součástí práce je seznam použité literatury.
+ Před jeho vytvořením doporučuji prostudovat Projekt Bibliografické citace
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Citace"
+
+\end_inset
+
+.
+ Seznam použité literatury lze vytvořit dvěma způsoby:
+\end_layout
+
+\begin_layout Enumerate
+Pomocí stylu Bibliografie (příklad je na konci souboru 
+\family typewriter
+bakalarka.lyx
+\family default
+).
+ Citace musíme vytvořit a formátovat sami, při respektování zvyklostí respektive
+ norem, které vytváření citací upravují.
+ Může nám pomoci generátor citací
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after "karta generátor"
+key "Citace"
+
+\end_inset
+
+.
+ Tento způsob vytváření seznamu literatury je pracnější, ale pro začátečníka
+ snadněji pochopitelný a proto patrně vhodnější.
+\end_layout
+
+\begin_layout Enumerate
+Pomocí 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+BibTeX 
+\end_layout
+
+\end_inset
+
+u, který je součástí LaTeXu a je dobře implementován i do LyXu.
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+BibTeX 
+\end_layout
+
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+se sám postará o dokonalé vytvoření citací z databáze citací (v našem případě
+\noun on
+ 
+\family typewriter
+\noun default
+baka\SpecialChar \-
+lar\SpecialChar \-
+ka.bib
+\family default
+) podle námi zvoleného stylu.
+ Velkou výhodou tohoto způsobu je, že citace jsou vytvořeny (a formátovány)
+ naprosto jednotně, podle ČSN ISO 690 (pokud použijeme styl 
+\family typewriter
+csplainnat
+\family default
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "csplainnat"
+
+\end_inset
+
+), respektive podle mezinárodních zvyklostí (pokud použijeme styl 
+\family typewriter
+plainnat
+\family default
+ nebo u
+\family typewriter
+nsrtnat).
+
+\family default
+ Citace jsou automaticky seřazeny, buď podle abecedy nebo podle pořadí citování
+ v práci.
+ Databázi citací 
+\family typewriter
+bakalarka.bib 
+\family default
+lze vytvořit a editovat v jakémkoliv textovém editoru, který umí kódování
+ češtiny utf8, nebo pomocí specializovaného programu, výborný je například
+ JabRef
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Jabref"
+
+\end_inset
+
+.
+ Zde je příklad záznamu citace knížky (
+\family typewriter
+@BOOK
+\family default
+) Leslie Lamporta
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Lamport"
+
+\end_inset
+
+ v souboru 
+\family typewriter
+bakalarka.bib
+\family default
+ (komentáře jsou viditelné pouze při otevření souboru uvod_Lyx.lyx v LyXu):
+\end_layout
+
+\begin_layout LyX-Code
+@BOOK{Lamport, 
+\family typewriter
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\family typewriter
+označení typu citace (book) a značka (bibtexkey), která se používá pro ocitování
+ knížky v textu
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+title = {Latex: a document preparation system}, 
+\family typewriter
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\family typewriter
+Titul knížky
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+publisher = {Addison-Wesley Longman Publishing Co., Inc.}, 
+\end_layout
+
+\begin_layout LyX-Code
+year = {1986}, 
+\family typewriter
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\family typewriter
+rok publikování
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+author = {Leslie Lamport}, 
+\family typewriter
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\family typewriter
+autor knihy
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+address = {Boston, MA, USA}, 
+\end_layout
+
+\begin_layout LyX-Code
+isbn = {0-201-15790-X} }
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout Standard
+Za zmínku stojí, že bibliografické záznamy ve formátu 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+BibTeX 
+\end_layout
+
+\end_inset
+
+ lze vygenerovat v řadě on-line databázích (například ISI Web of Knowledge
+ -- pro studenty ČVUT přístupný přes bránu 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+https://dialog.cvut.cz/
+\end_layout
+
+\end_inset
+
+ -- se stejným uživatelským jménem a heslem jako do KOSu).
+ Výše uvedený záznam byl vygenerován vyhledávačem Google Scholar 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://scholar.google.cz/
+\end_layout
+
+\end_inset
+
+, který je přístupný všem.
+ Jedinou nevýhodou 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+BibTeX 
+\end_layout
+
+\end_inset
+
+u je, že neumí dobře česky.
+ Ve jménech autorů je místo háčků a čárek nutné použít LaTeXový zápis diakritiky
+ ({
+\backslash
+'{a}} pro á,{
+\backslash
+v{c}} pro č a {
+\backslash
+r{u}} pro ů atp.).
+ Také je třeba dát pozor na uzavření všech složených závorek v záznamech
+ (použijete-li JabRef, tak tento problém odpadá).
+ Kompletní návod k 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+BibTeX 
+\end_layout
+
+\end_inset
+
+u najdete v instalaci MikTeXu
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BibTeXing"
+
+\end_inset
+
+, na internetu je ovšem mnoho jednodušších návodů pro začátečníky, například
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BibTeXWiki"
+
+\end_inset
+
+.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Na konci souboru
+\family typewriter
+ bakalarka.lyx
+\family default
+ jsou použity oba uvedené způsoby, nelekněte se proto, že jsou v této práci
+ 
+\emph on
+dva
+\emph default
+ seznamy literatury.
+ Vy se musíte rozhodnout jen pro jeden způsob a druhý v
+\begin_inset space ~
+\end_inset
+
+šabloně smazat.
+ Máme-li vytvořen seznam použité literatury, odkazy na citace vkládáme do
+\begin_inset space ~
+\end_inset
+
+textu pomocí menu 
+\family typewriter
+Vložit 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ Citace
+\family default
+\SpecialChar \ldots{}
+
+\end_layout
+
+\begin_layout Subsubsection
+Vkládání poznámek, plovoucích obrázků a odkazů na obrázky
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/wedgeSplit.pdf
+	lyxscale 50
+	height 40theight%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Obrázek, tentokrát plovoucí, neobtékaný.
+ Čísla a titulky obrázků se uvádí pod obrázky.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:LevII"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Plovoucí neobtékaný obrázek: Vložit -> plovoucí objekt -> obrázek
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Marginal
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+raggedright{}
+\end_layout
+
+\end_inset
+
+Poznámka na okraji.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Jak se vkládá obrázek obtékaný textem už umíme (obr.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Příklad odkazu na obrázek (rovnici, tabulku)
+\end_layout
+
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "fig:Lev"
+
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Toto je příklad křížového odkazu na obrázek (tabulku, rovnici, kapitolu...).
+ Odkaz může ale nemusí obsahovat informaci, na které stránce objekt je.
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Vložit -> Poznámka pod čarou
+\end_layout
+
+\end_inset
+
+.), obrázek
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:LevII"
+
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Jiný příklad křížového odkazu na obrázek - tentokrát je uvedena pouze strana,
+ na které obrázek je.
+\end_layout
+
+\end_inset
+
+) je příkladem klasického neobtékaného plovoucího obrázku.
+ LaTeX plovoucí obrázky umisťuje přednostně na horní okraj stránky -- toto
+ nastavení lze změnit po kliknutí prsteníčkovým uchem na rámeček plovoucího
+ objektu (tedy vedle samotného obrázku) a umístit obrázek třeba na spodek
+ stránky nebo až na konec kapitoly.
+\end_layout
+
+\end_body
+\end_document

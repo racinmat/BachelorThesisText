@@ -1,0 +1,309 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass scrreprt
+\begin_preamble
+%<-------------------------------společná nastavení------------------------------>
+\usepackage{color}%kvůli barvám ČVUT
+\usepackage{multicol}
+
+
+
+
+%<-----------------------------volání stylů----------------------------------------->
+% (znak % je označení komentáře: co je za ním, není aktivní)
+
+%<--------matematické písmo--------------------------------------->
+
+%\usepackage[helvet]{packages/sfmath}%matematika ala helvetica
+
+
+
+%<------------------------------záhlaví stránek------------------------------------>
+%\usepackage{packages/bc-headings}
+\usepackage{packages/bc-fancyhdr}
+
+%<------------------------------hlavičky kapitol------------------------------------>
+%\usepackage{packages/bc-neueskapitel}
+%\usepackage{packages/bc-fancychap}
+\end_preamble
+\options openright,cleardoubleempty,BCOR10mm
+\use_default_options false
+\maintain_unincluded_children false
+\language czech
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman default
+\font_sans iwona
+\font_typewriter tgcursor
+\font_math iwona-math
+\font_default_family sfdefault
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize a4paper
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 0
+\use_package mathdots 0
+\use_package mathtools 1
+\use_package mhchem 0
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language german
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pagenumbering{arabic}%start arabic pagination from 1
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Chapter
+Úvod
+\end_layout
+
+\begin_layout Standard
+Často slýcháme tvrzení, že u závěrečné práce nezáleží tolik na grafické
+ úpravě, jako na obsahu
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Je zvláštní, že nic takového se neříká o gramatické správnosti textu --
+ sebemenší gramatickou chybičku Vám každý člen zkušební komise rád škodolibě
+ vyčte! 
+\end_layout
+
+\end_inset
+
+.
+ To je tvrzení bezesporu pravdivé.
+ Avšak neříká, že na grafické úpravě nezáleží vůbec.
+ Ani že čím hůře práce vypadá, tím je obsahově lepší.
+ Většinou totiž platí spíše opak.
+ 
+\end_layout
+
+\begin_layout Standard
+Je asi jedno, jak vypadá podprůměrná práce (stejně ji nikdo nečte), ale
+ myslete na to, že 
+\emph on
+Vaši skvělou
+\emph default
+ 
+\emph on
+práci
+\emph default
+ bude možná číst spousta lidí!
+\end_layout
+
+\begin_layout Standard
+Samozřejmě nemělo by smysl vytvářet typograficky dokonalý dokument, pokud
+ by tvorba takového dokumentu spotřebovala neúměrně mnoho času, který by
+ pak chyběl pro vlastní práci.
+ O kvalitě výstupu ale ve značné míře rozhoduje použitá 
+\emph on
+šablona
+\emph default
+.
+ A
+\begin_inset space ~
+\end_inset
+
+psát do špatné šablony je stejně pracné, jako do dobré...
+\end_layout
+
+\begin_layout Standard
+Předkládaná šablona je pokusem takovou dobrou šablonu studentům poskytnout.
+ Je určena pro WYSIWYM
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+What You See Is What You Mean.
+\end_layout
+
+\end_inset
+
+ textový editor 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+href{http://www.lyx.org/}{
+\end_layout
+
+\end_inset
+
+LyX
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Marginal
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+raggedright{}
+\end_layout
+
+\end_inset
+
+LyX
+\end_layout
+
+\end_inset
+
+, což je 
+\emph on
+frontend
+\emph default
+ typografického sázecího systému LaTeX.
+ Samotný LaTeX je poněkud náročný, a rozhodně bych ho nedoporučil použít
+ začátečníkům pro psaní bakalářky
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Seznámit se podrobněji s LaTeXem lze například v knize autora systému
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Lamport"
+
+\end_inset
+
+ nebo ve skvělém přehledu Pavla Satrapy
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "LaTeXProPragmatiky"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ S pomocí LyXu to ale jde -- LyX není náročnější, než jiné editory, spíše
+ naopak.
+ Vytváření 
+\emph on
+dlouhých,
+\emph default
+ 
+\emph on
+strukturovaných
+\emph default
+ dokumentů je v LyXu snazší.
+ Pokud tedy vaše práce bude mít několik kapitol, rozdělených do sekcí a
+ podsekcí, bude mít obsah a číslované obrázky nebo dokonce číslované rovnice,
+ bude mít seznam literatury a uvnitř práce bude tato literatura citována
+ -- pak je LyX správná volba! Naučit se základy ovládání zabere půl dne
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+LyX je přeci jen trochu 
+\emph on
+jiný
+\emph default
+ než obvyklé wordprocessory!
+\end_layout
+
+\end_inset
+
+, ale tento čas se během práce několikanásobně vrátí.
+ Za zmínku ještě stojí, že LyX i LaTeX jsou úplně zadarmo (GNU General Public
+ License)!
+\end_layout
+
+\end_body
+\end_document
