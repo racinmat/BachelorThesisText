@@ -163,7 +163,7 @@ pagenumbering{roman}
 \shape smallcaps
 \size largest
 \noun on
-České vysoké učení technické v Praze
+Czech Technical University in Prague
 \family default
 \shape default
 \size default
@@ -181,7 +181,7 @@ pagenumbering{roman}
 \shape smallcaps
 \size largest
 \noun on
-Fakulta elektrotechnická
+Fakulty of Electrical Engineering
 \family default
 \shape default
 \size default
@@ -199,7 +199,7 @@ Fakulta elektrotechnická
 \shape smallcaps
 \size larger
 \noun on
-katedra kybernetiky
+Department of Cybernetics
 \family default
 \shape default
 \size default
@@ -230,7 +230,7 @@ katedra kybernetiky
 
 \family sans
 \size huge
-BAKALÁŘSKÁ PRÁCE
+BACHELOR THESIS
 \end_layout
 
 \begin_layout Standard
@@ -299,11 +299,11 @@ Matěj Račinský
 \align block
 
 \size large
-Vedoucí
+Thesis
 \begin_inset space ~
 \end_inset
 
-práce: 
+supervisor: 
 \family sans
 Dr.
  Martin Saska
@@ -314,7 +314,7 @@ Dr.
 
 
 \family sans
-Praha,
+In Prague,
 \family default
  
 \begin_inset ERT

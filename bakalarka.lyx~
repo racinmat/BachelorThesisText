@@ -163,7 +163,7 @@ pagenumbering{roman}
 \shape smallcaps
 \size largest
 \noun on
-České vysoké učení technické v Praze
+Czech Technical University in Prague
 \family default
 \shape default
 \size default
@@ -181,7 +181,7 @@ pagenumbering{roman}
 \shape smallcaps
 \size largest
 \noun on
-Fakulta elektrotechnická
+Fakulty of Electrical Engineering
 \family default
 \shape default
 \size default
@@ -199,7 +199,7 @@ Fakulta elektrotechnická
 \shape smallcaps
 \size larger
 \noun on
-katedra kybernetiky
+Department of Cybernetics
 \family default
 \shape default
 \size default
@@ -230,7 +230,7 @@ katedra kybernetiky
 
 \family sans
 \size huge
-BAKALÁŘSKÁ PRÁCE
+BACHELOR THESIS
 \end_layout
 
 \begin_layout Standard
@@ -314,7 +314,7 @@ Dr.
 
 
 \family sans
-Praha,
+In Prague,
 \family default
  
 \begin_inset ERT
@@ -387,7 +387,7 @@ addcontentsline{toc}{chapter}{
 
 Abstrakt
 \begin_inset ERT
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -643,7 +643,7 @@ addcontentsline{toc}{chapter}{
 
 Zadání práce
 \begin_inset ERT
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
