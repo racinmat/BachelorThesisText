@@ -31,7 +31,7 @@
 %\usepackage{packages/bc-neueskapitel}
 \usepackage{packages/bc-fancychap}
 \end_preamble
-\options czech,cleardoublepage=empty,BCOR15mm,DIV12
+\options cleardoublepage=empty,BCOR15mm,DIV12
 \use_default_options false
 \maintain_unincluded_children false
 \language czech
@@ -1464,7 +1464,11 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Map with goals unsuitable for grouping 
+Map 
+\lang english
+with
+\lang czech
+ goals unsuitable for grouping 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Map-with-goals"
