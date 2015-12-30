@@ -1511,12 +1511,24 @@ waiting
 status open
 
 \begin_layout Plain Layout
-Dubbins maneuvers
+Dubins maneuvers
 \end_layout
 
 \end_inset
 
-Dubbins maneuvers
+Dubins maneuvers
+\end_layout
+
+\begin_layout Standard
+Dubins maneuvers, also called Dubins curves or Dubins were published by
+ Lester Eli Dubins in 1957 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Dubins1957"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Chapter
@@ -1563,7 +1575,7 @@ target "http://www.boost.org/"
  Thesis by Petr Váňa
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Dubins-thesis"
+key "Vana2015"
 
 \end_inset
 
@@ -1743,29 +1755,11 @@ GuidingPathFactory is wrapper for PathFindingAlgorithm interface and is
 Implementation of PathFindingAlgorithm is AStart class.
 \end_layout
 
-\begin_layout Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-label "1"
-key "Dubins-thesis"
-
-\end_inset
-
-Petr Váňa,
-\emph on
- Path Planning for Non-holonomic Vehicle in Surveillance Missions
-\emph default
- [online].
- [cit.
- 2015-12-29].
- URL: 
-\begin_inset Flex URL
-status open
-
-\begin_layout Plain Layout
-
-https://dspace.cvut.cz/bitstream/handle/10467/61814/F3-DP-2015-Vana-Petr-thesis.pdf
-\end_layout
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "bibliography"
+options "bibtotoc,csplainnat"
 
 \end_inset
 
