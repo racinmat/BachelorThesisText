@@ -1198,19 +1198,16 @@ Edges in this graph are only between nodes of neighboring squares, so each
 \end_layout
 
 \begin_layout Standard
-Before converting map to nodes, optional modification of goal for guiding
- path can be turned on.
- I will cover the modification in next chapter.
-\begin_inset Marginal
-status open
-
-\begin_layout Plain Layout
-todo: možná sem odkaz na kapitolu
-\end_layout
+After converting map to nodes, optional grouping of goals for guiding path
+ can be turned on.
+ I will cover the grouping in chapter 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Grouping-of-goals"
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Standard
@@ -1260,12 +1257,9 @@ On line 8 is optional preparation before optimization using Dubins maneuvers.
  During implementation of this method were complications, which are covered
  in chapter, and thus the row was removed from the algorithm.
  
-\begin_inset Marginal
-status open
-
-\begin_layout Plain Layout
-todo: možná sem odkaz na kapitolu
-\end_layout
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Paths-narrowing"
 
 \end_inset
 
@@ -1292,18 +1286,25 @@ todo: možná sem odkaz na kapitolu
 status open
 
 \begin_layout Plain Layout
-Modifications of goal for guiding path
+Grouping of goals for guiding path
 \end_layout
 
 \end_inset
 
-Modifications of goal for guiding path
+Grouping of goals for guiding path
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Grouping-of-goals"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-During this preprocessing (method MapProcessor::getEndNodes in codebase)
- all AoIs are transformed to one big AoI, which is the smallest rectangle
- covering all AoIs.
+During this processing of map (method MapProcessor::getEndNodes in codebase)
+ all AoIs are grouped to one big AoI, which is the smallest rectangle covering
+ all AoIs.
  
 \end_layout
 
@@ -1312,6 +1313,136 @@ If this modification is turned on, instead of one goal for every AoI (node
  in middle of AoI rectangle is considered as goal node), only one goal is
  used for all AoIs.
  This prevents swarm to split and whole swarm has only one guiding path.
+ The main reason to have one big swarm instead of more smaller swarms is
+ that smaller swarms (or individual UAVs in case of same count of AoI and
+ UAVs) is relative localization, which can be used better when having only
+ one swarm.
+\end_layout
+
+\begin_layout Standard
+Below are images of maps with goals and obstacles.
+ Goals have grren color and obstacles have grey color.
+\end_layout
+
+\begin_layout Standard
+This approach has advantage, when individual AoIs are near the global goal
+ of big AoI, as seen in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Maps-with-goals"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Disadvantage of this method is, when individual AoIs have big distance from
+ each other than can be covered by UAVs, this approach totally fails, because
+ RRT-Path, which is much faster than RRT, has goal very distant from AoIs,
+ as can be seen in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Map-with-goals"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename obrazky/map1.png
+	lyxscale 50
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Map with goals unsuitable for grouping 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Map-with-goals"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename obrazky/map2.png
+	lyxscale 50
+	scale 30
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename obrazky/map5.png
+	lyxscale 50
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Maps with goals suitable for grouping 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Maps-with-goals"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Chapter
@@ -1325,6 +1456,13 @@ Paths narrowing
 \end_inset
 
 Paths narrowing
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Paths-narrowing"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Chapter
@@ -1483,7 +1621,7 @@ name "fig:Dependency-diagram"
 
 \begin_layout Standard
 Core class holds core of whole Application and has all other classes as
- dependencies, as is shown in image 4.1
+ dependencies, as is shown in image 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Dependency-diagram"

@@ -108,6 +108,8 @@
 \begin_body
 
 \begin_layout Standard
+
+\lang english
 \begin_inset space ~
 \end_inset
 
@@ -163,6 +165,7 @@ pagenumbering{roman}
 \shape smallcaps
 \size largest
 \noun on
+\lang english
 České vysoké učení technické v Praze
 \family default
 \shape default
@@ -213,7 +216,7 @@ katedra kybernetiky
 
 \begin_layout Standard
 
-\size normal
+\lang english
 \begin_inset ERT
 status open
 
@@ -255,8 +258,6 @@ status collapsed
 \end_inset
 
 
-\size default
-
 \begin_inset VSpace 15mm
 \end_inset
 
@@ -267,12 +268,13 @@ status collapsed
 
 \family sans
 \size huge
+\lang english
 BAKALÁŘSKÁ/DIPLOMOVÁ PRÁCE
 \end_layout
 
 \begin_layout Standard
 
-\size normal
+\lang english
 \begin_inset VSpace 15mm
 \end_inset
 
@@ -283,12 +285,13 @@ BAKALÁŘSKÁ/DIPLOMOVÁ PRÁCE
 
 \family sans
 \size largest
+\lang english
 Název práce
 \end_layout
 
 \begin_layout Standard
 
-\size normal
+\lang english
 \begin_inset VSpace 10mm
 \end_inset
 
@@ -296,6 +299,8 @@ Název práce
 \end_layout
 
 \begin_layout Standard
+
+\lang english
 \begin_inset ERT
 status open
 
@@ -312,6 +317,8 @@ end{center}
 \end_layout
 
 \begin_layout Standard
+
+\lang english
 \begin_inset VSpace vfill*
 \end_inset
 
@@ -320,7 +327,7 @@ end{center}
 
 \begin_layout Standard
 
-\size normal
+\lang english
 \begin_inset VSpace 10mm
 \end_inset
 
@@ -331,22 +338,26 @@ end{center}
 \noindent
 \align block
 
-\family sans
 \size large
-Autor: Matěj Račinský
+\lang english
+Autor: 
+\family sans
+Matěj Račinský
 \end_layout
 
 \begin_layout Description
 \noindent
 \align block
 
-\family sans
 \size large
+\lang english
 Vedoucí
 \begin_inset space ~
 \end_inset
 
-práce: Dr.
+práce: 
+\family sans
+Dr.
  Martin Saska
 \family default
 
@@ -380,6 +391,8 @@ year % nebo doplňte rok vzniku vaší bakalářské práce
 \end_layout
 
 \begin_layout Standard
+
+\lang english
 \begin_inset Newpage clearpage
 \end_inset
 
@@ -389,6 +402,7 @@ year % nebo doplňte rok vzniku vaší bakalářské práce
 \begin_layout Standard
 
 \size small
+\lang english
 \begin_inset Note Note
 status open
 
@@ -444,6 +458,7 @@ status collapsed
 \noindent
 
 \size small
+\lang english
 \begin_inset space ~
 \end_inset
 
@@ -457,38 +472,33 @@ status collapsed
 \begin_layout Description
 \noindent
 
-\series bold
 \size small
+\lang english
 Název
 \begin_inset space ~
 \end_inset
 
-práce:
-\series default
- Název bakalářské práce
+práce: Název bakalářské práce
 \end_layout
 
 \begin_layout Description
 \noindent
 
-\series bold
 \size small
-Autor:
-\series default
- Matěj Račinský
+\lang english
+Autor: Matěj Račinský
 \end_layout
 
 \begin_layout Description
 \noindent
 
-\series bold
 \size small
+\lang english
 Katedra
 \begin_inset space ~
 \end_inset
 
 (ústav):
-\series default
 \size default
  Kate
 \size small
@@ -498,8 +508,8 @@ dra kybernetiky
 \begin_layout Description
 \noindent
 
-\series bold
 \size small
+\lang english
 Vedoucí
 \begin_inset space ~
 \end_inset
@@ -508,9 +518,7 @@ bakalářské
 \begin_inset space ~
 \end_inset
 
-práce:
-\series default
- 
+práce: 
 \size default
 Dr.
  Martin Saska
@@ -519,15 +527,13 @@ Dr.
 \begin_layout Description
 \noindent
 
-\series bold
 \size small
+\lang english
 e-mail
 \begin_inset space ~
 \end_inset
 
-vedoucího: 
-\series default
-saska@labe.felk.cvut.cz
+vedoucího: saska@labe.felk.cvut.cz
 \begin_inset Newline newline
 \end_inset
 
@@ -538,6 +544,7 @@ saska@labe.felk.cvut.cz
 \noindent
 
 \size small
+\lang english
 Abstrakt V předložené práci studujeme...
  Uvede se abstrakt v rozsahu 80 až 200 slov.
  Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
@@ -553,6 +560,7 @@ Abstrakt V předložené práci studujeme...
 \noindent
 
 \size small
+\lang english
 Klíčová
 \begin_inset space ~
 \end_inset
@@ -568,6 +576,7 @@ slova: klíčová slova (3 až 5)
 \noindent
 
 \size small
+\lang english
 \begin_inset CommandInset line
 LatexCommand rule
 offset "0.5ex"
@@ -582,41 +591,33 @@ height "1pt"
 \begin_layout Description
 \noindent
 
-\series bold
 \size small
-Title: 
-\series default
-Název bakalářské práce v angličtině
+\lang english
+Title: Název bakalářské práce v angličtině
 \end_layout
 
 \begin_layout Description
 \noindent
 
-\series bold
 \size small
-Author:
-\series default
- Matěj Račinský
+\lang english
+Author: Matěj Račinský
 \end_layout
 
 \begin_layout Description
 \noindent
 
-\series bold
 \size small
-Department:
-\series default
- Department of Cybernetics
+\lang english
+Department: Department of Cybernetics
 \end_layout
 
 \begin_layout Description
 \noindent
 
-\series bold
 \size small
-Supervisor:
-\series default
- 
+\lang english
+Supervisor: 
 \size default
 Dr.
  Martin Saska
@@ -625,8 +626,8 @@ Dr.
 \begin_layout Description
 \noindent
 
-\series bold
 \size small
+\lang english
 Supervisor's
 \begin_inset space ~
 \end_inset
@@ -635,9 +636,7 @@ e-mail
 \begin_inset space ~
 \end_inset
 
-address:
-\series default
- saska@labe.felk.cvut.cz
+address: saska@labe.felk.cvut.cz
 \begin_inset Newline newline
 \end_inset
 
@@ -647,11 +646,9 @@ address:
 \begin_layout Description
 \noindent
 
-\series bold
 \size small
-Abstract
-\series default
- In the present work we study ...
+\lang english
+Abstract In the present work we study ...
  Uvede se anglický abstrakt v rozsahu 80 až 200 slov.
  Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
  Ut sit amet sem.
@@ -675,10 +672,13 @@ Abstract
 \noindent
 
 \size small
+\lang english
 Keywords: klíčová slova (3 až 5) v angličtině
 \end_layout
 
 \begin_layout Standard
+
+\lang english
 \begin_inset Newpage cleardoublepage
 \end_inset
 
@@ -729,6 +729,8 @@ status collapsed
 \end_layout
 
 \begin_layout Standard
+
+\lang english
 \begin_inset ERT
 status open
 
@@ -747,6 +749,7 @@ thispagestyle{plain}
 \begin_layout Standard
 
 \size small
+\lang english
 \begin_inset ERT
 status open
 
@@ -785,6 +788,7 @@ status open
 \noindent
 
 \size small
+\lang english
 \begin_inset VSpace vfill
 \end_inset
 
@@ -814,6 +818,7 @@ status open
 \noindent
 
 \size small
+\lang english
 Prohlašuji, že jsem svou bakalářskou práci napsal(a) samostatně a výhradně
  s použitím citovaných pramenů.
  Souhlasím se zapůjčováním práce a jejím zveřejňováním.
@@ -822,11 +827,12 @@ Prohlašuji, že jsem svou bakalářskou práci napsal(a) samostatně a výhradn
 \begin_layout Standard
 
 \size small
+\lang english
 \begin_inset VSpace bigskip
 \end_inset
 
 
-\size normal
+\size default
 
 \begin_inset ERT
 status open
@@ -884,6 +890,7 @@ status open
 \begin_layout Standard
 
 \size small
+\lang english
 \begin_inset ERT
 status open
 
@@ -919,6 +926,7 @@ status open
 \begin_layout Standard
 
 \size small
+\lang english
 \begin_inset CommandInset toc
 LatexCommand tableofcontents
 
@@ -943,10 +951,14 @@ status open
 \end_layout
 
 \begin_layout Chapter
+
+\lang english
 \begin_inset Argument 1
 status open
 
 \begin_layout Plain Layout
+
+\lang english
 Algorithm
 \end_layout
 
@@ -956,20 +968,34 @@ Algorithm
 \end_layout
 
 \begin_layout Standard
+
+\lang english
 Basis of whole algorithm is here in pseudocode
 \end_layout
 
 \begin_layout Standard
+
+\lang english
 \begin_inset Float algorithm
 wide false
 sideways false
 status open
 
 \begin_layout Plain Layout
+
+\lang english
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Basis of whole algorithm
+
+\lang english
+Basis
+\lang czech
+ 
+\lang english
+of
+\lang czech
+ whole algorithm
 \end_layout
 
 \end_inset
@@ -978,6 +1004,8 @@ Basis of whole algorithm
 \end_layout
 
 \begin_layout Plain Layout
+
+\lang english
 \begin_inset ERT
 status open
 
@@ -994,6 +1022,8 @@ begin{algorithmic}[1]
 \end_layout
 
 \begin_layout Plain Layout
+
+\lang english
 \begin_inset ERT
 status open
 
@@ -1010,6 +1040,8 @@ map := configuration.getMap();
 \end_layout
 
 \begin_layout Plain Layout
+
+\lang english
 \begin_inset ERT
 status open
 
@@ -1026,6 +1058,8 @@ map := amplifyObstacles(map);
 \end_layout
 
 \begin_layout Plain Layout
+
+\lang english
 \begin_inset ERT
 status open
 
@@ -1042,6 +1076,8 @@ nodes := mapToNodes(map);
 \end_layout
 
 \begin_layout Plain Layout
+
+\lang english
 \begin_inset ERT
 status open
 
@@ -1058,6 +1094,8 @@ paths := createGuidingPaths(nodes);
 \end_layout
 
 \begin_layout Plain Layout
+
+\lang english
 \begin_inset ERT
 status open
 
@@ -1074,6 +1112,8 @@ rrtPath := rrtPath(paths, map, nodes);
 \end_layout
 
 \begin_layout Plain Layout
+
+\lang english
 \begin_inset ERT
 status open
 
@@ -1090,6 +1130,8 @@ lastState := getBestFitness(rrtPath, map);
 \end_layout
 
 \begin_layout Plain Layout
+
+\lang english
 \begin_inset ERT
 status open
 
@@ -1106,6 +1148,8 @@ path := getPath(lastState);
 \end_layout
 
 \begin_layout Plain Layout
+
+\lang english
 \begin_inset ERT
 status open
 
@@ -1122,6 +1166,8 @@ path = straightenCrossingTrajectories(path);
 \end_layout
 
 \begin_layout Plain Layout
+
+\lang english
 \begin_inset ERT
 status open
 
@@ -1138,6 +1184,8 @@ path := optimizePathByDubins(rrtPath, map);
 \end_layout
 
 \begin_layout Plain Layout
+
+\lang english
 \begin_inset ERT
 status open
 
@@ -1159,6 +1207,8 @@ end{algorithmic}
 \end_layout
 
 \begin_layout Standard
+
+\lang english
 Configuration variable is instance of Configuration class, which holds all
  configuration variables, including selected map.
  Map holds all Aeras of Interest (AoI) and obstacles.
@@ -1166,6 +1216,8 @@ Configuration variable is instance of Configuration class, which holds all
 \end_layout
 
 \begin_layout Standard
+
+\lang english
 Even if we want to find as short path to AoI as possible, path too near
  to obstacles is not convenient for realization, because UAVs do not use
  car like motion model used in this simulation, so they can not exactly
@@ -1178,6 +1230,8 @@ Even if we want to find as short path to AoI as possible, path too near
 \end_layout
 
 \begin_layout Standard
+
+\lang english
 Line 3 represents discretization of map to graph.
  Discretizaion divides map to squares with size set in configuration and
  eac square is represented by node.
@@ -1192,28 +1246,31 @@ Line 3 represents discretization of map to graph.
 \end_layout
 
 \begin_layout Standard
+
+\lang english
 Edges in this graph are only between nodes of neighboring squares, so each
  node has maximally 8 edges.
  Obstacle nodes do not have any edges.
 \end_layout
 
 \begin_layout Standard
-Before converting map to nodes, optional modification of goal for guiding
- path can be turned on.
- I will cover the modification in next chapter.
-\begin_inset Marginal
-status open
 
-\begin_layout Plain Layout
-todo: možná sem odkaz na kapitolu
-\end_layout
+\lang english
+After converting map to nodes, optional grouping of goals for guiding path
+ can be turned on.
+ I will cover the grouping in chapter 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Grouping-of-goals"
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Standard
+
+\lang english
 Line 4 calculates the guiding paths for rrt path algorithm using the A*
  algorithm.
  Algorithm has modified cost function and in addition to cost function of
@@ -1226,6 +1283,8 @@ Line 4 calculates the guiding paths for rrt path algorithm using the A*
 \end_layout
 
 \begin_layout Standard
+
+\lang english
 On line 5 the rrt path algoritm takes place.
  This function returns structure with tree with root at starting position
  of UAVs and with array containing leaves of this three, where all UAVs
@@ -1234,6 +1293,8 @@ On line 5 the rrt path algoritm takes place.
 \end_layout
 
 \begin_layout Standard
+
+\lang english
 On line 6 the leaf, where UAVs have best coverage of AoI is chosen.
  Quality of coverage is determined by cost function, which will be mentioned
  later.
@@ -1241,6 +1302,8 @@ On line 6 the leaf, where UAVs have best coverage of AoI is chosen.
 status open
 
 \begin_layout Plain Layout
+
+\lang english
 todo: možná sem odkaz na kapitolu
 \end_layout
 
@@ -1250,22 +1313,23 @@ todo: možná sem odkaz na kapitolu
 \end_layout
 
 \begin_layout Standard
+
+\lang english
 On line 7 the path is built from last state.
 \end_layout
 
 \begin_layout Standard
+
+\lang english
 On line 8 is optional preparation before optimization using Dubins maneuvers.
  In the preperation, all crossings of paths of individual UAVs are straigtened,
  so UAVs do not cross other UAVs trajectories during whole path.
  During implementation of this method were complications, which are covered
  in chapter, and thus the row was removed from the algorithm.
  
-\begin_inset Marginal
-status open
-
-\begin_layout Plain Layout
-todo: možná sem odkaz na kapitolu
-\end_layout
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Paths-narrowing"
 
 \end_inset
 
@@ -1273,12 +1337,16 @@ todo: možná sem odkaz na kapitolu
 \end_layout
 
 \begin_layout Standard
+
+\lang english
 On line 9 is optimization by Dubins maneuvers.
  Optimizations is covered in chapter.
 \begin_inset Marginal
 status open
 
 \begin_layout Plain Layout
+
+\lang english
 todo: možná sem odkaz na kapitolu
 \end_layout
 
@@ -1288,33 +1356,196 @@ todo: možná sem odkaz na kapitolu
 \end_layout
 
 \begin_layout Chapter
+
+\lang english
 \begin_inset Argument 1
 status open
 
 \begin_layout Plain Layout
-Modifications of goal for guiding path
+Grouping of goals for guiding path
 \end_layout
 
 \end_inset
 
-Modifications of goal for guiding path
+Grouping of goals for guiding path
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Grouping-of-goals"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-During this preprocessing (method MapProcessor::getEndNodes in codebase)
- all AoIs are transformed to one big AoI, which is the smallest rectangle
- covering all AoIs.
+
+\lang english
+During this processing of map (method MapProcessor::getEndNodes in codebase)
+ all AoIs are grouped to one big AoI, which is the smallest rectangle covering
+ all AoIs.
  
 \end_layout
 
 \begin_layout Standard
+
+\lang english
 If this modification is turned on, instead of one goal for every AoI (node
  in middle of AoI rectangle is considered as goal node), only one goal is
  used for all AoIs.
  This prevents swarm to split and whole swarm has only one guiding path.
+ The main reason to have one big swarm instead of more smaller swarms is
+ that smaller swarms (or individual UAVs in case of same count of AoI and
+ UAVs) is relative localization, which can be used better when having only
+ one swarm.
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+Below are images of maps with goals and obstacles.
+ Goals have grren color and obstacles have grey color.
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+This approach has advantage, when individual AoIs are near the global goal
+ of big AoI, as seen in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Maps-with-goals"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+Disadvantage of this method is, when individual AoIs have big distance from
+ each other than can be covered by UAVs, this approach totally fails, because
+ RRT-Path, which is much faster than RRT, has goal very distant from AoIs,
+ as can be seen in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Map-with-goals"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Graphics
+	filename obrazky/map1.png
+	lyxscale 50
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Map with goals unsuitable for grouping 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Map-with-goals"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Graphics
+	filename obrazky/map2.png
+	lyxscale 50
+	scale 30
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename obrazky/map5.png
+	lyxscale 50
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Maps with goals suitable for grouping 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Maps-with-goals"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Chapter
+
+\lang english
 \begin_inset Argument 1
 status open
 
@@ -1325,9 +1556,18 @@ Paths narrowing
 \end_inset
 
 Paths narrowing
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Paths-narrowing"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Chapter
+
+\lang english
 \begin_inset Argument 1
 status open
 
@@ -1341,6 +1581,8 @@ Implementation
 \end_layout
 
 \begin_layout Standard
+
+\lang english
 This part will cover implementation of algorithm, which was used for simulations.
  Whole codebase can be found at 
 \begin_inset CommandInset href
@@ -1354,10 +1596,14 @@ target "https://github.com/racinmat/AutonomousSurveillanceBachelorThesis"
 \end_layout
 
 \begin_layout Section
+
+\lang english
 External libraries
 \end_layout
 
 \begin_layout Standard
+
+\lang english
 In implementation are used some external libries.
  Every used library is mentioned here.
 \begin_inset CommandInset href
@@ -1398,6 +1644,8 @@ target "http://gamma.cs.unc.edu/V-COLLIDE/"
 \end_layout
 
 \begin_layout Standard
+
+\lang english
 Because V-Collide sources were written in 1997 and because I used C++11
  compiler to compile my source codes, I had to rewrite part of this library
  for compatibility and to make public API easier to use.
@@ -1414,15 +1662,21 @@ target "https://github.com/racinmat/VCollide2"
 \end_layout
 
 \begin_layout Standard
+
+\lang english
 Last use external library is QT, which was used to create platform independent
  GUI.
 \end_layout
 
 \begin_layout Section
+
+\lang english
 Code structure 
 \end_layout
 
 \begin_layout Standard
+
+\lang english
 Here is shown brief UML scheme demonstrating dependency diagram of codebase.
  To keep diagram simple, only services are displayed, other classes were
  left out.
@@ -1438,6 +1692,8 @@ target "http://staruml.io/"
 \end_layout
 
 \begin_layout Standard
+
+\lang english
 \begin_inset Float figure
 wide false
 sideways false
@@ -1448,6 +1704,8 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
+
+\lang english
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -1467,6 +1725,8 @@ name "fig:Dependency-diagram"
 \end_layout
 
 \begin_layout Plain Layout
+
+\lang english
 \begin_inset Graphics
 	filename obrazky/umlSchema.svg
 	scale 40
@@ -1482,6 +1742,8 @@ name "fig:Dependency-diagram"
 \end_layout
 
 \begin_layout Standard
+
+\lang english
 Core class holds core of whole Application and has all other classes as
  dependencies, as is shown in image 
 \begin_inset CommandInset ref
@@ -1495,25 +1757,35 @@ reference "fig:Dependency-diagram"
 \end_layout
 
 \begin_layout Standard
+
+\lang english
 State factory creates State classes according to Factory pattern.
  State class represents state in RRT-Path algorithm.
  State has coordinates and rotations for all UAVs.
 \end_layout
 
 \begin_layout Standard
+
+\lang english
 Persister persists found path to JSON using Json Spirit library.
 \end_layout
 
 \begin_layout Standard
+
+\lang english
 PathHandler serves as utils class for manipulations with path (vector of
  State classes).
 \end_layout
 
 \begin_layout Standard
+
+\lang english
 CarLikeMotionModel holds motion model algorithm.
 \end_layout
 
 \begin_layout Bibliography
+
+\lang english
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
 label "1"
@@ -1543,6 +1815,8 @@ https://dspace.cvut.cz/bitstream/handle/10467/61814/F3-DP-2015-Vana-Petr-thesis.
 \end_layout
 
 \begin_layout Standard
+
+\lang english
 \begin_inset Newpage cleardoublepage
 \end_inset
 

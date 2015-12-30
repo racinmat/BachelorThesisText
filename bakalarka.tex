@@ -28,18 +28,6 @@
 \providecommand{\algorithmname}{Algoritmus}
 \floatname{algorithm}{\protect\algorithmname}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
-\newenvironment{lyxcode}
-{\par\begin{list}{}{
-\setlength{\rightmargin}{\leftmargin}
-\setlength{\listparindent}{0pt}% needed for AMS classes
-\raggedright
-\setlength{\itemsep}{0pt}
-\setlength{\parsep}{0pt}
-\normalfont\ttfamily}%
- \item[]}
-{\end{list}}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
 %<-------------------------------společná nastavení------------------------------>
 \usepackage[numbers,sort&compress]{natbib} %balíček pro citace literatury  
@@ -71,18 +59,7 @@
 \makeatother
 
 \begin{document}
-~\thispagestyle{empty}{\small{}~\vfill{}
-}{\small \par}
-
-\noindent {\small{}Na tomto místě mohou být napsána případná poděkování
-(vedoucímu práce, konzultantovi, tomu kdo půjčil software, literaturu,
-poskytl data apod.). \newpage{}}{\small \par}
-
-~\thispagestyle{empty}\vfill{}
-Tato stránka je tzv. protititul a je graficky součástí titulní stránky.
-Nechte ji prázdnou, nebo na ni umístěte vhodnou fotografii či ilustraci.
-
-\cleardoublepage{}~\thispagestyle{empty}\begin{center}\pagenumbering{roman}\vspace{10mm}
+~\thispagestyle{empty}\begin{center}\pagenumbering{roman}\vspace{10mm}
 
 
 \textsf{\textsc{\noun{\LARGE{}České vysoké učení technické v Praze}}}\\
@@ -165,13 +142,7 @@ v angličtině}{\small \par}
 \cleardoublepage{}\thispagestyle{empty}~{\small{}\addcontentsline{toc}{chapter}{Zadání
 práce} }{\small \par}
 
-
-
-\newpage{}\thispagestyle{empty}~
-
-
-
-\newpage{}\thispagestyle{plain}
+\thispagestyle{plain}
 
 {\small{}%\setcounter{page}{3} % nastavení číslování stránek
 \ }{\small \par}
@@ -194,10 +165,8 @@ zapůjčováním práce a jejím zveřejňováním.}{\small \par}
 %%%                                         *********
 }{\small \par}
 
-\cleardoublepage{}
-
-\thispagestyle{empty}{\small{}\tableofcontents{}% vkládá automaticky generovaný obsah dokumentu
-\cleardoublepage{}}{\small \par}
+{\small{}\tableofcontents{}% vkládá automaticky generovaný obsah dokumentu
+}{\small \par}
 
 
 \chapter[Algorithm]{Algorithm}
@@ -205,8 +174,6 @@ zapůjčováním práce a jejím zveřejňováním.}{\small \par}
 Basis of whole algorithm is here in pseudocode
 
 \begin{algorithm}
-
-
 \caption{Basis of whole algorithm}
 
 
@@ -216,7 +183,7 @@ Basis of whole algorithm is here in pseudocode
 
 \STATE map := amplifyObstacles(map);
 
-\STATE nodes := mapToNodes();
+\STATE nodes := mapToNodes(map);
 
 \STATE paths := createGuidingPaths(nodes);
 
@@ -228,16 +195,114 @@ Basis of whole algorithm is here in pseudocode
 
 \STATE path = straightenCrossingTrajectories(path);
 
-\STATE rrtPath := optimizePathByDubins(rrtPath, map);
+\STATE path := optimizePathByDubins(rrtPath, map);
 
 \end{algorithmic}
 \end{algorithm}
 
-\begin{lyxcode}
 
-\end{lyxcode}
+Configuration variable is instance of Configuration class, which holds
+all configuration variables, including selected map. Map holds all
+Aeras of Interest (AoI) and obstacles. All obstacles and AoIs are
+represented now as rectangles.
 
-\chapter[Passage narrowing]{Passage narrowing}
+Even if we want to find as short path to AoI as possible, path too
+near to obstacles is not convenient for realization, because UAVs
+do not use car like motion model used in this simulation, so they
+can not exactly follow found trajectories. So in real environment,
+it is convenient for the swarm to have path planned with safe distance
+from obstacles. Because of that fact, we need to increase size od
+obstacles, which is done in line 2 in function amplifyObstacles. 
+
+Line 3 represents discretization of map to graph. Discretizaion divides
+map to squares with size set in configuration and eac square is represented
+by node. In this graph, there are 4 types of nodes: Free, Obstacle,
+UAV and Goal. If part of square of whole square is covered by obstacle,
+corresponding node has type Obstacle. If part of square or whole square
+is covered by AoI, corresponding node has type Goal. If square contains
+UAV, corresponding node has type UAV and rest of squares have corresponding
+nodes qith type Free. 
+
+Edges in this graph are only between nodes of neighboring squares,
+so each node has maximally 8 edges. Obstacle nodes do not have any
+edges.
+
+After converting map to nodes, optional grouping of goals for guiding
+path can be turned on. I will cover the grouping in chapter \ref{chap:Modifications-of-goal}.
+
+Line 4 calculates the guiding paths for rrt path algorithm using the
+A{*} algorithm. Algorithm has modified cost function and in addition
+to cost function of A{*} algorithm, cost of current node is added
+during the calculation. Nodes neighboring with obstacles has bigger
+cost than nodes which do not have obstacles as neighbors. Thanks to
+this modification, guiding path avoids obstacles and has bigger distance
+to obstacles. 
+
+On line 5 the rrt path algoritm takes place. This function returns
+structure with tree with root at starting position of UAVs and with
+array containing leaves of this three, where all UAVs are in Areas
+of Interest. 
+
+On line 6 the leaf, where UAVs have best coverage of AoI is chosen.
+Quality of coverage is determined by cost function, which will be
+mentioned later.\marginpar{todo: možná sem odkaz na kapitolu}
+
+On line 7 the path is built from last state.
+
+On line 8 is optional preparation before optimization using Dubins
+maneuvers. In the preperation, all crossings of paths of individual
+UAVs are straigtened, so UAVs do not cross other UAVs trajectories
+during whole path. During implementation of this method were complications,
+which are covered in chapter, and thus the row was removed from the
+algorithm. \ref{chap:Paths-narrowing}
+
+On line 9 is optimization by Dubins maneuvers. Optimizations is covered
+in chapter.\marginpar{todo: možná sem odkaz na kapitolu}
+
+
+\chapter[Grouping of goals for guiding path]{Grouping of goals for guiding path\label{chap:Modifications-of-goal}}
+
+During this processing of map (method MapProcessor::getEndNodes in
+codebase) all AoIs are grouped to one big AoI, which is the smallest
+rectangle covering all AoIs. 
+
+If this modification is turned on, instead of one goal for every AoI
+(node in middle of AoI rectangle is considered as goal node), only
+one goal is used for all AoIs. This prevents swarm to split and whole
+swarm has only one guiding path. The main reason to have one big swarm
+instead of more smaller swarms is that smaller swarms (or individual
+UAVs in case of same count of AoI and UAVs) is relative localization,
+which can be used better when having only one swarm.
+
+Below are images of maps with goals and obstacles. Goals have grren
+color and obstacles have grey color.
+
+This approach has advantage, when individual AoIs are near the global
+goal of big AoI, as seen in \ref{fig:Maps-with-goals}. 
+
+Disadvantage of this method is, when individual AoIs have big distance
+from each other than can be covered by UAVs, this approach totally
+fails, because RRT-Path, which is much faster than RRT, has goal very
+distant from AoIs, as can be seen in \ref{fig:Map-with-goals}.
+
+\begin{figure}
+\includegraphics[scale=0.3]{obrazky/map1}
+
+\caption{Map with goals unsuitable for grouping \label{fig:Map-with-goals}}
+\end{figure}
+
+
+\begin{figure}
+\includegraphics[scale=0.3]{obrazky/map2}\includegraphics[scale=0.3]{obrazky/map5}
+
+\caption{Maps with goals suitable for grouping \label{fig:Maps-with-goals}}
+
+
+\end{figure}
+
+
+
+\chapter[Paths narrowing]{Paths narrowing\label{chap:Paths-narrowing}}
 
 
 \chapter[Implementation]{Implementation}
@@ -267,13 +332,22 @@ independent GUI.
 
 \section{Code structure }
 
-Here is shown brief UML scheme demonstrating code structure. Scheme
-was generated using software \href{http://staruml.io/}{StarUML}
+Here is shown brief UML scheme demonstrating dependency diagram of
+codebase. To keep diagram simple, only services are displayed, other
+classes were left out. Diagram was generated using software \href{http://staruml.io/}{StarUML}
+
+\begin{figure}
+
+
+\caption{Dependency diagram \label{fig:Dependency-diagram}}
+
 
 \includegraphics[scale=0.4]{obrazky/umlSchema}
+\end{figure}
+
 
 Core class holds core of whole Application and has all other classes
-as dependencies, as is shown in image above. 
+as dependencies, as is shown in image \ref{fig:Dependency-diagram}. 
 
 State factory creates State classes according to Factory pattern.
 State class represents state in RRT-Path algorithm. State has coordinates
