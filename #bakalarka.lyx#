@@ -880,6 +880,13 @@ Algorithm
 \end_inset
 
 Algorithm
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Algorithm"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1504,6 +1511,23 @@ waiting
 status open
 
 \begin_layout Plain Layout
+Dubins maneuvers
+\end_layout
+
+\end_inset
+
+Dubins maneuvers
+\end_layout
+
+\begin_layout Standard
+Dubins maneuvers, also called Dubins curves or Dubins were founded by 
+\end_layout
+
+\begin_layout Chapter
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
 Implementation
 \end_layout
 
@@ -1591,13 +1615,13 @@ Last use external library is QT, which was used to create platform independent
 \end_layout
 
 \begin_layout Section
-Code structure 
+Code structure and services
 \end_layout
 
 \begin_layout Standard
 Here is shown brief UML scheme demonstrating dependency diagram of codebase.
- To keep diagram simple, only services are displayed, other classes were
- left out.
+ To keep diagram simple, only services are displayed, other classes, thich
+ are not services, were left out for lucidity.
  Diagram was generated using software 
 \begin_inset CommandInset href
 LatexCommand href
@@ -1663,6 +1687,21 @@ reference "fig:Dependency-diagram"
 \end_layout
 
 \begin_layout Standard
+As mentioned in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Algorithm"
+
+\end_inset
+
+ chapter Configuration is DTO for all configuration variables, but to keep
+ reasonable amount of classes, Configuration is also service, which delegates
+ all configuration changes from GUI to Core class.
+ Configuration and GuiDrawer implementation LoggerInterface are the only
+ connections between Core and GUI.
+\end_layout
+
+\begin_layout Standard
 State factory creates State classes according to Factory pattern.
  State class represents state in RRT-Path algorithm.
  State has coordinates and rotations for all UAVs.
@@ -1679,6 +1718,33 @@ PathHandler serves as utils class for manipulations with path (vector of
 
 \begin_layout Standard
 CarLikeMotionModel holds motion model algorithm.
+\end_layout
+
+\begin_layout Standard
+InputGenerator is used to generate inputs to motion model.
+\end_layout
+
+\begin_layout Standard
+NTupletGenerator only generates variation with repeating for given input.
+\end_layout
+
+\begin_layout Standard
+DistanceResolver counts distances between two states and distance of path.
+\end_layout
+
+\begin_layout Standard
+AoICoverageResolver determines cost function for states,where all UAVs are
+ in AoIs.
+\end_layout
+
+\begin_layout Standard
+GuidingPathFactory is wrapper for PathFindingAlgorithm interface and is
+ used by Core to find guiding path.
+ 
+\end_layout
+
+\begin_layout Standard
+Implementation of PathFindingAlgorithm is AStart class.
 \end_layout
 
 \begin_layout Bibliography
