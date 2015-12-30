@@ -1,6 +1,6 @@
 %% LyX 2.1.4 created this file.  For more info, see http://www.lyx.org/.
 %% Do not edit unless you really know what you are doing.
-\documentclass[a4paper,twoside,czech,czech,cleardoublepage=empty,BCOR15mm,DIV12]{scrreprt}
+\documentclass[a4paper,twoside,english,cleardoublepage=empty,BCOR15mm,DIV12]{scrreprt}
 \usepackage{tgtermes}
 \usepackage{tgheros}
 \usepackage{tgcursor}
@@ -25,7 +25,7 @@
 \newcommand{\noun}[1]{\textsc{#1}}
 \floatstyle{ruled}
 \newfloat{algorithm}{tbp}{loa}[chapter]
-\providecommand{\algorithmname}{Algoritmus}
+\providecommand{\algorithmname}{Algorithm}
 \floatname{algorithm}{\protect\algorithmname}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
@@ -195,7 +195,9 @@ Basis of whole algorithm is here in pseudocode
 
 \STATE path = straightenCrossingTrajectories(path);
 
-\STATE path := optimizePathByDubins(rrtPath, map);
+\STATE path := optimizePathByDubins(path, map);
+
+\STATE savePathToJson(path);
 
 \end{algorithmic}
 \end{algorithm}
@@ -228,7 +230,7 @@ so each node has maximally 8 edges. Obstacle nodes do not have any
 edges.
 
 After converting map to nodes, optional grouping of goals for guiding
-path can be turned on. I will cover the grouping in chapter \ref{chap:Modifications-of-goal}.
+path can be turned on. I will cover the grouping in chapter \ref{chap:Grouping-of-goals}.
 
 Line 4 calculates the guiding paths for rrt path algorithm using the
 A{*} algorithm. Algorithm has modified cost function and in addition
@@ -259,8 +261,11 @@ algorithm. \ref{chap:Paths-narrowing}
 On line 9 is optimization by Dubins maneuvers. Optimizations is covered
 in chapter.\marginpar{todo: možná sem odkaz na kapitolu}
 
+Last line is only persisting of path to file for usage of path by
+different program.
 
-\chapter[Grouping of goals for guiding path]{Grouping of goals for guiding path\label{chap:Modifications-of-goal}}
+
+\chapter[Grouping of goals for guiding path]{ Grouping of goals for guiding path \label{chap:Grouping-of-goals}}
 
 During this processing of map (method MapProcessor::getEndNodes in
 codebase) all AoIs are grouped to one big AoI, which is the smallest
