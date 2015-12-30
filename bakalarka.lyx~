@@ -212,39 +212,6 @@ katedra kybernetiky
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-%%% Aby vložení loga  správně fungovalo, je třeba mít soubor lev.png nahraný
- v pracovním adresáři,
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-%%% tj.
- v adresáři, kde se nachází překládaný zdrojový soubor.
- 
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
 \begin_inset Graphics
 	filename obrazky/lev.png
 	lyxscale 50
@@ -1306,8 +1273,8 @@ Below are images of maps with goals and obstacles.
 \end_layout
 
 \begin_layout Standard
-This approach has advantage, when individual AoIs are near the global goal
- of big AoI, as seen in 
+This approach has advantage, when individual AoIs are near to global goal
+ of whole gorup, as seen in 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Maps-with-goals"
@@ -1647,7 +1614,7 @@ Petr Váňa,
  [online].
  [cit.
  2015-12-29].
- Dostupný z WWW: 
+ URL: 
 \begin_inset Flex URL
 status open
 

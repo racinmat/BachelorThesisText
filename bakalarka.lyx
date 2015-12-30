@@ -212,39 +212,6 @@ katedra kybernetiky
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-%%% Aby vložení loga  správně fungovalo, je třeba mít soubor lev.png nahraný
- v pracovním adresáři,
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-%%% tj.
- v adresáři, kde se nachází překládaný zdrojový soubor.
- 
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
 \begin_inset Graphics
 	filename obrazky/lev.png
 	lyxscale 50
@@ -420,7 +387,7 @@ addcontentsline{toc}{chapter}{
 
 Abstrakt
 \begin_inset ERT
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -676,7 +643,7 @@ addcontentsline{toc}{chapter}{
 
 Zadání práce
 \begin_inset ERT
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -1647,7 +1614,7 @@ Petr Váňa,
  [online].
  [cit.
  2015-12-29].
- Dostupný z WWW: 
+ URL: 
 \begin_inset Flex URL
 status open
 
