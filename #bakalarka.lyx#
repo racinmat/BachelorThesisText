@@ -1311,7 +1311,7 @@ STATE
 
 \end_inset
 
-nodes := mapToNodes();
+nodes := mapToNodes(map);
 \end_layout
 
 \begin_layout Plain Layout
@@ -1435,7 +1435,7 @@ end{algorithmic}
 Configuration variable is instance of Configuration class, which holds all
  configuration variables, including selected map.
  Map holds all Aeras of Interest (AoI) and obstacles.
- 
+ All obstacles and AoIs are represented now as rectangles.
 \end_layout
 
 \begin_layout Standard
@@ -1471,9 +1471,71 @@ Edges in this graph are only between nodes of neighboring squares, so each
 \end_layout
 
 \begin_layout Standard
-Then we need guiding paths for rrt path algorithm.
- Guiding paths is found at line 4.
- Guiding path is 
+Before converting map to nodes, optional modification of goal for guiding
+ path can be turned on.
+ I will cover the modification in next chapter.
+\begin_inset Marginal
+status open
+
+\begin_layout Plain Layout
+todo: možná sem odkaz na kapitolu
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Line 4 calculates the guiding paths for rrt path algorithm using the A*
+ algorithm.
+ Algorithm has modified cost function and in addition to cost function of
+ A* algorithm, cost of current node is added during the calculation.
+ Nodes neighboring with obstacles has bigger cost than nodes which do not
+ have obstacles as neighbors.
+ Thanks to this modification, guiding path avoids obstacles and has bigger
+ distance to obstacles.
+ 
+\end_layout
+
+\begin_layout Standard
+On line 5, the rrt path algoritm takes place.
+ This function returns structure with tree with root at starting position
+ of UAVs and with array containing leaves of this three, where all UAVs
+ are in Areas of Interest.
+ 
+\end_layout
+
+\begin_layout Standard
+On line 6, the leaf, where UAVs have best coverage of AoI is chosen.
+ Quality of coverage is determined by cost funcio
+\end_layout
+
+\begin_layout Chapter
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Modifications of goal for guiding path
+\end_layout
+
+\end_inset
+
+Modifications of goal for guiding path
+\end_layout
+
+\begin_layout Standard
+During this preprocessing (method MapProcessor::getEndNodes in codebase)
+ all AoIs are transformed to one big AoI, which is the smallest rectangle
+ covering all AoIs.
+ 
+\end_layout
+
+\begin_layout Standard
+If this modification is turned on, instead of one goal for every AoI (node
+ in middle of AoI rectangle is considered as goal node), only one goal is
+ used for all AoIs.
+ This prevents swarm to split and whole swarm has only one guiding path.
 \end_layout
 
 \begin_layout Chapter
