@@ -1063,11 +1063,11 @@
 											"containerExtending": false,
 											"left": 133,
 											"top": 2238,
-											"width": 97.5126953125,
+											"width": 98.24267578125,
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "LoggetInterface",
+											"text": "LoggerInterface",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5
 										},
@@ -1132,7 +1132,7 @@
 									"containerExtending": false,
 									"left": 128,
 									"top": 2231,
-									"width": 107.5126953125,
+									"width": 108.24267578125,
 									"height": 25,
 									"autoResize": false,
 									"stereotypeLabel": {
@@ -1256,7 +1256,7 @@
 							"containerExtending": false,
 							"left": 128,
 							"top": 2208,
-							"width": 107.5126953125,
+							"width": 108.24267578125,
 							"height": 49,
 							"autoResize": false,
 							"stereotypeDisplay": "icon",
@@ -10541,7 +10541,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "LoggetInterface",
+					"name": "LoggerInterface",
 					"visibility": "public",
 					"isAbstract": false,
 					"isFinalSpecialization": false,

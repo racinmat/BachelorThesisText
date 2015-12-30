@@ -6,7 +6,7 @@
 \begin_preamble
 %<-------------------------------společná nastavení------------------------------>
 \usepackage[numbers,sort&compress]{natbib} %balíček pro citace literatury  
-
+\usepackage{algorithmic}
 \usepackage{color}%kvůli barvám ČVUT
 \newcommand{\BibTeX}{{\sc Bib}\TeX}%BibTeX logo
 \usepackage{multicol}
@@ -1010,7 +1010,7 @@ setcounter{page}{3}
 
  
 \begin_inset ERT
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -1228,6 +1228,266 @@ Algorithm
 Algorithm
 \end_layout
 
+\begin_layout Standard
+Basis of whole algorithm is here in pseudocode
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Basis of whole algorithm
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{algorithmic}[1]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+map := configuration.getMap();
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+map := amplifyObstacles(map);
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+nodes := mapToNodes();
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+paths := createGuidingPaths(nodes);
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+rrtPath := rrtPath(paths, map, nodes);
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+lastState := getBestFitness(rrtPath, map);
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+path := getPath(lastState);
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+path = straightenCrossingTrajectories(path);
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+rrtPath := optimizePathByDubins(rrtPath, map);
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{algorithmic}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Configuration variable is instance of Configuration class, which holds all
+ configuration variables, including selected map.
+ Map holds all Aeras of Interest (AoI) and obstacles.
+ 
+\end_layout
+
+\begin_layout Standard
+Even if we want to find as short path to AoI as possible, path too near
+ to obstacles is not convenient for realization, because UAVs do not use
+ car like motion model used in this simulation, so they can not exactly
+ follow found trajectories.
+ So in real environment, it is convenient for the swarm to have path planned
+ with safe distance from obstacles.
+ Because of that fact, we need to increase size od obstacles, which is done
+ in line 2 in function amplifyObstacles.
+ 
+\end_layout
+
+\begin_layout Standard
+Line 3 represents discretization of map to graph.
+ Discretizaion divides map to squares with size set in configuration and
+ eac square is represented by node.
+ In this graph, there are 4 types of nodes: Free, Obstacle, UAV and Goal.
+ If part of square of whole square is covered by obstacle, corresponding
+ node has type Obstacle.
+ If part of square or whole square is covered by AoI, corresponding node
+ has type Goal.
+ If square contains UAV, corresponding node has type UAV and rest of squares
+ have corresponding nodes qith type Free.
+ 
+\end_layout
+
+\begin_layout Standard
+Edges in this graph are only between nodes of neighboring squares, so each
+ node has maximally 8 edges.
+ Obstacle nodes do not have any edges.
+\end_layout
+
+\begin_layout Standard
+Then we need guiding path for rrt path algorithm.
+ 
+\end_layout
+
+\begin_layout Chapter
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Passage narrowing
+\end_layout
+
+\end_inset
+
+Passage narrowing
+\end_layout
+
 \begin_layout Chapter
 \begin_inset Argument 1
 status open
@@ -1338,7 +1598,8 @@ target "http://staruml.io/"
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename C:/Users/Azathoth/Disk Google/moje věci/škola/bakalářská práce/umlSchema.svg
+	filename obrazky/umlSchema.svg
+	scale 40
 
 \end_inset
 
