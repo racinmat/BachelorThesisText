@@ -729,60 +729,6 @@ status collapsed
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Zadání práce (formulář)
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-thispagestyle{empty}
-\end_layout
-
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Zadní strana formuláře :)
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
-
-
 \begin_inset ERT
 status open
 
@@ -971,28 +917,8 @@ status open
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage cleardoublepage
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-thispagestyle{empty}
-\end_layout
-
-\end_inset
-
 
 \size small
-
 \begin_inset CommandInset toc
 LatexCommand tableofcontents
 
@@ -1011,10 +937,6 @@ status open
 
 \end_layout
 
-\end_inset
-
-
-\begin_inset Newpage cleardoublepage
 \end_inset
 
 
@@ -1561,7 +1483,7 @@ name "fig:Dependency-diagram"
 
 \begin_layout Standard
 Core class holds core of whole Application and has all other classes as
- dependencies, as is shown in image 4.1
+ dependencies, as is shown in image 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Dependency-diagram"
