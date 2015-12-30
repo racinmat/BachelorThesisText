@@ -163,7 +163,7 @@ pagenumbering{roman}
 \shape smallcaps
 \size largest
 \noun on
-České vysoké učení technické v Praze
+Czech Technical University in Prague
 \family default
 \shape default
 \size default
@@ -181,7 +181,7 @@ pagenumbering{roman}
 \shape smallcaps
 \size largest
 \noun on
-Fakulta elektrotechnická
+Fakulty of Electrical Engineering
 \family default
 \shape default
 \size default
@@ -199,7 +199,7 @@ Fakulta elektrotechnická
 \shape smallcaps
 \size larger
 \noun on
-katedra kybernetiky
+Department of Cybernetics
 \family default
 \shape default
 \size default
@@ -212,39 +212,6 @@ katedra kybernetiky
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-%%% Aby vložení loga  správně fungovalo, je třeba mít soubor lev.png nahraný
- v pracovním adresáři,
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-%%% tj.
- v adresáři, kde se nachází překládaný zdrojový soubor.
- 
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
 \begin_inset Graphics
 	filename obrazky/lev.png
 	lyxscale 50
@@ -263,7 +230,7 @@ status collapsed
 
 \family sans
 \size huge
-BAKALÁŘSKÁ/DIPLOMOVÁ PRÁCE
+BACHELOR THESIS
 \end_layout
 
 \begin_layout Standard
@@ -332,11 +299,11 @@ Matěj Račinský
 \align block
 
 \size large
-Vedoucí
+Thesis
 \begin_inset space ~
 \end_inset
 
-práce: 
+supervisor: 
 \family sans
 Dr.
  Martin Saska
@@ -347,7 +314,7 @@ Dr.
 
 
 \family sans
-Praha,
+In Prague,
 \family default
  
 \begin_inset ERT
@@ -420,7 +387,7 @@ addcontentsline{toc}{chapter}{
 
 Abstrakt
 \begin_inset ERT
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -676,7 +643,7 @@ addcontentsline{toc}{chapter}{
 
 Zadání práce
 \begin_inset ERT
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -1306,8 +1273,8 @@ Below are images of maps with goals and obstacles.
 \end_layout
 
 \begin_layout Standard
-This approach has advantage, when individual AoIs are near the global goal
- of big AoI, as seen in 
+This approach has advantage, when individual AoIs are near to global goal
+ of whole gorup, as seen in 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Maps-with-goals"
@@ -1417,10 +1384,6 @@ name "fig:Maps-with-goals"
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
@@ -1444,6 +1407,96 @@ name "chap:Paths-narrowing"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+RRT-Path algorithm checks crossing paths between neighboring states, so
+ between n-th state and n+1-th state no trajectories are crossing each other.
+ But between states trajectories are still crossing.
+ In this image 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Crossing-paths"
+
+\end_inset
+
+ is shown path found by RRT-Path.
+ Every color marks one state in RRT-Path.
+ As we can see, check in algorithm prevents from crossing path between neighbori
+ng states, but crossing of paths in different times can not be easily prevented.
+ We can see in image, that paths cross between points J (yellow), M (light
+ green) and H (orange), K (yellow), so there is no easy approach to prevent
+ path collisions between n-2-th state and n-th state.
+ Optimization by Dubins maneuvers shortens trajectory of UAVs, so UAVs could
+ be in these trajectories in different time, so there could be collisions
+ after optimization.
+ Another complication occurs, when time difference between two states is
+ too low, then uavs could collide, because in reality UAV can not follow
+ path precisely, but only with some errors.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Crossing paths 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Crossing-paths"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename obrazky/crossingPathReal1.png
+	lyxscale 60
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+I tried to straighten crossing trajectories, but all attempts failed.
+ Straightening was done by switching parts of crossing paths from the earliest
+ crossing state to end.
+ But then paths had different leghts, which was unsuitable for path planning
+ for swarm.
+ This can be done by adding 
+\begin_inset Quotes eld
+\end_inset
+
+waiting
+\begin_inset Quotes erd
+\end_inset
+
+ points, points in different state but with same position in different time.
+ But then is really hard sto traighten longer path with many crossings (this
+ path is really short, paths in other maps are much longer and more complicated).
+ For motion model with inertia is also really hard to deal with waiting
+ states, which complicates following of straightened trajectories.
+ Due to all complications mentioned above, this part was removed from algorithm.
+ But it is possible to add it, when better aproach will be found.
 \end_layout
 
 \begin_layout Chapter
@@ -1563,10 +1616,6 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -1647,7 +1696,7 @@ Petr Váňa,
  [online].
  [cit.
  2015-12-29].
- Dostupný z WWW: 
+ URL: 
 \begin_inset Flex URL
 status open
 
