@@ -1511,6 +1511,19 @@ waiting
 status open
 
 \begin_layout Plain Layout
+Motion model
+\end_layout
+
+\end_inset
+
+Motion model
+\end_layout
+
+\begin_layout Chapter
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
 Dubins maneuvers
 \end_layout
 
@@ -1520,15 +1533,17 @@ Dubins maneuvers
 \end_layout
 
 \begin_layout Standard
-Dubins maneuvers, also called Dubins curves or Dubins were published by
- Lester Eli Dubins in 1957 
+Dubins maneuvers, also called Dubins curves or Dubins path were published
+ by Lester Eli Dubins in 1957 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Dubins1957"
 
 \end_inset
 
-
+.
+ Dubins path is optimal path for Car like motion model.
+ Car li
 \end_layout
 
 \begin_layout Chapter
@@ -1759,7 +1774,7 @@ Implementation of PathFindingAlgorithm is AStart class.
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
 bibfiles "bibliography"
-options "bibtotoc,plain"
+options "bibtotoc,plainnat"
 
 \end_inset
 

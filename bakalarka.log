@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.8.21)  30 DEC 2015 23:01
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.8.21)  30 DEC 2015 23:32
 entering extended mode
 **bakalarka.tex
 
@@ -805,10 +805,12 @@ Package: fncychap 2007/07/30 v1.34 LaTeX package (Revised chapters)
 \c@AlphaCnt=\count131
 \c@AlphaDecCnt=\count132
 ))
-No file bakalarka.aux.
+("C:\Users\Azathoth\Disk Google\moje věci\škola\bakalářská práce\text\Bac
+helorThesisText\bakalarka.aux")
 LaTeX Font Info:    Checking defaults for OML/ntxmi/m/it on input line 61.
 LaTeX Font Info:    Try loading font information for OML+ntxmi on input line 61
 .
+
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\newtx\omlntxmi.fd"
 File: omlntxmi.fd 2012/03/22 Fontinst v1.933 font definitions for OML/ntxmi.
 )
@@ -843,4 +845,244 @@ LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 61.
 LaTeX Font Info:    ... okay on input line 61.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
-[
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count133
+\scratchdimen=\dimen127
+\scratchbox=\box57
+\nofMPsegments=\count134
+\nofMParguments=\count135
+\everyMPshowfont=\toks27
+\MPscratchCnt=\count136
+\MPscratchDim=\dimen128
+\MPnumerator=\count137
+\makeMPintoPDFobject=\count138
+\everyMPtoPDFconversion=\toks28
+)
+\AtBeginShipoutBox=\box58
+Package hyperref Info: Link coloring OFF on input line 61.
+ ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\hyperref\nameref.sty"
+Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\gettitlestring.sty"
+Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
+)
+\c@section@level=\count139
+)
+LaTeX Info: Redefining \ref on input line 61.
+LaTeX Info: Redefining \pageref on input line 61.
+LaTeX Info: Redefining \nameref on input line 61.
+
+("C:\Users\Azathoth\Disk Google\moje věci\škola\bakalářská práce\text\Bac
+helorThesisText\bakalarka.out")
+("C:\Users\Azathoth\Disk Google\moje věci\škola\bakalářská práce\text\Bac
+helorThesisText\bakalarka.out")
+\@outlinefile=\write3
+LaTeX Font Info:    Try loading font information for T1+qhv on input line 65.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\tex-gyre\t1qhv.fd"
+File: t1qhv.fd 2009/09/25 v1.2 font definition file for T1/qhv
+)
+<obrazky/lev.png, id=3, 96.36pt x 72.63135pt>
+File: obrazky/lev.png Graphic file (type png)
+ <use obrazky/lev.png>
+Package pdftex.def Info: obrazky/lev.png used on input line 74.
+(pdftex.def)             Requested size: 124.83775pt x 94.09601pt.
+ [1
+
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <C:/Users/Azathoth/Disk Go
+ogle/moje věci/škola/bakalářská práce/text/BachelorThesisText/obrazky/lev
+.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 111--112
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 119--121
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 128--129
+
+ []
+
+[2
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 159--162
+
+ []
+
+[3
+
+
+]
+
+Class scrreprt Warning: Usage of deprecated font command `\sf'!
+(scrreprt)              You should note, that in 1994 font command `\sf' has
+(scrreprt)              been defined for compatiblitiy to Script 2.0 only.
+(scrreprt)              Now, after two decades of LaTeX2e and NFSS2, you
+(scrreprt)              shouldn't use such commands any longer and within
+(scrreprt)              KOMA-Script usage of `\sf' is definitely deprecated.
+(scrreprt)              See `fntguide.pdf' for more information about
+(scrreprt)              recommended font commands.
+(scrreprt)              Note also, that KOMA-Script will remove the definition
+(scrreprt)              of `\sf' anytime until release of about version 3.20.
+(scrreprt)              But for now, KOMA-Script will replace deprecated `\sf'
+(scrreprt)              by `\normalfont \sffamily ' on input line 168.
+
+\tf@toc=\write4
+[4
+
+]
+chapter 1.
+
+Class scrreprt Warning: \float@addtolists detected!
+(scrreprt)              Implementation of \float@addtolist became
+(scrreprt)              deprecated in KOMA-Script v3.01 2008/11/14 and
+(scrreprt)              has been replaced by several more flexible
+(scrreprt)              features of package `tocbasic`.
+(scrreprt)              Since Version 3.12 support for deprecated
+(scrreprt)              \float@addtolist interface has been
+(scrreprt)              restricted to only some of the KOMA-Script
+(scrreprt)              features and been removed from others.
+(scrreprt)              Loading of package `scrhack' may help to
+(scrreprt)              avoid this warning, if you are using a
+(scrreprt)              a package that still implements the
+(scrreprt)              deprecated \float@addtolist interface .
+
+
+Class scrreprt Warning: Usage of deprecated font command `\sf'!
+(scrreprt)              You should note, that in 1994 font command `\sf' has
+(scrreprt)              been defined for compatiblitiy to Script 2.0 only.
+(scrreprt)              Now, after two decades of LaTeX2e and NFSS2, you
+(scrreprt)              shouldn't use such commands any longer and within
+(scrreprt)              KOMA-Script usage of `\sf' is definitely deprecated.
+(scrreprt)              See `fntguide.pdf' for more information about
+(scrreprt)              recommended font commands.
+(scrreprt)              Note also, that KOMA-Script will remove the definition
+(scrreprt)              of `\sf' anytime until release of about version 3.20.
+(scrreprt)              But for now, KOMA-Script will replace deprecated `\sf'
+(scrreprt)              by `\normalfont \sffamily ' on input line 172.
+
+
+Class scrreprt Warning: Usage of deprecated font command `\sf'!
+(scrreprt)              You should note, that in 1994 font command `\sf' has
+(scrreprt)              been defined for compatiblitiy to Script 2.0 only.
+(scrreprt)              Now, after two decades of LaTeX2e and NFSS2, you
+(scrreprt)              shouldn't use such commands any longer and within
+(scrreprt)              KOMA-Script usage of `\sf' is definitely deprecated.
+(scrreprt)              See `fntguide.pdf' for more information about
+(scrreprt)              recommended font commands.
+(scrreprt)              Note also, that KOMA-Script will remove the definition
+(scrreprt)              of `\sf' anytime until release of about version 3.20.
+(scrreprt)              But for now, KOMA-Script will replace deprecated `\sf'
+(scrreprt)              by `\normalfont \sffamily ' on input line 172.
+
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
+put line 177.
+
+LaTeX Warning: Reference `chap:Grouping-of-goals' on page v undefined on input 
+line 233.
+
+[5
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 250--250
+[]\T1/qtm/m/n/10.95 todo: mo�n�
+ []
+
+
+Underfull \hbox (badness 4518) in paragraph at lines 250--250
+\T1/qtm/m/n/10.95 sem od-kaz na
+ []
+
+
+LaTeX Warning: Reference `chap:Paths-narrowing' on page vi undefined on input l
+ine 259.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 262--262
+[]\T1/qtm/m/n/10.95 todo: mo�n�
+ []
+
+
+Underfull \hbox (badness 4518) in paragraph at lines 262--262
+\T1/qtm/m/n/10.95 sem od-kaz na
+ []
+
+
+LaTeX Font Warning: Font shape `T1/qtm/m/sl' in size <10.95> not available
+(Font)              Font shape `T1/qtm/m/it' tried instead on input line 268.
+
+
+LaTeX Font Warning: Font shape `T1/qtm/m/sl' in size <10> not available
+(Font)              Font shape `T1/qtm/m/it' tried instead on input line 268.
+
+
+Class scrreprt Warning: Usage of deprecated font command `\rm'!
+(scrreprt)              You should note, that in 1994 font command `\rm' has
+(scrreprt)              been defined for compatiblitiy to Script 2.0 only.
+(scrreprt)              Now, after two decades of LaTeX2e and NFSS2, you
+(scrreprt)              shouldn't use such commands any longer and within
+(scrreprt)              KOMA-Script usage of `\rm' is definitely deprecated.
+(scrreprt)              See `fntguide.pdf' for more information about
+(scrreprt)              recommended font commands.
+(scrreprt)              Note also, that KOMA-Script will remove the definition
+(scrreprt)              of `\rm' anytime until release of about version 3.20.
+(scrreprt)              But for now, KOMA-Script will replace deprecated `\rm'
+(scrreprt)              by `\normalfont \rmfamily ' on input line 268.
+
+[6]
+chapter 2.
+
+Class scrreprt Warning: Usage of deprecated font command `\sf'!
+(scrreprt)              You should note, that in 1994 font command `\sf' has
+(scrreprt)              been defined for compatiblitiy to Script 2.0 only.
+(scrreprt)              Now, after two decades of LaTeX2e and NFSS2, you
+(scrreprt)              shouldn't use such commands any longer and within
+(scrreprt)              KOMA-Script usage of `\sf' is definitely deprecated.
+(scrreprt)              See `fntguide.pdf' for more information about
+(scrreprt)              recommended font commands.
+(scrreprt)              Note also, that KOMA-Script will remove the definition
+(scrreprt)              of `\sf' anytime until release of about version 3.20.
+(scrreprt)              But for now, KOMA-Script will replace deprecated `\sf'
+(scrreprt)              by `\normalfont \sffamily ' on input line 268.
+
+
+Class scrreprt Warning: Usage of deprecated font command `\sf'!
+(scrreprt)              You should note, that in 1994 font command `\sf' has
+(scrreprt)              been defined for compatiblitiy to Script 2.0 only.
+(scrreprt)              Now, after two decades of LaTeX2e and NFSS2, you
+(scrreprt)              shouldn't use such commands any longer and within
+(scrreprt)              KOMA-Script usage of `\sf' is definitely deprecated.
+(scrreprt)              See `fntguide.pdf' for more information about
+(scrreprt)              recommended font commands.
+(scrreprt)              Note also, that KOMA-Script will remove the definition
+(scrreprt)              of `\sf' anytime until release of about version 3.20.
+(scrreprt)              But for now, KOMA-Script will replace deprecated `\sf'
+(scrreprt)              by `\normalfont \sffamily ' on input line 268.
+
+! Undefined control sequence.
+\label #1->\@bsphack \begingroup \def \label@name 
+                                                  {#1}\label@hook \protected...
+l.268 ...ding path \label{chap:Grouping-of-goals}}
+                                                  
+? 
+! Emergency stop.
+\label #1->\@bsphack \begingroup \def \label@name 
+                                                  {#1}\label@hook \protected...
+l.268 ...ding path \label{chap:Grouping-of-goals}}
+                                                  
+End of file on the terminal!
+
+ 
+Here is how much of TeX's memory you used:
+ 13448 strings out of 493921
+ 190726 string characters out of 3144867
+ 320958 words of memory out of 3000000
+ 16563 multiletter control sequences out of 15000+200000
+ 72623 words of font info for 38 fonts, out of 3000000 for 9000
+ 841 hyphenation exceptions out of 8191
+ 47i,11n,66p,274b,410s stack positions out of 5000i,500n,10000p,200000b,50000s
+!  ==> Fatal error occurred, no output PDF file produced!
