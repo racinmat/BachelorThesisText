@@ -1220,6 +1220,19 @@ status open
 status open
 
 \begin_layout Plain Layout
+Algorithm
+\end_layout
+
+\end_inset
+
+Algorithm
+\end_layout
+
+\begin_layout Chapter
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
 Implementation
 \end_layout
 
@@ -1302,11 +1315,59 @@ target "https://github.com/racinmat/VCollide2"
 \end_layout
 
 \begin_layout Standard
-Last use external library is QT, which was used to create GUI.
+Last use external library is QT, which was used to create platform independent
+ GUI.
 \end_layout
 
 \begin_layout Section
 Code structure 
+\end_layout
+
+\begin_layout Standard
+Here is shown brief UML scheme demonstrating code structure.
+ Scheme was generated using software 
+\begin_inset CommandInset href
+LatexCommand href
+name "StarUML"
+target "http://staruml.io/"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename C:/Users/Azathoth/Disk Google/moje věci/škola/bakalářská práce/umlSchema.svg
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Core class holds core of whole Application and has all other classes as
+ dependencies, as is shown in image above.
+ 
+\end_layout
+
+\begin_layout Standard
+State factory creates State classes according to Factory pattern.
+ State class represents state in RRT-Path algorithm.
+ State has coordinates and rotations for all UAVs.
+\end_layout
+
+\begin_layout Standard
+Persister persists found path to JSON using Json Spirit library.
+\end_layout
+
+\begin_layout Standard
+PathHandler serves as utils class for manipulations with path (vector of
+ State classes).
+\end_layout
+
+\begin_layout Standard
+CarLikeMotionModel holds motion model algorithm.
 \end_layout
 
 \begin_layout Bibliography
