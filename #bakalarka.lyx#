@@ -1519,6 +1519,52 @@ Motion model
 Motion model
 \end_layout
 
+\begin_layout Standard
+The RRT-Path algorithm is universal and works without motion model, which
+ is fine for holonomic robot, but usage of motion model allows us to find
+ path more feasible for swarm of UAVs than without using of holonomic robot.
+ For this purpose, car like model was chosen.
+ Differential equations of motion model in 3D from 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "MartinSaskaPreucil"
+
+\end_inset
+
+ are 
+\begin_inset Formula 
+\begin{eqnarray}
+\dot{x}\left(t\right) & = & v\left(t\right)\sin\varphi\left(t\right)\\
+\dot{y}\left(t\right) & = & v\left(t\right)\cos\left(t\right)\\
+\dot{z}\left(t\right) & = & w\left(t\right)\\
+\dot{\varphi}\left(t\right) & = & K\left(t\right)v\left(t\right)
+\end{eqnarray}
+
+\end_inset
+
+.
+ Differential equations are useful for representation in equations, but
+ not useful for computer algorithm.
+ For usage in algorithm are better difference equations instead of differential
+ equations.
+ When inputs are held constant in each time interval between two time steps,
+ difference equations are 
+\begin_inset Formula 
+\begin{eqnarray}
+x\left(k+1\right) & = & \begin{cases}
+\\
+\\
+\end{cases}x\left(k\right)+\frac{1}{K\left(k+1\right)}\\
+y\left(k+1\right) & =\\
+z\left(k+1\right) & =\\
+\varphi\left(k+1\right) & =
+\end{eqnarray}
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Chapter
 \begin_inset Argument 1
 status open
