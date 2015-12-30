@@ -10,7 +10,7 @@
 \usepackage{color}%kvůli barvám ČVUT
 \newcommand{\BibTeX}{{\sc Bib}\TeX}%BibTeX logo
 \usepackage{multicol}
-
+\usepackage[overload]{textcase}
 
 
 
@@ -263,7 +263,7 @@ status collapsed
 
 \family sans
 \size huge
-BAKALÁŘSKÁ/DIPLOMOVÁ PRÁCE
+BAKALÁŘSKÁ PRÁCE
 \end_layout
 
 \begin_layout Standard
@@ -1306,8 +1306,8 @@ Below are images of maps with goals and obstacles.
 \end_layout
 
 \begin_layout Standard
-This approach has advantage, when individual AoIs are near the global goal
- of big AoI, as seen in 
+This approach has advantage, when individual AoIs are near to global goal
+ of whole gorup, as seen in 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Maps-with-goals"
