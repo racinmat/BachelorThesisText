@@ -1,6 +1,7 @@
 %% LyX 2.1.4 created this file.  For more info, see http://www.lyx.org/.
 %% Do not edit unless you really know what you are doing.
 \documentclass[a4paper,twoside,english,cleardoublepage=empty,BCOR15mm,DIV12]{scrreprt}
+\usepackage{amsmath}
 \usepackage{tgtermes}
 \usepackage{tgheros}
 \usepackage{tgcursor}
@@ -9,7 +10,6 @@
 \usepackage[utf8]{inputenc}
 \usepackage{babel}
 \usepackage{float}
-\usepackage{url}
 \usepackage{graphicx}
 \usepackage[unicode=true,pdfusetitle,
  bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
@@ -23,6 +23,8 @@
 \pdfpagewidth\paperwidth
 
 \newcommand{\noun}[1]{\textsc{#1}}
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
 \floatstyle{ruled}
 \newfloat{algorithm}{tbp}{loa}[chapter]
 \providecommand{\algorithmname}{Algorithm}
@@ -35,7 +37,7 @@
 \usepackage{color}%kvůli barvám ČVUT
 \newcommand{\BibTeX}{{\sc Bib}\TeX}%BibTeX logo
 \usepackage{multicol}
-
+\usepackage[overload]{textcase}
 
 
 
@@ -62,19 +64,17 @@
 ~\thispagestyle{empty}\begin{center}\pagenumbering{roman}\vspace{10mm}
 
 
-\textsf{\textsc{\noun{\LARGE{}České vysoké učení technické v Praze}}}\\
+\textsf{\textsc{\noun{\LARGE{}Czech Technical University in Prague}}}\\
 \vspace{0.5em}
-\textsf{\textsc{\noun{\LARGE{}Fakulta elektrotechnická}}}\\
+\textsf{\textsc{\noun{\LARGE{}Fakulty of Electrical Engineering}}}\\
 \vspace*{1em}
-\textsf{\textsc{\noun{\Large{}katedra kybernetiky}}}\vspace{15mm}
+\textsf{\textsc{\noun{\Large{}Department of Cybernetics}}}\vspace{15mm}
 
 
-%%% Aby vložení loga  správně fungovalo, je třeba mít soubor lev.png nahraný v pracovním adresáři,
-%%% tj. v adresáři, kde se nachází překládaný zdrojový soubor. 
 \includegraphics[width=0.3\textwidth]{obrazky/lev}\vspace{15mm}
 
 
-\textsf{\huge{}BAKALÁŘSKÁ/DIPLOMOVÁ PRÁCE}{\huge \par}
+\textsf{\huge{}BACHELOR THESIS}{\huge \par}
 
 \vspace{15mm}
 
@@ -93,8 +93,8 @@
 
 \begin{description}
 \item [{{\large{}Autor:}}] \noindent \textsf{\large{}Matěj Račinský}{\large \par}
-\item [{{\large{}Vedoucí~práce:}}] \noindent \textsf{\large{}Dr. Martin
-Saska}{\large{}\hfill{}}\textsf{\large{}Praha,}{\large{} \the\year % nebo doplňte rok vzniku vaší bakalářské práce
+\item [{{\large{}Thesis~supervisor:}}] \noindent \textsf{\large{}Dr. Martin
+Saska}{\large{}\hfill{}}\textsf{\large{}In Prague,}{\large{} \the\year % nebo doplňte rok vzniku vaší bakalářské práce
 }{\large \par}
 \end{description}
 \clearpage{}
@@ -169,7 +169,7 @@ zapůjčováním práce a jejím zveřejňováním.}{\small \par}
 }{\small \par}
 
 
-\chapter[Algorithm]{Algorithm}
+\chapter[Algorithm]{Algorithm\label{chap:Algorithm}}
 
 Basis of whole algorithm is here in pseudocode
 
@@ -282,8 +282,8 @@ which can be used better when having only one swarm.
 Below are images of maps with goals and obstacles. Goals have grren
 color and obstacles have grey color.
 
-This approach has advantage, when individual AoIs are near the global
-goal of big AoI, as seen in \ref{fig:Maps-with-goals}. 
+This approach has advantage, when individual AoIs are near to global
+goal of whole gorup, as seen in \ref{fig:Maps-with-goals}. 
 
 Disadvantage of this method is, when individual AoIs have big distance
 from each other than can be covered by UAVs, this approach totally
@@ -301,13 +301,177 @@ distant from AoIs, as can be seen in \ref{fig:Map-with-goals}.
 \includegraphics[scale=0.3]{obrazky/map2}\includegraphics[scale=0.3]{obrazky/map5}
 
 \caption{Maps with goals suitable for grouping \label{fig:Maps-with-goals}}
-
-
 \end{figure}
 
 
 
-\chapter[Paths narrowing]{Paths narrowing\label{chap:Paths-narrowing}}
+\chapter[Paths narrowing]{Paths narrowing \label{chap:Paths-narrowing}}
+
+RRT-Path algorithm checks crossing paths between neighboring states,
+so between n-th state and n+1-th state no trajectories are crossing
+each other. But between states trajectories are still crossing. In
+this image \ref{fig:Crossing-paths} is shown path found by RRT-Path.
+Every color marks one state in RRT-Path. As we can see, check in algorithm
+prevents from crossing path between neighboring states, but crossing
+of paths in different times can not be easily prevented. We can see
+in image, that paths cross between points J (yellow), M (light green)
+and H (orange), K (yellow), so there is no easy approach to prevent
+path collisions between n-2-th state and n-th state. Optimization
+by Dubins maneuvers shortens trajectory of UAVs, so UAVs could be
+in these trajectories in different time, so there could be collisions
+after optimization. Another complication occurs, when time difference
+between two states is too low, then uavs could collide, because in
+reality UAV can not follow path precisely, but only with some errors.
+
+\begin{figure}
+
+
+\caption{Crossing paths \label{fig:Crossing-paths}}
+
+
+\includegraphics[scale=0.3]{obrazky/crossingPathReal1}
+\end{figure}
+I tried to straighten crossing trajectories, but all attempts failed.
+Straightening was done by switching parts of crossing paths from the
+earliest crossing state to end. But then paths had different leghts,
+which was unsuitable for path planning for swarm. This can be done
+by adding ``waiting'' points, points in different state but with
+same position in different time. But then is really hard sto traighten
+longer path with many crossings (this path is really short, paths
+in other maps are much longer and more complicated). For motion model
+with inertia is also really hard to deal with waiting states, which
+complicates following of straightened trajectories. Due to all complications
+mentioned above, this part was removed from algorithm. But it is possible
+to add it, when better aproach will be found.
+
+
+\chapter[Motion model]{Motion model}
+
+The RRT-Path algorithm is universal and works without motion model,
+which is fine for holonomic robot, but usage of motion model allows
+us to find path more feasible for swarm of UAVs than without using
+of holonomic robot. For this purpose, car like model was chosen. Differential
+equations of motion model in 3D from \cite{MartinSaskaPreucil} are
+\begin{equation}
+\begin{split}\dot{x}\left(t\right) & = & v\left(t\right)\sin\varphi\left(t\right)\\
+\dot{y}\left(t\right) & = & v\left(t\right)\cos\left(t\right)\\
+\dot{z}\left(t\right) & = & w\left(t\right)\\
+\dot{\varphi}\left(t\right) & = & K\left(t\right)v\left(t\right)
+\end{split}
+\end{equation}
+where $x\left(t\right),y\left(t\right),z\left(t\right)$ are coordinates
+of UAV, $\varphi\left(t\right)$ represents heading of UAV, $v\left(t\right)$
+is forward velocity, $K\left(t\right)$ is curvature, $w\left(t\right)$
+is ascent velocity. $\begin{bmatrix}K\left(t\right) & w\left(t\right) & v\left(t\right)\end{bmatrix}$
+represent input vector of motion model. Differential equations are
+useful for representation in equations, but not useful for computer
+algorithm. For usage in algorithm are better difference equations
+instead of differential equations. When inputs are held constant in
+each time interval between two time steps, difference equations are
+\begin{equation}
+\begin{split}x\left(k+1\right) & = & \begin{cases}
+x\left(k\right)+\frac{1}{K\left(k+1\right)}\left(\sin\left(\varphi\left(k\right)+K\left(k+1\right)v\left(k+1\right)\Delta t\left(k+1\right)\right)-\sin\left(\varphi\left(k\right)\right)\right) & if\,K\left(k+1\right)\neq0\\
+x\left(k\right)+v\left(k+1\right)\cos\left(\varphi\left(k\right)\right)\Delta t\left(k+1\right) & if\,K\left(k+1\right)=0
+\end{cases}\\
+y\left(k+1\right) & = & \begin{cases}
+y\left(k\right)-\frac{1}{K\left(k+1\right)}\left(\cos\left(\varphi\left(k\right)+K\left(k+1\right)v\left(k+1\right)\Delta t\left(k+1\right)\right)-\cos\left(\varphi\left(k\right)\right)\right) & if\,K\left(k+1\right)\neq0\\
+y\left(k\right)+v\left(k+1\right)\sin\left(\varphi\left(k\right)\right)\Delta t\left(k+1\right) & if\,K\left(k+1\right)=0
+\end{cases}\\
+z\left(k+1\right) & = & z\left(k\right)+w\left(k+1\right)\Delta t\left(k+1\right)\\
+\varphi\left(k+1\right) & = & \varphi\left(k\right)+K\left(k+1\right)v\left(k+1\right)\Delta t\left(k+1\right)
+\end{split}
+\end{equation}
+
+
+
+\chapter[Dubins maneuvers]{Dubins maneuvers}
+
+Dubins maneuvers, also called Dubins curves or Dubins path were published
+by Lester Eli Dubins in 1957 \cite{Dubins1957}. Dubins path is optimal
+path for car like motion model. Path is optimal, when car moves at
+constant forward speed. The other important constraint is the maximum
+steering angle $\phi_{max}$, which results in a minimum turning radius$\rho_{min}$.
+As the car travels, consider the length of the curve in ${\cal W}=\mathbb{R}^{2}$
+traced out by a pencil attached to the center of the car. The task
+is to minimize the length of this curve as the car travels between
+any $q_{I}$ and $q_{G}$. Due to $\rho_{min}$, this can be considered
+as a bounded-curvature shortest-path problem. If $\rho_{min}=0$,
+then there is no curvature bound, and the shortest path follows a
+straight line in $\mathbb{R}^{2}$. In terms of a cost function, the
+criterion to optimize is
+
+\begin{equation}
+\ensuremath{{\displaystyle L(\tilde{q},\tilde{u})=\int_{0}^{t_{F}}\sqrt{\dot{x}(t)^{2}+\dot{y}(t)^{2}}dt}}
+\end{equation}
+, where $t_{F}$ is the time at which $q_{G}$ is reached, and a configuration
+is denoted as $q=(x,y,\theta)$, $\tilde{x}_{t}$ denotes the function
+$\tilde{x}_{t}:[0,t]\rightarrow X$, which is called the state trajectory
+(or state history). This is a continuous-time version of the state
+history, which was defined previously for problems that have discrete
+stages. Similarly, $\tilde{u}_{t}$ denotes the action trajectory
+(or action history),. If $q_{G}$ is not reached, then it is assumed
+that $L(\tilde{q},\tilde{u})=\infty$. \cite{LaValle2006}
+
+When considering constraints of inputs (actions) for motion model,
+the system can be simplified to
+
+\begin{equation}
+\begin{split}\dot{x} & = & \cos\theta\\
+\dot{y} & = & \sin\theta\\
+\dot{\theta} & = & u
+\end{split}
+\end{equation}
+
+
+in which $u$ is chosen from the interval $U=\left\{ -\tan\phi_{max},0,\tan\phi_{max}\right\} $.
+For simplicity, assume that $\tan\phi=1$. The following results also
+hold for any $\phi_{max}\in(0,\pi/2)$. 
+
+\begin{table}
+
+
+\caption{The three motion primitives from which all optimal curves for the
+Dubins car can be constructed. \label{tab:The-three-motion}}
+
+
+\begin{tabular}{|c|c|}
+\hline 
+Symbol & Steering u\tabularnewline
+\hline 
+\hline 
+L & -1\tabularnewline
+\hline 
+S & 0\tabularnewline
+\hline 
+R & 1\tabularnewline
+\hline 
+\end{tabular}
+\end{table}
+
+
+It was shown in \cite{Dubins1957} that between any two configurations,
+the shortest path for the Dubins car can always be expressed as a
+combination of no more than three motion primitives. Each motion primitive
+applies a constant action over an interval of time. Furthermore, the
+only actions that are needed to traverse the shortest paths are $u\in\{-1,0,1\}$.
+The primitives and their associated symbols are shown in \ref{tab:The-three-motion}.
+The $S$ primitive drives the car straight ahead. The $L$ and $R$
+primitives turn as sharply as possible to the left and right, respectively.
+Using these symbols, each possible kind of shortest path can be designated
+as a sequence of three symbols that corresponds to the order in which
+the primitives are applied. Let such a sequence be called a word .
+There is no need to have two consecutive primitives of the same kind
+because they can be merged into one. Under this observation, ten possible
+words of length three are possible. Dubins showed that only these
+six words are possibly optimal:
+
+\begin{equation}
+\ensuremath{{\displaystyle \{LRL,\;RLR,\;LSL,\;LSR,\;RSL,\;RSR\}.}}
+\end{equation}
+
+
+The shortest path between any two configurations can always be characterized
+by one of these words. These are called the Dubins curves.
 
 
 \chapter[Implementation]{Implementation}
@@ -321,8 +485,8 @@ simulations. Whole codebase can be found at \href{https://github.com/racinmat/Au
 In implementation are used some external libries. Every used library
 is mentioned here.\href{http://www.boost.org/}{Boost libraries} is
 used for smart pointers, libraries for Dubins maneuvers are from Master
-Thesis by Petr Váňa\cite{Dubins-thesis}. Generating of JSON from
-C++ object is done via \href{http://www.codeproject.com/Articles/20027/JSON-Spirit-A-C-JSON-Parser-Generator-Implemented}{Json Spirit}
+Thesis by Petr Váňa\cite{Vana2015}. Generating of JSON from C++ object
+is done via \href{http://www.codeproject.com/Articles/20027/JSON-Spirit-A-C-JSON-Parser-Generator-Implemented}{Json Spirit}
 library. Another external library is \href{http://gamma.cs.unc.edu/V-COLLIDE/}{V-Collide}
 from The University of North Carolina at Chapel Hill. 
 
@@ -335,15 +499,14 @@ Last use external library is QT, which was used to create platform
 independent GUI.
 
 
-\section{Code structure }
+\section{Code structure and services}
 
 Here is shown brief UML scheme demonstrating dependency diagram of
 codebase. To keep diagram simple, only services are displayed, other
-classes were left out. Diagram was generated using software \href{http://staruml.io/}{StarUML}
+classes, thich are not services, were left out for lucidity. Diagram
+was generated using software \href{http://staruml.io/}{StarUML}
 
 \begin{figure}
-
-
 \caption{Dependency diagram \label{fig:Dependency-diagram}}
 
 
@@ -353,6 +516,12 @@ classes were left out. Diagram was generated using software \href{http://staruml
 
 Core class holds core of whole Application and has all other classes
 as dependencies, as is shown in image \ref{fig:Dependency-diagram}. 
+
+As mentioned in \ref{chap:Algorithm} chapter Configuration is DTO
+for all configuration variables, but to keep reasonable amount of
+classes, Configuration is also service, which delegates all configuration
+changes from GUI to Core class. Configuration and GuiDrawer implementation
+LoggerInterface are the only connections between Core and GUI.
 
 State factory creates State classes according to Factory pattern.
 State class represents state in RRT-Path algorithm. State has coordinates
@@ -364,11 +533,26 @@ PathHandler serves as utils class for manipulations with path (vector
 of State classes).
 
 CarLikeMotionModel holds motion model algorithm.
-\begin{thebibliography}{1}
-\bibitem[1]{Dubins-thesis}Petr Váňa,\emph{ Path Planning for Non-holonomic
-Vehicle in Surveillance Missions} {[}online{]}. {[}cit. 2015-12-29{]}.
-Dostupný z WWW: \url{https://dspace.cvut.cz/bitstream/handle/10467/61814/F3-DP-2015-Vana-Petr-thesis.pdf}
 
-\end{thebibliography}
+InputGenerator is used to generate inputs to motion model.
+
+NTupletGenerator only generates variation with repeating for given
+input.
+
+DistanceResolver counts distances between two states and distance
+of path.
+
+AoICoverageResolver determines cost function for states,where all
+UAVs are in AoIs.
+
+GuidingPathFactory is wrapper for PathFindingAlgorithm interface and
+is used by Core to find guiding path. 
+
+Implementation of PathFindingAlgorithm is AStart class.
+
+\bibliographystyle{plainnat}
+\phantomsection\addcontentsline{toc}{chapter}{\bibname}\bibliography{bibliography}
+
+
 \cleardoublepage{}
 \end{document}

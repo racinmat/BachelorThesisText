@@ -34,7 +34,7 @@
 \options cleardoublepage=empty,BCOR15mm,DIV12
 \use_default_options false
 \maintain_unincluded_children false
-\language english
+\language british
 \language_package default
 \inputencoding utf8
 \fontencoding global
@@ -181,7 +181,7 @@ Czech Technical University in Prague
 \shape smallcaps
 \size largest
 \noun on
-Fakulty of Electrical Engineering
+Faculty of Electrical Engineering
 \family default
 \shape default
 \size default
@@ -244,7 +244,7 @@ BACHELOR THESIS
 
 \family sans
 \size largest
-Název práce
+RRT-path method used for cooperative surveillance by group of helicopters
 \end_layout
 
 \begin_layout Standard
@@ -289,7 +289,7 @@ end{center}
 \align block
 
 \size large
-Autor: 
+Author: 
 \family sans
 Matěj Račinský
 \end_layout
@@ -421,7 +421,8 @@ Název
 \begin_inset space ~
 \end_inset
 
-práce: Název bakalářské práce
+práce: Aplikace algoritmu RRT-path v úloze autonomního dohledu skupinou
+ helikoptér
 \end_layout
 
 \begin_layout Description
@@ -528,7 +529,7 @@ height "1pt"
 \noindent
 
 \size small
-Title: Název bakalářské práce v angličtině
+Title: RRT-path method used for cooperative surveillance by group of helicopters
 \end_layout
 
 \begin_layout Description
@@ -891,6 +892,16 @@ name "chap:Algorithm"
 
 \begin_layout Standard
 Basis of whole algorithm is here in pseudocode
+\begin_inset Marginal
+status open
+
+\begin_layout Plain Layout
+todo: přesunout k popisku?
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1111,7 +1122,7 @@ end{algorithmic}
 \begin_layout Standard
 Configuration variable is instance of Configuration class, which holds all
  configuration variables, including selected map.
- Map holds all Aeras of Interest (AoI) and obstacles.
+ Map holds all Areas of Interest (AoI) and obstacles.
  All obstacles and AoIs are represented now as rectangles.
 \end_layout
 
@@ -1122,15 +1133,15 @@ Even if we want to find as short path to AoI as possible, path too near
  follow found trajectories.
  So in real environment, it is convenient for the swarm to have path planned
  with safe distance from obstacles.
- Because of that fact, we need to increase size od obstacles, which is done
+ Because of that fact, we need to increase size of obstacles, which is done
  in line 2 in function amplifyObstacles.
  
 \end_layout
 
 \begin_layout Standard
 Line 3 represents discretization of map to graph.
- Discretizaion divides map to squares with size set in configuration and
- eac square is represented by node.
+ Discretization divides map to squares with size set in configuration and
+ each square is represented by node.
  In this graph, there are 4 types of nodes: Free, Obstacle, UAV and Goal.
  If part of square of whole square is covered by obstacle, corresponding
  node has type Obstacle.
@@ -1142,7 +1153,7 @@ Line 3 represents discretization of map to graph.
 \end_layout
 
 \begin_layout Standard
-Edges in this graph are only between nodes of neighboring squares, so each
+Edges in this graph are only between nodes of neighbouring squares, so each
  node has maximally 8 edges.
  Obstacle nodes do not have any edges.
 \end_layout
@@ -1165,15 +1176,15 @@ Line 4 calculates the guiding paths for rrt path algorithm using the A*
  algorithm.
  Algorithm has modified cost function and in addition to cost function of
  A* algorithm, cost of current node is added during the calculation.
- Nodes neighboring with obstacles has bigger cost than nodes which do not
- have obstacles as neighbors.
+ Nodes neighbouring with obstacles has bigger cost than nodes which do not
+ have obstacles as neighbours.
  Thanks to this modification, guiding path avoids obstacles and has bigger
  distance to obstacles.
  
 \end_layout
 
 \begin_layout Standard
-On line 5 the rrt path algoritm takes place.
+On line 5 the RRT path algorithm takes place.
  This function returns structure with tree with root at starting position
  of UAVs and with array containing leaves of this three, where all UAVs
  are in Areas of Interest.
@@ -1201,8 +1212,8 @@ On line 7 the path is built from last state.
 \end_layout
 
 \begin_layout Standard
-On line 8 is optional preparation before optimization using Dubins maneuvers.
- In the preperation, all crossings of paths of individual UAVs are straigtened,
+On line 8 is optional preparation before optimization using Dubins manoeuvrers.
+ In the preparation, all crossings of paths of individual UAVs are straightened,
  so UAVs do not cross other UAVs trajectories during whole path.
  During implementation of this method were complications, which are covered
  in chapter, and thus the row was removed from the algorithm.
@@ -1217,7 +1228,7 @@ reference "chap:Paths-narrowing"
 \end_layout
 
 \begin_layout Standard
-On line 9 is optimization by Dubins maneuvers.
+On line 9 is optimization by Dubins manoeuvrers.
  Optimizations is covered in chapter.
 \begin_inset Marginal
 status open
@@ -1276,12 +1287,12 @@ If this modification is turned on, instead of one goal for every AoI (node
 
 \begin_layout Standard
 Below are images of maps with goals and obstacles.
- Goals have grren color and obstacles have grey color.
+ Goals have green colour and obstacles have grey colour.
 \end_layout
 
 \begin_layout Standard
 This approach has advantage, when individual AoIs are near to global goal
- of whole gorup, as seen in 
+ of whole group, as seen in 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Maps-with-goals"
@@ -1401,12 +1412,12 @@ name "fig:Maps-with-goals"
 status open
 
 \begin_layout Plain Layout
-Paths narrowing
+Paths straightening
 \end_layout
 
 \end_inset
 
-Paths narrowing 
+Paths straightening 
 \begin_inset CommandInset label
 LatexCommand label
 name "chap:Paths-narrowing"
@@ -1417,8 +1428,8 @@ name "chap:Paths-narrowing"
 \end_layout
 
 \begin_layout Standard
-RRT-Path algorithm checks crossing paths between neighboring states, so
- between n-th state and n+1-th state no trajectories are crossing each other.
+RRT-Path algorithm checks crossing paths between neighbouring states, so
+ between nth state and n+1-th state no trajectories are crossing each other.
  But between states trajectories are still crossing.
  In this image 
 \begin_inset CommandInset ref
@@ -1428,17 +1439,17 @@ reference "fig:Crossing-paths"
 \end_inset
 
  is shown path found by RRT-Path.
- Every color marks one state in RRT-Path.
- As we can see, check in algorithm prevents from crossing path between neighbori
-ng states, but crossing of paths in different times can not be easily prevented.
+ Every colour marks one state in RRT-Path.
+ As we can see, check in algorithm prevents from crossing path between neighbour
+ing states, but crossing of paths in different times can not be easily prevented.
  We can see in image, that paths cross between points J (yellow), M (light
  green) and H (orange), K (yellow), so there is no easy approach to prevent
- path collisions between n-2-th state and n-th state.
- Optimization by Dubins maneuvers shortens trajectory of UAVs, so UAVs could
- be in these trajectories in different time, so there could be collisions
+ path collisions between n-2-th state and nth state.
+ Optimization by Dubins manoeuvrers shortens trajectory of UAVs, so UAVs
+ could be in these trajectories in different time, so there could be collisions
  after optimization.
  Another complication occurs, when time difference between two states is
- too low, then uavs could collide, because in reality UAV can not follow
+ too low, then UAVs could collide, because in reality UAV can not follow
  path precisely, but only with some errors.
 \end_layout
 
@@ -1487,7 +1498,7 @@ name "fig:Crossing-paths"
 I tried to straighten crossing trajectories, but all attempts failed.
  Straightening was done by switching parts of crossing paths from the earliest
  crossing state to end.
- But then paths had different leghts, which was unsuitable for path planning
+ But then paths had different lengths, which was unsuitable for path planning
  for swarm.
  This can be done by adding 
 \begin_inset Quotes eld
@@ -1498,12 +1509,12 @@ waiting
 \end_inset
 
  points, points in different state but with same position in different time.
- But then is really hard sto traighten longer path with many crossings (this
+ But then is really hard to straighten longer path with many crossings (this
  path is really short, paths in other maps are much longer and more complicated).
  For motion model with inertia is also really hard to deal with waiting
  states, which complicates following of straightened trajectories.
  Due to all complications mentioned above, this part was removed from algorithm.
- But it is possible to add it, when better aproach will be found.
+ But it is possible to add it, when better approach will be found.
 \end_layout
 
 \begin_layout Chapter
@@ -1533,12 +1544,14 @@ key "MartinSaskaPreucil"
 
  are 
 \begin_inset Formula 
-\begin{eqnarray}
+\begin{equation}
+\begin{array}{ccc}
 \dot{x}\left(t\right) & = & v\left(t\right)\sin\varphi\left(t\right)\\
 \dot{y}\left(t\right) & = & v\left(t\right)\cos\left(t\right)\\
 \dot{z}\left(t\right) & = & w\left(t\right)\\
 \dot{\varphi}\left(t\right) & = & K\left(t\right)v\left(t\right)
-\end{eqnarray}
+\end{array}
+\end{equation}
 
 \end_inset
 
@@ -1550,7 +1563,7 @@ where
 \begin_inset Formula $\varphi\left(t\right)$
 \end_inset
 
- represents heading of UAV , 
+ represents heading of UAV, 
 \begin_inset Formula $v\left(t\right)$
 \end_inset
 
@@ -1575,7 +1588,8 @@ where
  When inputs are held constant in each time interval between two time steps,
  difference equations are 
 \begin_inset Formula 
-\begin{eqnarray}
+\begin{equation}
+\begin{array}{ccc}
 x\left(k+1\right) & = & \begin{cases}
 x\left(k\right)+\frac{1}{K\left(k+1\right)}\left(\sin\left(\varphi\left(k\right)+K\left(k+1\right)v\left(k+1\right)\Delta t\left(k+1\right)\right)-\sin\left(\varphi\left(k\right)\right)\right) & if\,K\left(k+1\right)\neq0\\
 x\left(k\right)+v\left(k+1\right)\cos\left(\varphi\left(k\right)\right)\Delta t\left(k+1\right) & if\,K\left(k+1\right)=0
@@ -1586,7 +1600,8 @@ y\left(k\right)+v\left(k+1\right)\sin\left(\varphi\left(k\right)\right)\Delta t\
 \end{cases}\\
 z\left(k+1\right) & = & z\left(k\right)+w\left(k+1\right)\Delta t\left(k+1\right)\\
 \varphi\left(k+1\right) & = & \varphi\left(k\right)+K\left(k+1\right)v\left(k+1\right)\Delta t\left(k+1\right)
-\end{eqnarray}
+\end{array}
+\end{equation}
 
 \end_inset
 
@@ -1598,16 +1613,16 @@ z\left(k+1\right) & = & z\left(k\right)+w\left(k+1\right)\Delta t\left(k+1\right
 status open
 
 \begin_layout Plain Layout
-Dubins maneuvers
+Dubins manoeuvrers
 \end_layout
 
 \end_inset
 
-Dubins maneuvers
+Dubins manoeuvrers
 \end_layout
 
 \begin_layout Standard
-Dubins maneuvers, also called Dubins curves or Dubins path were published
+Dubins manoeuvrers, also called Dubins curves or Dubins path were published
  by Lester Eli Dubins in 1957 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -1616,8 +1631,366 @@ key "Dubins1957"
 \end_inset
 
 .
- Dubins path is optimal path for Car like motion model.
- Car li
+ Dubins path is optimal path for car like motion model.
+ Path is optimal, when car moves at constant forward speed.
+ The other important constraint is the maximum steering angle 
+\begin_inset Formula $\phi_{max}$
+\end_inset
+
+, which results in a minimum turning radius
+\begin_inset Formula $\rho_{min}$
+\end_inset
+
+.
+ As the car travels, consider the length of the curve in 
+\begin_inset Formula ${\cal W}=\mathbb{R}^{2}$
+\end_inset
+
+ traced out by a pencil attached to the centre of the car.
+ The task is to minimize the length of this curve as the car travels between
+ any 
+\begin_inset Formula $q_{I}$
+\end_inset
+
+ and 
+\begin_inset Formula $q_{G}$
+\end_inset
+
+.
+ Due to 
+\begin_inset Formula $\rho_{min}$
+\end_inset
+
+, this can be considered as a bounded-curvature shortest-path problem.
+ If 
+\begin_inset Formula $\rho_{min}=0$
+\end_inset
+
+, then there is no curvature bound, and the shortest path follows a straight
+ line in 
+\begin_inset Formula $\mathbb{R}^{2}$
+\end_inset
+
+.
+ In terms of a cost function, the criterion to optimize is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\ensuremath{{\displaystyle L(\tilde{q},\tilde{u})=\int_{0}^{t_{F}}\sqrt{\dot{x}(t)^{2}+\dot{y}(t)^{2}}dt}}
+\end{equation}
+
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+, where 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $t_{F}$
+\end_inset
+
+ is the time at which 
+\begin_inset Formula $q_{G}$
+\end_inset
+
+ is reached, and a configuration is denoted as 
+\begin_inset Formula $q=(x,y,\theta)$
+\end_inset
+
+, 
+\begin_inset Formula $\tilde{x}_{t}$
+\end_inset
+
+ denotes the function 
+\begin_inset Formula $\tilde{x}_{t}:[0,t]\rightarrow X$
+\end_inset
+
+, which is called the state trajectory (or state history).
+ This is a continuous-time version of the state history, which was defined
+ previously for problems that have discrete stages.
+ Similarly, 
+\begin_inset Formula $\tilde{u}_{t}$
+\end_inset
+
+ denotes the action trajectory (or action history),.
+ If 
+\begin_inset Formula $q_{G}$
+\end_inset
+
+ is not reached, then it is assumed that 
+\begin_inset Formula $L(\tilde{q},\tilde{u})=\infty$
+\end_inset
+
+.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "LaValle2006"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+When considering constraints of inputs (actions) for motion model, the system
+ can be simplified to
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\begin{array}{ccc}
+\dot{x} & = & \cos\theta\\
+\dot{y} & = & \sin\theta\\
+\dot{\theta} & = & u
+\end{array}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+in which 
+\begin_inset Formula $u$
+\end_inset
+
+ is chosen from the interval 
+\begin_inset Formula $U=\left\{ -\tan\phi_{max},0,\tan\phi_{max}\right\} $
+\end_inset
+
+.
+ For simplicity, assume that 
+\begin_inset Formula $\tan\phi=1$
+\end_inset
+
+.
+ The following results also hold for any 
+\begin_inset Formula $\phi_{max}\in(0,\pi/2)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The three motion primitives from which all optimal curves for the Dubins
+ car can be constructed.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:The-three-motion"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Symbol
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Steering u
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+L
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+S
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+R
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It was shown in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Dubins1957"
+
+\end_inset
+
+ that between any two configurations, the shortest path for the Dubins car
+ can always be expressed as a combination of no more than three motion primitive
+s.
+ Each motion primitive applies a constant action over an interval of time.
+ Furthermore, the only actions that are needed to traverse the shortest
+ paths are 
+\begin_inset Formula $u\in\{-1,0,1\}$
+\end_inset
+
+.
+ The primitives and their associated symbols are shown in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:The-three-motion"
+
+\end_inset
+
+.
+ The 
+\begin_inset Formula $S$
+\end_inset
+
+ primitive drives the car straight ahead.
+ The 
+\begin_inset Formula $L$
+\end_inset
+
+ and 
+\begin_inset Formula $R$
+\end_inset
+
+ primitives turn as sharply as possible to the left and right, respectively.
+ Using these symbols, each possible kind of shortest path can be designated
+ as a sequence of three symbols that corresponds to the order in which the
+ primitives are applied.
+ Let such a sequence be called a word .
+ There is no need to have two consecutive primitives of the same kind because
+ they can be merged into one.
+ Under this observation, ten possible words of length three are possible.
+ Dubins showed that only these six words are possibly optimal:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\ensuremath{{\displaystyle \{LRL,\;RLR,\;LSL,\;LSR,\;RSL,\;RSR\}.}}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The shortest path between any two configurations can always be characterized
+ by one of these words.
+ These are called the Dubins curves.
 \end_layout
 
 \begin_layout Chapter
@@ -1651,7 +2024,7 @@ External libraries
 \end_layout
 
 \begin_layout Standard
-In implementation are used some external libries.
+In implementation are used some external libraries.
  Every used library is mentioned here.
 \begin_inset CommandInset href
 LatexCommand href
@@ -1660,7 +2033,7 @@ target "http://www.boost.org/"
 
 \end_inset
 
- is used for smart pointers, libraries for Dubins maneuvers are from Master
+ is used for smart pointers, libraries for Dubins manoeuvrers are from Master
  Thesis by Petr Váňa
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -1717,7 +2090,7 @@ Code structure and services
 
 \begin_layout Standard
 Here is shown brief UML scheme demonstrating dependency diagram of codebase.
- To keep diagram simple, only services are displayed, other classes, thich
+ To keep diagram simple, only services are displayed, other classes, which
  are not services, were left out for lucidity.
  Diagram was generated using software 
 \begin_inset CommandInset href
