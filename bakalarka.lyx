@@ -901,7 +901,7 @@ todo: přesunout k popisku?
 
 \end_inset
 
-
+todo: dodat odkaz na algoritmus
 \end_layout
 
 \begin_layout Standard
@@ -1079,6 +1079,22 @@ STATE
 
 \end_inset
 
+path := resamplePath(path, map);
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
 path := optimizePathByDubins(path, map);
 \end_layout
 
@@ -1212,7 +1228,7 @@ On line 7 the path is built from last state.
 \end_layout
 
 \begin_layout Standard
-On line 8 is optional preparation before optimization using Dubins manoeuvrers.
+On line 8 is optional preparation before optimization using Dubins curves.
  In the preparation, all crossings of paths of individual UAVs are straightened,
  so UAVs do not cross other UAVs trajectories during whole path.
  During implementation of this method were complications, which are covered
@@ -1220,7 +1236,7 @@ On line 8 is optional preparation before optimization using Dubins manoeuvrers.
  
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "chap:Paths-narrowing"
+reference "chap:Paths-straightening"
 
 \end_inset
 
@@ -1228,7 +1244,19 @@ reference "chap:Paths-narrowing"
 \end_layout
 
 \begin_layout Standard
-On line 9 is optimization by Dubins manoeuvrers.
+On line 9, re-sampling of path is made, mainly due to requirements of real
+ UAVs, which is mentioned in chapter 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Path-resampling"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+On line 10 is optimization by Dubins curves.
  Optimizations is covered in chapter.
 \begin_inset Marginal
 status open
@@ -1420,7 +1448,7 @@ Paths straightening
 Paths straightening 
 \begin_inset CommandInset label
 LatexCommand label
-name "chap:Paths-narrowing"
+name "chap:Paths-straightening"
 
 \end_inset
 
@@ -1455,8 +1483,8 @@ ing states, but crossing of paths in different times can not be easily prevented
  We can see in image, that paths cross between points J (yellow), M (light
  green) and H (orange), K (yellow), so there is no easy approach to prevent
  path collisions between n-2-th state and nth state.
- Optimization by Dubins manoeuvrers shortens trajectory of UAVs, so UAVs
- could be in these trajectories in different time, so there could be collisions
+ Optimization by Dubins curves shortens trajectory of UAVs, so UAVs could
+ be in these trajectories in different time, so there could be collisions
  after optimization.
  Another complication occurs, when time difference between two states is
  too low, then UAVs could collide, because in reality UAV can not follow
@@ -1623,16 +1651,16 @@ z\left(k+1\right) & = & z\left(k\right)+w\left(k+1\right)\Delta t\left(k+1\right
 status open
 
 \begin_layout Plain Layout
-Dubins manoeuvrers
+Dubins curves
 \end_layout
 
 \end_inset
 
-Dubins manoeuvrers
+Dubins curves
 \end_layout
 
 \begin_layout Standard
-Dubins manoeuvrers, also called Dubins curves or Dubins path were published
+Dubins curves, also called Dubins manoeuvrers or Dubins path were published
  by Lester Eli Dubins in 1957 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -1812,10 +1840,6 @@ in which
 wide false
 sideways false
 status open
-
-\begin_layout Plain Layout
-
-\end_layout
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -2008,6 +2032,134 @@ The shortest path between any two configurations can always be characterized
 status open
 
 \begin_layout Plain Layout
+Optimization using Dubins curves
+\end_layout
+
+\end_inset
+
+Optimization using Dubins curves
+\end_layout
+
+\begin_layout Standard
+The Dubins curves are used to optimize trajectory found with RRT-Path algorithm.
+\end_layout
+
+\begin_layout Standard
+Whole optimization works as follows.
+\end_layout
+
+\begin_layout Standard
+Two random states are chosen, which means one path as part of whole trajectory
+ for each UAV will be optimized.
+ Beginning and ending point of selected path are used as input to Dubins
+ curve algorithm.
+ 
+\end_layout
+
+\begin_layout Standard
+Dubins curve is then sampled with same frequency used in RRT-Path algorithm
+ and is tested for feasibility.
+ When the new path is feasible and shorter than original path, the original
+ path is replaced.
+ and distances of the original and new trajectory part are compared.
+ When new trajectory part is shorter, it is used instead of original trajectory
+ part.
+\end_layout
+
+\begin_layout Standard
+This is repeated in cycle which stops when path is not shortened after many
+ (eg.
+ 150) iterations or optimization is too slow and path is shortened only
+ by small distances (eg.
+ shortening by 5% per 1000 iterations).
+ 
+\end_layout
+
+\begin_layout Chapter
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Path re-sampling
+\end_layout
+
+\end_inset
+
+Path re-sampling
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Path-resampling"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Motion model in RRT-Path algorithm uses constant input in range from 0.5
+ to 1 second.
+ Smaller interval for constant input causes RRT-Path algorithm to run for
+ too long.
+ When using too short constant input interval, the tree has too many nodes,
+ grows slowly and runs out of memory much faster than longer interval.
+ Interval longer than 1 second makes UAVs unable to manoeuvre between smaller
+ obstacles.
+ Thus range from 0.5 to 1 second was experimentally chosen as best interval.
+ Using 
+\begin_inset Formula $x$
+\end_inset
+
+ seconds long constant input interval also means 
+\begin_inset Formula $\frac{1}{x}Hz$
+\end_inset
+
+ frequency of points in resulting trajectory in output of the algorithm.
+ So the range from 0.5 to 1 second implies resulting frequency is in range
+ 
+\begin_inset Formula $1Hz$
+\end_inset
+
+ to 
+\begin_inset Formula $2Hz$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Real UAVs in Multi-Robot Systems group at CTU use frequency 70Hz and trajectorie
+s with lower frequency are linear interpolated to have frequency 70Hz.
+ That means frequency 2Hz is too low for real usage because trajectory generated
+ with this frequency would not be smooth enough.
+ 
+\end_layout
+
+\begin_layout Standard
+Change of frequency before the RRT-Path algorithm makes the algorithm unable
+ to run efficiently in bigger maps, so this does not solve the problem.
+\end_layout
+
+\begin_layout Standard
+Another solution is to re-sample the path after Dubins curves.
+ But this method failed because after Dubins optimization, the curves had
+ different length and different constant input durations.
+ 
+\end_layout
+
+\begin_layout Standard
+The best solution for this problem is re-sampling of trajectory generated
+ by RRT-Path algorithm before it is optimized by Dubins curves.
+ This solution also has big advantage in Dubins curve optimization because
+ it results in more states in trajectories, so the Dubins curve optimization
+ has better results.
+\end_layout
+
+\begin_layout Chapter
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
 Implementation
 \end_layout
 
@@ -2043,7 +2195,7 @@ target "http://www.boost.org/"
 
 \end_inset
 
- is used for smart pointers, libraries for Dubins manoeuvrers are from Master
+ is used for smart pointers, libraries for Dubins curves are from Master
  Thesis by Petr Váňa
 \begin_inset CommandInset citation
 LatexCommand cite

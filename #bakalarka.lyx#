@@ -2049,18 +2049,16 @@ Whole optimization works as follows.
 \end_layout
 
 \begin_layout Standard
-Two random states are chosen, which means one path as part of whole trajectory
- for each UAV will be optimized.
- Beginning and ending point of selected path are used as input to Dubins
- curve algorithm.
+Two random states are chosen, which means one path of trajectory for each
+ UAV.
+ Beginning and ending point of selected trajectory part are used as input
+ to Dubins curve algorithm.
  
 \end_layout
 
 \begin_layout Standard
 Dubins curve is then sampled with same frequency used in RRT-Path algorithm
- and is tested for feasibility.
- When the new path is feasible and shorter than original path, the original
- path is replaced.
+ and is tested for feasibi.
  and distances of the original and new trajectory part are compared.
  When new trajectory part is shorter, it is used instead of original trajectory
  part.
