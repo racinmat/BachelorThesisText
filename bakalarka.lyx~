@@ -145,7 +145,7 @@ status open
 
 
 \backslash
-pagenumbering{roman}
+pagenumbering{arabic}
 \end_layout
 
 \end_inset
@@ -1498,10 +1498,6 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -1629,12 +1625,16 @@ where
 \begin{equation}
 \begin{array}{ccc}
 x\left(k+1\right) & = & \begin{cases}
-x\left(k\right)+\frac{1}{K\left(k+1\right)}\left(\sin\left(\varphi\left(k\right)+K\left(k+1\right)v\left(k+1\right)\Delta t\left(k+1\right)\right)-\sin\left(\varphi\left(k\right)\right)\right) & if\,K\left(k+1\right)\neq0\\
-x\left(k\right)+v\left(k+1\right)\cos\left(\varphi\left(k\right)\right)\Delta t\left(k+1\right) & if\,K\left(k+1\right)=0
+if\,K\left(k+1\right)\neq0\\
+x\left(k\right)+\frac{1}{K\left(k+1\right)}\left(\sin\left(\varphi\left(k\right)+K\left(k+1\right)v\left(k+1\right)\Delta t\left(k+1\right)\right)-\sin\left(\varphi\left(k\right)\right)\right)\\
+if\,K\left(k+1\right)=0\\
+x\left(k\right)+v\left(k+1\right)\cos\left(\varphi\left(k\right)\right)\Delta t\left(k+1\right)
 \end{cases}\\
 y\left(k+1\right) & = & \begin{cases}
-y\left(k\right)-\frac{1}{K\left(k+1\right)}\left(\cos\left(\varphi\left(k\right)+K\left(k+1\right)v\left(k+1\right)\Delta t\left(k+1\right)\right)-\cos\left(\varphi\left(k\right)\right)\right) & if\,K\left(k+1\right)\neq0\\
-y\left(k\right)+v\left(k+1\right)\sin\left(\varphi\left(k\right)\right)\Delta t\left(k+1\right) & if\,K\left(k+1\right)=0
+if\,K\left(k+1\right)\neq0\\
+y\left(k\right)-\frac{1}{K\left(k+1\right)}\left(\cos\left(\varphi\left(k\right)+K\left(k+1\right)v\left(k+1\right)\Delta t\left(k+1\right)\right)-\cos\left(\varphi\left(k\right)\right)\right)\\
+if\,K\left(k+1\right)=0\\
+y\left(k\right)+v\left(k+1\right)\sin\left(\varphi\left(k\right)\right)\Delta t\left(k+1\right)
 \end{cases}\\
 z\left(k+1\right) & = & z\left(k\right)+w\left(k+1\right)\Delta t\left(k+1\right)\\
 \varphi\left(k+1\right) & = & \varphi\left(k\right)+K\left(k+1\right)v\left(k+1\right)\Delta t\left(k+1\right)
@@ -2066,6 +2066,15 @@ Dubins curve is then sampled with same frequency used in RRT-Path algorithm
  part.
 \end_layout
 
+\begin_layout Standard
+This is repeated in cycle which stops when path is not shortened after many
+ (eg.
+ 150) iterations or optimization is too slow and path is shortened only
+ by small distances (eg.
+ shortening by 5% per 1000 iterations).
+ 
+\end_layout
+
 \begin_layout Chapter
 \begin_inset Argument 1
 status open
@@ -2141,7 +2150,699 @@ Another solution is to re-sample the path after Dubins curves.
 \begin_layout Standard
 The best solution for this problem is re-sampling of trajectory generated
  by RRT-Path algorithm before it is optimized by Dubins curves.
+ This solution also has big advantage in Dubins curves optimization because
+ it results to shorter final path as will be shown in following experiment.
+\end_layout
+
+\begin_layout Section
+Influence of re-sampling on Dubins curves optimization
+\end_layout
+
+\begin_layout Standard
+To demonstrate the optimization, I created map and let the RRT-Path algorithm
+ find the trajectories for UAVs.
+ The map with trajectories can be seen in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Path-before-Dubins"
+
+\end_inset
+
+.
+ Obstacles are grey rectangles, AoI is green rectangle and each UAV has
+ trajectory marked with different colour.
+ For measuring of influence of re-sampling of path to Dubins curves optimization
+, I picked frequencies: 1 Hz (initial frequency used in RRT-Path algorithm),
+ 2 Hz, 4 Hz, 6 Hz, 8 Hz, 10 Hz, 12 Hz, 14 Hz, 16 Hz, 18 Hz, 20 Hz.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Path before Dubins curves optimization
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Path-before-Dubins"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename obrazky/pathBeforeDubins.png
+	lyxscale 40
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As stated above, due to time and memory consumption, each optimization stopped
+ after 150 iterations where optimization did not shorten the path or when
+ speed of path shortening was slower than 5% of original path length per
+ 1000 iterations.
+\end_layout
+
+\begin_layout Standard
+For each frequency, the optimization process was run 100 times to obtain
+ relevant results because of using random numbers during the optimization.
+\end_layout
+
+\begin_layout Standard
+Following table shows average total, minimal and maximal distance of all
+ trajectories from 100 optimizations after the re-sampling and optimization.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Re-sampling and optimization results
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Re-sampling-and-optimization"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="12">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Frequency of re-sampling [Hz]
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+18
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Minimal total distance [m]
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8582.18
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8311.65
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8366.88
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8248.9
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8249.88
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8286.22
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8302.51
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8303.18
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8363.92
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8510.32
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8194.22
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Maximal total distance[m]
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8849.7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8548.81
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8393.09
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8275.7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8378.51
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8472.2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8309.2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8303.18
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8363.92
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8510.32
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8194.22
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Average total distance[m]
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8721.2904
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8430.23
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8379.985
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8262.3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8314.195
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8379.21
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8307.6613
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8303.18
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8363.92
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8510.32
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8194.22
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The results are also shown in graph 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Re-sampling-and-optimization"
+
+\end_inset
+
+.
+ On the graph we can see that initial frequency 1 Hz has worst results and
+ the frequency 20 Hz has best results.
+ We can also see that in frequency 14 Hz and higher, all 100 iterations
+ had same results, the minimum, maximum and mean value are the same.
+ But the second best frequency in terms of minimal, maximal and mean value
+ is 6 Hz.
  
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Re-sampling and optimization results graph 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Re-sampling-and-optimization"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename obrazky/frequencyDependence.png
+	lyxscale 40
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Depending on re-sampling frequency, the courses of optimization are also
+ different.
+\end_layout
+
+\begin_layout Standard
+Here we can see mean values and standard deviations for different frequencies,
+ divided to two graphs for better lucidity.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Time course of optimization
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename obrazky/lowFrequenciesErrors.png
+	lyxscale 40
+	scale 40
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename obrazky/highFrequenciesErrors.png
+	lyxscale 40
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Chapter
