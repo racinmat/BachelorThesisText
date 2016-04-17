@@ -2115,15 +2115,7 @@ Motion model in RRT-Path algorithm uses constant input in range from 0.5
 
  frequency of points in resulting trajectory in output of the algorithm.
  So the range from 0.5 to 1 second implies resulting frequency is in range
- 
-\begin_inset Formula $1Hz$
-\end_inset
-
- to 
-\begin_inset Formula $2Hz$
-\end_inset
-
-.
+ 1Hz to 2Hz.
  
 \end_layout
 
@@ -2203,7 +2195,90 @@ name "fig:Path-before-Dubins"
 \begin_inset Graphics
 	filename obrazky/pathBeforeDubins.png
 	lyxscale 40
-	scale 30
+	scale 28
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The best result of Dubins curves optimization (re-sampling of 20Hz) is shown
+ in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Path-after-Dubins"
+
+\end_inset
+
+.
+ As we can see, trajectories are much shorter than trajectories before optimizat
+ion in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Path-before-Dubins"
+
+\end_inset
+
+.
+ On the beginning of trajectories, in the left upper corner of picture,
+ we can see much smoother curves than before optimization.
+ This is due to re-sampling to frequency 20Hz, which smooths trajectories.
+ 
+\end_layout
+
+\begin_layout Standard
+In real flight, it is undesirable to have trajectories tight to obstacles,
+ so obstacles are amplified before optimization.
+ This can be seen in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Path-after-Dubins"
+
+\end_inset
+
+ where UAVs keep certain distance from the obstacles.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Path after Dubins curves optimization
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Path-after-Dubins"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename obrazky/pathAfterDubins20Hz.png
+	lyxscale 40
+	scale 28
 
 \end_inset
 
@@ -2803,9 +2878,35 @@ Depending on re-sampling frequency, the courses of optimization are also
 \end_layout
 
 \begin_layout Standard
-Here we can see mean values and standard deviations for different frequencies,
- divided to two graphs for better lucidity.
- 
+In 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Time-course-of"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Time-course-of-1"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Time-course-of-2"
+
+\end_inset
+
+ we can see mean values and standard deviations for different frequencies,
+ divided into three graphs for better readability.
+ The vertical lines are error bars, they show standard deviation during
+ the optimization.
+ Because the error bars would be too dense if they were shown for each iteration
+, only every 100th iteration is shown on graphs.
+ For comparison, on each graph is shown also frequency 1 Hz, the initial
+ frequency before re-sampling.
 \end_layout
 
 \begin_layout Standard
@@ -2822,7 +2923,14 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Time course of optimization
+Time course of optimization for 2 Hz, 4 Hz, 6 Hz
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Time-course-of"
+
+\end_inset
+
+ 
 \end_layout
 
 \end_inset
@@ -2838,9 +2946,43 @@ Time course of optimization
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Time course of optimization for 8 Hz, 10 Hz, 12 Hz
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Time-course-of-1"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename obrazky/highFrequenciesErrors.png
+	filename obrazky/middleFrequenciesErrors.png
 	lyxscale 40
 	scale 70
 
@@ -2849,7 +2991,48 @@ Time course of optimization
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
 \begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Time course of optimization for 14 Hz, 16 Hz, 18 Hz, 20 Hz
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Time-course-of-2"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename obrazky/highFrequenciesErrors.png
+	lyxscale 40
+	scale 70
+
+\end_inset
+
 
 \end_layout
 
