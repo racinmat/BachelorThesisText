@@ -2215,10 +2215,10 @@ name "fig:Path-before-Dubins"
 \end_layout
 
 \begin_layout Standard
-As stated above, due to time and memory consumption, each optimization stopped
- after 150 iterations where optimization did not shorten the path or when
- speed of path shortening was slower than 5% of original path length per
- 1000 iterations.
+As stated above, due to time and memory consumption, each optimization is
+ stopped after 150 iterations where optimization did not shorten the path
+ or when speed of path shortening was slower than 5% of original path length
+ per 1000 iterations.
 \end_layout
 
 \begin_layout Standard

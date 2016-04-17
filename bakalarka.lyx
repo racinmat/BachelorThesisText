@@ -2128,8 +2128,9 @@ Motion model in RRT-Path algorithm uses constant input in range from 0.5
 \end_layout
 
 \begin_layout Standard
-Real UAVs in Multi-Robot Systems group at CTU use frequency 70Hz and trajectorie
-s with lower frequency are linear interpolated to have frequency 70Hz.
+Real UAVs in Multi-Robot Systems group at CTU use frequency 70Hz for providing
+ target points to UAVs and trajectories with lower frequency are linear
+ interpolated to have frequency 70Hz.
  That means frequency 2Hz is too low for real usage because trajectory generated
  with this frequency would not be smooth enough.
  
