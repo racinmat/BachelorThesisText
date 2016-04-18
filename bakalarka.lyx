@@ -1352,6 +1352,7 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename obrazky/map1.png
 	lyxscale 50
@@ -1517,9 +1518,10 @@ name "fig:Crossing-paths"
 \end_layout
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename obrazky/crossingPathReal1.png
-	lyxscale 60
+	lyxscale 40
 	scale 30
 
 \end_inset
@@ -2027,7 +2029,7 @@ The shortest path between any two configurations can always be characterized
  These are called the Dubins curves.
 \end_layout
 
-\begin_layout Chapter
+\begin_layout Section
 \begin_inset Argument 1
 status open
 
@@ -2041,38 +2043,174 @@ Optimization using Dubins curves
 \end_layout
 
 \begin_layout Standard
-The Dubins curves are used to optimize trajectory found with RRT-Path algorithm.
+Because of the fact that Dubins curves provide us optimal trajectory, they
+ can be used to optimize trajectory found with RRT-Path algorithm.
 \end_layout
 
 \begin_layout Standard
-Whole optimization works as follows.
+For only one UAV, the situation is quite simple and optimization works as
+ follows.
 \end_layout
 
 \begin_layout Standard
-Two random states are chosen, which means one path as part of whole trajectory
- for each UAV will be optimized.
- Beginning and ending point of selected path are used as input to Dubins
- curve algorithm.
- 
+Two random points of trajectory are chosen and Dubins curves are calculated
+ between them.
+ If calculated curves do not collide with the obstacles, they are used instead
+ of original trajectory between chosen points.
+ This points choosing and trajectory replacing is repeated until the whole
+ trajectory can not be shortened more and thus is optimal.
 \end_layout
 
 \begin_layout Standard
-Dubins curve is then sampled with same frequency used in RRT-Path algorithm
- and is tested for feasibility.
- When the new path is feasible and shorter than original path, the original
- path is replaced.
- and distances of the original and new trajectory part are compared.
- When new trajectory part is shorter, it is used instead of original trajectory
- part.
-\end_layout
-
-\begin_layout Standard
-This is repeated in cycle which stops when path is not shortened after many
- (eg.
+In real situation, we do not know whether found trajectory is optimal or
+ not, so we need to determine conditions for stopping the optimization.
+ The optimization is stopped if the trajectory is not shortened after many
+ (e.
+ g.
  150) iterations or optimization is too slow and path is shortened only
- by small distances (eg.
+ by small distances (e.
+ g.
  shortening by 5% per 1000 iterations).
  
+\end_layout
+
+\begin_layout Standard
+But in swarm, the situation is complicated because of relative localization
+ and minimal and maximal distances between individual UAVs.
+ 
+\end_layout
+
+\begin_layout Standard
+So the algorithm must be modified.
+ Dubins curves must be sampled in same frequency as rest of trajectory (this
+ is frequency of RRT-Path algorithm or higher frequency when path is being
+ re-sampled) and each point has to be validated for feasibility in terms
+ of minimal and maximal distance from another UAVs.
+ So the curves can be used only when all trajectories between minimal and
+ maximal distance of relative localization.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+One UAV demonstration
+\end_layout
+
+\end_inset
+
+One UAV demonstration
+\end_layout
+
+\begin_layout Standard
+In 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:One-UAV-before"
+
+\end_inset
+
+ we have trajectory of one UAV found by RRT-Path algorithm in map with one
+ obstacle marked by grey rectangle.
+ In 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Path-after-Dubins"
+
+\end_inset
+
+ we can see optimal path found using Dubins curves..
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+One UAV before Dubins curves optimization
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:One-UAV-before"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename obrazky/oneUAV.json.png
+	lyxscale 60
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+One UAV after Dubins curves optimization
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:One-UAV-after"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename obrazky/oneUAVoptimized.json.png
+	lyxscale 60
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Chapter
@@ -2176,6 +2314,7 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -2275,6 +2414,7 @@ name "fig:Path-after-Dubins"
 \end_layout
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename obrazky/pathAfterDubins20Hz.png
 	lyxscale 40
@@ -2857,6 +2997,7 @@ name "fig:Re-sampling-and-optimization"
 \end_layout
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename obrazky/frequencyDependence.png
 	lyxscale 40
@@ -2920,6 +3061,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -2981,6 +3123,7 @@ name "fig:Time-course-of-1"
 \end_layout
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename obrazky/middleFrequenciesErrors.png
 	lyxscale 40
@@ -3026,6 +3169,7 @@ name "fig:Time-course-of-2"
 \end_layout
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename obrazky/highFrequenciesErrors.png
 	lyxscale 40
@@ -3177,6 +3321,7 @@ name "fig:Dependency-diagram"
 \end_layout
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename obrazky/umlSchema.svg
 	scale 40
