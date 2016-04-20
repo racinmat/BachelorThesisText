@@ -875,6 +875,19 @@ status open
 status open
 
 \begin_layout Plain Layout
+Motivation
+\end_layout
+
+\end_inset
+
+Motivation
+\end_layout
+
+\begin_layout Chapter
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
 Algorithm
 \end_layout
 
@@ -891,17 +904,14 @@ name "chap:Algorithm"
 \end_layout
 
 \begin_layout Standard
-Basis of whole algorithm is here in pseudocode
-\begin_inset Marginal
-status open
-
-\begin_layout Plain Layout
-todo: přesunout k popisku?
-\end_layout
+The basis of whole algorithm is shown in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:Basis-of-whole"
 
 \end_inset
 
-todo: dodat odkaz na algoritmus
+ in the pseudocode.
 \end_layout
 
 \begin_layout Standard
@@ -914,7 +924,14 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Basis of whole algorithm
+The basis of whole algorithm
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:Basis-of-whole"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1111,7 +1128,7 @@ STATE
 
 \end_inset
 
-savePathToJson(path);
+savePath(path);
 \end_layout
 
 \begin_layout Plain Layout
@@ -1136,35 +1153,42 @@ end{algorithmic}
 \end_layout
 
 \begin_layout Standard
-Configuration variable is instance of Configuration class, which holds all
- configuration variables, including selected map.
+The configuration variable is instance of Configuration class, which holds
+ all configuration data, including selected map.
  Map holds all Areas of Interest (AoI) and obstacles.
- All obstacles and AoIs are represented now as rectangles.
+ All obstacles and AoIs are represented as rectangles now.
 \end_layout
 
 \begin_layout Standard
-Even if we want to find as short path to AoI as possible, path too near
- to obstacles is not convenient for realization, because UAVs do not use
- car like motion model used in this simulation, so they can not exactly
- follow found trajectories.
- So in real environment, it is convenient for the swarm to have path planned
- with safe distance from obstacles.
- Because of that fact, we need to increase size of obstacles, which is done
- in line 2 in function amplifyObstacles.
- 
+The purpose of the path finding is to find the shortest feasible paths,
+ but real UAVs need to have some minimal distance to obstacles due to weather
+ conditions, sensor errors and other aspects.
+ To solve this issue, every obstacle is amplified before the whole path
+ finding algorithm on line 2.
+ This minimal distance to obstacles allows UAVs to follow their trajectories
+ safely.
 \end_layout
 
 \begin_layout Standard
-Line 3 represents discretization of map to graph.
- Discretization divides map to squares with size set in configuration and
- each square is represented by node.
+Line 3 represents the discretization of map to the graph.
+ Discretization divides the map to squares with size set in configuration
+ and each square is represented by node.
  In this graph, there are 4 types of nodes: Free, Obstacle, UAV and Goal.
- If part of square of whole square is covered by obstacle, corresponding
- node has type Obstacle.
- If part of square or whole square is covered by AoI, corresponding node
- has type Goal.
- If square contains UAV, corresponding node has type UAV and rest of squares
- have corresponding nodes qith type Free.
+ If a part of square of whole square is covered by an obstacle, the correspondin
+g node has the type Obstacle.
+ If a part of square or whole square is covered by AoI, 
+\begin_inset Marginal
+status open
+
+\begin_layout Plain Layout
+todo: přepsat větu
+\end_layout
+
+\end_inset
+
+corresponding node has type Goal.
+ If a square contains an UAV, the corresponding node has type UAV and rest
+ of squares have corresponding nodes with type Free.
  
 \end_layout
 
@@ -1175,8 +1199,8 @@ Edges in this graph are only between nodes of neighbouring squares, so each
 \end_layout
 
 \begin_layout Standard
-After converting map to nodes, optional grouping of goals for guiding path
- can be turned on.
+After converting the map to nodes, the optional grouping of goals for guiding
+ path can be turned on.
  I will cover the grouping in chapter 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1188,12 +1212,12 @@ reference "chap:Grouping-of-goals"
 \end_layout
 
 \begin_layout Standard
-Line 4 calculates the guiding paths for rrt path algorithm using the A*
- algorithm.
- Algorithm has modified cost function and in addition to cost function of
- A* algorithm, cost of current node is added during the calculation.
- Nodes neighbouring with obstacles has bigger cost than nodes which do not
- have obstacles as neighbours.
+Line 4 represents calculation of the guiding paths for RRT-Path algorithm
+ using the A* algorithm.
+ Algorithm has a modified cost function and in addition to a cost function
+ of the A* algorithm, the cost of current node is added during the calculation.
+ Nodes neighbouring with obstacles have a bigger cost than nodes which do
+ not have obstacles as neighbours.
  Thanks to this modification, guiding path avoids obstacles and has bigger
  distance to obstacles.
  
@@ -1201,15 +1225,15 @@ Line 4 calculates the guiding paths for rrt path algorithm using the A*
 
 \begin_layout Standard
 On line 5 the RRT path algorithm takes place.
- This function returns structure with tree with root at starting position
- of UAVs and with array containing leaves of this three, where all UAVs
- are in Areas of Interest.
+ This function returns a structure with a tree with a root at the starting
+ position of UAVs and with an array containing leaves of this three, where
+ all UAVs are in Areas of Interest.
  
 \end_layout
 
 \begin_layout Standard
-On line 6 the leaf, where UAVs have best coverage of AoI is chosen.
- Quality of coverage is determined by cost function, which will be mentioned
+On line 6 the leaf, where UAVs have the best coverage of AoI is chosen.
+ Quality of the coverage is determined by cost function, which will be mentioned
  later.
 \begin_inset Marginal
 status open
@@ -1224,28 +1248,29 @@ todo: možná sem odkaz na kapitolu
 \end_layout
 
 \begin_layout Standard
-On line 7 the path is built from last state.
+On line 7 the path is built from the last state.
 \end_layout
 
 \begin_layout Standard
-On line 8 is optional preparation before optimization using Dubins curves.
+On line 8 there is an optional preparation before the optimization using
+ Dubins curves.
  In the preparation, all crossings of paths of individual UAVs are straightened,
- so UAVs do not cross other UAVs trajectories during whole path.
- During implementation of this method were complications, which are covered
- in chapter, and thus the row was removed from the algorithm.
- 
+ so UAVs do not cross other UAVs trajectories during the whole path.
+ During the implementation of this method were complications, which are
+ covered in the chapter 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "chap:Paths-straightening"
 
 \end_inset
 
-
+, and thus the row was removed from the final version of the algorithm.
+ 
 \end_layout
 
 \begin_layout Standard
-On line 9, re-sampling of path is made, mainly due to requirements of real
- UAVs, which is mentioned in chapter 
+On line 9, the re-sampling of the path is made, mainly due to requirements
+ of real UAVs, which are mentioned in chapter 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "chap:Path-resampling"
@@ -1256,23 +1281,25 @@ reference "chap:Path-resampling"
 \end_layout
 
 \begin_layout Standard
-On line 10 is optimization by Dubins curves.
- Optimizations is covered in chapter.
-\begin_inset Marginal
-status open
-
-\begin_layout Plain Layout
-todo: možná sem odkaz na kapitolu
-\end_layout
+On line 10 there is the optimization by Dubins curves.
+ The optimization is covered in chapter 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Dubins-curves"
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Standard
-Last line is only persisting of path to file for usage of path by different
- program.
+The last line represents persisting of the path to a file for usage of result
+ of the whole algorithm by different programs.
+ Path is persisted to JSON, due to convenience of the JSON format.
+ JSON is smaller than XML and can be easily parsed by all widely used programmin
+g languages.
+ Path is also persisted to CSV format, so it can be loaded to MATLAB and
+ then loaded to real UAVs,
 \end_layout
 
 \begin_layout Chapter
@@ -1659,6 +1686,13 @@ Dubins curves
 \end_inset
 
 Dubins curves
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Dubins-curves"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2112,15 +2146,20 @@ reference "fig:One-UAV-before"
 \end_inset
 
  we have trajectory of one UAV found by RRT-Path algorithm in map with one
- obstacle marked by grey rectangle.
+ obstacle marked by dark grey rectangle.
+ Obstacle amplification is marked by light grey rectangle.
  In 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:Path-after-Dubins"
+reference "fig:One-UAV-after"
 
 \end_inset
 
- we can see optimal path found using Dubins maneuvers.
+ we can see optimal path found using Dubins curves.
+ The resulting path consists of many Dubins curves and it was obtained by
+ algorithm mentioned above.
+ Random points have been replaced by Dubins curves and after many iterations,
+ optimal path was found.
 \end_layout
 
 \begin_layout Standard
@@ -2153,6 +2192,7 @@ name "fig:One-UAV-before"
 \end_layout
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename obrazky/oneUAV.json.png
 	lyxscale 60
@@ -2198,6 +2238,7 @@ name "fig:One-UAV-after"
 \end_layout
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename obrazky/oneUAVoptimized.json.png
 	lyxscale 60

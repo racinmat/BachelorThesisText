@@ -1248,29 +1248,28 @@ todo: možná sem odkaz na kapitolu
 \end_layout
 
 \begin_layout Standard
-On line 7 the path is built from the last state.
+On line 7 the path is built from last state.
 \end_layout
 
 \begin_layout Standard
-On line 8 there is an optional preparation before the optimization using
- Dubins curves.
+On line 8 is optional preparation before optimization using Dubins curves.
  In the preparation, all crossings of paths of individual UAVs are straightened,
- so UAVs do not cross other UAVs trajectories during the whole path.
- During the implementation of this method were complications, which are
- covered in the chapter 
+ so UAVs do not cross other UAVs trajectories during whole path.
+ During implementation of this method were complications, which are covered
+ in chapter, and thus the row was removed from the algorithm.
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "chap:Paths-straightening"
 
 \end_inset
 
-, and thus the row was removed from the final version of the algorithm.
- 
+
 \end_layout
 
 \begin_layout Standard
-On line 9, the re-sampling of the path is made, mainly due to requirements
- of real UAVs, which are mentioned in chapter 
+On line 9, re-sampling of path is made, mainly due to requirements of real
+ UAVs, which is mentioned in chapter 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "chap:Path-resampling"
@@ -1281,8 +1280,8 @@ reference "chap:Path-resampling"
 \end_layout
 
 \begin_layout Standard
-On line 10 there is the optimization by Dubins curves.
- The optimization is covered in chapter 
+On line 10 is optimization by Dubins curves.
+ Optimizations is covered in chapter 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "chap:Dubins-curves"
@@ -1293,13 +1292,12 @@ reference "chap:Dubins-curves"
 \end_layout
 
 \begin_layout Standard
-The last line represents persisting of the path to a file for usage of result
- of the whole algorithm by different programs.
+Last line is only persisting of path to file for usage of path by different
+ program.
  Path is persisted to JSON, due to convenience of the JSON format.
  JSON is smaller than XML and can be easily parsed by all widely used programmin
 g languages.
- Path is also persisted to CSV format, so it can be loaded to MATLAB and
- then loaded to real UAVs.
+ Path is also persisted to CSV
 \end_layout
 
 \begin_layout Chapter
