@@ -13,6 +13,14 @@
   url =       {http://www.jstor.org/stable/2372560?origin=crossref&seq=1#page_scan_tab_contents}
 }
 
+@TechReport{LaValle1998,
+  author =      {Steven M. LaValle},
+  title =       {Rapidly-Exploring Random Trees: A New Tool for Path Planning},
+  institution = {Department of Computer Science, Iowa State University},
+  year =        {1998},
+  url =         {http://msl.cs.uiuc.edu/~lavalle/papers/Lav98c.pdf}
+}
+
 @Book{LaValle2006,
   title =     {Planning Algoritms},
   publisher = {Cambridge University Press},
@@ -21,8 +29,8 @@
   url =       {http://planning.cs.uiuc.edu/}
 }
 
-@Article{MartinSaskaPreucil,
-  author =    {Martin Saska, Vojtěch Vonásek, Tomáš Krajník and Libor Přeučil},
+@Article{SaskaVonasek,
+  author =    {Martin Saska and Vojtěch Vonásek and Tomáš Krajník and Libor Přeučil},
   title =     {Coordination and navigation of heterogeneous MAV–UGV formations localized by a ‘hawk-eye’-like approach under a model predictive control scheme},
   journal =   {The International Journal of Robotics Research},
   year =      {2014},
@@ -40,9 +48,6 @@
   year =      {2015},
   timestamp = {2015-12-30},
   url =       {https://dspace.cvut.cz/bitstream/handle/10467/61814/F3-DP-2015-Vana-Petr-thesis.pdf}
-}
-
-@Article{,
 }
 
 @comment{jabref-meta: selector_author:}
