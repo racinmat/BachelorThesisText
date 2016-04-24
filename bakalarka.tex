@@ -1,6 +1,6 @@
 %% LyX 2.1.4 created this file.  For more info, see http://www.lyx.org/.
 %% Do not edit unless you really know what you are doing.
-\documentclass[a4paper,twoside,british,cleardoublepage=empty,BCOR15mm,DIV12]{scrreprt}
+\documentclass[a4paper,twoside,french,british,cleardoublepage=empty,BCOR15mm,DIV12]{scrreprt}
 \usepackage{amsmath}
 \usepackage{tgtermes}
 \usepackage{tgheros}
@@ -9,6 +9,13 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{babel}
+\makeatletter
+\addto\extrasfrench{%
+   \providecommand{\og}{\leavevmode\flqq~}%
+   \providecommand{\fg}{\ifdim\lastskip>\z@\unskip\fi~\frqq}%
+}
+
+\makeatother
 \usepackage{float}
 \usepackage{graphicx}
 \usepackage[unicode=true,pdfusetitle,
@@ -25,6 +32,9 @@
 \newcommand{\noun}[1]{\textsc{#1}}
 %% Because html converters don't know tabularnewline
 \providecommand{\tabularnewline}{\\}
+%% A simple dot to overcome graphicx limitations
+\newcommand{\lyxdot}{.}
+
 \floatstyle{ruled}
 \newfloat{algorithm}{tbp}{loa}[chapter]
 \providecommand{\algorithmname}{Algorithm}
@@ -59,6 +69,8 @@
 \usepackage{packages/bc-fancychap}
 
 \makeatother
+
+\addto\captionsfrench{\renewcommand{\algorithmname}{Algorithme}}
 
 \begin{document}
 ~\thispagestyle{empty}\begin{center}\pagenumbering{arabic}\vspace{10mm}
@@ -171,13 +183,16 @@ zapůjčováním práce a jejím zveřejňováním.}{\small \par}
 }{\small \par}
 
 
+\chapter[Motivation]{Motivation}
+
+
 \chapter[Algorithm]{Algorithm\label{chap:Algorithm}}
 
-Basis of whole algorithm is here in pseudocode\marginpar{todo: přesunout k popisku?}todo:
-dodat odkaz na algoritmus
+The basis of the whole algorithm is shown in \ref{alg:Basis-of-whole}
+in the pseudocode.
 
 \begin{algorithm}
-\caption{Basis of whole algorithm}
+\caption{The basis of whole algorithm\label{alg:Basis-of-whole}}
 
 
 \begin{algorithmic}[1]
@@ -202,104 +217,115 @@ dodat odkaz na algoritmus
 
 \STATE path := optimizePathByDubins(path, map);
 
-\STATE savePathToJson(path);
+\STATE savePath(path);
 
 \end{algorithmic}
 \end{algorithm}
 
 
-Configuration variable is instance of Configuration class, which holds
-all configuration variables, including selected map. Map holds all
-Areas of Interest (AoI) and obstacles. All obstacles and AoIs are
-represented now as rectangles.
+The configuration variable is instance of the Configuration class,
+which holds all configuration data, including a selected map. The
+map holds all Areas of Interest (AoI) and obstacles. All obstacles
+and AoIs are represented as rectangles now.
 
-Even if we want to find as short path to AoI as possible, path too
-near to obstacles is not convenient for realization, because UAVs
-do not use car like motion model used in this simulation, so they
-can not exactly follow found trajectories. So in real environment,
-it is convenient for the swarm to have path planned with safe distance
-from obstacles. Because of that fact, we need to increase size of
-obstacles, which is done in line 2 in function amplifyObstacles. 
+The purpose of the path finding is to find the shortest feasible paths,
+but real UAVs need to have some minimal distance to obstacles due
+to weather conditions, sensor errors and other aspects. To solve this
+issue, every obstacle is amplified before the whole path finding algorithm
+on line 2. This minimal distance to obstacles allows UAVs to follow
+their trajectories safely.
 
-Line 3 represents discretization of map to graph. Discretization divides
-map to squares with size set in configuration and each square is represented
-by node. In this graph, there are 4 types of nodes: Free, Obstacle,
-UAV and Goal. If part of square of whole square is covered by obstacle,
-corresponding node has type Obstacle. If part of square or whole square
-is covered by AoI, corresponding node has type Goal. If square contains
-UAV, corresponding node has type UAV and rest of squares have corresponding
-nodes qith type Free. 
+The 3rd line represents the discretization of the map to the graph.
+The discretization divides the map to squares with size set in the
+configuration and each square is represented by a graph node. In this
+graph, there are 4 types of nodes: Free, Obstacle, UAV and Goal. If
+the whole square or its part is covered by an obstacle, the corresponding
+node has the type Obstacle. If the whole square or its part is covered
+by an AoI, then the corresponding node has type Goal. If the square
+contains an UAV, the corresponding node has type UAV and rest of squares
+have corresponding nodes with type Free. 
 
 Edges in this graph are only between nodes of neighbouring squares,
 so each node has maximally 8 edges. Obstacle nodes do not have any
 edges.
 
-After converting map to nodes, optional grouping of goals for guiding
-path can be turned on. I will cover the grouping in chapter \ref{chap:Grouping-of-goals}.
+After converting the map to nodes, the optional grouping of goals
+for guiding path can be turned on. I will cover the grouping in chapter
+\ref{chap:Grouping-of-goals}.
 
-Line 4 calculates the guiding paths for rrt path algorithm using the
-A{*} algorithm. Algorithm has modified cost function and in addition
-to cost function of A{*} algorithm, cost of current node is added
-during the calculation. Nodes neighbouring with obstacles has bigger
-cost than nodes which do not have obstacles as neighbours. Thanks
-to this modification, guiding path avoids obstacles and has bigger
-distance to obstacles. 
+The 4th line represents the calculation of the guiding paths for RRT-Path
+algorithm using the A{*} algorithm with modified cost function. The
+modification will be covered in section \ref{sec:Guiding-path}.
 
-On line 5 the RRT path algorithm takes place. This function returns
-structure with tree with root at starting position of UAVs and with
-array containing leaves of this three, where all UAVs are in Areas
-of Interest. 
+On the 5th line the RRT-Path algorithm takes place. This function
+returns a structure with a tree with a root at the starting position
+of UAVs and with an array containing leaves of this three, where all
+UAVs are in Areas of Interest. 
 
-On line 6 the leaf, where UAVs have best coverage of AoI is chosen.
-Quality of coverage is determined by cost function, which will be
-mentioned later.\marginpar{todo: možná sem odkaz na kapitolu}
+The leaf, where UAVs have the best coverage of AoI, is chosen on line
+6. The quality of the coverage is determined by the cost function,
+which will be mentioned later.\marginpar{todo: možná sem odkaz na kapitolu}
 
-On line 7 the path is built from last state.
+On the 6th line the path is built from the last state.
 
-On line 8 is optional preparation before optimization using Dubins
-curves. In the preparation, all crossings of paths of individual UAVs
-are straightened, so UAVs do not cross other UAVs trajectories during
-whole path. During implementation of this method were complications,
-which are covered in chapter, and thus the row was removed from the
-algorithm. \ref{chap:Paths-straightening}
+On the 8th line there is an optional preparation before the optimization
+using Dubins curves. In the preparation, all crossings of paths of
+individual UAVs are straightened, so UAVs do not cross other trajectories
+during the whole path. During the implementation of this method some
+complications appeared, which are covered in the chapter \ref{chap:Paths-straightening},
+and thus the row was removed from the final version of the algorithm. 
 
-On line 9, re-sampling of path is made, mainly due to requirements
-of real UAVs, which is mentioned in chapter \ref{chap:Path-resampling}.
+On the 9th line, the re-sampling of the path is made, mainly due to
+requirements of real UAVs, which are mentioned in chapter \ref{chap:Path-resampling}.
 
-On line 10 is optimization by Dubins curves. Optimizations is covered
-in chapter.\marginpar{todo: možná sem odkaz na kapitolu}
+On the 10th line there is the optimization by Dubins curves. The optimization
+is covered in chapter \ref{chap:Dubins-curves}.
 
-Last line is only persisting of path to file for usage of path by
-different program.
+The last line represents persisting of the path to a file for usage
+of path by different programs. Path is persisted to JSON, due to convenience
+of the JSON format. JSON is smaller than XML and can be easily parsed
+by all widely used programming languages. Path is also persisted to
+CSV format, so it can be loaded to MATLAB and then loaded into real
+UAVs.
 
 
-\chapter[Grouping of goals for guiding path]{ Grouping of goals for guiding path \label{chap:Grouping-of-goals}}
+\chapter[Grouping of goals for the guiding path]{ Grouping of goals for the guiding path \label{chap:Grouping-of-goals}}
 
-During this processing of map (method MapProcessor::getEndNodes in
-codebase) all AoIs are grouped to one big AoI, which is the smallest
+During this processing of the map (method MapProcessor::getEndNodes
+in codebase) all AoIs are grouped to one big AoI, which is the smallest
 rectangle covering all AoIs. 
 
-If this modification is turned on, instead of one goal for every AoI
-(node in middle of AoI rectangle is considered as goal node), only
-one goal is used for all AoIs. This prevents swarm to split and whole
-swarm has only one guiding path. The main reason to have one big swarm
-instead of more smaller swarms is that smaller swarms (or individual
-UAVs in case of same count of AoI and UAVs) is relative localization,
-which can be used better when having only one swarm.
+If this modification is turned on, then instead of one goal for every
+AoI (node in the middle of AoI rectangle is considered as a goal node),
+only one goal is used for all AoIs. This prevents swarm to split because
+the whole swarm has only one guiding path. The relative localization
+is the main reason to have only one big swarm instead of more smaller
+swarms is that a smaller swarms (or individual UAVs in case of the
+same count of AoI and UAVs). Advantages of relative localization are
+more significant when we have only one swarm.
 
-Below are images of maps with goals and obstacles. Goals have green
-colour and obstacles have grey colour.
+\marginpar{todo: rozepsat vytváření shluknutého cíle a jak z něj najdu goal node
+pro a star}
 
-This approach has advantage, when individual AoIs are near to global
-goal of whole group, as seen in \ref{fig:Maps-with-goals}. 
+Maps with goals and obstacles are shown in figures \ref{fig:Map-with-goals}
+and \ref{fig:Maps-with-goals}. Goals are coloured green colour and
+obstacles grey.
 
-Disadvantage of this method is, when individual AoIs have big distance
-from each other than can be covered by UAVs, this approach totally
-fails, because RRT-Path, which is much faster than RRT, has goal very
-distant from AoIs, as can be seen in \ref{fig:Map-with-goals}.
+This approach has the following advantage: when individual AoIs are
+near to a global goal of the whole group, as seen in \ref{fig:Maps-with-goals},
+then the whole swarm follows one guiding path without any splitting,
+which makes the RRT-Path run faster and also the advantage of relative
+localization is included. 
+
+The disadvantage of this method is that when individual AoIs have
+a bigger distance from each other than can be covered by UAVs then
+this approach totally fails, because RRT-Path, which is much faster
+than RRT, has goal very distant from AoIs, as can be seen in \ref{fig:Map-with-goals}.\marginpar{rozdělit na více vět }
 
 \begin{figure}
+\begin{centering}
 \includegraphics[scale=0.3]{obrazky/map1}
+\par\end{centering}
 
 \caption{Map with goals unsuitable for grouping \label{fig:Map-with-goals}}
 \end{figure}
@@ -311,6 +337,127 @@ distant from AoIs, as can be seen in \ref{fig:Map-with-goals}.
 \caption{Maps with goals suitable for grouping \label{fig:Maps-with-goals}}
 \end{figure}
 
+
+
+\chapter[RRT-Path]{RRT-Path}
+
+This chapter will cover brief introduction of RRT-Path algorithm.
+But before that, we need to define RRT algorithm which RRT-Path is
+based on.
+
+
+\section{Rapidly Exploring Random Tree}
+
+Rapidly Exploring Random Tree, also abbreviated as RRT, introduced
+by LaValle\cite{LaValle1998} in 1998, is non-deterministic algorithm
+for motion planning, used to search non-convex spaces by randomly
+building space-filling tree. The RRT method builds a tree $T$ rooted
+at $q_{start}$. The basic RRT algorithm works as follows. In each
+iteration, a random sample $q_{rand}$ is chosen from $C$ and the
+nearest node $q_{near}$ in the tree to $q_{rand}$ is found. The
+node $q_{near}$ is expanded using a local planner to obtain a set
+of new configurations reachable from $q_{near}$. The nearest configuration
+towards q is selected from this set and added to the tree. The edge
+from q near rand to the newly added configuration contains control
+inputs used by the local planner to reach the new configuration. The
+algorithm terminates if the distance between a node in the tree and
+$q_{goal}$ is less than $d_{goal}$ or after $I_{max}$ of planning
+iterations. \cite{Vonasek2015} The basis of RRT is listed in algorithm
+\ref{alg:RRT-algorithm}. In RRT algorithm, configurations on the
+third line have uniform distribution.
+
+\begin{algorithm}
+\caption{RRT algorithm\label{alg:RRT-algorithm}}
+
+
+\textbf{Input: }Configurations $q_{alert}$ and $q_{goal}$, maximum
+number of iterations $I_{max}$, maximum distance to goal $d_{goal}$
+
+\textbf{Output:} Trajectory $P$ or failure
+
+\begin{algorithmic}[1]
+
+\STATE $T.add\left(q_{start}\right);$ // create new tree and add
+initial conguration q in it
+
+\STATE \textbf{for} iteration:=1:I \textbf{do} 
+
+\STATE \foreignlanguage{french}{~}$q_{rand}$ := getRandomConfiguration($C$);
+
+\STATE \foreignlanguage{french}{~}$q_{near}$ := nearest node in
+tree $T$ to q ;
+
+\STATE \foreignlanguage{french}{~}expandTree($q_{rand}$,$q_{near}$);
+
+\STATE \foreignlanguage{french}{~}$d$ = distance from tree $T$
+to $q_{goal}$ ;
+
+\STATE \foreignlanguage{french}{~}\textbf{if} d < d \textbf{then}
+
+\STATE \foreignlanguage{french}{~~}P = extract trajectory from
+$q_{start}$ to $q_{rand}$;
+
+\STATE \foreignlanguage{french}{~~}return P;
+
+\STATE \foreignlanguage{french}{~}\textbf{end}
+
+\STATE \textbf{end}
+
+\STATE return failure; // no solution was found within K iterations
+start
+
+\end{algorithmic}
+\end{algorithm}
+
+
+
+\section{RRT-Path}
+
+RRT-Path, introduced by Vonásek \cite{Vonasek2015} in 2015, is an
+improved version of RRT featuring preprocessing of configuration space.
+RRT-Path enables UAVs to manoeuvre around obstacles and find way in
+narrow passages. Before running RRT algorithm, the guiding path from
+$q_{start}$ to $q_{goal}$ is found and sampled. One of inputs to
+RRT-Path algorithm is the probability $p\left(guided\right)$. In
+the main loop of the algorithm, obtaining of the random configuration
+is modified. Instead of random configuration with uniform distribution,
+configuration around the $q_{i}$is selected with probability $p\left(guided\right)$.
+
+Let $G$ be the guiding path and $\left(q_{start},q_{1},q_{2},...,q_{goal}\right)\text{\ensuremath{\in}}G$
+the points of the guiding path, where $q_{i}\text{\ensuremath{\in}}C_{free}$.
+In the beginning, $q_{i}=q_{1}$, so random point is selected from
+area around the point $q_{1}$ with probability $p\left(guided\right)$.
+When the leaves of the searching tree reach distance lower than $r_{dist}$to
+the $q_{i}$, then the next point of the guiding path will be used
+instead of $q_{i}$, so $q_{i}:=q_{i+1}$. This continues until $q_{goal}$
+is reached, which means the RRT-Path algorithm ends.
+
+
+\section{Guiding path\label{sec:Guiding-path}}
+
+The guiding path is obtained by transferring the map to graph representation
+and then path is found using the graph-search algorithms. The map
+can be transferred to graph representation by using the Voronoi diagram,
+visibility graph or by discretization to a grid representation. 
+
+Then the path can be found by using Dijkstra algorithm or A{*} algorithm.
+In this thesis, the A{*} algorithm has been used because of its ability
+to find optimal path and easy calculation of heuristic function is
+Euclidean space.
+
+The classic cost function of node $q_{i}$ in A{*} algorithm is $f\left(q_{i}\right)=g\left(q_{i}\right)+h\left(q_{i}\right)$.
+The $g\left(q_{i}\right)$ is sum of costs of all edges in shortest
+path between nodes and $q_{init}$ and $q_{i}$. The $h\left(q_{i}\right)$
+is heuristic estimate of distance between $q_{i}$ and $q_{goal}$.
+In Euclidean space, it is calculated as $h\left(q_{i}\right)=\left\Vert q_{i}-q_{goal}\right\Vert $.
+This algorithm uses a modified cost function and in addition to a
+cost function of the A{*} algorithm. The modified cost function is
+$f\left(q_{i}\right)=g\left(q_{i}\right)+h\left(q_{i}\right)+j\left(q_{i}\right)$,
+where $j\left(q_{i}\right)$ is integer representing the nearness
+to the nearest obstacle. For example, it can be $j\left(q_{i}\right)=\frac{const}{\left\Vert q_{i}-nearest\,obstacle\right\Vert }$,
+where $const$ is weight of the $j\left(q_{i}\right)$ and expresses
+how much obstacles should be avoided with respect to length of the
+whole path.
 
 
 \chapter[Paths straightening]{Paths straightening \label{chap:Paths-straightening}}
@@ -336,7 +483,7 @@ but only with some errors.
 \caption{Crossing paths \label{fig:Crossing-paths}}
 
 
-\includegraphics[scale=0.3]{obrazky/crossingPathReal1}
+\centering{}\includegraphics[scale=0.3]{obrazky/crossingPathReal1}
 \end{figure}
 I tried to straighten crossing trajectories, but all attempts failed.
 Straightening was done by switching parts of crossing paths from the
@@ -397,7 +544,7 @@ z\left(k+1\right) & = & z\left(k\right)+w\left(k+1\right)\Delta t\left(k+1\right
 
 
 
-\chapter[Dubins curves]{Dubins curves}
+\chapter[Dubins curves]{Dubins curves\label{chap:Dubins-curves}}
 
 Dubins curves, also called Dubins manoeuvrers or Dubins path were
 published by Lester Eli Dubins in 1957 \cite{Dubins1957}. Dubins
@@ -486,28 +633,68 @@ The shortest path between any two configurations can always be characterized
 by one of these words. These are called the Dubins curves.
 
 
-\chapter[Optimization using Dubins curves]{Optimization using Dubins curves}
+\section[Optimization using Dubins curves]{Optimization using Dubins curves}
 
-The Dubins curves are used to optimize trajectory found with RRT-Path
-algorithm.
+Because of the fact that Dubins curves provide us optimal trajectory,
+they can be used to optimize trajectory found with RRT-Path algorithm.
 
-Whole optimization works as follows.
+For only one UAV, the situation is quite simple and optimization works
+as follows.
 
-Two random states are chosen, which means one path as part of whole
-trajectory for each UAV will be optimized. Beginning and ending point
-of selected path are used as input to Dubins curve algorithm. 
+Two random points of trajectory are chosen and Dubins curves are calculated
+between them. If calculated curves do not collide with the obstacles,
+they are used instead of original trajectory between chosen points.
+This points choosing and trajectory replacing is repeated until the
+whole trajectory can not be shortened more and thus is optimal.
 
-Dubins curve is then sampled with same frequency used in RRT-Path
-algorithm and is tested for feasibility. When the new path is feasible
-and shorter than original path, the original path is replaced. and
-distances of the original and new trajectory part are compared. When
-new trajectory part is shorter, it is used instead of original trajectory
-part.
-
-This is repeated in cycle which stops when path is not shortened after
-many (eg. 150) iterations or optimization is too slow and path is
-shortened only by small distances (eg. shortening by 5\% per 1000
+In real situation, we do not know whether found trajectory is optimal
+or not, so we need to determine conditions for stopping the optimization.
+The optimization is stopped if the trajectory is not shortened after
+many (e. g. 150) iterations or optimization is too slow and path is
+shortened only by small distances (e. g. shortening by 5\% per 1000
 iterations). 
+
+But in swarm, the situation is complicated because of relative localization
+and minimal and maximal distances between individual UAVs. 
+
+So the algorithm must be modified. Dubins curves must be sampled in
+same frequency as rest of trajectory (this is frequency of RRT-Path
+algorithm or higher frequency when path is being re-sampled) and each
+point has to be validated for feasibility in terms of minimal and
+maximal distance from another UAVs. So the curves can be used only
+when all trajectories between minimal and maximal distance of relative
+localization.
+
+
+\subsection[One UAV demonstration]{One UAV demonstration}
+
+In \ref{fig:One-UAV-before} we have trajectory of one UAV found by
+RRT-Path algorithm in map with one obstacle marked by dark grey rectangle.
+Obstacle amplification is marked by light grey rectangle. In \ref{fig:One-UAV-after}
+we can see optimal path found using Dubins curves. The resulting path
+consists of many Dubins curves and it was obtained by algorithm mentioned
+above. Random points have been replaced by Dubins curves and after
+many iterations, optimal path was found.
+
+\begin{figure}
+
+
+\caption{One UAV before Dubins curves optimization\label{fig:One-UAV-before}}
+
+
+\centering{}\includegraphics[scale=0.6]{obrazky/oneUAV\lyxdot json}
+\end{figure}
+
+
+\begin{figure}
+
+
+\caption{One UAV after Dubins curves optimization\label{fig:One-UAV-after}}
+
+
+\centering{}\includegraphics[scale=0.6]{obrazky/oneUAVoptimized\lyxdot json}
+\end{figure}
+
 
 
 \chapter[Path re-sampling]{Path re-sampling\label{chap:Path-resampling}}
@@ -522,13 +709,13 @@ from 0.5 to 1 second was experimentally chosen as best interval. Using
 $x$ seconds long constant input interval also means $\frac{1}{x}Hz$
 frequency of points in resulting trajectory in output of the algorithm.
 So the range from 0.5 to 1 second implies resulting frequency is in
-range $1Hz$ to $2Hz$. 
+range 1Hz to 2Hz. 
 
-Real UAVs in Multi-Robot Systems group at CTU use frequency 70Hz and
-trajectories with lower frequency are linear interpolated to have
-frequency 70Hz. That means frequency 2Hz is too low for real usage
-because trajectory generated with this frequency would not be smooth
-enough. 
+Real UAVs in Multi-Robot Systems group at CTU use frequency 70Hz for
+providing target points to UAVs and trajectories with lower frequency
+are linear interpolated to have frequency 70Hz. That means frequency
+2Hz is too low for real usage because trajectory generated with this
+frequency would not be smooth enough. 
 
 Change of frequency before the RRT-Path algorithm makes the algorithm
 unable to run efficiently in bigger maps, so this does not solve the
@@ -556,8 +743,30 @@ used in RRT-Path algorithm), 2 Hz, 4 Hz, 6 Hz, 8 Hz, 10 Hz, 12 Hz,
 14 Hz, 16 Hz, 18 Hz, 20 Hz.
 
 \begin{figure}
-\caption{Path before Dubins curves optimization\label{fig:Path-before-Dubins}}
-\includegraphics[scale=0.3]{obrazky/pathBeforeDubins}
+\centering{}\caption{Path before Dubins curves optimization\label{fig:Path-before-Dubins}}
+\includegraphics[scale=0.28]{obrazky/pathBeforeDubins}
+\end{figure}
+
+
+The best result of Dubins curves optimization (re-sampling of 20Hz)
+is shown in \ref{fig:Path-after-Dubins}. As we can see, trajectories
+are much shorter than trajectories before optimization in \ref{fig:Path-before-Dubins}.
+On the beginning of trajectories, in the left upper corner of picture,
+we can see much smoother curves than before optimization. This is
+due to re-sampling to frequency 20Hz, which smooths trajectories. 
+
+In real flight, it is undesirable to have trajectories tight to obstacles,
+so obstacles are amplified before optimization. This can be seen in
+\ref{fig:Path-after-Dubins} where UAVs keep certain distance from
+the obstacles.
+
+\begin{figure}
+
+
+\caption{Path after Dubins curves optimization\label{fig:Path-after-Dubins}}
+
+
+\centering{}\includegraphics[scale=0.28]{obrazky/pathAfterDubins20Hz}
 \end{figure}
 
 
@@ -624,24 +833,157 @@ even the worst optimization in 6 Hz has smaller total distance than
 \caption{Re-sampling and optimization results graph \label{fig:Re-sampling-and-optimization}}
 
 
-\includegraphics[scale=0.7]{obrazky/frequencyDependence}
+\centering{}\includegraphics[scale=0.7]{obrazky/frequencyDependence}
 \end{figure}
 
 
 Depending on re-sampling frequency, the courses of optimization are
 also different.
 
-Here we can see mean values and standard deviations for different
-frequencies, divided to two graphs for better lucidity. 
+In \ref{fig:Time-course-of}, \ref{fig:Time-course-of-1} and \ref{fig:Time-course-of-2}
+we can see mean values and standard deviations for different frequencies,
+divided into three graphs for better readability. The vertical lines
+are error bars, they show standard deviation during the optimization.
+Because the error bars would be too dense if they were shown for each
+iteration, only every 100th iteration is shown on graphs. For comparison,
+on each graph is shown also frequency 1 Hz, the initial frequency
+before re-sampling. As we can see, frequencies 14, 16, 18 and 20 Hz
+have almost zero standard deviation and converge to lower value than
+initial frequency. In frequency 10 Hz can be seen high standard deviation.
+That means the optimization got stuck in local optimum and did was
+not able to shorten any path for many iterations.
 
 \begin{figure}
 
 
-\caption{Time course of optimization}
+\centering{}\caption{Time course of optimization for 2 Hz, 4 Hz, 6 Hz\label{fig:Time-course-of} }
 \includegraphics[scale=0.7]{obrazky/lowFrequenciesErrors}
+\end{figure}
 
-\includegraphics[scale=0.7]{obrazky/highFrequenciesErrors}
 
+\begin{figure}
+
+
+\caption{Time course of optimization for 8 Hz, 10 Hz, 12 Hz\label{fig:Time-course-of-1} }
+
+
+\centering{}\includegraphics[scale=0.7]{obrazky/middleFrequenciesErrors}
+\end{figure}
+
+
+\begin{figure}
+
+
+\caption{Time course of optimization for 14 Hz, 16 Hz, 18 Hz, 20 Hz\label{fig:Time-course-of-2} }
+
+
+\centering{}\includegraphics[scale=0.7]{obrazky/highFrequenciesErrors}
+\end{figure}
+
+
+
+\chapter[Covering more AoIs with one swarm]{Covering more AoIs with one swarm}
+
+
+\chapter[V-REP simulations]{V-REP simulations}
+
+V-REP is acronym for Virtual robot experimentation platform, a simulator
+developed by Coppelia Robotics, providing an advanced environment
+for testing and simulations of robots of all types. The V-REP environment
+is free and open-souce for educational purposes and also has commercial
+licence. The environment takes in account certain physical laws like
+gravity, inertia or friction, which enables to truthfully verify applicability
+for deployment of UAVs in the real world. V-REP has many build-in
+models, but user can also create his own robot. V-REP enables to control
+robots over API and has API clients for C, C++, Python, Java, Lua,
+Matlab, Octave and Urbi. 
+
+
+\section{UAV control and path simulation}
+
+Python is convenient for fast prototyping and has native functions
+for easy JSON parsing, which made it good choice for simulations of
+generated trajectories in V-REP.
+
+UAVs in V-REP can be controlled over remote API only by changing location
+of their target. Then UAV tries to reach the location of its target.
+Unfortunately, UAVs only follow location, with speed proportional
+to distance. UAVs do not try to reach target and simultaneously to
+have zero speed when reaching their target, which causes overshoot.
+This fact leads to another disadvantage of UAV controller. When keeping
+target in same distance and direction from UAV, the UAV increases
+its speed, which causes overshoot when target changes its direction
+to UAV. These overshoots were many times bigger than size of UAVs,
+so they could not be ignored and had to be fixed.
+
+During first, naive implementation, position of next state was set
+as target position for UAV, but due to overshoot and large distances
+between states UAVs failed to follow the trajectory. 
+
+Another implementation linear interpolated trajectory between UAV
+and its next state position and calculated target placed in line between
+UAV and next state position, but in constant distance to UAV.
+
+So the calculation was defined as follows
+\[
+\mathbf{X}\left(k+1\right)_{target}=\mathbf{X}\left(k\right)_{UAV}+\frac{\left(\mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right)}{\left\Vert \mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right\Vert }\cdot const
+\]
+where $\mathbf{X}\left(k\right)_{UAV}$ is UAV position in k-th iteration
+of simulation, $\mathbf{X}\left(k\right)_{ns}$ is position of next
+state in planned path in k-th iteration, $\mathbf{X}\left(k+1\right)_{target}$
+is position of UAV target in (k+1)-th iteration and $const$ is constant
+experimentally tuned, so the UAV does not move too fast nor too slow.
+Too fast movements cause overshoot and too slow movements cause the
+simulation to run for needlessly long time.
+
+But a mentioned earlier, even this approach did not go well. In long
+passages, where trajectory did not turn, UAVs increased their velocity
+and inertia, which made them harder to turn. The problem of overshooting
+is shown in figures \ref{fig:Map-with-UAV} and \ref{fig:UAV-overshoot}.
+Overshoot is on the end of long passage in map \ref{fig:Map-with-UAV}.
+Red and violet balls represent positions of next states and green
+balls represent UAV targets. In the first image, we can see UAVs leaving
+the narrow passage. As you can see in second and third image, positions
+of next state are still, but because of constant distance of target
+and UAV, the target is dragged by UAVs inertia.
+
+This has been fixed by not updating the position of target when distance
+between UAV and next state is bigger than in previous iteration and
+the position of next state is still the same, so the equation describing
+target position is
+\[
+\mathbf{X}\left(k+1\right)_{target}=\begin{cases}
+if\left\Vert \mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right\Vert <\left\Vert \mathbf{X}\left(k-1\right)_{ns}-\mathbf{X}\left(k-1\right)_{UAV}\right\Vert \\
+\land\mathbf{X}\left(k\right)_{ns}=\mathbf{X}\left(k-1\right)_{ns}\\
+\mathbf{X}\left(k\right)_{UAV}+\frac{\left(\mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right)}{\left\Vert \mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right\Vert }\cdot const\\
+else\\
+\mathbf{X}\left(k\right)_{target}
+\end{cases}
+\]
+. This prevents target from dragging by UAV with big inertia.
+
+\begin{figure}
+\begin{centering}
+\includegraphics[scale=0.4]{obrazky/mapWithPassage}
+\par\end{centering}
+
+\caption{Map with UAV overshoot \label{fig:Map-with-UAV}}
+\end{figure}
+
+
+\begin{figure}
+\begin{centering}
+\includegraphics[scale=0.5]{obrazky/overshoot2}
+\par\end{centering}
+
+\begin{centering}
+\includegraphics[scale=0.52]{obrazky/overshoot3_2}~~\includegraphics[scale=0.5]{obrazky/overshoot4}
+\par\end{centering}
+
+\caption{UAV overshoot\label{fig:UAV-overshoot}}
+
+
+Here can be seen 3 iterations. Next state is changed during 
 \end{figure}
 
 
@@ -649,7 +991,13 @@ frequencies, divided to two graphs for better lucidity.
 \chapter[Implementation]{Implementation}
 
 This part will cover implementation of algorithm, which was used for
-simulations. Whole codebase can be found at \href{https://github.com/racinmat/AutonomousSurveillanceBachelorThesis}{this github repository}.
+simulations. Whole codebase in C++ can be found at \href{https://github.com/racinmat/AutonomousSurveillanceBachelorThesis}{this github repository}.
+Next to the C++ program, I also created some CLI scripts in PHP, for
+drawing map and paths from the JSON representation, batch running
+of Dubins curves optimization and other useful stuff. These can be
+seen at \href{https://github.com/racinmat/UAVUtils}{this github repository}.
+V-REP simulations were made by communicating with V-REP through remote
+API, the client is written in Python and can be seen \href{https://github.com/racinmat/VRepPathBuilder}{here}.
 
 
 \section{External libraries}
@@ -667,7 +1015,7 @@ C++11 compiler to compile my source codes, I had to rewrite part of
 this library for compatibility and to make public API easier to use.
 Modifications can be seen in \href{https://github.com/racinmat/VCollide2}{this github repository}. 
 
-Last use external library is QT, which was used to create platform
+Last used external library is QT, which was used to create platform
 independent GUI.
 
 
@@ -682,7 +1030,7 @@ was generated using software \href{http://staruml.io/}{StarUML}
 \caption{Dependency diagram \label{fig:Dependency-diagram}}
 
 
-\includegraphics[scale=0.4]{obrazky/umlSchema}
+\centering{}\includegraphics[scale=0.4]{obrazky/umlSchema}
 \end{figure}
 
 

@@ -1511,7 +1511,9 @@ RRT-Path
 \end_layout
 
 \begin_layout Standard
-This chapter will cover brief introduction of RRT and RRT-Path algorithms.
+This chapter will cover brief introduction of RRT-Path algorithm.
+ But before that, we need to define RRT algorithm which RRT-Path is based
+ on.
 \end_layout
 
 \begin_layout Section
@@ -1519,8 +1521,7 @@ Rapidly Exploring Random Tree
 \end_layout
 
 \begin_layout Standard
-Rapidly Exploring Random Tree, also abbreviated as RRT, was introduced by
- LaValle
+Rapidly Exploring Random Tree, also abbreviated as RRT, introduced by LaValle
 \begin_inset CommandInset citation
 LatexCommand cite
 key "LaValle1998"
@@ -1529,7 +1530,11 @@ key "LaValle1998"
 
  in 1998, is non-deterministic algorithm for motion planning, used to search
  non-convex spaces by randomly building space-filling tree.
- The RRT method builds a roadmap as a tree rooted at 
+ The RRT method builds a tree 
+\begin_inset Formula $T$
+\end_inset
+
+ rooted at 
 \begin_inset Formula $q_{start}$
 \end_inset
 
@@ -1564,12 +1569,559 @@ key "LaValle1998"
 .
  The nearest configuration towards q is selected from this set and added
  to the tree.
- The edge from q near rand to the newly added conguration contains control
- inputs used by the local planner to reach the new conguration.
+ The edge from q near rand to the newly added configuration contains control
+ inputs used by the local planner to reach the new configuration.
  The algorithm terminates if the distance between a node in the tree and
- q goal is less than d goal or after I of planning iterations.
- The main loop of RRT is listed in Alg.
- 1 and the expansion procedure is described in max near
+ 
+\begin_inset Formula $q_{goal}$
+\end_inset
+
+ is less than 
+\begin_inset Formula $d_{goal}$
+\end_inset
+
+ or after 
+\begin_inset Formula $I_{max}$
+\end_inset
+
+ of planning iterations.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Vonasek2015"
+
+\end_inset
+
+ The basis of RRT is listed in algorithm 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:RRT-algorithm"
+
+\end_inset
+
+.
+ In RRT algorithm, configurations on the third line have uniform distribution.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+RRT algorithm
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:RRT-algorithm"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\series bold
+Input: 
+\series default
+Configurations 
+\begin_inset Formula $q_{alert}$
+\end_inset
+
+ and 
+\begin_inset Formula $q_{goal}$
+\end_inset
+
+, maximum number of iterations 
+\begin_inset Formula $I_{max}$
+\end_inset
+
+, maximum distance to goal 
+\begin_inset Formula $d_{goal}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\series bold
+Output:
+\series default
+ Trajectory 
+\begin_inset Formula $P$
+\end_inset
+
+ or failure
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{algorithmic}[1]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $T.add\left(q_{start}\right);$
+\end_inset
+
+ // create new tree and add initial conguration q in it
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+
+\series bold
+for
+\series default
+ iteration:=1:I 
+\series bold
+do
+\series default
+ 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+
+\lang french
+
+\begin_inset space ~
+\end_inset
+
+
+\lang british
+
+\begin_inset Formula $q_{rand}$
+\end_inset
+
+ := getRandomConfiguration(
+\begin_inset Formula $C$
+\end_inset
+
+);
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+
+\lang french
+
+\begin_inset space ~
+\end_inset
+
+
+\lang british
+
+\begin_inset Formula $q_{near}$
+\end_inset
+
+ := nearest node in tree 
+\begin_inset Formula $T$
+\end_inset
+
+ to q ;
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+
+\lang french
+
+\begin_inset space ~
+\end_inset
+
+
+\lang british
+expandTree(
+\begin_inset Formula $q_{rand}$
+\end_inset
+
+,
+\begin_inset Formula $q_{near}$
+\end_inset
+
+);
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+
+\lang french
+
+\begin_inset space ~
+\end_inset
+
+
+\lang british
+
+\begin_inset Formula $d$
+\end_inset
+
+ = distance from tree 
+\begin_inset Formula $T$
+\end_inset
+
+ to 
+\begin_inset Formula $q_{goal}$
+\end_inset
+
+ ;
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+
+\lang french
+
+\begin_inset space ~
+\end_inset
+
+
+\series bold
+\lang british
+if
+\series default
+ d < d 
+\series bold
+then
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+
+\lang french
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\lang british
+P = extract trajectory from 
+\begin_inset Formula $q_{start}$
+\end_inset
+
+ to 
+\begin_inset Formula $q_{rand}$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+
+\lang french
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\lang british
+return P;
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+
+\lang french
+
+\begin_inset space ~
+\end_inset
+
+
+\series bold
+\lang british
+end
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+
+\series bold
+end
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+return failure; // no solution was found within K iterations start
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{algorithmic}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+RRT-Path
+\end_layout
+
+\begin_layout Standard
+RRT-Path, introduced by Vonásek 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Vonasek2015"
+
+\end_inset
+
+ in 2015, is an improved version of RRT featuring preprocessing of configuration
+ space.
+ RRT-Path enables UAVs to manoeuvre around obstacles and find way in narrow
+ passages.
+ Before running RRT algorithm, the guiding path from 
+\begin_inset Formula $q_{start}$
+\end_inset
+
+ to 
+\begin_inset Formula $q_{goal}$
+\end_inset
+
+ is found and sampled.
+ One of inputs to RRT-Path algorithm is the probability 
+\begin_inset Formula $p\left(guided\right)$
+\end_inset
+
+.
+ In the main loop of the algorithm, obtaining of the random configuration
+ is modified.
+ Instead of random configuration with uniform distribution, configuration
+ around the 
+\begin_inset Formula $q_{i}$
+\end_inset
+
+is selected with probability 
+\begin_inset Formula $p\left(guided\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $G$
+\end_inset
+
+ be the guiding path and 
+\begin_inset Formula $\left(q_{start},q_{1},q_{2},...,q_{goal}\right)\text{∈}G$
+\end_inset
+
+ the points of the guiding path, where 
+\begin_inset Formula $q_{i}\text{∈}C_{free}$
+\end_inset
+
+.
+ In the beginning, 
+\begin_inset Formula $q_{i}=q_{1}$
+\end_inset
+
+, so random point is selected from area around the point 
+\begin_inset Formula $q_{1}$
+\end_inset
+
+ with probability 
+\begin_inset Formula $p\left(guided\right)$
+\end_inset
+
+.
+ When the leaves of the searching tree reach distance lower than 
+\begin_inset Formula $r_{dist}$
+\end_inset
+
+to the 
+\begin_inset Formula $q_{i}$
+\end_inset
+
+, then the next point of the guiding path will be used instead of 
+\begin_inset Formula $q_{i}$
+\end_inset
+
+, so 
+\begin_inset Formula $q_{i}:=q_{i+1}$
+\end_inset
+
+.
+ This continues until 
+\begin_inset Formula $q_{goal}$
+\end_inset
+
+ is reached, which means the RRT-Path algorithm ends.
 \end_layout
 
 \begin_layout Section
@@ -1584,26 +2136,86 @@ name "sec:Guiding-path"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Marginal
-status open
-
-\begin_layout Plain Layout
-todo: popsat modifikaci cost function
-\end_layout
-
-\end_inset
-
-
+The guiding path is obtained by transferring the map to graph representation
+ and then path is found using the graph-search algorithms.
+ The map can be transferred to graph representation by using the Voronoi
+ diagram, visibility graph or by discretization to a grid representation.
+ 
 \end_layout
 
 \begin_layout Standard
-This algorithm has a modified cost function and in addition to a cost function
- of the A* algorithm, the cost of current node is added during the calculation.
- Nodes neighbouring with obstacles have a bigger cost than nodes which do
- not have obstacles as neighbours.
- Thanks to this modification, guiding path avoids obstacles and has bigger
- distance to obstacles.
- 
+Then the path can be found by using Dijkstra algorithm or A* algorithm.
+ In this thesis, the A* algorithm has been used because of its ability to
+ find optimal path and easy calculation of heuristic function is Euclidean
+ space.
+\end_layout
+
+\begin_layout Standard
+The classic cost function of node 
+\begin_inset Formula $q_{i}$
+\end_inset
+
+ in A* algorithm is 
+\begin_inset Formula $f\left(q_{i}\right)=g\left(q_{i}\right)+h\left(q_{i}\right)$
+\end_inset
+
+.
+ The 
+\begin_inset Formula $g\left(q_{i}\right)$
+\end_inset
+
+ is sum of costs of all edges in shortest path between nodes and 
+\begin_inset Formula $q_{init}$
+\end_inset
+
+ and 
+\begin_inset Formula $q_{i}$
+\end_inset
+
+.
+ The 
+\begin_inset Formula $h\left(q_{i}\right)$
+\end_inset
+
+ is heuristic estimate of distance between 
+\begin_inset Formula $q_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $q_{goal}$
+\end_inset
+
+.
+ In Euclidean space, it is calculated as 
+\begin_inset Formula $h\left(q_{i}\right)=\left\Vert q_{i}-q_{goal}\right\Vert $
+\end_inset
+
+.
+ This algorithm uses a modified cost function and in addition to a cost
+ function of the A* algorithm.
+ The modified cost function is 
+\begin_inset Formula $f\left(q_{i}\right)=g\left(q_{i}\right)+h\left(q_{i}\right)+j\left(q_{i}\right)$
+\end_inset
+
+, where 
+\begin_inset Formula $j\left(q_{i}\right)$
+\end_inset
+
+ is integer representing the nearness to the nearest obstacle.
+ For example, it can be 
+\begin_inset Formula $j\left(q_{i}\right)=\frac{const}{\left\Vert q_{i}-nearest\,obstacle\right\Vert }$
+\end_inset
+
+, where 
+\begin_inset Formula $const$
+\end_inset
+
+ is weight of the 
+\begin_inset Formula $j\left(q_{i}\right)$
+\end_inset
+
+ and expresses how much obstacles should be avoided with respect to length
+ of the whole path,
 \end_layout
 
 \begin_layout Chapter
@@ -3372,6 +3984,19 @@ name "fig:Time-course-of-2"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Chapter
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Covering more AoIs with one swarm
+\end_layout
+
+\end_inset
+
+Covering more AoIs with one swarm
 \end_layout
 
 \begin_layout Chapter

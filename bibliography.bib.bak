@@ -50,6 +50,19 @@
   url =       {https://dspace.cvut.cz/bitstream/handle/10467/61814/F3-DP-2015-Vana-Petr-thesis.pdf}
 }
 
+@PhdThesis{Vonasek2015,
+  author = {Vojtěch Vonásek},
+  title =  {A guided approach to sampling-based motion planning},
+  school = {Czech Technical University in Prague Faculty of electrical engineering Department of cybernetics},
+  year =   {2015},
+  month =  aug
+}
+
+@MastersThesis{,
+  author = {Matěj Petrlík},
+  title =  {Planning of swarm deployment for autonomous surveillance}
+}
+
 @comment{jabref-meta: selector_author:}
 
 @comment{jabref-meta: selector_journal:}
