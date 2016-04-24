@@ -1191,7 +1191,7 @@ Edges in this graph are only between nodes of neighbouring squares, so each
 
 \begin_layout Standard
 After converting the map to nodes, the optional grouping of goals for guiding
- path can be turned on.
+ path can be enabled.
  I will cover the grouping in chapter 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1224,23 +1224,21 @@ On the 5th line the RRT-Path algorithm takes place.
 \end_layout
 
 \begin_layout Standard
-The leaf, where UAVs have the best coverage of AoI, is chosen on line 6.
- The quality of the coverage is determined by the cost function, which will
- be mentioned later.
-\begin_inset Marginal
-status open
-
-\begin_layout Plain Layout
-todo: možná sem odkaz na kapitolu
-\end_layout
+The leaf, where UAVs have the best coverage of AoI, is chosen on the 6th
+ line.
+ The quality of the coverage is determined by the cost function, which is
+ described in chapter 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Areas-of-Interest"
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Standard
-On the 6th line the path is built from the last state.
+On the 7th line the path is built from the last state.
 \end_layout
 
 \begin_layout Standard
@@ -1248,16 +1246,14 @@ On the 8th line there is an optional preparation before the optimization
  using Dubins curves.
  In the preparation, all crossings of paths of individual UAVs are straightened,
  so UAVs do not cross other trajectories during the whole path.
- During the implementation of this method some complications appeared, which
- are covered in the chapter 
+ Details are covered in the chapter
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "chap:Paths-straightening"
 
 \end_inset
 
-, and thus the row was removed from the final version of the algorithm.
- 
+.
 \end_layout
 
 \begin_layout Standard
@@ -1322,16 +1318,16 @@ During this processing of the map (method MapProcessor::getEndNodes in codebase)
 \end_layout
 
 \begin_layout Standard
-If this modification is turned on, then instead of one goal for every AoI
- (node in the middle of AoI rectangle is considered as a goal node), only
- one goal is used for all AoIs.
- This prevents swarm to split because the whole swarm has only one guiding
- path.
+If this modification is enabled, only one goal is used for all AoIs instead
+ of one goal for every AoI (node in the middle of AoI rectangle is considered
+ to be the goal node).
+ The whole swarm has only one guiding path, so the grouping prevents swarm
+ from splitting.
  The relative localization is the main reason to have only one big swarm
- instead of more smaller swarms is that a smaller swarms (or individual
- UAVs in case of the same count of AoI and UAVs).
+ instead of more smaller swarms (or individual UAVs in case of the same
+ count of AoI and UAVs).
  Advantages of relative localization are more significant when we have only
- one swarm.
+ one big swarm.
 \end_layout
 
 \begin_layout Standard
@@ -1346,6 +1342,21 @@ todo: rozepsat vytváření shluknutého cíle a jak z něj najdu goal node pro
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+This approach has the following advantage: when individual AoIs are near
+ to a global goal of the whole group, as seen in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Maps-with-goals"
+
+\end_inset
+
+, then the whole swarm follows one guiding path without any splitting, which
+ makes the RRT-Path run faster and also the advantage of relative localization
+ is included.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1368,42 +1379,17 @@ reference "fig:Maps-with-goals"
 \end_layout
 
 \begin_layout Standard
-This approach has the following advantage: when individual AoIs are near
- to a global goal of the whole group, as seen in 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Maps-with-goals"
-
-\end_inset
-
-, then the whole swarm follows one guiding path without any splitting, which
- makes the RRT-Path run faster and also the advantage of relative localization
- is included.
- 
-\end_layout
-
-\begin_layout Standard
-The disadvantage of this method is that when individual AoIs have a bigger
- distance from each other than can be covered by UAVs then this approach
- totally fails, because RRT-Path, which is much faster than RRT, has goal
- very distant from AoIs, as can be seen in 
+The disadvantage of this method appears when individual AoIs have a bigger
+ distance from each other than can be covered by UAVs.
+ Then this approach totally fails, because RRT-Path, which is much faster
+ than RRT, has goal very distant from AoIs, as can be seen in 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Map-with-goals"
 
 \end_inset
 
-.
-\begin_inset Marginal
-status open
-
-\begin_layout Plain Layout
-rozdělit na více vět 
-\end_layout
-
-\end_inset
-
-
+ and main part of the path is found by RRT algorithm, which is slower.
 \end_layout
 
 \begin_layout Standard
@@ -1512,7 +1498,7 @@ RRT-Path
 
 \begin_layout Standard
 This chapter will cover brief introduction of RRT-Path algorithm.
- But before that, we need to define RRT algorithm which RRT-Path is based
+ In first of all, we need to define RRT algorithm which RRT-Path is based
  on.
 \end_layout
 
@@ -1567,8 +1553,11 @@ key "LaValle1998"
 \end_inset
 
 .
- The nearest configuration towards q is selected from this set and added
- to the tree.
+ The nearest configuration towards 
+\begin_inset Formula $q_{rand}$
+\end_inset
+
+ is selected from this set and added to the tree.
  The edge from q near rand to the newly added configuration contains control
  inputs used by the local planner to reach the new configuration.
  The algorithm terminates if the distance between a node in the tree and
@@ -1738,13 +1727,21 @@ STATE
 \end_inset
 
 
-\lang french
+\begin_inset space ~
+\end_inset
+
 
 \begin_inset space ~
 \end_inset
 
 
-\lang british
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
 
 \begin_inset Formula $q_{rand}$
 \end_inset
@@ -1770,13 +1767,21 @@ STATE
 \end_inset
 
 
-\lang french
+\begin_inset space ~
+\end_inset
+
 
 \begin_inset space ~
 \end_inset
 
 
-\lang british
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
 
 \begin_inset Formula $q_{near}$
 \end_inset
@@ -1802,13 +1807,21 @@ STATE
 \end_inset
 
 
-\lang french
+\begin_inset space ~
+\end_inset
+
 
 \begin_inset space ~
 \end_inset
 
 
-\lang british
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
 expandTree(
 \begin_inset Formula $q_{rand}$
 \end_inset
@@ -1834,13 +1847,21 @@ STATE
 \end_inset
 
 
-\lang french
+\begin_inset space ~
+\end_inset
+
 
 \begin_inset space ~
 \end_inset
 
 
-\lang british
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
 
 \begin_inset Formula $d$
 \end_inset
@@ -1870,14 +1891,23 @@ STATE
 \end_inset
 
 
-\lang french
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
 
 \begin_inset space ~
 \end_inset
 
 
 \series bold
-\lang british
 if
 \series default
  d < d 
@@ -1899,7 +1929,13 @@ STATE
 \end_inset
 
 
-\lang french
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
 
 \begin_inset space ~
 \end_inset
@@ -1909,7 +1945,21 @@ STATE
 \end_inset
 
 
-\lang british
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
 P = extract trajectory from 
 \begin_inset Formula $q_{start}$
 \end_inset
@@ -1935,7 +1985,13 @@ STATE
 \end_inset
 
 
-\lang french
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
 
 \begin_inset space ~
 \end_inset
@@ -1945,7 +2001,21 @@ STATE
 \end_inset
 
 
-\lang british
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
 return P;
 \end_layout
 
@@ -1963,14 +2033,23 @@ STATE
 \end_inset
 
 
-\lang french
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
 
 \begin_inset space ~
 \end_inset
 
 
 \series bold
-\lang british
 end
 \end_layout
 
@@ -2045,6 +2124,16 @@ key "Vonasek2015"
  space.
  RRT-Path enables UAVs to manoeuvre around obstacles and find way in narrow
  passages.
+ RRT.
+ Path also finds goal much faster 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "petrlik2015"
+
+\end_inset
+
+.
+ RRT-Path uses the guiding path during building the space-filling tree.
  Before running RRT algorithm, the guiding path from 
 \begin_inset Formula $q_{start}$
 \end_inset
@@ -2201,7 +2290,7 @@ The classic cost function of node
 \begin_inset Formula $j\left(q_{i}\right)$
 \end_inset
 
- is integer representing the nearness to the nearest obstacle.
+ is number representing the nearness to the nearest obstacle.
  For example, it can be 
 \begin_inset Formula $j\left(q_{i}\right)=\frac{const}{\left\Vert q_{i}-nearest\,obstacle\right\Vert }$
 \end_inset
@@ -2216,6 +2305,39 @@ The classic cost function of node
 
  and expresses how much obstacles should be avoided with respect to length
  of the whole path.
+\end_layout
+
+\begin_layout Chapter
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Areas of Interest coverage
+\end_layout
+
+\end_inset
+
+Areas of Interest coverage 
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Areas-of-Interest"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Marginal
+status open
+
+\begin_layout Plain Layout
+todo:dopsat
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Chapter
@@ -2239,36 +2361,41 @@ name "chap:Paths-straightening"
 \end_layout
 
 \begin_layout Standard
-RRT-Path algorithm checks crossing paths between neighbouring states, so
- between nth state and n+1-th 
-\begin_inset Marginal
-status open
-
-\begin_layout Plain Layout
-todo: zjistit, jak je to správně anglicky
-\end_layout
-
+In the RRT-Path algorithm, crossing paths between neighbouring states are
+ checked, so no trajectories are crossing each other between the 
+\begin_inset Formula $n$
 \end_inset
 
- state no trajectories are crossing each other.
- But between states trajectories are still crossing.
- In this image 
+-th state and the 
+\begin_inset Formula $n+1$
+\end_inset
+
+-th state, but this does not solve the problem completely.
+ In figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Crossing-paths"
 
 \end_inset
 
- is shown path found by RRT-Path.
+ trajectories found by RRT-Path algorithm are shown.
  Every colour marks one state in RRT-Path.
  As we can see, check in algorithm prevents from crossing path between neighbour
 ing states, but crossing of paths in different times can not be easily prevented.
  We can see in image, that paths cross between points J (yellow), M (light
  green) and H (orange), K (yellow), so there is no easy approach to prevent
- path collisions between n-2-th state and nth state.
+ path collisions between
+\begin_inset Formula $n-2$
+\end_inset
+
+-th state and 
+\begin_inset Formula $n$
+\end_inset
+
+-th state.
  Optimization by Dubins curves shortens trajectory of UAVs, so UAVs could
- be in these trajectories in different time, so there could be collisions
- after optimization.
+ be in these trajectories in different time.
+ Considering that, there could be collisions after optimization.
  Another complication occurs, when time difference between two states is
  too low, then UAVs could collide, because in reality UAV can not follow
  path precisely, but only with some errors.
@@ -2313,9 +2440,10 @@ name "fig:Crossing-paths"
 
 \end_inset
 
-I tried to straighten crossing trajectories, but all attempts failed.
+There were attempts to straighten crossing trajectories, but all of them
+ failed.
  Straightening was done by switching parts of crossing paths from the earliest
- crossing state to end.
+ crossing state to the end.
  But then paths had different lengths, which was unsuitable for path planning
  for swarm.
  This can be done by adding 
@@ -2326,13 +2454,15 @@ waiting
 \begin_inset Quotes erd
 \end_inset
 
- points, points in different state but with same position in different time.
+ points, points in different state but with the same position in different
+ time.
  But then is really hard to straighten longer path with many crossings (this
  path is really short, paths in other maps are much longer and more complicated).
  For motion model with inertia is also really hard to deal with waiting
  states, which complicates following of straightened trajectories.
  Due to all complications mentioned above, this part was removed from algorithm.
  But it is possible to add it, when better approach will be found.
+ 
 \end_layout
 
 \begin_layout Chapter
@@ -2512,31 +2642,7 @@ key "Dubins1957"
 
 \end_inset
 
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
 , where 
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-
 \begin_inset Formula $t_{F}$
 \end_inset
 
@@ -4078,7 +4184,11 @@ where
 \begin_inset Formula $\mathbf{X}\left(k\right)_{UAV}$
 \end_inset
 
- is UAV position in k-th iteration of simulation, 
+ is UAV position in 
+\begin_inset Formula $k$
+\end_inset
+
+-th iteration of simulation, 
 \begin_inset Formula $\mathbf{X}\left(k\right)_{ns}$
 \end_inset
 
@@ -4086,7 +4196,11 @@ where
 \begin_inset Formula $\mathbf{X}\left(k+1\right)_{target}$
 \end_inset
 
- is position of UAV target in (k+1)-th iteration and 
+ is position of UAV target in 
+\begin_inset Formula $k+1$
+\end_inset
+
+-th iteration and 
 \begin_inset Formula $const$
 \end_inset
 
