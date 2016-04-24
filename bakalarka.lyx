@@ -1738,13 +1738,9 @@ STATE
 \end_inset
 
 
-\lang french
-
 \begin_inset space ~
 \end_inset
 
-
-\lang british
 
 \begin_inset Formula $q_{rand}$
 \end_inset
@@ -1770,13 +1766,9 @@ STATE
 \end_inset
 
 
-\lang french
-
 \begin_inset space ~
 \end_inset
 
-
-\lang british
 
 \begin_inset Formula $q_{near}$
 \end_inset
@@ -1802,13 +1794,9 @@ STATE
 \end_inset
 
 
-\lang french
-
 \begin_inset space ~
 \end_inset
 
-
-\lang british
 expandTree(
 \begin_inset Formula $q_{rand}$
 \end_inset
@@ -1834,13 +1822,9 @@ STATE
 \end_inset
 
 
-\lang french
-
 \begin_inset space ~
 \end_inset
 
-
-\lang british
 
 \begin_inset Formula $d$
 \end_inset
@@ -1870,14 +1854,11 @@ STATE
 \end_inset
 
 
-\lang french
-
 \begin_inset space ~
 \end_inset
 
 
 \series bold
-\lang british
 if
 \series default
  d < d 
@@ -1899,8 +1880,6 @@ STATE
 \end_inset
 
 
-\lang french
-
 \begin_inset space ~
 \end_inset
 
@@ -1908,8 +1887,6 @@ STATE
 \begin_inset space ~
 \end_inset
 
-
-\lang british
 P = extract trajectory from 
 \begin_inset Formula $q_{start}$
 \end_inset
@@ -1935,8 +1912,6 @@ STATE
 \end_inset
 
 
-\lang french
-
 \begin_inset space ~
 \end_inset
 
@@ -1944,8 +1919,6 @@ STATE
 \begin_inset space ~
 \end_inset
 
-
-\lang british
 return P;
 \end_layout
 
@@ -1963,14 +1936,11 @@ STATE
 \end_inset
 
 
-\lang french
-
 \begin_inset space ~
 \end_inset
 
 
 \series bold
-\lang british
 end
 \end_layout
 
@@ -2512,31 +2482,7 @@ key "Dubins1957"
 
 \end_inset
 
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
 , where 
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-
 \begin_inset Formula $t_{F}$
 \end_inset
 

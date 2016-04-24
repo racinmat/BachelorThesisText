@@ -407,7 +407,7 @@ status open
 \end_inset
 
 
-\begin_inset VSpace vfill
+\begin_inset VSpace vfill*
 \end_inset
 
 
@@ -2215,7 +2215,7 @@ The classic cost function of node
 \end_inset
 
  and expresses how much obstacles should be avoided with respect to length
- of the whole path,
+ of the whole path.
 \end_layout
 
 \begin_layout Chapter

@@ -1,6 +1,6 @@
 %% LyX 2.1.4 created this file.  For more info, see http://www.lyx.org/.
 %% Do not edit unless you really know what you are doing.
-\documentclass[a4paper,twoside,french,british,cleardoublepage=empty,BCOR15mm,DIV12]{scrreprt}
+\documentclass[a4paper,twoside,british,cleardoublepage=empty,BCOR15mm,DIV12]{scrreprt}
 \usepackage{amsmath}
 \usepackage{tgtermes}
 \usepackage{tgheros}
@@ -9,13 +9,6 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{babel}
-\makeatletter
-\addto\extrasfrench{%
-   \providecommand{\og}{\leavevmode\flqq~}%
-   \providecommand{\fg}{\ifdim\lastskip>\z@\unskip\fi~\frqq}%
-}
-
-\makeatother
 \usepackage{float}
 \usepackage{graphicx}
 \usepackage[unicode=true,pdfusetitle,
@@ -69,8 +62,6 @@
 \usepackage{packages/bc-fancychap}
 
 \makeatother
-
-\addto\captionsfrench{\renewcommand{\algorithmname}{Algorithme}}
 
 \begin{document}
 ~\thispagestyle{empty}\begin{center}\pagenumbering{arabic}\vspace{10mm}
@@ -382,24 +373,21 @@ initial conguration q in it
 
 \STATE \textbf{for} iteration:=1:I \textbf{do} 
 
-\STATE \foreignlanguage{french}{~}$q_{rand}$ := getRandomConfiguration($C$);
+\STATE ~$q_{rand}$ := getRandomConfiguration($C$);
 
-\STATE \foreignlanguage{french}{~}$q_{near}$ := nearest node in
-tree $T$ to q ;
+\STATE ~$q_{near}$ := nearest node in tree $T$ to q ;
 
-\STATE \foreignlanguage{french}{~}expandTree($q_{rand}$,$q_{near}$);
+\STATE ~expandTree($q_{rand}$,$q_{near}$);
 
-\STATE \foreignlanguage{french}{~}$d$ = distance from tree $T$
-to $q_{goal}$ ;
+\STATE ~$d$ = distance from tree $T$ to $q_{goal}$ ;
 
-\STATE \foreignlanguage{french}{~}\textbf{if} d < d \textbf{then}
+\STATE ~\textbf{if} d < d \textbf{then}
 
-\STATE \foreignlanguage{french}{~~}P = extract trajectory from
-$q_{start}$ to $q_{rand}$;
+\STATE ~~P = extract trajectory from $q_{start}$ to $q_{rand}$;
 
-\STATE \foreignlanguage{french}{~~}return P;
+\STATE ~~return P;
 
-\STATE \foreignlanguage{french}{~}\textbf{end}
+\STATE ~\textbf{end}
 
 \STATE \textbf{end}
 

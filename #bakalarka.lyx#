@@ -2201,7 +2201,21 @@ The classic cost function of node
 \begin_inset Formula $j\left(q_{i}\right)$
 \end_inset
 
- is 
+ is integer representing the nearness to the nearest obstacle.
+ For example, it can be 
+\begin_inset Formula $j\left(q_{i}\right)=\frac{const}{\left\Vert q_{i}-nearest\,obstacle\right\Vert }$
+\end_inset
+
+, where 
+\begin_inset Formula $const$
+\end_inset
+
+ is weight of the 
+\begin_inset Formula $j\left(q_{i}\right)$
+\end_inset
+
+ and expresses how much obstacles should be avoided with respect to length
+ of the whole path.
 \end_layout
 
 \begin_layout Chapter
