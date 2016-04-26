@@ -2998,6 +2998,11 @@ So the algorithm must be modified.
  maximal distance of relative localization.
 \end_layout
 
+\begin_layout Standard
+Due to using random points during optimization, the optimization is stochastic
+ and non-deterministic.
+\end_layout
+
 \begin_layout Subsection
 \begin_inset Argument 1
 status open
@@ -3200,14 +3205,545 @@ The best solution for this problem is re-sampling of trajectory generated
  it results to shorter final path as will be shown in following experiment.
 \end_layout
 
-\begin_layout Section
-Influence of re-sampling on Dubins curves optimization
+\begin_layout Chapter
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Covering more AoIs with one swarm
+\end_layout
+
+\end_inset
+
+Covering more AoIs with one swarm
+\end_layout
+
+\begin_layout Chapter
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+V-REP simulations
+\end_layout
+
+\end_inset
+
+V-REP simulations
 \end_layout
 
 \begin_layout Standard
-To demonstrate the optimization, I created map and let the RRT-Path algorithm
- find the trajectories for UAVs.
- The map with trajectories can be seen in 
+V-REP is acronym for Virtual robot experimentation platform, a simulator
+ developed by Coppelia Robotics, providing an advanced environment for testing
+ and simulations of robots of all types.
+ The V-REP environment is free and open-souce for educational purposes and
+ also has commercial licence.
+ The environment takes in account certain physical laws like gravity, inertia
+ or friction, which enables to truthfully verify applicability for deployment
+ of UAVs in the real world.
+ V-REP has many build-in models, but user can also create his own robot.
+ V-REP enables to control robots over API and has API clients for C, C++,
+ Python, Java, Lua, Matlab, Octave and Urbi.
+ 
+\end_layout
+
+\begin_layout Section
+UAV control and path simulation
+\end_layout
+
+\begin_layout Standard
+Python is convenient for fast prototyping and has native functions for easy
+ JSON parsing, which made it good choice for simulations of generated trajectori
+es in V-REP.
+\end_layout
+
+\begin_layout Standard
+UAVs in V-REP can be controlled over remote API only by changing location
+ of their target.
+ Then UAV tries to reach the location of its target.
+ Unfortunately, UAVs only follow location, with speed proportional to distance.
+ UAVs do not try to reach target and simultaneously to have zero speed when
+ reaching their target, which causes overshoot.
+ This fact leads to another disadvantage of UAV controller.
+ When keeping target in same distance and direction from UAV, the UAV increases
+ its speed, which causes overshoot when target changes its direction to
+ UAV.
+ These overshoots were many times bigger than size of UAVs, so they could
+ not be ignored and had to be fixed.
+\end_layout
+
+\begin_layout Standard
+During first, naive implementation, position of next state was set as target
+ position for UAV, but due to overshoot and large distances between states
+ UAVs failed to follow the trajectory.
+ 
+\end_layout
+
+\begin_layout Standard
+Another implementation linear interpolated trajectory between UAV and its
+ next state position and calculated target placed in line between UAV and
+ next state position, but in constant distance to UAV.
+\end_layout
+
+\begin_layout Standard
+So the calculation was defined as follows
+\begin_inset Formula 
+\[
+\mathbf{X}\left(k+1\right)_{target}=\mathbf{X}\left(k\right)_{UAV}+\frac{\left(\mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right)}{\left\Vert \mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right\Vert }\cdot const
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathbf{X}\left(k\right)_{UAV}$
+\end_inset
+
+ is UAV position in 
+\begin_inset Formula $k$
+\end_inset
+
+-th iteration of simulation, 
+\begin_inset Formula $\mathbf{X}\left(k\right)_{ns}$
+\end_inset
+
+ is position of next state in planned path in k-th iteration, 
+\begin_inset Formula $\mathbf{X}\left(k+1\right)_{target}$
+\end_inset
+
+ is position of UAV target in 
+\begin_inset Formula $k+1$
+\end_inset
+
+-th iteration and 
+\begin_inset Formula $const$
+\end_inset
+
+ is constant experimentally tuned, so the UAV does not move too fast nor
+ too slow.
+ Too fast movements cause overshoot and too slow movements cause the simulation
+ to run for needlessly long time.
+\end_layout
+
+\begin_layout Standard
+But a mentioned earlier, even this approach did not go well.
+ In long passages, where trajectory did not turn, UAVs increased their velocity
+ and inertia, which made them harder to turn.
+ The problem of overshooting is shown in figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Map-with-UAV"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:UAV-overshoot"
+
+\end_inset
+
+.
+ Overshoot is on the end of long passage in map 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Map-with-UAV"
+
+\end_inset
+
+.
+ Red and violet balls represent positions of next states and green balls
+ represent UAV targets.
+ In the first image, we can see UAVs leaving the narrow passage.
+ As you can see in second and third image, positions of next state are still,
+ but because of constant distance of target and UAV, the target is dragged
+ by UAVs inertia.
+\end_layout
+
+\begin_layout Standard
+This has been fixed by not updating the position of target when distance
+ between UAV and next state is bigger than in previous iteration and the
+ position of next state is still the same, so the equation describing target
+ position is
+\begin_inset Formula 
+\[
+\mathbf{X}\left(k+1\right)_{target}=\begin{cases}
+if\left\Vert \mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right\Vert <\left\Vert \mathbf{X}\left(k-1\right)_{ns}-\mathbf{X}\left(k-1\right)_{UAV}\right\Vert \\
+\land\mathbf{X}\left(k\right)_{ns}=\mathbf{X}\left(k-1\right)_{ns}\\
+\mathbf{X}\left(k\right)_{UAV}+\frac{\left(\mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right)}{\left\Vert \mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right\Vert }\cdot const\\
+else\\
+\mathbf{X}\left(k\right)_{target}
+\end{cases}
+\]
+
+\end_inset
+
+.
+ This prevents target from dragging by UAV with big inertia.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/mapWithPassage.png
+	lyxscale 40
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Map with UAV overshoot 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Map-with-UAV"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/overshoot2.png
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/overshoot3_2.png
+	lyxscale 52
+	scale 52
+
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Graphics
+	filename obrazky/overshoot4.png
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+UAV overshoot
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:UAV-overshoot"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Here can be seen 3 iterations.
+ Next state is changed during 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Implementation
+\end_layout
+
+\end_inset
+
+Implementation
+\end_layout
+
+\begin_layout Standard
+This part will cover implementation of algorithm, which was used for simulations.
+ Whole codebase in C++ can be found at 
+\begin_inset CommandInset href
+LatexCommand href
+name "this github repository"
+target "https://github.com/racinmat/AutonomousSurveillanceBachelorThesis"
+
+\end_inset
+
+.
+ Next to the C++ program, I also created some CLI scripts in PHP, for drawing
+ map and paths from the JSON representation, batch running of Dubins curves
+ optimization and other useful stuff.
+ These can be seen at 
+\begin_inset CommandInset href
+LatexCommand href
+name "this github repository"
+target "https://github.com/racinmat/UAVUtils"
+
+\end_inset
+
+.
+ V-REP simulations were made by communicating with V-REP through remote
+ API, the client is written in Python and can be seen 
+\begin_inset CommandInset href
+LatexCommand href
+name "here"
+target "https://github.com/racinmat/VRepPathBuilder"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+External libraries
+\end_layout
+
+\begin_layout Standard
+Some external libraries are used in the implementation.
+ Every used library is mentioned here.
+ 
+\begin_inset CommandInset href
+LatexCommand href
+name "Boost libraries"
+target "http://www.boost.org/"
+
+\end_inset
+
+ are used for smart pointers, libraries for Dubins curves are from Master
+ Thesis by Petr Váňa
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Vana2015"
+
+\end_inset
+
+.
+ Generating of JSON from C++ object is done via 
+\begin_inset CommandInset href
+LatexCommand href
+name "Json Spirit"
+target "http://www.codeproject.com/Articles/20027/JSON-Spirit-A-C-JSON-Parser-Generator-Implemented"
+
+\end_inset
+
+ library.
+ Another external library is 
+\begin_inset CommandInset href
+LatexCommand href
+name "V-Collide"
+target "http://gamma.cs.unc.edu/V-COLLIDE/"
+
+\end_inset
+
+ from The University of North Carolina at Chapel Hill.
+ 
+\end_layout
+
+\begin_layout Standard
+Because V-Collide sources were written in 1997 and because I used C++11
+ compiler to compile my source codes, I had to rewrite part of this library
+ for compatibility and to make public API easier to use.
+ Modifications can be seen in 
+\begin_inset CommandInset href
+LatexCommand href
+name "this github repository"
+target "https://github.com/racinmat/VCollide2"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Last used external library is QT, which was used to create platform independent
+ GUI.
+\end_layout
+
+\begin_layout Section
+Code structure and services
+\end_layout
+
+\begin_layout Standard
+Here is shown brief UML scheme demonstrating dependency diagram of codebase.
+ To keep diagram simple, only services are displayed, other classes, which
+ are not services, were left out for readability.
+ Diagram was generated using software 
+\begin_inset CommandInset href
+LatexCommand href
+name "StarUML"
+target "http://staruml.io/"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Dependency diagram 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Dependency-diagram"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/umlSchema.svg
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Core class holds core of whole Application and has all other classes as
+ dependencies, as is shown in image 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Dependency-diagram"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+As mentioned in chapter 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Algorithm"
+
+\end_inset
+
+, Configuration is DTO for all configuration variables, but to keep reasonable
+ amount of classes, Configuration is also service, which delegates all configura
+tion changes from GUI to Core class.
+ Configuration and GuiDrawer implementation LoggerInterface are the only
+ connections between Core and GUI.
+\end_layout
+
+\begin_layout Standard
+State factory creates State classes according to Factory pattern.
+ State class represents state in RRT-Path algorithm.
+ State has coordinates and rotations for all UAVs.
+ Persister persists found path to JSON using Json Spirit library.
+ PathHandler serves as utils class for manipulations with path (vector of
+ State classes).
+ CarLikeMotionModel holds motion model algorithm.
+ InputGenerator is used to generate inputs to motion model.
+ NTupletGenerator only generates variation with repeating for given input.
+ DistanceResolver counts distances between two states and distance of path.
+ AoICoverageResolver determines cost function for states,where all UAVs
+ are in AoIs.
+ GuidingPathFactory is wrapper for PathFindingAlgorithm interface and is
+ used by Core to find guiding path.
+ Implementation of PathFindingAlgorithm is AStart class.
+\end_layout
+
+\begin_layout Section
+Utility scripts
+\end_layout
+
+\begin_layout Standard
+All graphs in experiments with re-sampling and Dubins optimization were
+ generated with usage of PHP scripts.
+ Script runDubinsOptimization.php runs sequentially resampling with given
+ frequencies multiple times.
+ This script can be run many times at once with different configuration,
+ which brings advantage of parallel run without need to deals with threads.
+ Script processDubinsOptimizatinData.php merges all CSV result files to one
+ big matrix, with number of rows equal to maximal number of iterations and
+ number of columns equal number of runs of the optimization.
+ For example, as seen in experiment 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:First-experiment"
+
+\end_inset
+
+ for frequency 1 Hz it is matrix with size 2095x100.
+ This can be loaded directly to matlab so the graph can be generated.
+ Script drawPaths.php generates map to png image.
+ E.
+ g.
+ map generated by this script can be seen in 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Path-before-Dubins"
@@ -3215,11 +3751,83 @@ reference "fig:Path-before-Dubins"
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Chapter
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Experiments
+\end_layout
+
+\end_inset
+
+Experiments
+\end_layout
+
+\begin_layout Section
+RRT-Path
+\end_layout
+
+\begin_layout Section
+Influence of re-sampling on Dubins curves optimization
+\end_layout
+
+\begin_layout Standard
+To demonstrate the optimization, few maps were selected to be used in re-samplin
+g and optimization experiments.
+ The RRT-Path algorithm found trajectories for UAVs.
+ These trajectories were re-sampled and optimized 100 times to obtain relevant
+ results because of using random numbers during the optimization and avoiding
+ getting stuck in local optima.
+\end_layout
+
+\begin_layout Standard
+Due to time and memory consumption, each optimization is stopped after 200
+ iterations where optimization did not shorten the path or when speed of
+ path shortening was slower than 5% of original path length per 1000 iterations.
+\end_layout
+
+\begin_layout Standard
+The algorithm also stops when consumed memory exceeds 1900 MB.
+ This is right before shutting of program by operating system, because 32bit
+ processes are not allowed to use more than 2 GB of RAM.
+ This feature was implemented using an ugly platform-dependent hack.
+\end_layout
+
+\begin_layout Standard
+In next sections, maps with obstacles, AoIs and trajectories will be shown.
  Obstacles are grey rectangles, AoI is green rectangle and each UAV has
  trajectory marked with different colour.
  For measuring of influence of re-sampling of path to Dubins curves optimization
-, I picked frequencies: 1 Hz (initial frequency used in RRT-Path algorithm),
- 2 Hz, 4 Hz, 6 Hz, 8 Hz, 10 Hz, 12 Hz, 14 Hz, 16 Hz, 18 Hz, 20 Hz.
+, following frequencies were selected: 1 Hz (initial frequency used in RRT-Path
+ algorithm), 2 Hz, 4 Hz, 6 Hz, 8 Hz, 10 Hz, 12 Hz, 14 Hz, 16 Hz, 18 Hz,
+ 20 Hz.
+\end_layout
+
+\begin_layout Subsection
+First experiment
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:First-experiment"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The map with trajectories found by the RRT-Path algorithm can be seen in
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Path-before-Dubins"
+
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -3343,18 +3951,6 @@ name "fig:Path-after-Dubins"
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-As stated above, due to time and memory consumption, each optimization is
- stopped after 150 iterations where optimization did not shorten the path
- or when speed of path shortening was slower than 5% of original path length
- per 1000 iterations.
-\end_layout
-
-\begin_layout Standard
-For each frequency, the optimization process was run 100 times to obtain
- relevant results because of using random numbers during the optimization.
 \end_layout
 
 \begin_layout Standard
@@ -3914,7 +4510,7 @@ name "fig:Re-sampling-and-optimization"
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename obrazky/frequencyDependence.png
+	filename obrazky/experiment1-frequencyDependence.png
 	lyxscale 40
 	scale 70
 
@@ -3966,8 +4562,8 @@ reference "fig:Time-course-of-2"
  As we can see, frequencies 14, 16, 18 and 20 Hz have almost zero standard
  deviation and converge to lower value than initial frequency.
  In frequency 10 Hz can be seen high standard deviation.
- That means the optimization got stuck in local optimum and did was not
- able to shorten any path for many iterations.
+ That means the optimization got stuck in local optimum and was not able
+ to shorten any path for many iterations.
 \end_layout
 
 \begin_layout Standard
@@ -3999,7 +4595,7 @@ name "fig:Time-course-of"
 
 
 \begin_inset Graphics
-	filename obrazky/lowFrequenciesErrors.png
+	filename obrazky/experiment1-lowFrequenciesErrors.png
 	lyxscale 40
 	scale 70
 
@@ -4045,7 +4641,7 @@ name "fig:Time-course-of-1"
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename obrazky/middleFrequenciesErrors.png
+	filename obrazky/experiment1-middleFrequenciesErrors.png
 	lyxscale 40
 	scale 70
 
@@ -4091,7 +4687,7 @@ name "fig:Time-course-of-2"
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename obrazky/highFrequenciesErrors.png
+	filename obrazky/experiment1-highFrequenciesErrors.png
 	lyxscale 40
 	scale 70
 
@@ -4105,179 +4701,235 @@ name "fig:Time-course-of-2"
 
 \end_layout
 
-\begin_layout Chapter
-\begin_inset Argument 1
+\begin_layout Subsection
+Second experiment
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Second-experiment"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
 status open
 
 \begin_layout Plain Layout
-Covering more AoIs with one swarm
-\end_layout
-
-\end_inset
-
-Covering more AoIs with one swarm
-\end_layout
-
-\begin_layout Chapter
-\begin_inset Argument 1
-status open
+\align center
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
-V-REP simulations
+Path before Dubins curves optimization
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Path-before-Dubins-1"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
 
-V-REP simulations
+
+\begin_inset Graphics
+	filename obrazky/path-03-27-17-49-16-before-dubins.json.png
+	lyxscale 40
+	scale 28
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-V-REP is acronym for Virtual robot experimentation platform, a simulator
- developed by Coppelia Robotics, providing an advanced environment for testing
- and simulations of robots of all types.
- The V-REP environment is free and open-souce for educational purposes and
- also has commercial licence.
- The environment takes in account certain physical laws like gravity, inertia
- or friction, which enables to truthfully verify applicability for deployment
- of UAVs in the real world.
- V-REP has many build-in models, but user can also create his own robot.
- V-REP enables to control robots over API and has API clients for C, C++,
- Python, Java, Lua, Matlab, Octave and Urbi.
- 
-\end_layout
-
-\begin_layout Section
-UAV control and path simulation
-\end_layout
-
-\begin_layout Standard
-Python is convenient for fast prototyping and has native functions for easy
- JSON parsing, which made it good choice for simulations of generated trajectori
-es in V-REP.
-\end_layout
-
-\begin_layout Standard
-UAVs in V-REP can be controlled over remote API only by changing location
- of their target.
- Then UAV tries to reach the location of its target.
- Unfortunately, UAVs only follow location, with speed proportional to distance.
- UAVs do not try to reach target and simultaneously to have zero speed when
- reaching their target, which causes overshoot.
- This fact leads to another disadvantage of UAV controller.
- When keeping target in same distance and direction from UAV, the UAV increases
- its speed, which causes overshoot when target changes its direction to
- UAV.
- These overshoots were many times bigger than size of UAVs, so they could
- not be ignored and had to be fixed.
-\end_layout
-
-\begin_layout Standard
-During first, naive implementation, position of next state was set as target
- position for UAV, but due to overshoot and large distances between states
- UAVs failed to follow the trajectory.
- 
-\end_layout
-
-\begin_layout Standard
-Another implementation linear interpolated trajectory between UAV and its
- next state position and calculated target placed in line between UAV and
- next state position, but in constant distance to UAV.
-\end_layout
-
-\begin_layout Standard
-So the calculation was defined as follows
-\begin_inset Formula 
-\[
-\mathbf{X}\left(k+1\right)_{target}=\mathbf{X}\left(k\right)_{UAV}+\frac{\left(\mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right)}{\left\Vert \mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right\Vert }\cdot const
-\]
-
-\end_inset
-
-where 
-\begin_inset Formula $\mathbf{X}\left(k\right)_{UAV}$
-\end_inset
-
- is UAV position in 
-\begin_inset Formula $k$
-\end_inset
-
--th iteration of simulation, 
-\begin_inset Formula $\mathbf{X}\left(k\right)_{ns}$
-\end_inset
-
- is position of next state in planned path in k-th iteration, 
-\begin_inset Formula $\mathbf{X}\left(k+1\right)_{target}$
-\end_inset
-
- is position of UAV target in 
-\begin_inset Formula $k+1$
-\end_inset
-
--th iteration and 
-\begin_inset Formula $const$
-\end_inset
-
- is constant experimentally tuned, so the UAV does not move too fast nor
- too slow.
- Too fast movements cause overshoot and too slow movements cause the simulation
- to run for needlessly long time.
-\end_layout
-
-\begin_layout Standard
-But a mentioned earlier, even this approach did not go well.
- In long passages, where trajectory did not turn, UAVs increased their velocity
- and inertia, which made them harder to turn.
- The problem of overshooting is shown in figures 
+The best result of Dubins curves optimization (re-sampling of 4Hz) is shown
+ in 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:Map-with-UAV"
+reference "fig:Path-after-Dubins-1"
+
+\end_inset
+
+.
+ As we can see, trajectories are much shorter than trajectories before optimizat
+ion in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Path-before-Dubins-1"
+
+\end_inset
+
+, as in experiment 1, but curves in the upper part of figure still were
+ not optimized.
+ This was caused by optimization algorithm getting stuck in local optimum.
+ The algorithm tried to optimize other parts and ended due to stopping condition
+s mentioned above.
+ Light grey colour represents obstacle amplification.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Path after Dubins curves optimization
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Path-after-Dubins-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/path-04-25-16-23-37-05-optimized.json.png
+	lyxscale 40
+	scale 28
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The results are shown in graph 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Re-sampling-and-optimization-1"
+
+\end_inset
+
+.
+ On the graph can be seen interesting results.
+ Contrary to the graph from experiment 1 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Re-sampling-and-optimization"
+
+\end_inset
+
+, all frequencies have same minimal distance, maximal distance and mean
+ distance.
+ This shows us interesting fact.
+ For same frequency, all 100 runs got stuck in same local optimum, but every
+ frequency has different local optimum where the algorithm can stuck.
+ Trajectory in this experiment is much smaller, which leads to zero standard
+ deviation and difference between minimal and maximal distance between optimizat
+ion results in one frequency.
+ The difference between maximal and minimal results is bigger when optimizing
+ longer and more complicated trajectory.
+ As we can also see from graphs, we can not predict optimal re-sampling
+ frequency from trajectory.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Re-sampling and optimization results graph 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Re-sampling-and-optimization-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/experiment2-frequencyDependence.png
+	lyxscale 40
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Depending on re-sampling frequency, the courses of optimization are also
+ different.
+\end_layout
+
+\begin_layout Standard
+In 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Time-course-of-3"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Time-course-of-1-1"
 
 \end_inset
 
  and 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:UAV-overshoot"
+reference "fig:Time-course-of-2-1"
 
 \end_inset
 
-.
- Overshoot is on the end of long passage in map 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Map-with-UAV"
-
-\end_inset
-
-.
- Red and violet balls represent positions of next states and green balls
- represent UAV targets.
- In the first image, we can see UAVs leaving the narrow passage.
- As you can see in second and third image, positions of next state are still,
- but because of constant distance of target and UAV, the target is dragged
- by UAVs inertia.
-\end_layout
-
-\begin_layout Standard
-This has been fixed by not updating the position of target when distance
- between UAV and next state is bigger than in previous iteration and the
- position of next state is still the same, so the equation describing target
- position is
-\begin_inset Formula 
-\[
-\mathbf{X}\left(k+1\right)_{target}=\begin{cases}
-if\left\Vert \mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right\Vert <\left\Vert \mathbf{X}\left(k-1\right)_{ns}-\mathbf{X}\left(k-1\right)_{UAV}\right\Vert \\
-\land\mathbf{X}\left(k\right)_{ns}=\mathbf{X}\left(k-1\right)_{ns}\\
-\mathbf{X}\left(k\right)_{UAV}+\frac{\left(\mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right)}{\left\Vert \mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right\Vert }\cdot const\\
-else\\
-\mathbf{X}\left(k\right)_{target}
-\end{cases}
-\]
-
-\end_inset
-
-.
- This prevents target from dragging by UAV with big inertia.
+ we can see mean values and standard deviations for different frequencies,
+ divided into three graphs for better readability.
+ The vertical lines are error bars, they show standard deviation during
+ the optimization.
+ Because the error bars would be too dense if they were shown for each iteration
+, only every 10th iteration is shown on graphs.
+ For comparison, on each graph is shown also frequency 1 Hz, the initial
+ frequency before re-sampling.
+ As we can see, in comparison to experiment 1, standard deviations are zero,
+ so the optimization algorithm exhibits deterministic behaviour even if
+ this optimization method is stochastic.
 \end_layout
 
 \begin_layout Standard
@@ -4288,29 +4940,26 @@ status open
 
 \begin_layout Plain Layout
 \align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Time course of optimization for 2 Hz, 4 Hz, 6 Hz
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Time-course-of-3"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
 \begin_inset Graphics
-	filename obrazky/mapWithPassage.png
+	filename obrazky/experiment2-lowFrequenciesErrors.png
 	lyxscale 40
-	scale 40
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Map with UAV overshoot 
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Map-with-UAV"
-
-\end_inset
-
-
-\end_layout
+	scale 70
 
 \end_inset
 
@@ -4329,57 +4978,17 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename obrazky/overshoot2.png
-	lyxscale 50
-	scale 50
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename obrazky/overshoot3_2.png
-	lyxscale 52
-	scale 52
-
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset Graphics
-	filename obrazky/overshoot4.png
-	lyxscale 50
-	scale 50
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-UAV overshoot
+Time course of optimization for 8 Hz, 10 Hz, 12 Hz
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:UAV-overshoot"
+name "fig:Time-course-of-1-1"
 
 \end_inset
 
-
+ 
 \end_layout
 
 \end_inset
@@ -4388,142 +4997,16 @@ name "fig:UAV-overshoot"
 \end_layout
 
 \begin_layout Plain Layout
-Here can be seen 3 iterations.
- Next state is changed during 
-\end_layout
+\align center
+\begin_inset Graphics
+	filename obrazky/experiment2-middleFrequenciesErrors.png
+	lyxscale 40
+	scale 70
 
 \end_inset
 
 
 \end_layout
-
-\begin_layout Chapter
-\begin_inset Argument 1
-status open
-
-\begin_layout Plain Layout
-Implementation
-\end_layout
-
-\end_inset
-
-Implementation
-\end_layout
-
-\begin_layout Standard
-This part will cover implementation of algorithm, which was used for simulations.
- Whole codebase in C++ can be found at 
-\begin_inset CommandInset href
-LatexCommand href
-name "this github repository"
-target "https://github.com/racinmat/AutonomousSurveillanceBachelorThesis"
-
-\end_inset
-
-.
- Next to the C++ program, I also created some CLI scripts in PHP, for drawing
- map and paths from the JSON representation, batch running of Dubins curves
- optimization and other useful stuff.
- These can be seen at 
-\begin_inset CommandInset href
-LatexCommand href
-name "this github repository"
-target "https://github.com/racinmat/UAVUtils"
-
-\end_inset
-
-.
- V-REP simulations were made by communicating with V-REP through remote
- API, the client is written in Python and can be seen 
-\begin_inset CommandInset href
-LatexCommand href
-name "here"
-target "https://github.com/racinmat/VRepPathBuilder"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Section
-External libraries
-\end_layout
-
-\begin_layout Standard
-Some external libraries are used in the implementation.
- Every used library is mentioned here.
- 
-\begin_inset CommandInset href
-LatexCommand href
-name "Boost libraries"
-target "http://www.boost.org/"
-
-\end_inset
-
- are used for smart pointers, libraries for Dubins curves are from Master
- Thesis by Petr Váňa
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Vana2015"
-
-\end_inset
-
-.
- Generating of JSON from C++ object is done via 
-\begin_inset CommandInset href
-LatexCommand href
-name "Json Spirit"
-target "http://www.codeproject.com/Articles/20027/JSON-Spirit-A-C-JSON-Parser-Generator-Implemented"
-
-\end_inset
-
- library.
- Another external library is 
-\begin_inset CommandInset href
-LatexCommand href
-name "V-Collide"
-target "http://gamma.cs.unc.edu/V-COLLIDE/"
-
-\end_inset
-
- from The University of North Carolina at Chapel Hill.
- 
-\end_layout
-
-\begin_layout Standard
-Because V-Collide sources were written in 1997 and because I used C++11
- compiler to compile my source codes, I had to rewrite part of this library
- for compatibility and to make public API easier to use.
- Modifications can be seen in 
-\begin_inset CommandInset href
-LatexCommand href
-name "this github repository"
-target "https://github.com/racinmat/VCollide2"
-
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-Last used external library is QT, which was used to create platform independent
- GUI.
-\end_layout
-
-\begin_layout Section
-Code structure and services
-\end_layout
-
-\begin_layout Standard
-Here is shown brief UML scheme demonstrating dependency diagram of codebase.
- To keep diagram simple, only services are displayed, other classes, which
- are not services, were left out for readability.
- Diagram was generated using software 
-\begin_inset CommandInset href
-LatexCommand href
-name "StarUML"
-target "http://staruml.io/"
 
 \end_inset
 
@@ -4540,14 +5023,14 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Dependency diagram 
+Time course of optimization for 14 Hz, 16 Hz, 18 Hz, 20 Hz
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:Dependency-diagram"
+name "fig:Time-course-of-2-1"
 
 \end_inset
 
-
+ 
 \end_layout
 
 \end_inset
@@ -4558,8 +5041,9 @@ name "fig:Dependency-diagram"
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename obrazky/umlSchema.svg
-	scale 40
+	filename obrazky/experiment2-highFrequenciesErrors.png
+	lyxscale 40
+	scale 70
 
 \end_inset
 
@@ -4569,52 +5053,6 @@ name "fig:Dependency-diagram"
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-Core class holds core of whole Application and has all other classes as
- dependencies, as is shown in image 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Dependency-diagram"
-
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-As mentioned in chapter 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:Algorithm"
-
-\end_inset
-
- Configuration is DTO for all configuration variables, but to keep reasonable
- amount of classes, Configuration is also service, which delegates all configura
-tion changes from GUI to Core class.
- Configuration and GuiDrawer implementation LoggerInterface are the only
- connections between Core and GUI.
-\end_layout
-
-\begin_layout Standard
-State factory creates State classes according to Factory pattern.
- State class represents state in RRT-Path algorithm.
- State has coordinates and rotations for all UAVs.
- Persister persists found path to JSON using Json Spirit library.
- PathHandler serves as utils class for manipulations with path (vector of
- State classes).
- CarLikeMotionModel holds motion model algorithm.
- InputGenerator is used to generate inputs to motion model.
- NTupletGenerator only generates variation with repeating for given input.
- DistanceResolver counts distances between two states and distance of path.
- AoICoverageResolver determines cost function for states,where all UAVs
- are in AoIs.
- GuidingPathFactory is wrapper for PathFindingAlgorithm interface and is
- used by Core to find guiding path.
- Implementation of PathFindingAlgorithm is AStart class.
 \end_layout
 
 \begin_layout Standard
@@ -4626,6 +5064,19 @@ options "bibtotoc,plainnat"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Chapter
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Conclusion
+\end_layout
+
+\end_inset
+
+Conclusion
 \end_layout
 
 \begin_layout Standard
