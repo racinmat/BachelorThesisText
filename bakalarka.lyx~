@@ -1331,17 +1331,14 @@ If this modification is enabled, only one goal is used for all AoIs instead
 \end_layout
 
 \begin_layout Standard
-\begin_inset Marginal
-status open
-
-\begin_layout Plain Layout
-todo: rozepsat vytváření shluknutého cíle a jak z něj najdu goal node pro
- a star
-\end_layout
-
-\end_inset
-
-
+Grouping of goals is done by finding the smallest rectangle containing all
+ AoIs.
+ Middle of this big rectangle is considered to be middle of the group of
+ goals.
+ When obstacle is in the middle, nearest node which is not obstacle is used
+ as middle of goals group.
+ The middle is used as target for guiding path.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1606,6 +1603,13 @@ RRT algorithm
 \begin_inset CommandInset label
 LatexCommand label
 name "alg:RRT-algorithm"
+
+\end_inset
+
+ source 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Vonasek2015"
 
 \end_inset
 
@@ -2328,11 +2332,274 @@ name "chap:Areas-of-Interest"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Marginal
+Covering Areas of Interest (AoIs) with UAVs is key part of task of autonomous
+ or cooperative surveillance.
+ In task of surveillance, UAVs view space below them by on-board camera,
+ as shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:The-area-viewed"
+
+\end_inset
+
+.
+ AoIs and areas seen by UAVs are represented by rectangles in this thesis
+ for simplicity and fast computation.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
 status open
 
 \begin_layout Plain Layout
-todo:dopsat
+\align center
+\begin_inset Graphics
+	filename obrazky/uav-with-camera.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The area viewed by UAV on-board camera
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:The-area-viewed"
+
+\end_inset
+
+, source 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "petrlik2015"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Coverage of AoIs is optimization problem.
+ This optimization problem can be solved by finding minimum of cost function.
+ The value of cost function should objectively reflect the quality of coverage,
+ the lower value should represent better coverage.
+ In this thesis, cost function 
+\begin_inset Formula $f\left(q_{i}\right)$
+\end_inset
+
+ represents quality of coverage in configuration 
+\begin_inset Formula $q_{i}$
+\end_inset
+
+, where configuration 
+\begin_inset Formula $q_{i}$
+\end_inset
+
+ is set of UAV positions.
+ The cost function 
+\begin_inset Formula $f$
+\end_inset
+
+ in this thesis measures size of AoIs not covered by UAVs, which is equivalent
+ to information not seen by UAVs.
+ That means if 
+\begin_inset Formula $f\left(q_{1}\right)<f\left(q_{2}\right)$
+\end_inset
+
+ configuration 
+\begin_inset Formula $q_{1}$
+\end_inset
+
+ covers bigger part of AoIs than configuration 
+\begin_inset Formula $q_{2}$
+\end_inset
+
+.
+ The world 
+\begin_inset Formula $W=R^{2}$
+\end_inset
+
+ is discretized to square grid represented by matrix 
+\begin_inset Formula $A\in R^{2}$
+\end_inset
+
+.
+ One of parameters for coverage optimization is size of one square in grid
+ 
+\begin_inset Formula $a\,\left[map\right]units$
+\end_inset
+
+.
+ Element 
+\begin_inset Formula $A_{j,k}$
+\end_inset
+
+ represents square with size 
+\begin_inset Formula $a$
+\end_inset
+
+ and left lower corner with coordinates 
+\begin_inset Formula $\left[j\cdot a,k\cdot a\right]$
+\end_inset
+
+.
+ Before computing areas seen by UAVs, 
+\begin_inset Formula $A_{j,k}$
+\end_inset
+
+=
+\begin_inset Formula $A_{max}$
+\end_inset
+
+ if it contains AoI, and 
+\begin_inset Formula $A_{j,k}=0$
+\end_inset
+
+ otherwise.
+ 
+\begin_inset Formula $A_{max}=100$
+\end_inset
+
+ has been used in experiments, but the value is arbitrary.
+ Then the 
+\begin_inset Formula 
+\[
+A_{j,k}:=A_{j,k}\cdot l^{m}
+\]
+
+\end_inset
+
+ formula is applied to every element of the world representing matrix 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ Variable 
+\begin_inset Formula $l$
+\end_inset
+
+ must be in range 
+\begin_inset Formula $1>l>0$
+\end_inset
+
+ and represents amount of information not seen by UAV even if this UAV covers
+ the element 
+\begin_inset Formula $A_{j,k}$
+\end_inset
+
+.
+ This is because quality of image obtained from on-board camera depends
+ on many factors, such as time of day, weather conditions, flight altitude,
+ camera chip resolution, lens parameters, stabilization, frame rate and
+ so on.
+ In this implementation, 
+\begin_inset Formula $l=0.5$
+\end_inset
+
+, but if the flight altitude will be considered in the optimization algorithm,
+ higher flight altitude would lead worse image recording, so 
+\begin_inset Formula $l(flightAltitude_{1})>l\left(flightAltitude_{2}\right)$
+\end_inset
+
+ for 
+\begin_inset Formula $flightAltitude_{1}>flightAltitude_{2}$
+\end_inset
+
+.
+ Variable 
+\begin_inset Formula $m\in N_{0}$
+\end_inset
+
+ represents number of UAVs seeing the area of element 
+\begin_inset Formula $A_{j,k}$
+\end_inset
+
+.
+ Example can be seen in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:AoI-matrix-with"
+
+\end_inset
+
+.
+ AoI is marked with green colour and UAV is marked with blue colour.
+ As we can see, parts of AoI not seen by an UAV have value 
+\begin_inset Formula $A_{j,k}=A_{max}=100$
+\end_inset
+
+ and parts of AoI seen by UAV have value 
+\begin_inset Formula $A_{j,k}=A_{max}\cdot l^{m}=100\cdot0.5^{1}=50$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/oneUAVcoverage.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+AoI matrix with one UAV
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:AoI-matrix-with"
+
+\end_inset
+
+, source 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "petrlik2015"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -2384,7 +2651,7 @@ reference "fig:Crossing-paths"
 ing states, but crossing of paths in different times can not be easily prevented.
  We can see in image, that paths cross between points J (yellow), M (light
  green) and H (orange), K (yellow), so there is no easy approach to prevent
- path collisions between
+ path collisions between 
 \begin_inset Formula $n-2$
 \end_inset
 

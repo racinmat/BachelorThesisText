@@ -1331,14 +1331,17 @@ If this modification is enabled, only one goal is used for all AoIs instead
 \end_layout
 
 \begin_layout Standard
-Grouping of goals is done by finding the smallest rectangle containing all
- AoIs.
- Middle of this big rectangle is considered to be middle of the group of
- goals.
- When obstacle is in the middle, nearest node which is not obstacle is used
- as middle of goals group.
- The middle is used as target for guiding path.
- 
+\begin_inset Marginal
+status open
+
+\begin_layout Plain Layout
+todo: rozepsat vytváření shluknutého cíle a jak z něj najdu goal node pro
+ a star
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2550,10 +2553,10 @@ reference "fig:AoI-matrix-with"
 \end_inset
 
  and parts of AoI seen by UAV have value 
-\begin_inset Formula $A_{j,k}=A_{max}\cdot l^{m}=100\cdot0.5^{1}=50$
+\begin_inset Formula $A_{j,k}=A_{max}\cdot$
 \end_inset
 
-.
+
 \end_layout
 
 \begin_layout Standard
@@ -3828,7 +3831,7 @@ target "http://www.boost.org/"
 \end_inset
 
  are used for smart pointers, libraries for Dubins curves are from Master
- Thesis by Petr Váňa 
+ Thesis by Petr Váňa
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Vana2015"
