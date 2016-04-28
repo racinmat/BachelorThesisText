@@ -883,6 +883,19 @@ Motivation
 Motivation
 \end_layout
 
+\begin_layout Standard
+\begin_inset Marginal
+status open
+
+\begin_layout Plain Layout
+todo: dopsat
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Chapter
 \begin_inset Argument 1
 status open
@@ -1288,199 +1301,6 @@ The last line represents persisting of the path to a file for usage of path
 g languages.
  Path is also persisted to CSV format, so it can be loaded to MATLAB and
  then loaded into real UAVs.
-\end_layout
-
-\begin_layout Chapter
-\begin_inset Argument 1
-status open
-
-\begin_layout Plain Layout
-Grouping of goals for the guiding path
-\end_layout
-
-\end_inset
-
- Grouping of goals for the guiding path 
-\begin_inset CommandInset label
-LatexCommand label
-name "chap:Grouping-of-goals"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-During this processing of the map (method MapProcessor::getEndNodes in codebase)
- all AoIs are grouped to one big AoI, which is the smallest rectangle covering
- all AoIs.
- 
-\end_layout
-
-\begin_layout Standard
-If this modification is enabled, only one goal is used for all AoIs instead
- of one goal for every AoI (node in the middle of AoI rectangle is considered
- to be the goal node).
- The whole swarm has only one guiding path, so the grouping prevents swarm
- from splitting.
- The relative localization is the main reason to have only one big swarm
- instead of more smaller swarms (or individual UAVs in case of the same
- count of AoI and UAVs).
- Advantages of relative localization are more significant when we have only
- one big swarm.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Marginal
-status open
-
-\begin_layout Plain Layout
-todo: rozepsat vytváření shluknutého cíle a jak z něj najdu goal node pro
- a star
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-This approach has the following advantage: when individual AoIs are near
- to a global goal of the whole group, as seen in 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Maps-with-goals"
-
-\end_inset
-
-, then the whole swarm follows one guiding path without any splitting, which
- makes the RRT-Path run faster and also the advantage of relative localization
- is included.
- 
-\end_layout
-
-\begin_layout Standard
-Maps with goals and obstacles are shown in figures 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Map-with-goals"
-
-\end_inset
-
- and 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Maps-with-goals"
-
-\end_inset
-
-.
- Goals are coloured green colour and obstacles grey.
-\end_layout
-
-\begin_layout Standard
-The disadvantage of this method appears when individual AoIs have a bigger
- distance from each other than can be covered by UAVs.
- Then this approach totally fails, because RRT-Path, which is much faster
- than RRT, has goal very distant from AoIs, as can be seen in 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Map-with-goals"
-
-\end_inset
-
- and main part of the path is found by RRT algorithm, which is slower.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename obrazky/map1.png
-	lyxscale 50
-	scale 30
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Map with goals unsuitable for grouping 
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Map-with-goals"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename obrazky/map2.png
-	lyxscale 50
-	scale 30
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename obrazky/map5.png
-	lyxscale 50
-	scale 30
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Maps with goals suitable for grouping 
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Maps-with-goals"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Chapter
@@ -2319,6 +2139,202 @@ The classic cost function of node
 status open
 
 \begin_layout Plain Layout
+Grouping of goals for the guiding path
+\end_layout
+
+\end_inset
+
+ Grouping of goals for the guiding path 
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Grouping-of-goals"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+During this processing of the map (method MapProcessor::getEndNodes in codebase)
+ all AoIs are grouped to one big AoI, which is the smallest rectangle covering
+ all AoIs.
+ 
+\end_layout
+
+\begin_layout Standard
+If this modification is enabled, only one goal is used for all AoIs instead
+ of one goal for every AoI (node in the middle of AoI rectangle is considered
+ to be the goal node).
+ The whole swarm has only one guiding path, so the grouping prevents swarm
+ from splitting.
+ The relative localization is the main reason to have only one big swarm
+ instead of more smaller swarms (or individual UAVs in case of the same
+ count of AoI and UAVs).
+ Advantages of relative localization are more significant when we have only
+ one big swarm.
+\end_layout
+
+\begin_layout Standard
+Grouping of goals is done by finding the smallest rectangle containing all
+ AoIs.
+ Middle of this big rectangle is considered to be middle of the group of
+ goals.
+ When obstacle is in the middle, nearest node which is not obstacle is used
+ as middle of goals group.
+ The middle is used as target for guiding path.
+ 
+\end_layout
+
+\begin_layout Standard
+This approach has the following advantage: when individual AoIs are near
+ to a global goal of the whole group, as seen in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Maps-with-goals"
+
+\end_inset
+
+, then the whole swarm follows one guiding path without any splitting, which
+ makes the RRT-Path run faster and also the advantage of relative localization
+ is included.
+ 
+\end_layout
+
+\begin_layout Standard
+Maps with goals and obstacles are shown in figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Map-with-goals"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Maps-with-goals"
+
+\end_inset
+
+.
+ Goals are coloured green colour and obstacles grey.
+\end_layout
+
+\begin_layout Standard
+The disadvantage of this method appears when individual AoIs have a bigger
+ distance from each other than can be covered by UAVs.
+ Then this approach totally fails, because RRT-Path, which is much faster
+ than RRT, has goal very distant from AoIs, as can be seen in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Map-with-goals"
+
+\end_inset
+
+ and main part of the path is found by RRT algorithm, which is slower.
+\end_layout
+
+\begin_layout Standard
+Because of advantages of having only one swarm, all experiments in this
+ thesis use grouping and all UAVs form one big swarm.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/map1.png
+	lyxscale 50
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Map with goals unsuitable for grouping 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Map-with-goals"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/map2.png
+	lyxscale 50
+	scale 30
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename obrazky/map5.png
+	lyxscale 50
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Maps with goals suitable for grouping 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Maps-with-goals"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
 Areas of Interest coverage
 \end_layout
 
@@ -2553,10 +2569,10 @@ reference "fig:AoI-matrix-with"
 \end_inset
 
  and parts of AoI seen by UAV have value 
-\begin_inset Formula $A_{j,k}=A_{max}\cdot$
+\begin_inset Formula $A_{j,k}=A_{max}\cdot l^{m}=100\cdot0.5^{1}=50$
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Standard
@@ -2608,6 +2624,19 @@ key "petrlik2015"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+When UAV arrives above any AoI, RRT-Path algorithm ends for this UAV and
+ instead of it, RRT algorithm takes place.
+ Random node for RRT algorithm is selected only from AoI beneath the UAV,
+ not from whole world.
+ When all UAVs arrive to their goal by RRT-Path algorithm, RRT algorithm
+ is run and it runs until being stopped.
+ After stopping, all states found by RRT algorithm where UAVs are above
+ AoIs, are gathered and their coverage cost function is calculated.
+ State with lowest cost function is used as result of the path finding algorithm
+ and used as input for Dubins curves optimization.
 \end_layout
 
 \begin_layout Chapter
@@ -2752,11 +2781,15 @@ waiting
 status open
 
 \begin_layout Plain Layout
-Motion model
+UAV swarm properties
 \end_layout
 
 \end_inset
 
+UAV swarm properties
+\end_layout
+
+\begin_layout Section
 Motion model
 \end_layout
 
@@ -2841,6 +2874,21 @@ z\left(k+1\right) & = & z\left(k\right)+w\left(k+1\right)\Delta t\left(k+1\right
 \end_inset
 
 
+\end_layout
+
+\begin_layout Section
+Relative localization
+\end_layout
+
+\begin_layout Standard
+When swarm consists of only one UAV, no relative localization is needed.
+ But when more UAVS are in swarm, every UAV has to be aware of its neighbours
+ in order to remain together in one swarm.
+ In this thesis, relative localization is implemented by setting the minimal
+ and maximal distance.
+ The minimal distance is set because UAV push air beneath them when they
+ fly.
+ In 
 \end_layout
 
 \begin_layout Chapter
@@ -3488,6 +3536,97 @@ Covering more AoIs with one swarm
 Covering more AoIs with one swarm
 \end_layout
 
+\begin_layout Standard
+Some maps have distribution of obstacles and AoIs where algorithm stated
+ above fails.
+ These maps can be seen in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Failed-maps"
+
+\end_inset
+
+.
+ Standard algorithm which uses only one guiding path always leads swarm
+ to only one Area of Interest and the second area remains completely uncovered.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/standard-map9.png
+	lyxscale 50
+	scale 30
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename obrazky/standard-map10.png
+	lyxscale 50
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Maps with only one covered Area of Interest
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Failed-maps"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In case of using relative localization where every UAV needs only 1 to 2
+ neighbours, UAVs can create chain and reach to more distant targets or
+ targets divided by obstacles which UAVs can not reach when moving as one
+ swarm using standard RRT-Path algorithm.
+\end_layout
+
+\begin_layout Standard
+Following modifications must be done if we want to cover all AoIs in figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Failed-maps"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+UAVs are split to two groups, and every group has its own guiding path to
+ one AoI.
+ Relative localization needs to be modified 
+\end_layout
+
 \begin_layout Chapter
 \begin_inset Argument 1
 status open
@@ -3831,7 +3970,7 @@ target "http://www.boost.org/"
 \end_inset
 
  are used for smart pointers, libraries for Dubins curves are from Master
- Thesis by Petr Váňa
+ Thesis by Petr Váňa 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Vana2015"
@@ -4782,7 +4921,7 @@ name "fig:Re-sampling-and-optimization"
 \begin_inset Graphics
 	filename obrazky/experiment1-frequencyDependence.png
 	lyxscale 40
-	scale 70
+	scale 65
 
 \end_inset
 
@@ -4867,7 +5006,7 @@ name "fig:Time-course-of"
 \begin_inset Graphics
 	filename obrazky/experiment1-lowFrequenciesErrors.png
 	lyxscale 40
-	scale 70
+	scale 65
 
 \end_inset
 
@@ -4913,7 +5052,7 @@ name "fig:Time-course-of-1"
 \begin_inset Graphics
 	filename obrazky/experiment1-middleFrequenciesErrors.png
 	lyxscale 40
-	scale 70
+	scale 65
 
 \end_inset
 
@@ -4959,7 +5098,7 @@ name "fig:Time-course-of-2"
 \begin_inset Graphics
 	filename obrazky/experiment1-highFrequenciesErrors.png
 	lyxscale 40
-	scale 70
+	scale 65
 
 \end_inset
 
@@ -5150,7 +5289,7 @@ name "fig:Re-sampling-and-optimization-1"
 \begin_inset Graphics
 	filename obrazky/experiment2-frequencyDependence.png
 	lyxscale 40
-	scale 70
+	scale 65
 
 \end_inset
 
@@ -5229,7 +5368,7 @@ name "fig:Time-course-of-3"
 \begin_inset Graphics
 	filename obrazky/experiment2-lowFrequenciesErrors.png
 	lyxscale 40
-	scale 70
+	scale 65
 
 \end_inset
 
@@ -5271,7 +5410,7 @@ name "fig:Time-course-of-1-1"
 \begin_inset Graphics
 	filename obrazky/experiment2-middleFrequenciesErrors.png
 	lyxscale 40
-	scale 70
+	scale 65
 
 \end_inset
 
