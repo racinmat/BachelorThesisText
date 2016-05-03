@@ -2855,31 +2855,21 @@ where
 \begin{equation}
 \begin{array}{ccc}
 x\left(k+1\right) & = & \begin{cases}
-if\,K\left(k+1\right)\neq0\\
 x\left(k\right)+\frac{1}{K\left(k+1\right)}\left(\sin\left(\varphi\left(k\right)+K\left(k+1\right)v\left(k+1\right)\Delta t\left(k+1\right)\right)-\sin\left(\varphi\left(k\right)\right)\right)\\
-if\,K\left(k+1\right)=0\\
-x\left(k\right)+v\left(k+1\right)\cos\left(\varphi\left(k\right)\right)\Delta t\left(k+1\right)
+if\,K\left(k+1\right)\neq0\\
+x\left(k\right)+v\left(k+1\right)\cos\left(\varphi\left(k\right)\right)\Delta t\left(k+1\right)\\
+if\,K\left(k+1\right)=0
 \end{cases}\\
 y\left(k+1\right) & = & \begin{cases}
-if\,K\left(k+1\right)\neq0\\
 y\left(k\right)-\frac{1}{K\left(k+1\right)}\left(\cos\left(\varphi\left(k\right)+K\left(k+1\right)v\left(k+1\right)\Delta t\left(k+1\right)\right)-\cos\left(\varphi\left(k\right)\right)\right)\\
-if\,K\left(k+1\right)=0\\
-y\left(k\right)+v\left(k+1\right)\sin\left(\varphi\left(k\right)\right)\Delta t\left(k+1\right)
+if\,K\left(k+1\right)\neq0\\
+y\left(k\right)+v\left(k+1\right)\sin\left(\varphi\left(k\right)\right)\Delta t\left(k+1\right)\\
+if\,K\left(k+1\right)=0
 \end{cases}\\
 z\left(k+1\right) & = & z\left(k\right)+w\left(k+1\right)\Delta t\left(k+1\right)\\
 \varphi\left(k+1\right) & = & \varphi\left(k\right)+K\left(k+1\right)v\left(k+1\right)\Delta t\left(k+1\right)
 \end{array}
 \end{equation}
-
-\end_inset
-
-
-\begin_inset Marginal
-status open
-
-\begin_layout Plain Layout
-todo: otočit u vzorců podmínky, aby byly v podobě něco if něco, jiné else.
-\end_layout
 
 \end_inset
 
@@ -2923,12 +2913,9 @@ When swarm consists of only one UAV, no relative localization is needed.
  The maximal distance needs to be set because of sensors range.
  UAVs in the Multi-Robot Systems group at CTU use on-board camera based
  localization system, published in 
-\begin_inset Marginal
-status open
-
-\begin_layout Plain Layout
-todo: odkaz na icra2013
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Faigl2013"
 
 \end_inset
 
@@ -3818,7 +3805,7 @@ status open
 
 
 \begin_inset Graphics
-	filename obrazky/chan-map10.png
+	filename obrazky/chain-map10.png
 	lyxscale 50
 	scale 30
 
@@ -3852,8 +3839,8 @@ name "fig:Maps-with-successful"
 \end_layout
 
 \begin_layout Standard
-Unfortunately, this approach does not work in all maps, and tends to end
- in local minimum in many cases, as can be seen in figure 
+Unfortunately, this approach does not work in all maps and configurations
+ as can be seen in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Maps-with-unsuccessful"
@@ -3861,6 +3848,29 @@ reference "fig:Maps-with-unsuccessful"
 \end_inset
 
 .
+ The map on the right shows typical example of getting stuck in local minimum,
+ where all UAVs preferred covering only one AoI over covering both AoIs,
+ but the map on the left shows different issue.
+ When we have symmetric map and UAVs do not have starting position in middle
+ of this map, one side of the chain needs to be 
+\begin_inset Quotes eld
+\end_inset
+
+pulled
+\begin_inset Quotes erd
+\end_inset
+
+ with more power than the other side to cover both AoIs and encircle the
+ obstacle between UAVs starting position and AoIs.
+ This leads to configuration where only one side of chain covers AoI and
+ the other side of chain does not reach the second AoI.
+ This bigger pulling power, which would probably solve this issue, can not
+ be simulated in RRT-Path algorithm.
+ These problems demonstrates the fact this approach is not robust and needs
+ manual preprocessing of UAVs starting positions.
+ The limitation of this approach is also the fact it works only for two
+ AoIs.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -3868,6 +3878,26 @@ reference "fig:Maps-with-unsuccessful"
 wide false
 sideways false
 status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/chain-map9-failed.png
+	lyxscale 50
+	scale 30
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename obrazky/chain-map11-failed.png
+	lyxscale 50
+	scale 30
+
+\end_inset
+
+
+\end_layout
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -3891,6 +3921,70 @@ name "fig:Maps-with-unsuccessful"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Section
+Proposition of improvement of the algorithm
+\end_layout
+
+\begin_layout Standard
+This approach could be modified to be more robust and usable in more maps
+ with more than 2 AoIs.
+ Generalization of this approach would require not crating a chain, which
+ is good only for covering two AoIs, but tree structure, where each leaf
+ covers one AoI.
+ I will now propose principle of the generalized algorithm.
+\end_layout
+
+\begin_layout Standard
+In the first step, we need to decide, which AoIs can be covered by swarm.
+ Some maps can have distant AoIs where all AoIs could not be covered at
+ the same time.
+ This requires finding shortest tree 
+\begin_inset Formula $T$
+\end_inset
+
+ which connects middles of all AoIs.
+ When sum of all edges in this tree 
+\begin_inset Formula $d_{total}$
+\end_inset
+
+ is bigger than 
+\begin_inset Formula $d_{max}=\left(number\,of\,uavs-1\right)\cdot maximal\,distance\,between\,neighbouring\,uavs$
+\end_inset
+
+, which is maximal length of chain created by UAVs, some AoI and branch
+ leading to its middle will be excluded.
+ This results in shortening the value 
+\begin_inset Formula $d_{total}$
+\end_inset
+
+.
+ This process will be repeated while 
+\begin_inset Formula $d_{total}$
+\end_inset
+
+ will be bigger than maximal 
+\begin_inset Formula $d_{max}$
+\end_inset
+
+.
+ When 
+\begin_inset Formula $d_{total}<d_{max}$
+\end_inset
+
+, we obtain set of AoIs which can be covered by swarm of UAVs.
+ In the next step, UAVs will be split to multiple groups, one group for
+ each AoI.
+ Then the guiding paths will be planned for each groups to reach corresponding
+ branches of 
+\begin_inset Formula $T$
+\end_inset
+
+.
+ Then the RRT-Path algorithm will take place.
+ The final step will be optimization by Dubins curves, described in this
+ thesis.
 \end_layout
 
 \begin_layout Chapter
@@ -4041,11 +4135,11 @@ This has been fixed by not updating the position of target when distance
 \begin_inset Formula 
 \[
 \mathbf{X}\left(k+1\right)_{target}=\begin{cases}
+\mathbf{X}\left(k\right)_{UAV}+\frac{\left(\mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right)}{\left\Vert \mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right\Vert }\cdot const\\
 if\left\Vert \mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right\Vert <\left\Vert \mathbf{X}\left(k-1\right)_{ns}-\mathbf{X}\left(k-1\right)_{UAV}\right\Vert \\
 \land\mathbf{X}\left(k\right)_{ns}=\mathbf{X}\left(k-1\right)_{ns}\\
-\mathbf{X}\left(k\right)_{UAV}+\frac{\left(\mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right)}{\left\Vert \mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right\Vert }\cdot const\\
-else\\
-\mathbf{X}\left(k\right)_{target}
+\mathbf{X}\left(k\right)_{target}\\
+else
 \end{cases}
 \]
 
