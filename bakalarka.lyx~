@@ -2874,10 +2874,27 @@ z\left(k+1\right) & = & z\left(k\right)+w\left(k+1\right)\Delta t\left(k+1\right
 \end_inset
 
 
+\begin_inset Marginal
+status open
+
+\begin_layout Plain Layout
+todo: otočit u vzorců podmínky, aby byly v podobě něco if něco, jiné else.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
 Relative localization
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Relative-localization"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2885,7 +2902,15 @@ When swarm consists of only one UAV, no relative localization is needed.
  But when more UAVS are in swarm, every UAV has to be aware of its neighbours
  in order to remain together in one swarm.
  In this thesis, relative localization is implemented by setting the minimal
- and maximal distance.
+ distance 
+\begin_inset Formula $d_{min}$
+\end_inset
+
+ and maximal distance 
+\begin_inset Formula $d_{max}$
+\end_inset
+
+.
  The minimal distance is set because UAV push air beneath them when they
  fly.
  UAVs in the Multi-Robot Systems group at CTU have weight around 3 kg, which
@@ -2915,20 +2940,101 @@ todo: odkaz na icra2013
 \end_layout
 
 \begin_layout Standard
+In configuration of whole algorithm, number of neighbours 
+\begin_inset Formula $n$
+\end_inset
 
+ is set.
+ Every UAV must have 
+\begin_inset Formula $n$
+\end_inset
+
+ or more neighbours in distance 
+\begin_inset Formula $d$
+\end_inset
+
+, where 
+\begin_inset Formula $d_{min}<d<d_{max}$
+\end_inset
+
+ in every step of configuration.
+ Default setting is 
+\begin_inset Formula $n=2$
+\end_inset
+
+.
+ Computation of this relative localization is fast, but unusable for more
+ than 5 UAVs.
+ Swarm of 6 or more UAVs can split to 2 or more groups and still fit this
+ relative localization constraint.
+ The only solution to check whether all UAVs are in same swarm can be obtained
+ by using following algorithm, which consists of two steps and uses graph
+ representation.
+ Every UAV is node and every pair of UAVs with distance 
+\begin_inset Formula $d$
+\end_inset
+
+, where 
+\begin_inset Formula $d_{min}<d<d_{max}$
+\end_inset
+
+ are connected by an edge.
+ If the graph has only one connected component, all UAVs are in one swarm.
+ Otherwise, the graph has more connected components, which implies UAVs
+ are split into more swarms.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Marginal
-status open
+In the first step, the adjacency matrix 
+\begin_inset Formula $A$
+\end_inset
 
-\begin_layout Plain Layout
-todo: popsat počet uav pro danou vzdálenost a prohledávání do hloubky
-\end_layout
+ is built.
+ Each UAV represents one column and one row in this matrix.
+ The adjacency matrix 
+\begin_inset Formula $A$
+\end_inset
+
+ is built by following pattern.
+\begin_inset Formula 
+\[
+A_{i,j}=\begin{cases}
+1 & if\,d_{min}<d_{i,j}<d_{max}\\
+0 & otherwise
+\end{cases}
+\]
 
 \end_inset
 
+where 
+\begin_inset Formula $i,j$
+\end_inset
 
+ are indices of matrix A and 
+\begin_inset Formula $d_{i,j}$
+\end_inset
+
+is distance between 
+\begin_inset Formula $i$
+\end_inset
+
+-th and 
+\begin_inset Formula $j$
+\end_inset
+
+-th UAV.
+ In the second step, the graph represented by 
+\begin_inset Formula $A$
+\end_inset
+
+ is traversed by depth-first algorithm, starting at 
+\begin_inset Formula $A_{1,1}$
+\end_inset
+
+.
+ When all nodes are visited during the traversing, the graph has only one
+ connected component and all UAVs are in one swarm.
+ In configuration can be set whether swarm splitting is enabled or not.
 \end_layout
 
 \begin_layout Chapter
@@ -3546,7 +3652,8 @@ Real UAVs in Multi-Robot Systems group at CTU use frequency 70Hz for providing
 
 \begin_layout Standard
 Change of frequency before the RRT-Path algorithm makes the algorithm unable
- to run efficiently in bigger maps, so this does not solve the problem.
+ to run efficiently in bigger maps, so this approach does not solve the
+ problem.
 \end_layout
 
 \begin_layout Standard
@@ -3664,7 +3771,130 @@ reference "fig:Failed-maps"
 \begin_layout Standard
 UAVs are split to two groups, and every group has its own guiding path to
  one AoI.
- Relative localization needs to be modified 
+ Relative localization keeps all UAVs in one swarm by its constraints described
+ in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Relative-localization"
+
+\end_inset
+
+.
+ With this setting, the swarm behaves like chain, because it is 
+\begin_inset Quotes eld
+\end_inset
+
+pulled
+\begin_inset Quotes erd
+\end_inset
+
+ to opposite sides by different guiding paths, but it is also connected
+ by relative localization, so it does not split into more smaller swarms.
+ Successful coverage by using the chain behaviour can be seen in figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Maps-with-successful"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/chain-map9.png
+	lyxscale 50
+	scale 30
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename obrazky/chan-map10.png
+	lyxscale 50
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Maps with successful chaining behaviour 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Maps-with-successful"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Unfortunately, this approach does not work in all maps, and tends to end
+ in local minimum in many cases, as can be seen in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Maps-with-unsuccessful"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Maps with unsuccessful chaining behaviour 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Maps-with-unsuccessful"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Chapter
