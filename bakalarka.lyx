@@ -4539,6 +4539,152 @@ Experiments
 RRT-Path
 \end_layout
 
+\begin_layout Standard
+In this experiment, a path in a map shown in the figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Map-used-for"
+
+\end_inset
+
+ in the left image, is searched by using the RRT-Path algorithm.
+ As we can see, the map is quite complex and has many obstacles.
+ UAVs start in the lower left corner.
+ In the right image, we can see path found by RRT-Path algorithm.
+ The algorithm follows the guiding path quite precisely, and whole searching
+ tree for each UAV looks like one long branch.
+ Only the AoI is covered by branches of searching trees.
+ The algorithm is run 1000 times.
+ The algorithm found path to AoI in every run.
+ The results can be seen in the figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Distances-between-UAVS"
+
+\end_inset
+
+, where can be seen mean value and standard deviation of all 1000 runs.
+ In the first graph, on the left, we can see total distance between current
+ position of UAVs and their final position above AoI.
+ As we can see, in the beginning, the UAVs are very distant from AoI, but
+ they get closer to goal and try to minimize the distance.
+ The increase of distance to goal corresponds with obstacles avoidance.
+ The second graph, on the right, describes distance to nearest neighbour.
+ This experiment has been run with 3 UAVs.
+ In every iteration of the algorithm, each UAV has some nearest neighbour.
+ Distances between the UAV and its nearest neighbour is shown in the graph.
+ This information is important for the relative localization.
+ The minimal and maximal distance are 24 and 180 map units, in this experiment.
+ During the whole path, UAVs fly really close to each other.
+ But in the end, they fly away from each other, because they can cover bigger
+ part of AoI when they have bigger distance between each other.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/experiment3-map.png
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename obrazky/experiment3-map-covered.png
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Map used for experiment 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Map-used-for"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/experiment3-distanceToGoal.png
+	lyxscale 40
+	scale 65
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename obrazky/experiment3-distanceToNeighbour.png
+	lyxscale 40
+	scale 65
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Distances between UAVS in swarm and distance to AoI 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Distances-between-UAVS"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Influence of re-sampling on Dubins curves optimization
 \end_layout

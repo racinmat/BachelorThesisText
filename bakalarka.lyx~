@@ -2874,16 +2874,6 @@ z\left(k+1\right) & = & z\left(k\right)+w\left(k+1\right)\Delta t\left(k+1\right
 \end_inset
 
 
-\begin_inset Marginal
-status open
-
-\begin_layout Plain Layout
-todo: otočit u vzorců podmínky, aby byly v podobě něco if něco, jiné else.
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Section
@@ -2923,12 +2913,9 @@ When swarm consists of only one UAV, no relative localization is needed.
  The maximal distance needs to be set because of sensors range.
  UAVs in the Multi-Robot Systems group at CTU use on-board camera based
  localization system, published in 
-\begin_inset Marginal
-status open
-
-\begin_layout Plain Layout
-todo: odkaz na icra2013
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Faigl2013"
 
 \end_inset
 
@@ -4550,6 +4537,148 @@ Experiments
 
 \begin_layout Section
 RRT-Path
+\end_layout
+
+\begin_layout Standard
+In this experiment, a path in a map shown in the figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Map-used-for"
+
+\end_inset
+
+, is searched by using the RRT-Path algorithm.
+ As we can see, the map is quite complex and has many obstacles.
+ UAVs start in the upper left corner.
+ The algorithm is run 1000 times.
+ The algorithm found path to AoI in every run.
+ The results can be seen in the figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Distances-between-UAVS"
+
+\end_inset
+
+, where can be seen mean value and standard deviation of all 1000 runs.
+ In the first graph, on the left, we can see total distance between current
+ position of UAVs and their final position above AoI.
+ As we can see, in the beginning, the UAVs are very distant from AoI, but
+ they get closer to goal and try to minimize the distance.
+ The increase of distance to goal corresponds with obstacles avoidance.
+ The second graph, on the right, describes distance to nearest neighbour.
+ This experiment has been run with 3 UAVs.
+ In every iteration of the algorithm, each UAV has some nearest neighbour.
+ Distances between the UAV and its nearest neighbour is shown in the graph.
+ This information is important for the relative localization.
+ The minimal and maximal distance are 24 and 180 map units, in this experiment.
+ During the whole path, UAVs fly really close to each other.
+ But in the end, they fly away from each other, because they can cover bigger
+ part of AoI when they have bigger distance between each other.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/experiment3-map.png
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename obrazky/experiment3-map-covered.png
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Map used for experiment 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Map-used-for"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/experiment3-distanceToGoal.png
+	lyxscale 40
+	scale 65
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename obrazky/experiment3-distanceToNeighbour.png
+	lyxscale 40
+	scale 65
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Distances between UAVS in swarm and distance to AoI 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Distances-between-UAVS"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
