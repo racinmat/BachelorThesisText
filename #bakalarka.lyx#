@@ -1067,6 +1067,9 @@ Autonomous aircraft fly independently without an operator directly controlling
  It can be anything from flying straight to a single point or following
  a path consisting of multiple points, to perform a complex task of following
  a moving object and avoiding collisions.
+ The Amazon plans to use autonomous drones for packages delivery in their
+ program Prime Air.
+ 
 \end_layout
 
 \begin_layout Chapter

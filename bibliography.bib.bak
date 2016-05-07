@@ -1,5 +1,17 @@
 % Encoding: UTF-8
 
+@Misc{amazon,
+  author = {Chris Velazco},
+  title =  {Amazon Is Experimenting With Autonomous Flying Delivery Drones}
+}
+
+@Misc{animalCounting,
+  author = {Andrea Peterson},
+  title =  {The Switch States are competing to be the Silicon Valley of drones},
+  month =  aug,
+  year =   {2013}
+}
+
 @Article{Dubins1957,
   author =    {Lester Eli Dubins},
   title =     {On Curves of Minimal Length with a Constraint on Average Curvature, and with Prescribed Initial and Terminal Positions and Tangents},
@@ -17,7 +29,17 @@
   author =  {Jan Faigl and Tomáš Krajník and Jan Chudoba and Martin Saska},
   title =   {Low-Cost Embedded System for Relative Localization in Robotic Swarms},
   journal = {Robotics and Automation (ICRA), 2013 IEEE International Conference on},
-  year =    {2013}
+  year =    {2013},
+  pages =   {993 - 998},
+  month =   may
+}
+
+@Book{icao2011,
+  title =     {Unmanned Aircraft Systems (UAS)},
+  publisher = {International Civil Aviation Organization},
+  year =      {2011},
+  author =    {International Civil Aviation Organization},
+  month =     apr
 }
 
 @TechReport{LaValle1998,
@@ -34,6 +56,14 @@
   year =      {2006},
   author =    {Steven M. LaValle},
   url =       {http://planning.cs.uiuc.edu/}
+}
+
+@Misc{patent1989,
+  author = {Roosevelt A. Fernandes},
+  title =  {Monitoring system for power lines and right-of-way using remotely piloted drone.},
+  month =  apr,
+  year =   {1989},
+  url =    {http://www.google.com/patents/US4818990}
 }
 
 @MastersThesis{petrlik2015,
@@ -65,12 +95,27 @@
   url =       {https://dspace.cvut.cz/bitstream/handle/10467/61814/F3-DP-2015-Vana-Petr-thesis.pdf}
 }
 
+@Misc{vineyard,
+  title = {Heard on the grapevine: drones to transform viticulture},
+  month = jul,
+  year =  {2015},
+  url =   {https://droneapps.co/case-study-drones-to-transform-viticulture/}
+}
+
 @PhdThesis{Vonasek2015,
   author = {Vojtěch Vonásek},
   title =  {A guided approach to sampling-based motion planning},
   school = {Czech Technical University in Prague Faculty of electrical engineering Department of cybernetics},
   year =   {2015},
   month =  aug
+}
+
+@Misc{washingtonpost2013,
+  author = {Brian Fung},
+  title =  {Why drone makers have declared war on the word ‘drone’},
+  month =  aug,
+  year =   {2013},
+  url =    {https://www.washingtonpost.com/news/the-switch/wp/2013/08/16/why-drone-makers-have-declared-war-on-the-word-drone/}
 }
 
 @comment{jabref-meta: selector_author:}
