@@ -1067,6 +1067,109 @@ Autonomous aircraft fly independently without an operator directly controlling
  It can be anything from flying straight to a single point or following
  a path consisting of multiple points, to perform a complex task of following
  a moving object and avoiding collisions.
+ 
+\end_layout
+
+\begin_layout Standard
+Both start-up companies and large corporates compete in developing various
+ kinds of autonomous aircraft for many different purposes.
+ Currently there are 368 projects on kickstarter tinkering with drones.
+ The Amazon plans to use autonomous drones for packages delivery in their
+ program Prime Air 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "amazon"
+
+\end_inset
+
+.
+ Next to delivering goods, the other commonly discussed topic is localization
+ of people or other objects in rescue missions taking place in dangerous
+ or hard to access areas and autonomous surveillance of Areas of Interest
+ (abbreviated as AoI).
+\end_layout
+
+\begin_layout Standard
+Miniaturization, more manufacturers and lowering costs of UAVs and nature
+ inspired algorithms led to the idea of creating UAV swarms.
+ Any group that is somehow coordinated and does not have fixed structure,
+ can be considered a swarm.
+ Swarm is impossible to be remotely controlled by one person and controlling
+ each UAV in swarm by one operator would be really hard to coordinate and
+ practically impossible to avoid collisions between UAVs, so the only plausible
+ way to control the swarm is to remotely control whole swarm as one drone.
+ This thesis deals exclusively with fully autonomous aircraft where no UAV
+ needs to be remotely controlled by operator.
+ 
+\end_layout
+
+\begin_layout Standard
+In the problem of controlling of swarm, collisions between UAVs must be
+ avoided.
+ That means a way to keep them in a safe distance between each other has
+ to be found.
+ Second, a precise enough relative localization system is needed to keep
+ track of the swarm formation shape and relative distances.
+ And finally motion planning algorithm has to be developed in order to move
+ the swarm from initial position to a target position (Area of Interest)
+ in a certain environment which can contain a set of obstacles 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "roadmaps1996"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Section
+Objective
+\end_layout
+
+\begin_layout Standard
+The objective of this thesis is to explore the possibility of using swarms
+ of UAVs in the task of autonomous surveillance.
+ The task is defined as finding a collision free trajectories from initial
+ depot to an AoI or more AoIs and covering the largest possible part of
+ AoI or AoIs.
+\end_layout
+
+\begin_layout Standard
+This task can be done using several approaches.
+ One approach is finding and optimal position in AoI for each individual
+ UAV and then searching optimal and collision-free trajectory for each UAV.
+ This approach has the problem the optimal trajectories do not have to be
+ feasible due to obstacles and relative localization constrains.
+ Finding feasible optimal trajectories between fixed set of points is very
+ difficult task.
+ Another approach is to find trajectory to any points above AoIs and then
+ to optimize AoI coverage.
+ 
+\end_layout
+
+\begin_layout Standard
+This thesis presents implementation of finding feasible trajectories using
+ the RRT-Path algorithm and optimization by Dubins curves.
+ The RRT-Path algorithm is based on the RRT algorithm, which is abbreviation
+ for Rapidly-exploring Random Tree.
+ To guarantee proper function of the RRT-Path algorithm, many support algorithms
+ and systems must be implemented.
+ The motion model simulating behaviour of UAVs is implemented and collision
+ avoidance algorithm is used for obstacles avoidance.
+ In the next step, trajectories found by the RRT-Path algorithm are optimized
+ using the Dubins curves, which provide optimal trajectory for motion model
+ used in this thesis.
+ 
+\end_layout
+
+\begin_layout Standard
+Optimized trajectories are saved for future usage.
+ Part of this thesis is also following trajectories by UAVs swarm in simulation
+ software V-REP.
+ The last part of this thesis is saving trajectories is format easily usable
+ by Multi-Robot Systems group at CTU where trajectories can be loaded to
+ real UAVs for experiments.
 \end_layout
 
 \begin_layout Chapter
@@ -6195,17 +6298,6 @@ name "fig:Time-course-of-2-1"
 
 \end_layout
 
-\begin_layout Standard
-\begin_inset CommandInset bibtex
-LatexCommand bibtex
-bibfiles "bibliography"
-options "bibtotoc,plainnat"
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Chapter
 \begin_inset Argument 1
 status open
@@ -6225,6 +6317,17 @@ In this thesis, I described and implemented and experimentally verified
  localization and motion model, which makes it usable for motion planning
  of real swarms.
  
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "bibliography"
+options "bibtotoc,plainnat"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard

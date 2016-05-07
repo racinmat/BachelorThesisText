@@ -2,7 +2,9 @@
 
 @Misc{amazon,
   author = {Chris Velazco},
-  title =  {Amazon Is Experimenting With Autonomous Flying Delivery Drones}
+  title =  {Amazon Is Experimenting With Autonomous Flying Delivery Drones},
+  month =  dec,
+  year =   {2013}
 }
 
 @Misc{animalCounting,
@@ -72,6 +74,16 @@
   school = {Czech technical university in Prague Faculty of Electrical Engineering Department of Cybernetics},
   year =   {2015},
   type =   {Bachelor's Thesis}
+}
+
+@Article{roadmaps1996,
+  author =  {L. E. Kavraki and P. Svestka and J. C. Latombe and M. H. Overmars},
+  title =   {Probabilistic roadmaps for path planning in high-dimensional configuration spaces},
+  journal = {IEEE Transactions on Robotics and Automation},
+  year =    {1996},
+  volume =  {12},
+  pages =   {566-580},
+  month =   aug
 }
 
 @Article{SaskaVonasek,
