@@ -607,7 +607,7 @@ key "Vonasek2015"
 .
  Algorithm described in this thesis combines the RRT-Path algorithm with
  optimization by Dubins Curves.
- The thesis 
+ The thesis uses novel approach
 \end_layout
 
 \begin_layout Description
@@ -6327,11 +6327,30 @@ Conclusion
 \end_layout
 
 \begin_layout Standard
-In this thesis, I described and implemented and experimentally verified
- usage of the motion planning RRT-Path algorithm.The algorithm contains relative
- localization and motion model, which makes it usable for motion planning
- of real swarms.
- 
+This thesis contributes to the problems of autonomous surveillance with
+ a novel approach by using a sampling-based algorithm for trajectory planning
+ of a UAVs swarm and optimizing by Dubins curves.
+ This thesis also examined the possibility of re-sampling of trajectories
+ and influence of re-sampling on the optimization process.
+\end_layout
+
+\begin_layout Standard
+The goal of this thesis was to design and implement and algorithm based
+ on RRT-Path algorithm for motion planning of a swarm of cooperating unmanned
+ aerial vehicles in the task of autonomous surveillance, optimize it by
+ Dubins curves and simulate the flight of the swarm in V-REP platform.
+ The algorithm provides trajectories from a depot station to optimal positions
+ in Areas of Interest in two internationally standardized formats (CSV and
+ JSON).
+ An easy computable cost function had to be created and implemented.
+ Feasibility of trajectory in each point has been ensured by an appropriate
+ motion model and relative localization system.
+\end_layout
+
+\begin_layout Standard
+The task was approached by separating the task to more smaller subtasks.
+ The first subtask is trajectory to a position, in which all UAVs are located
+ above Areas of Interest .
 \end_layout
 
 \begin_layout Standard
