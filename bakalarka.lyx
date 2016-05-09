@@ -348,18 +348,6 @@ year % nebo doplňte rok vzniku vaší bakalářské práce
 \begin_layout Standard
 
 \size small
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-
-\size small
-Anotace
-\end_layout
-
-\end_inset
-
-
 \begin_inset ERT
 status open
 
@@ -368,30 +356,6 @@ status open
 
 \backslash
 thispagestyle{plain}
-\end_layout
-
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-addcontentsline{toc}{chapter}{
-\end_layout
-
-\end_inset
-
-Abstrakt
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-}
 \end_layout
 
 \end_inset
@@ -622,32 +586,6 @@ thispagestyle{empty}
 \end_inset
 
 
-\size small
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-addcontentsline{toc}{chapter}{
-\end_layout
-
-\end_inset
-
-Zadání práce
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\end_inset
-
- 
 \end_layout
 
 \begin_layout Standard

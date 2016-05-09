@@ -348,18 +348,6 @@ year % nebo doplňte rok vzniku vaší bakalářské práce
 \begin_layout Standard
 
 \size small
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-
-\size small
-Anotace
-\end_layout
-
-\end_inset
-
-
 \begin_inset ERT
 status open
 
@@ -380,18 +368,7 @@ status open
 
 
 \backslash
-addcontentsline{toc}{chapter}{
-\end_layout
-
-\end_inset
-
-Abstrakt
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-}
+addcontentsline{toc}
 \end_layout
 
 \end_inset
@@ -631,18 +608,7 @@ status open
 
 
 \backslash
-addcontentsline{toc}{chapter}{
-\end_layout
-
-\end_inset
-
-Zadání práce
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-}
+addcontentsline{toc}
 \end_layout
 
 \end_inset
@@ -800,7 +766,7 @@ $
 \backslash
 overline{
 \backslash
-textrm{~~~~~~~Podpis autora práce~~~}}$
+textrm{~~~~~~~~~Podpis autora práce~~~}}$
 \end_layout
 
 \end_inset
