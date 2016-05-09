@@ -484,15 +484,17 @@ vedoucího: saska@labe.felk.cvut.cz
 \noindent
 
 \size small
-Abstrakt V předložené práci studujeme...
- Uvede se abstrakt v rozsahu 80 až 200 slov.
- Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
- Ut sit amet sem.
- Mauris nec turpis ac sem mollis pretium.
- Suspendisse neque massa, suscipit id, dictum in, porta at, quam.
- Nunc suscipit, pede vel elementum pretium, nisl urna sodales velit, sit
- amet auctor elit quam id tellus.
- Nullam sollicitudin.
+Abstrakt 
+\size default
+V této práci studujeme nazasení roje složeného z bezpilotních helikoptér
+ v úloze autonomního dohledu pomocí plánování trasy mobilních robotů.
+ Tato práce popisuje principy a implementaci algoritmu pro plánování trasy
+ roje bezpilotního helikoptér za použití RRT-Path algoritmu.
+ Algoritmus popsán v této práci kombinuje RRT-Path algoritmus s optimalizací
+ pomocí Dubinsových křivek.
+ Tato práce zahrnuje implementaci algoritmu v jazycích C++ a Python.
+ Funkcionalita implementace byla ověřena experimenty, které jsou prezentovány
+ v této práci.
 \end_layout
 
 \begin_layout Description
@@ -503,7 +505,7 @@ Klíčová
 \begin_inset space ~
 \end_inset
 
-slova: klíčová slova (3 až 5)
+slova: RRT, RRT-Path, Dubins curves, UAV, swarm
 \begin_inset Newline newline
 \end_inset
 
@@ -581,40 +583,21 @@ address: saska@labe.felk.cvut.cz
 \size small
 Abstract 
 \size default
-Cílem této práce je (Tato práce se zabývá…) návrh a programová realizace
- algoritmu pro řízení rojového letu kvadrokoptér s použitím algoritmu RRT
- – path (popsáno v..
- ref.) V práci je popsán vývoj navigačního programu, který používá metodu
- RRT – path tree a optimalizaci pomocí metody Dubinsových křivek.
- Práce přistupuje k problému hledání nejkratší cesty zcela nově/v rámci
- zavedených konvencí, (právě) použitím… Konkrétní zdrojový kód v jazyce
- ..
- je přiložen jako součást bakalářské práce, jeho funkčnost byla ověřena
- v rámci experimentů.
- Data z experimentů (potvrzující správnost metody/ukazující na potřebu vylepšení
-…) jsou zpracována v několika grafech a tabulkách.
-\end_layout
-
-\begin_layout Standard
-This thesis describes principles and implementation of the algorithm for
- motion planing of swarm of UAVs using the RRT-Path algorithm 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Vonasek2015"
-
-\end_inset
-
-.
+In this thesis we study deployment of a swarm consisting of Unmanned Aerial
+ Vehicles (UAVs) in the task of autonomous surveillance using motion planning.
+ This thesis describes principles and implementation of the algorithm for
+ motion planing of swarm of UAVs using the RRT-Path algorithm.
  Algorithm described in this thesis combines the RRT-Path algorithm with
  optimization by Dubins Curves.
- The thesis uses novel approach
+ The thesis includes the implementation in C++ and Python, functionality
+ was verified by experiments presented in this thesis.
 \end_layout
 
 \begin_layout Description
 \noindent
 
 \size small
-Keywords: klíčová slova (3 až 5) v angličtině
+Keywords: RRT, RRT-Path, Dubins curves, UAV, swarm
 \end_layout
 
 \begin_layout Standard
@@ -747,6 +730,17 @@ status open
 \end_inset
 
 
+\end_layout
+
+\begin_layout Title
+Prohlášení autora práce 
+\end_layout
+
+\begin_layout Standard
+Prohlašuji, že jsem předloženou práci vypracoval samostatně a že jsem uvedl
+ veškeré použité informační zdroje v souladu s Metodickým pokynem o dodržování
+ etických principů při přípravě vysokoškolských závěrečných prací.
+ V Praze dne Podpis autora práce
 \end_layout
 
 \begin_layout Standard
@@ -6329,16 +6323,61 @@ Conclusion
 \begin_layout Standard
 This thesis contributes to the problems of autonomous surveillance with
  a novel approach by using a sampling-based algorithm for trajectory planning
- of a UAVs swarm and optimizing by 
+ of a UAVs swarm and optimizing by Dubins curves.
+ This thesis also examined the possibility of re-sampling of trajectories
+ and influence of re-sampling on the optimization process.
 \end_layout
 
 \begin_layout Standard
-In this thesis, I described and implemented and experimentally verified
- usage of the motion planning RRT-Path algorithm.The algorithm contains relative
- localization and motion model, which makes it usable for motion planning
- of real swarms.
- I demonstrated how Dubins curves can shorten and smooth the trajectories
- and 
+The goal of this thesis was to design and implement and algorithm based
+ on RRT-Path algorithm for motion planning of a swarm of cooperating unmanned
+ aerial vehicles in the task of autonomous surveillance, optimize it by
+ Dubins curves and simulate the flight of the swarm in V-REP platform.
+ The algorithm provides trajectories from a depot station to optimal positions
+ in Areas of Interest in two internationally standardized formats (CSV and
+ JSON).
+ An easy computable cost function had to be created and implemented.
+ Feasibility of trajectory in each point has been ensured by an appropriate
+ motion model and relative localization system.
+\end_layout
+
+\begin_layout Standard
+The task was approached by separating the task to more smaller subtasks.
+ The first subtask is finding a trajectory to a position, in which all UAVs
+ are located above Areas of Interest.
+ The trajectory finding is realized by using A* algorithm to find the optimal
+ guiding path and the RRT-Path algorithm uses this path to guide the space-filli
+ng tree.
+ The second subtask is optimization of AoIs coverage using the RRT algorithm.
+ The next subtask is re-sampling of trajectories and optimizing trajectories
+ by Dubins manoeuvrers, which provide us shorter trajectories than trajectories
+ found only by using the RRT-Path algorithm.
+ The effectiveness of Dubins curves optimization depends on re-sampling
+ frequency, but unfortunately, the best frequency is heavily dependent on
+ the map where trajectories are searched.
+ 
+\end_layout
+
+\begin_layout Standard
+The presumed use of autonomous surveillance is monitoring of a parking lot
+ near supermarket, shopping centre or a company campus.
+ The advantage of an autonomous system over static cameras is the fact the
+ UAV swarm can operatively change the distribution of individual UAVs according
+ to the position of cars and minimize dead angles by moving UAVs.
+ Static cameras usually fail to capture the identity of a criminal due to
+ large distance or a bad angle, while UAVs can change their positions to
+ capture the image of criminal in higher quality or from better angle and
+ even provide simultaneous record from more cameras.
+ Not only parking lots can be monitored, another possibility is monitoring
+ of people during large events or large scale monitoring of agricultural
+ areas.
+ UAVs also scale much easier than static cameras, because UAVs can fly to
+ their destination without human help, but static cameras must be installed
+ by human and fast scalability is important factor in massive events and
+ situations where size of Area of Interest change over time.
+ Contrarily to GPS localized UAVs, swarm described in this thesis can even
+ operate in hard to access areas, dense urban areas, inside buildings and
+ other places with no GPS signal, thanks to the relative localization system.
 \end_layout
 
 \begin_layout Standard
