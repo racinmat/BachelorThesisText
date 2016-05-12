@@ -712,7 +712,6 @@ noindent
 \size default
 ________
 \size small
-\lang british
 
 \begin_inset ERT
 status open
@@ -1530,8 +1529,8 @@ reference "chap:Dubins-curves"
 \end_layout
 
 \begin_layout Standard
-The last line represents persisting of the path to a file for usage of path
- by different programs.
+The last line represents persisting of the path to a file for usage of the
+ path by different programs.
  Path is persisted to JSON, due to convenience of the JSON format.
  JSON is smaller than XML and can be easily parsed by all widely used programmin
 g languages.
@@ -1554,8 +1553,7 @@ RRT-Path
 
 \begin_layout Standard
 This chapter will cover brief introduction of RRT-Path algorithm.
- In first of all, we need to define RRT algorithm which RRT-Path is based
- on.
+ First of all, we need to define RRT algorithm which RRT-Path is based on.
 \end_layout
 
 \begin_layout Section
@@ -1571,7 +1569,7 @@ key "LaValle1998"
 \end_inset
 
  in 1998, is non-deterministic algorithm for motion planning, used to search
- non-convex spaces by randomly building space-filling tree.
+ non-convex spaces by randomly-built space-filling tree.
  The RRT method builds a tree 
 \begin_inset Formula $T$
 \end_inset
@@ -2187,8 +2185,7 @@ key "Vonasek2015"
  space.
  RRT-Path enables UAVs to manoeuvre around obstacles and find way in narrow
  passages.
- RRT.
- Path also finds goal much faster 
+ RRT-Path also finds goal much faster 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "petrlik2015"
@@ -2243,7 +2240,7 @@ Let
 \begin_inset Formula $q_{i}=q_{1}$
 \end_inset
 
-, so random point is selected from area around the point 
+, so random point is selected from the area around the point 
 \begin_inset Formula $q_{1}$
 \end_inset
 
@@ -2288,10 +2285,10 @@ name "sec:Guiding-path"
 \end_layout
 
 \begin_layout Standard
-The guiding path is obtained by transferring the map to graph representation
- and then path is found using the graph-search algorithms.
+The guiding path is obtained by transferring the map to a graph representation
+ and then the path is found using the graph-search algorithms.
  The map can be transferred to graph representation by using the Voronoi
- diagram, visibility graph or by discretization to a grid representation.
+ diagram, a visibility graph or by discretization to a grid representation.
  
 \end_layout
 
@@ -2353,7 +2350,7 @@ The classic cost function of node
 \begin_inset Formula $j\left(q_{i}\right)$
 \end_inset
 
- is number representing the nearness to the nearest obstacle.
+ is number representing the proximity to the nearest obstacle.
  For example, it can be 
 \begin_inset Formula $j\left(q_{i}\right)=\frac{const}{\left\Vert q_{i}-nearest\,obstacle\right\Vert }$
 \end_inset
@@ -2399,10 +2396,10 @@ During this processing of the map (method MapProcessor::getEndNodes in codebase)
 
 \begin_layout Standard
 If this modification is enabled, only one goal is used for all AoIs instead
- of one goal for every AoI (node in the middle of AoI rectangle is considered
+ of one goal for every AoI (a node in the middle of AoI rectangle is considered
  to be the goal node).
- The whole swarm has only one guiding path, so the grouping prevents swarm
- from splitting.
+ The whole swarm has only one guiding path, so the grouping prevents the
+ swarm from splitting.
  The relative localization is the main reason to have only one big swarm
  instead of more smaller swarms (or individual UAVs in case of the same
  count of AoI and UAVs).
@@ -2452,21 +2449,21 @@ reference "fig:Maps-with-goals"
 \end_inset
 
 .
- Goals are coloured green colour and obstacles grey.
+ The goals are coloured green colour and obstacles grey.
 \end_layout
 
 \begin_layout Standard
-The disadvantage of this method appears when individual AoIs have a bigger
+The disadvantage of this method emerges when individual AoIs have a bigger
  distance from each other than can be covered by UAVs.
- Then this approach totally fails, because RRT-Path, which is much faster
- than RRT, has goal very distant from AoIs, as can be seen in 
+ Then this approach totally fails, because the goal of the RRT-Path, which
+ is much faster than RRT, is very distant from AoIs, as can be seen in 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Map-with-goals"
 
 \end_inset
 
- and main part of the path is found by RRT algorithm, which is slower.
+ and the main part of the path is found by RRT algorithm, which is slower.
 \end_layout
 
 \begin_layout Standard
@@ -2496,7 +2493,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Map with goals unsuitable for grouping 
+A map with the goals unsuitable for grouping 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Map-with-goals"
@@ -2546,7 +2543,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Maps with goals suitable for grouping 
+Maps with the goals suitable for grouping 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Maps-with-goals"
@@ -2863,11 +2860,11 @@ key "petrlik2015"
 \end_layout
 
 \begin_layout Standard
-When UAV arrives above any AoI, RRT-Path algorithm ends for this UAV and
- instead of it, RRT algorithm takes place.
+When UAV arrives above any AoI, the RRT-Path algorithm ends for this UAV
+ and instead of it, RRT algorithm takes place.
  Random node for RRT algorithm is selected only from AoI beneath the UAV,
  not from whole world.
- When all UAVs arrive to their goal by RRT-Path algorithm, RRT algorithm
+ When all UAVs arrive to their goal by the RRT-Path algorithm, RRT algorithm
  is run and it runs until being stopped.
  After stopping, all states found by RRT algorithm where UAVs are above
  AoIs, are gathered and their coverage cost function is calculated.
@@ -2913,8 +2910,8 @@ reference "fig:Crossing-paths"
 
 \end_inset
 
- trajectories found by RRT-Path algorithm are shown.
- Every colour marks one state in RRT-Path.
+ trajectories found by the RRT-Path algorithm are shown.
+ Every colour marks one state in a RRT-Path.
  As we can see, check in algorithm prevents from crossing path between neighbour
 ing states, but crossing of paths in different times can not be easily prevented.
  We can see in image, that paths cross between points J (yellow), M (light
@@ -2990,7 +2987,7 @@ There were attempts to straighten crossing trajectories, but all of them
  Straightening was done by switching parts of crossing paths from the earliest
  crossing state to the end.
  But then lengths of paths differed, which was unsuitable for path planning
- for swarm.
+ for a swarm.
  This can be done by adding 
 \begin_inset Quotes eld
 \end_inset
@@ -3001,7 +2998,7 @@ waiting
 
  points, points in different state but with the same position in different
  time.
- Due to these facts, it was really complicated to straighten longer path
+ Due to these facts, it was really complicated to straighten a longer path
  with many crossings (this path is really short, paths in other maps are
  much longer and more complicated).
  Motion model with inertia is unable to stop immediately in one place, so
@@ -3031,14 +3028,13 @@ Motion model
 
 \begin_layout Standard
 The RRT-Path algorithm is universal and works with any motion model, which
- is fine for holonomic robot, but usage of non-holonomic motion model allows
- us to find path more feasible for swarm of UAVs.
- For this purpose, car like model was chosen.
+ allows us to find paths feasible for swarm of UAVs.
+ For this purpose, car-like model was chosen.
  Car like model is very fast to compute and can be computed analytically.
  Differential equations of motion model in 3D from 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "MartinSaskaPreucil"
+key "SaskaVonasek"
 
 \end_inset
 
@@ -3082,7 +3078,7 @@ where
 
  represent the input vector of motion model.
  Differential equations are readable and useful for representation in equations,
- but not they are so useful for computer algorithm due to time consumption.
+ but they are not so useful for computer algorithm due to time consumption.
  Difference equations are better for usage in algorithm instead of differential
  equations because they are much faster and scalable.
  When inputs are held constant in each time interval between two time steps,
@@ -3290,7 +3286,7 @@ key "Dubins1957"
 \end_inset
 
 .
- Dubins path is optimal path for car like motion model.
+ Dubins path is optimal path for car-like motion model.
  Path is optimal, when car moves at constant forward speed.
  The other important constraint is the maximum steering angle 
 \begin_inset Formula $\phi_{max}$
@@ -3639,7 +3635,7 @@ Optimization using Dubins curves
 
 \begin_layout Standard
 Because of the fact that Dubins curves provide us optimal trajectory, they
- can be used to optimize trajectory found with RRT-Path algorithm.
+ can be used to optimize trajectory found with the RRT-Path algorithm.
 \end_layout
 
 \begin_layout Standard
@@ -3657,8 +3653,8 @@ Two random points of trajectory are chosen and Dubins curves are calculated
 \end_layout
 
 \begin_layout Standard
-In real situation, we do not know whether found trajectory is optimal or
- not, so we need to determine conditions for stopping the optimization.
+In a real situation, we do not know whether found trajectory is optimal
+ or not, so we need to determine conditions for stopping the optimization.
  The optimization is stopped if the trajectory is not shortened after many
  (e.
  g.
@@ -3670,17 +3666,17 @@ In real situation, we do not know whether found trajectory is optimal or
 \end_layout
 
 \begin_layout Standard
-But in swarm, the situation is complicated because of relative localization
+But in a swarm, the situation is complicated because of relative localization
  and minimal and maximal distances between individual UAVs.
  
 \end_layout
 
 \begin_layout Standard
 So the algorithm must be modified.
- Dubins curves must be sampled in same frequency as rest of trajectory (this
- is frequency of RRT-Path algorithm or higher frequency when path is being
- re-sampled) and each point has to be validated for feasibility in terms
- of minimal and maximal distance from another UAVs.
+ Dubins curves must be sampled with same frequency as the rest of trajectory
+ (this is frequency of the RRT-Path algorithm or higher frequency when a
+ path is being re-sampled) and each point has to be validated for feasibility
+ in terms of minimal and maximal distance from another UAVs.
  So the curves can be used only when all trajectories between minimal and
  maximal distance of relative localization.
 \end_layout
@@ -3711,9 +3707,9 @@ reference "fig:One-UAV-before"
 
 \end_inset
 
- we have trajectory of one UAV found by RRT-Path algorithm in map with one
- obstacle marked by dark grey rectangle.
- Obstacle amplification is marked by light grey rectangle.
+ we have trajectory of one UAV found by the RRT-Path algorithm in map with
+ one obstacle marked by a dark grey rectangle.
+ Obstacle amplification is marked by a light grey rectangle.
  In 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3725,7 +3721,7 @@ reference "fig:One-UAV-after"
  The resulting path consists of many Dubins curves and it was obtained by
  algorithm mentioned above.
  Random points have been replaced by Dubins curves and after many iterations,
- optimal path was found.
+ an optimal path was found.
 \end_layout
 
 \begin_layout Standard
@@ -3733,10 +3729,6 @@ reference "fig:One-UAV-after"
 wide false
 sideways false
 status open
-
-\begin_layout Plain Layout
-
-\end_layout
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -3841,14 +3833,14 @@ name "chap:Path-resampling"
 \end_layout
 
 \begin_layout Standard
-Motion model in RRT-Path algorithm uses constant input in range from 0.5
- to 1 second.
+Motion model in the RRT-Path algorithm uses constant input in range from
+ 0.5 to 1 second.
  Smaller interval for constant input causes RRT-Path algorithm to run for
  too long.
  When using too short constant input interval, the tree has too many nodes,
  grows slowly and runs out of memory much faster than longer interval.
- Interval longer than 1 second makes UAVs unable to manoeuvre between smaller
- obstacles.
+ An interval longer than 1 second makes UAVs unable to manoeuvre between
+ smaller obstacles.
  Thus range from 0.5 to 1 second was experimentally chosen as best interval.
  Using 
 \begin_inset Formula $x$
@@ -3858,7 +3850,7 @@ Motion model in RRT-Path algorithm uses constant input in range from 0.5
 \begin_inset Formula $\frac{1}{x}Hz$
 \end_inset
 
- frequency of points in resulting trajectory in output of the algorithm.
+ frequency of points in resulting trajectory in the output of the algorithm.
  So the range from 0.5 to 1 second implies resulting frequency is in range
  1Hz to 2Hz.
  
@@ -3868,8 +3860,8 @@ Motion model in RRT-Path algorithm uses constant input in range from 0.5
 Real UAVs in Multi-Robot Systems group at CTU use frequency 70Hz for providing
  target points to UAVs and trajectories with lower frequency are linear
  interpolated to have frequency 70Hz.
- That means frequency 2Hz is too low for real usage because trajectory generated
- with this frequency would not be smooth enough.
+ That means frequency 2Hz is too low for real usage because a trajectory
+ generated with this frequency would not be smooth enough.
  
 \end_layout
 
@@ -3887,10 +3879,18 @@ Another solution is to re-sample the path after Dubins curves.
 \end_layout
 
 \begin_layout Standard
-The best solution for this problem is re-sampling of trajectory generated
+The best solution for this issue is re-sampling of trajectory generated
  by RRT-Path algorithm before it is optimized by Dubins curves.
  This solution also has big advantage in Dubins curves optimization because
- it results to shorter final path as will be shown in following experiment.
+ it results in shorter final path as will be shown in the experiments in
+ the chapter 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Experiments"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Chapter
@@ -4237,7 +4237,7 @@ V-REP simulations
 \end_layout
 
 \begin_layout Standard
-V-REP is acronym for Virtual robot experimentation platform, a simulator
+V-REP is an acronym for Virtual robot experimentation platform, a simulator
  developed by Coppelia Robotics, providing an advanced environment for testing
  and simulations of robots of all types.
  The V-REP environment is free and open-souce for educational purposes and
@@ -4284,9 +4284,10 @@ During first, naive implementation, position of next state was set as target
 \end_layout
 
 \begin_layout Standard
-Another implementation linear interpolated trajectory between UAV and its
- next state position and calculated target placed in line between UAV and
- next state position, but in constant distance to UAV.
+Another implementation uses linear interpolated trajectory between UAV and
+ its next state position.
+ The calculated target is placed in the line between UAV and next state
+ position, in the constant distance to UAV.
 \end_layout
 
 \begin_layout Standard
@@ -4329,7 +4330,7 @@ where
 \end_layout
 
 \begin_layout Standard
-But a mentioned earlier, even this approach did not go well.
+But as mentioned earlier, even this approach did not go well.
  In long passages, where trajectory did not turn, UAVs increased their velocity
  and inertia, which made them harder to turn.
  The problem of overshooting is shown in figures 
@@ -4347,7 +4348,7 @@ reference "fig:UAV-overshoot"
 \end_inset
 
 .
- Overshoot is on the end of long passage in map 
+ Overshoot is at the end of long passage in the map 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Map-with-UAV"
@@ -4364,7 +4365,7 @@ reference "fig:Map-with-UAV"
 \end_layout
 
 \begin_layout Standard
-This has been fixed by not updating the position of target when distance
+This has been fixed by not updating the position of the target when distance
  between UAV and next state is bigger than in previous iteration and the
  position of next state is still the same, so the equation describing target
  position is
@@ -4382,7 +4383,7 @@ else
 \end_inset
 
 .
- This prevents target from dragging by UAV with big inertia.
+ This prevents the target from dragging by UAV with big inertia.
 \end_layout
 
 \begin_layout Standard
@@ -4516,7 +4517,8 @@ Implementation
 \end_layout
 
 \begin_layout Standard
-This part will cover implementation of algorithm, which was used for simulations.
+This part will cover implementation of the algorithm, which was used for
+ simulations.
  Whole codebase in C++ can be found at 
 \begin_inset CommandInset href
 LatexCommand href
@@ -4526,9 +4528,10 @@ target "https://github.com/racinmat/AutonomousSurveillanceBachelorThesis"
 \end_inset
 
 .
- Next to the C++ program, I also created some CLI scripts in PHP, for drawing
- map and paths from the JSON representation, batch running of Dubins curves
- optimization and other useful stuff.
+ Apart from the C++ program, I also created some CLI scripts in PHP, for
+ drawing map and paths from the JSON representation, batch running of Dubins
+ curves optimization and concatenation of the experiment results before
+ plotting them in Matlab.
  These can be seen at 
 \begin_inset CommandInset href
 LatexCommand href
@@ -4678,7 +4681,7 @@ name "fig:Dependency-diagram"
 
 \begin_layout Standard
 Core class holds core of whole Application and has all other classes as
- dependencies, as is shown in image 
+ dependencies, as is shown in the image 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Dependency-diagram"
@@ -4690,7 +4693,7 @@ reference "fig:Dependency-diagram"
 \end_layout
 
 \begin_layout Standard
-As mentioned in chapter 
+As mentioned in the chapter 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "chap:Algorithm"
@@ -4769,6 +4772,13 @@ Experiments
 \end_inset
 
 Experiments
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Experiments"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -5091,14 +5101,14 @@ reference "fig:Path-before-Dubins"
 \end_inset
 
 .
- On the beginning of trajectories, in the left upper corner of picture,
+ At the beginning of trajectories, in the left upper corner of the picture,
  we can see much smoother curves than before optimization.
  This is due to re-sampling to frequency 20Hz, which smooths trajectories.
  
 \end_layout
 
 \begin_layout Standard
-In real flight, it is undesirable to have trajectories tight to obstacles,
+In real flight, it is undesirable to have trajectories close to obstacles,
  so obstacles are amplified before optimization.
  This can be seen in 
 \begin_inset CommandInset ref
@@ -5157,8 +5167,8 @@ name "fig:Path-after-Dubins"
 \end_layout
 
 \begin_layout Standard
-Following table shows average total, minimal and maximal distance of all
- trajectories from 100 optimizations after the re-sampling and optimization.
+The following table shows average total, minimal and maximal distance of
+ all trajectories from 100 optimizations after the re-sampling and optimization.
 \end_layout
 
 \begin_layout Standard
@@ -5671,8 +5681,8 @@ reference "fig:Re-sampling-and-optimization"
 \end_inset
 
 .
- On the graph we can see that initial frequency 1 Hz has worst results and
- the frequency 20 Hz has best results.
+ In the graph we can see that the initial frequency 1 Hz has worst results
+ and the frequency 20 Hz has the best results.
  We can also see that in frequency 14 Hz and higher, all 100 iterations
  had same results, the minimum, maximum and mean value are the same.
  But the second best frequency in terms of minimal, maximal and mean value
@@ -5759,12 +5769,12 @@ reference "fig:Time-course-of-2"
  The vertical lines are error bars, they show standard deviation during
  the optimization.
  Because the error bars would be too dense if they were shown for each iteration
-, only every 100th iteration is shown on graphs.
- For comparison, on each graph is shown also frequency 1 Hz, the initial
+, only every 100th iteration is shown in the graphs.
+ For comparison, frequency 1 Hz is also shown in each graph, the initial
  frequency before re-sampling.
  As we can see, frequencies 14, 16, 18 and 20 Hz have almost zero standard
- deviation and converge to lower value than initial frequency.
- In frequency 10 Hz can be seen high standard deviation.
+ deviation and converge to lower value than the initial frequency.
+ High standard deviation can be seen in frequency 10 Hz.
  That means the optimization got stuck in local optimum and was not able
  to shorten any path for many iterations.
 \end_layout
@@ -5863,10 +5873,6 @@ name "fig:Time-course-of-1"
 wide false
 sideways false
 status open
-
-\begin_layout Plain Layout
-
-\end_layout
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
