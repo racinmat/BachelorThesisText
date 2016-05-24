@@ -879,17 +879,11 @@ For small drones, the quadrotor (also called quadcopter) design has become
  Quadrotor is a helicopter that is lifted and propelled by four horizontal
  rotors.
  Quadrotors are used in the Multi-Robot Systems group at CTU, which uses
- them in various multi-robot scenarios, such as formation flying 
+ them in various multi-robot scenarios, such as formation flying , swarm
+ robotics 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Saska14:218644,Saska14:219889,Saska13:206002,Saska12:198993,Saska14:212936"
-
-\end_inset
-
-, swarm robotics 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Saska15icuas,Saska14:221382"
+key "Saska15icuas"
 
 \end_inset
 
@@ -903,7 +897,7 @@ key "Saska14:226686"
  and autonomous surveillance 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "SaskaJINT2016,Saska14:221385"
+key "SaskaJINT2016"
 
 \end_inset
 
@@ -1016,7 +1010,7 @@ key "animalCounting"
 
 \end_inset
 
- and crowd monitoring of large events including festivals and protests.
+ or crowd monitoring of large events including festivals and protests.
  UAV monitoring of crowds allow operators to see different parts of the
  surveyed scene, follow crowd/people and thus provide information that is
  not accessible with fixed infrastructure of immovable cameras.

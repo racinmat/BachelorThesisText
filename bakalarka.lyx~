@@ -450,14 +450,14 @@ vedoucího: saska@labe.felk.cvut.cz
 \size small
 Abstrakt 
 \size default
-V této práci studujeme nazasení roje složeného z bezpilotních helikoptér
- v úloze autonomního dohledu pomocí plánování trasy mobilních robotů.
- Tato práce popisuje principy a implementaci algoritmu pro plánování trasy
- roje bezpilotního helikoptér za použití RRT-Path algoritmu.
+Tato práce se zabývá plánováním trasy roje složeného z bezpilotních helikoptér
+ v úloze autonomního dohledu.
+ Popisuji zde principy a implementaci algoritmu pro plánování trasy roje
+ bezpilotního helikoptér za použití RRT-Path algoritmu.
  Algoritmus popsán v této práci kombinuje RRT-Path algoritmus s optimalizací
  pomocí Dubinsových křivek.
  Tato práce zahrnuje implementaci algoritmu v jazycích C++ a Python.
- Funkcionalita implementace byla ověřena experimenty, které jsou prezentovány
+ Funkce vyvinutého systému byla ověřena experimenty, které jsou prezentovány
  v této práci.
 \end_layout
 
@@ -682,7 +682,7 @@ Prohlášení autora práce
 Prohlašuji, že jsem předloženou práci vypracoval samostatně a že jsem uvedl
  veškeré použité informační zdroje v souladu s Metodickým pokynem o dodržování
  etických principů při přípravě vysokoškolských závěrečných prací.
- V Praze dne Podpis autora práce 
+ 
 \end_layout
 
 \begin_layout Standard
@@ -839,13 +839,14 @@ Introduction
 \end_layout
 
 \begin_layout Standard
-Unmanned Aerial Vehicle, abbreviated as UAV is an aircraft intended to operate
- with no pilot on-board.
+Unmanned Aerial Vehicle (UAV) is an aircraft intended to operate with no
+ pilot on-board.
  The UAV is also known as drone and it has been gaining popularity in recent
  years in both academic circles and wide public.
- The term Micro Aerial Vehicle (MAV) is also used for UAV.
- Drones are used in many applications, both military and peaceful, but unfortuna
-tely, the term 
+ The term Micro Aerial Vehicle (MAV) is also used for very small UAV, typically
+ intended for multi-robot scenarios.
+ Drones are used in many applications, both military and civil, but unfortunatel
+y, the term 
 \begin_inset Quotes eld
 \end_inset
 
@@ -854,15 +855,9 @@ drone
 \end_inset
 
  has negative connotation and is mainly linked to military actions.
- This fact complicates usage of drones in peaceful environments and many
- manufacturers have to deal with this difficulty 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "washingtonpost2013"
-
-\end_inset
-
-.
+ The main complication of massive industrial use of drones is national regulatio
+n and legislation.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -881,11 +876,39 @@ key "icao2011"
 \begin_layout Standard
 For small drones, the quadrotor (also called quadcopter) design has become
  very popular and widely used.
- Quadrotor is a multi-rotor helicopter that is lifted and propelled by four
- horizontal rotors.
- Quadrotors are used in the Multi-Robot Systems group at CTU, which assembles
- their own quadrotors.
- Example of this quadrotor can be seen in figure 
+ Quadrotor is a helicopter that is lifted and propelled by four horizontal
+ rotors.
+ Quadrotors are used in the Multi-Robot Systems group at CTU, which uses
+ them in various multi-robot scenarios, such as formation flying 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Saska14:218644,Saska14:219889,Saska13:206002,Saska12:198993,Saska14:212936"
+
+\end_inset
+
+, swarm robotics 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Saska15icuas,Saska14:221382"
+
+\end_inset
+
+, environment monitoring 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Saska14:226686"
+
+\end_inset
+
+ and autonomous surveillance 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "SaskaJINT2016,Saska14:221385"
+
+\end_inset
+
+, which is being solved also in this thesis.
+ Example of a swarm of quadrotors can be seen in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:DYI-quadrotor-assembled"
@@ -903,19 +926,10 @@ status open
 
 \begin_layout Plain Layout
 \align center
-\begin_inset Graphics
-	filename obrazky/UAV.png
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-DYI quadrotor assembled in the Multi-Robot Systems group at CTU 
+Quadrotors assembled in the Multi-Robot Systems group at CTU 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:DYI-quadrotor-assembled"
@@ -924,6 +938,14 @@ name "fig:DYI-quadrotor-assembled"
 
 
 \end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename obrazky/P6260036.JPG
+	lyxscale 40
+	scale 40
 
 \end_inset
 
@@ -4693,7 +4715,7 @@ reference "fig:Dependency-diagram"
 \end_layout
 
 \begin_layout Standard
-As mentioned in thechapter 
+As mentioned in the chapter 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "chap:Algorithm"
