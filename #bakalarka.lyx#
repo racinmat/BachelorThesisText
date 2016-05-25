@@ -879,11 +879,17 @@ For small drones, the quadrotor (also called quadcopter) design has become
  Quadrotor is a helicopter that is lifted and propelled by four horizontal
  rotors.
  Quadrotors are used in the Multi-Robot Systems group at CTU, which uses
- them in various multi-robot scenarios, such as formation flying , swarm
- robotics 
+ them in various multi-robot scenarios, such as formation flying 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Saska15icuas"
+key "Saska14:218644,Saska14:219889,Saska13:206002,Saska12:198993,Saska14:212936"
+
+\end_inset
+
+, swarm robotics 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Saska15icuas,Saska14:221382"
 
 \end_inset
 
@@ -897,7 +903,7 @@ key "Saska14:226686"
  and autonomous surveillance 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "SaskaJINT2016"
+key "SaskaJINT2016,Saska14:221385"
 
 \end_inset
 
@@ -1010,7 +1016,7 @@ key "animalCounting"
 
 \end_inset
 
- or crowd monitoring of large events including festivals and protests.
+ and crowd monitoring of large events including festivals and protests.
  UAV monitoring of crowds allow operators to see different parts of the
  surveyed scene, follow crowd/people and thus provide information that is
  not accessible with fixed infrastructure of immovable cameras.
@@ -1052,27 +1058,67 @@ key "amazon"
 \begin_layout Standard
 Miniaturization, more manufacturers and lowering costs of UAVs and nature
  inspired algorithms led to the idea of creating UAV swarms.
- Any group that is somehow coordinated and does not have fixed structure,
- can be considered a swarm.
- Swarm is impossible to be remotely controlled by one person and controlling
- each UAV in swarm by one operator would be really hard to coordinate and
- practically impossible to avoid collisions between UAVs, so the only plausible
- way to control the swarm is to remotely control whole swarm as one drone.
+ Vito Trianni 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "trianni2008evolutionary"
+
+\end_inset
+
+ defines four criteria for robotic system to be considered a swarm robotic
+ system.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The system should be relevant for the coordination and control of a large
+ number of robots.
+ This includes all approaches that aim for scalability.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The system should involve relatively few groups of homogeneous robots, each
+ group comprising a large number of individuals, high redundancy is required
+ within each group.
+\end_layout
+
+\begin_layout Enumerate
+The system should consider tasks that can not be effectively solved by the
+ single robot, due to individual limitations.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The system should involve robots that have local and limited sensing and
+ communication abilities.
+ 
+\end_layout
+
+\begin_layout Standard
+The approach presented in this thesis is not scalable, but it satisfies
+ the other criteria.
+ Swarm cannot be remotely controlled by one person and controlling each
+ UAV in swarm by one operator would be really hard to coordinate and practically
+ impossible to avoid collisions between UAVs, so the only plausible way
+ to manually control the swarm is to remotely control whole swarm as one
+ drone.
  This thesis deals exclusively with fully autonomous aircraft where no UAV
- needs to be remotely controlled by operator.
+ needs to be remotely controlled by an operator.
  
 \end_layout
 
 \begin_layout Standard
 In the problem of controlling of swarm, collisions between UAVs must be
  avoided.
- That means a way to keep them in a safe distance between each other has
- to be found.
+ That means that a method to keep them in a safe distance between each other
+ has to be found.
  Second, a precise enough relative localization system is needed to keep
  track of the swarm formation shape and relative distances.
- And finally motion planning algorithm has to be developed in order to move
- the swarm from initial position to a target position (Area of Interest)
- in a certain environment which can contain a set of obstacles 
+ And finally, a motion planning algorithm has to be developed in order to
+ move the swarm from its initial position to a target position (Area of
+ Interest in case of the surveillance scenario) in a certain environment
+ which can contain a set of obstacles 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "roadmaps1996"
@@ -1088,7 +1134,8 @@ key "roadmaps1996"
  However, UAVs are often deployed in areas where GPS performs poorly or
  is impossible to use (e.g.
  inside buildings), moreover, even in open spaces with a good GPS signal
- the accuracy offered by GPS (around 3 m) might not be sufficient.
+ the accuracy offered by GPS (around 3 m) is not sufficient for control
+ of compact swarms with possibly smaller relative distances.
 \begin_inset CommandInset citation
 LatexCommand cite
 key "petrlik2015"
@@ -1108,16 +1155,30 @@ The objective of this thesis is to explore the possibility of using swarms
  The task is defined as finding a collision free trajectories from initial
  depot to an AoI or more AoIs and covering the largest possible part of
  AoI or AoIs.
+ For details on the problem definition see 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "SaskaJINT2016"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
 This task can be done using several approaches.
- One approach is finding and optimal position in AoI for each individual
- UAV and then searching optimal and collision-free trajectory for each UAV.
- This approach has the problem the optimal trajectories do not have to be
- feasible due to obstacles and relative localization constrains.
- Finding feasible optimal trajectories between fixed set of points is very
- difficult task.
+ One approach is finding an optimal position in AoI for each individual
+ UAV and then searching feasible and collision-free trajectory for each
+ UAV.
+ This approach has the problem that the feasible solution may not exist
+ due to obstacles and relative localization constrains, as shown in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "SaskaJINT2016"
+
+\end_inset
+
+.
  Another approach is to find trajectory to any points above AoIs and then
  to optimize AoI coverage.
  
@@ -1125,13 +1186,34 @@ This task can be done using several approaches.
 
 \begin_layout Standard
 This thesis presents implementation of finding feasible trajectories using
- the RRT-Path algorithm and optimization by Dubins curves.
- The RRT-Path algorithm is based on the RRT algorithm, which is abbreviation
- for Rapidly-exploring Random Tree.
- To guarantee proper function of the RRT-Path algorithm, many support algorithms
- and systems must be implemented.
- The motion model simulating behaviour of UAVs is implemented and collision
- avoidance algorithm is used for obstacles avoidance.
+ the RRT-Path algorithm 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Vonasek2015"
+
+\end_inset
+
+ and optimization by Dubins curves 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Dubins1957"
+
+\end_inset
+
+.
+ The RRT-Path algorithm is based on the Rapidly-exploring Random Tree algorithm
+ (RRT), described in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "LaValle1998"
+
+\end_inset
+
+.
+ To guarantee proper function of the RRT-Path algorithm for multi-UAV deployment
+, many support algorithms and systems must be implemented.
+ The motion model of UAVs is implemented and collision avoidance algorithm
+ is used for obstacles avoidance.
  In the next step, trajectories found by the RRT-Path algorithm are optimized
  using the Dubins curves, which provide optimal trajectory for motion model
  used in this thesis.
@@ -1139,12 +1221,11 @@ This thesis presents implementation of finding feasible trajectories using
 \end_layout
 
 \begin_layout Standard
-Optimized trajectories are saved for future usage.
- Part of this thesis is also following trajectories by UAVs swarm in simulation
- software V-REP.
- The last part of this thesis is saving trajectories is format easily usable
- by Multi-Robot Systems group at CTU where trajectories can be loaded to
- real UAVs for experiments.
+Part of this thesis is also verification of the planning algorithm by following
+ trajectories by UAVs swarm in simulation software V-REP.
+ The last part of this thesis is to design an inter trajectories is format
+ easily usable by Multi-Robot Systems group at CTU where trajectories can
+ be loaded to real UAVs for experiments.
 \end_layout
 
 \begin_layout Chapter

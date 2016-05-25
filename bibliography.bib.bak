@@ -97,6 +97,14 @@
   month =   aug
 }
 
+@InProceedings{Saska12:198993,
+  author =    {Saska, M. and Vonasek, V. and Krajnik, T. and Preucil, L.},
+  title =     {{Coordination and Navigation of Heterogeneous UAVs-UGVs Teams Localized by a Hawk-Eye Approach}},
+  booktitle = {{Proceedings of 2012 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)}},
+  year =      {2012},
+  pdf =       {data/papers/IROS-helMPC-joined.pdf}
+}
+
 @InProceedings{Saska13:206002,
   author =    {Saska, M. and Krajnik, T. and Vonasek, V. and Vanek, P. and Preucil, L.},
   title =     {{Navigation, Localization and Stabilization of Formations of Unmanned Aerial and Ground Vehicles}},
