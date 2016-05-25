@@ -1285,7 +1285,7 @@ n and each square is represented by a graph node.
  In this graph, there are 4 types of nodes: Free, Obstacle, UAV and Goal.
  If the whole square or its part is covered by an obstacle, the corresponding
  node has the type Obstacle.
- If the whole square or its part is covered by an AoI, then the corresponding
+ If the whole square or its part is covered by an AoI, the corresponding
  node has type Goal.
  If the square contains an UAV, the corresponding node has type UAV and
  rest of squares have corresponding nodes with type Free.
@@ -1347,14 +1347,14 @@ reference "chap:Areas-of-Interest"
 \end_layout
 
 \begin_layout Standard
-On the 7th line the path is built from the last state.
+On the 7th line the trajectory is built from the last state.
 \end_layout
 
 \begin_layout Standard
 On the 8th line there is an optional preparation before the optimization
  using Dubins curves.
  In the preparation, all crossings of paths of individual UAVs are straightened,
- so UAVs do not cross other trajectories during the whole path.
+ so UAVs do not cross other paths during the whole flight.
  Details are covered in the chapter
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1366,8 +1366,8 @@ reference "chap:Paths-straightening"
 \end_layout
 
 \begin_layout Standard
-On the 9th line, the re-sampling of the path is made, mainly due to requirements
- of real UAVs, which are mentioned in chapter 
+On the 9th line, the re-sampling of the trajectory is made, mainly due to
+ requirements of real UAVs, which are mentioned in chapter 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "chap:Path-resampling"
@@ -1392,11 +1392,7 @@ reference "chap:Dubins-curves"
 \begin_layout Standard
 The last line represents persisting of the path to a file for usage of the
  path by different programs.
- Path is persisted to JSON, due to convenience of the JSON format.
- JSON is smaller than XML and can be easily parsed by all widely used programmin
-g languages.
- Path is also persisted to CSV format, so it can be loaded to MATLAB and
- then loaded into real UAVs.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1517,7 +1513,7 @@ STATE
 
 \end_inset
 
-rrtPath := rrtPath(paths, map, nodes);
+rrtPathTree := rrtPath(paths, map, nodes);
 \end_layout
 
 \begin_layout Plain Layout
@@ -1533,7 +1529,7 @@ STATE
 
 \end_inset
 
-lastState := getBestFitness(rrtPath, map);
+lastState := getBestFitness(rrtPathTree, map);
 \end_layout
 
 \begin_layout Plain Layout
@@ -1549,7 +1545,7 @@ STATE
 
 \end_inset
 
-path := getPath(lastState);
+trajectory := getTrajectory(lastState);
 \end_layout
 
 \begin_layout Plain Layout
@@ -1565,7 +1561,7 @@ STATE
 
 \end_inset
 
-path = straightenCrossingTrajectories(path);
+trajectory := straightenCrossingPaths(trajectory);
 \end_layout
 
 \begin_layout Plain Layout
@@ -1581,7 +1577,7 @@ STATE
 
 \end_inset
 
-path := resamplePath(path, map);
+trajectory := resampleTrajectory(trajectory, map);
 \end_layout
 
 \begin_layout Plain Layout
@@ -1597,7 +1593,7 @@ STATE
 
 \end_inset
 
-path := optimizePathByDubins(path, map);
+trajectory := optimizeTrajectoryByDubins(trajectory, map);
 \end_layout
 
 \begin_layout Plain Layout
@@ -1613,7 +1609,7 @@ STATE
 
 \end_inset
 
-savePath(path);
+persistTrajectory(trajectory);
 \end_layout
 
 \begin_layout Plain Layout
@@ -3757,8 +3753,8 @@ In a real situation, we do not know whether found trajectory is optimal
  The optimization is stopped if the trajectory is not shortened after many
  (e.
  g.
- 150) iterations or optimization is too slow and path is shortened only
- by small distances (e.
+ 150) iterations or optimization is too slow and trajectory is shortened
+ only by small distances (e.
  g.
  shortening by 5% per 1000 iterations).
  
@@ -3774,8 +3770,8 @@ But in a swarm, the situation is complicated because of relative localization
 So the algorithm must be modified.
  Dubins curves must be sampled with same frequency as the rest of trajectory
  (this is frequency of the RRT-Path algorithm or higher frequency when a
- path is being re-sampled) and each point has to be validated for feasibility
- in terms of minimal and maximal distance from another UAVs.
+ trajectory is being re-sampled) and each point has to be validated for
+ feasibility in terms of minimal and maximal distance from another UAVs.
  So the curves can be used only when all trajectories between minimal and
  maximal distance of relative localization.
 \end_layout
@@ -3816,11 +3812,11 @@ reference "fig:One-UAV-after"
 
 \end_inset
 
- we can see optimal path found using Dubins curves.
- The resulting path consists of many Dubins curves and it was obtained by
- algorithm mentioned above.
+ we can see optimal trajectory found using Dubins curves.
+ The resulting trajectory consists of many Dubins curves and it was obtained
+ by algorithm mentioned above.
  Random points have been replaced by Dubins curves and after many iterations,
- an optimal path was found.
+ an optimal trajectory was found.
 \end_layout
 
 \begin_layout Standard
@@ -3916,12 +3912,12 @@ name "fig:One-UAV-after"
 status open
 
 \begin_layout Plain Layout
-Path re-sampling
+Trajectory re-sampling
 \end_layout
 
 \end_inset
 
-Path re-sampling
+Trajectory re-sampling
 \begin_inset CommandInset label
 LatexCommand label
 name "chap:Path-resampling"
@@ -3971,7 +3967,7 @@ Change of frequency before the RRT-Path algorithm makes the algorithm unable
 \end_layout
 
 \begin_layout Standard
-Another solution is to re-sample the path after Dubins curves.
+Another solution is to re-sample the trajectory after Dubins curves.
  But this method failed because after Dubins optimization, the curves had
  different length and different constant input durations.
  
@@ -3981,8 +3977,8 @@ Another solution is to re-sample the path after Dubins curves.
 The best solution for this issue is re-sampling of trajectory generated
  by RRT-Path algorithm before it is optimized by Dubins curves.
  This solution also has big advantage in Dubins curves optimization because
- it results in shorter final path as will be shown in the experiments in
- the chapter 
+ it results in shorter final trajectory as will be shown in the experiments
+ in the chapter 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "chap:Experiments"
@@ -4351,7 +4347,7 @@ V-REP is an acronym for Virtual robot experimentation platform, a simulator
 \end_layout
 
 \begin_layout Section
-UAV control and path simulation
+UAV control and trajectory simulation
 \end_layout
 
 \begin_layout Standard
@@ -4410,7 +4406,7 @@ where
 \begin_inset Formula $\mathbf{X}\left(k\right)_{ns}$
 \end_inset
 
- is position of next state in planned path in k-th iteration, 
+ is position of next state in planned trajectory in k-th iteration, 
 \begin_inset Formula $\mathbf{X}\left(k+1\right)_{target}$
 \end_inset
 
@@ -4628,9 +4624,9 @@ target "https://github.com/racinmat/AutonomousSurveillanceBachelorThesis"
 
 .
  Apart from the C++ program, I also created some CLI scripts in PHP, for
- drawing map and paths from the JSON representation, batch running of Dubins
- curves optimization and concatenation of the experiment results before
- plotting them in Matlab.
+ drawing map and trajectories from the JSON representation, batch running
+ of Dubins curves optimization and concatenation of the experiment results
+ before plotting them in Matlab.
  These can be seen at 
 \begin_inset CommandInset href
 LatexCommand href
@@ -4650,6 +4646,11 @@ target "https://github.com/racinmat/VRepPathBuilder"
 \end_inset
 
 .
+ Trajectories are persisted in JSON format.
+ JSON is more compact than XML and can be easily parsed by all widely used
+ programming languages.
+ Trajectories are also persisted to CSV format, so they can be loaded to
+ MATLAB and then into real UAVs.
 \end_layout
 
 \begin_layout Section
@@ -4810,13 +4811,13 @@ tion changes from GUI to Core class.
 State factory creates State classes according to Factory pattern.
  State class represents state in RRT-Path algorithm.
  State has coordinates and rotations for all UAVs.
- Persister persists found path to JSON using Json Spirit library.
- PathHandler serves as utils class for manipulations with path (vector of
- State classes).
+ Persister persists found trajectories to JSON using Json Spirit library.
+ PathHandler serves as utils class for manipulations with trajectories (vector
+ of State classes).
  CarLikeMotionModel holds motion model algorithm.
  InputGenerator is used to generate inputs to motion model.
  NTupletGenerator only generates variation with repeating for given input.
- DistanceResolver counts distances between two states and distance of path.
+ DistanceResolver counts distances between two states and length of trajectory.
  AoICoverageResolver determines cost function for states,where all UAVs
  are in AoIs.
  GuidingPathFactory is wrapper for PathFindingAlgorithm interface and is
@@ -4885,7 +4886,7 @@ RRT-Path
 \end_layout
 
 \begin_layout Standard
-In this experiment, a path in a map shown in the figure 
+In this experiment, a trajectory in a map shown in the figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Map-used-for"
@@ -4895,12 +4896,12 @@ reference "fig:Map-used-for"
 , is searched by using the RRT-Path algorithm.
  As we can see, the map is quite complex and has many obstacles.
  UAVs start in the lower left corner.
- In this figure, we can also see the path found by RRT-Path algorithm.
+ In this figure, we can also see the trajectory found by RRT-Path algorithm.
  The algorithm follows the guiding path quite precisely, and whole searching
  tree for each UAV looks like one long branch.
  Only the AoI is covered by branches of searching trees.
  The algorithm is run 1000 times.
- The algorithm found path to AoI in every run.
+ The algorithm found the trajectory to AoI in every run.
  The results can be seen in the figures 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -4942,7 +4943,7 @@ reference "fig:Distances-between-UAVS"
  Distances between the UAV and its nearest neighbour is shown in the graph.
  This information is important for the relative localization.
  The minimal and maximal distance are 24 and 180 map units, in this experiment.
- During the whole path, UAVs fly really close to each other.
+ During the whole flight, UAVs fly really close to each other.
  But in the end, they fly away from each other, because they can cover bigger
  part of AoI when they have bigger distance between each other.
 \end_layout
@@ -5097,8 +5098,9 @@ g and optimization experiments.
 
 \begin_layout Standard
 Due to time and memory consumption, each optimization is stopped after 200
- iterations where optimization did not shorten the path or when speed of
- path shortening was slower than 5% of original path length per 1000 iterations.
+ iterations where optimization did not shorten the trajectory or when speed
+ of trajectory shortening was slower than 5% of original trajectory length
+ per 1000 iterations.
 \end_layout
 
 \begin_layout Standard
@@ -5112,10 +5114,10 @@ The algorithm also stops when consumed memory exceeds 1900 MB.
 In next sections, maps with obstacles, AoIs and trajectories will be shown.
  Obstacles are grey rectangles, AoI is green rectangle and each UAV has
  trajectory marked with different colour.
- For measuring of influence of re-sampling of path to Dubins curves optimization
-, following frequencies were selected: 1 Hz (initial frequency used in RRT-Path
- algorithm), 2 Hz, 4 Hz, 6 Hz, 8 Hz, 10 Hz, 12 Hz, 14 Hz, 16 Hz, 18 Hz,
- 20 Hz.
+ For measuring of influence of re-sampling of trajectory to Dubins curves
+ optimization, following frequencies were selected: 1 Hz (initial frequency
+ used in RRT-Path algorithm), 2 Hz, 4 Hz, 6 Hz, 8 Hz, 10 Hz, 12 Hz, 14 Hz,
+ 16 Hz, 18 Hz, 20 Hz.
 \end_layout
 
 \begin_layout Subsection
@@ -5153,7 +5155,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Path before Dubins curves optimization
+Trajectory before Dubins curves optimization
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Path-before-Dubins"
@@ -5233,7 +5235,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Path after Dubins curves optimization
+Trajectory after Dubins curves optimization
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Path-after-Dubins"
@@ -5875,7 +5877,7 @@ reference "fig:Time-course-of-2"
  deviation and converge to lower value than the initial frequency.
  High standard deviation can be seen in frequency 10 Hz.
  That means the optimization got stuck in local optimum and was not able
- to shorten any path for many iterations.
+ to shorten any trajectory for many iterations.
 \end_layout
 
 \begin_layout Standard
@@ -6031,7 +6033,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Path before Dubins curves optimization
+Trajectory before Dubins curves optimization
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Path-before-Dubins-1"
@@ -6095,7 +6097,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Path after Dubins curves optimization
+Trajectory after Dubins curves optimization
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Path-after-Dubins-1"
