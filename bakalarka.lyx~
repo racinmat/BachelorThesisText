@@ -1179,6 +1179,7 @@ key "SaskaJINT2016"
 \end_inset
 
 .
+ The problem can be seen in the figure .
  Another approach is to find trajectory to any points above AoIs and then
  to optimize AoI coverage.
  
@@ -1231,6 +1232,187 @@ key "SaskaAURO16"
 \end_inset
 
 , where trajectories can be loaded to real UAVs for experiments.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/3mavs_c-0185.png
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/3mavs_c-0255.png
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/3mavs_c-0270.png
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/3mavs_c-0350.png
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Violation of the relative localization constraints when trajectories are
+ planned after searching the optimal positions.
+ Obstacles are 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Chapter
@@ -1469,6 +1651,61 @@ reference "alg:RRT-algorithm"
 .
  In the RRT algorithm, configurations on the third line have uniform distributio
 n.
+ The implementation of the expansion step is sketched in pseudocode 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:expandTree():-Expansion-procedur"
+
+\end_inset
+
+.
+ The expansion step includes motion planning with the use of a motion model.
+ Forward motion model 
+\begin_inset Formula $\dot{q}=f\left(q,u\right)$
+\end_inset
+
+is considered there and the expansion of node 
+\begin_inset Formula $q$
+\end_inset
+
+ is realized by applying several control inputs 
+\begin_inset Formula $u\text{∈}U$
+\end_inset
+
+ to the model in order to obtain new configurations reachable from the node.
+ The control inputs are applied over time 
+\begin_inset Formula $\Delta t$
+\end_inset
+
+.
+ New configurations are obtained by integration of the motion model, which
+ can be solved analytically in the case of simple systems like Car-like
+ robots 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Saska14:218644"
+
+\end_inset
+
+, or using numerical integration like Euler integration of Runge-Kutta methods
+ for complex systems.
+ As UAVs can be driven by continuous values, the set 
+\begin_inset Formula $U$
+\end_inset
+
+ has to be discretized in order to allow RRT to expand the node 
+\begin_inset Formula $q_{near}$
+\end_inset
+
+to a reasonable number of candidate configurations.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Vonasek2015"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2492,7 +2729,21 @@ expandTree(
 \begin_inset Formula $q_{rand},q_{near}$
 \end_inset
 
-): Expansion procedure of the RRT algorithm
+): Expansion procedure of the RRT algorithm 
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:expandTree():-Expansion-procedur"
+
+\end_inset
+
+ source 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Vonasek2015"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
