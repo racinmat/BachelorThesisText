@@ -3224,10 +3224,10 @@ Nevertheless such distribution of AoIs can be simply detected by measuring
  distances between the rectangle centre and the AoIs and the swarm can be
  split since all sub-swarms will operate in different parts of the environment
  and therefore in safe relative distances.
- The proposal of detection is mentioned in chapter 
+ The proposal of detection is mentioned in section 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "chap:Future-work"
+reference "sec:Future-work"
 
 \end_inset
 
@@ -4959,96 +4959,6 @@ V-REP is an acronym for Virtual robot experimentation platform, a simulator
  V-REP enables to control robots over API and has API clients for C, C++,
  Python, Java, Lua, Matlab, Octave and Urbi.
  
-\end_layout
-
-\begin_layout Chapter
-\begin_inset Argument 1
-status open
-
-\begin_layout Plain Layout
-Future work
-\end_layout
-
-\end_inset
-
-Future work 
-\begin_inset CommandInset label
-LatexCommand label
-name "chap:Future-work"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The approach described in chapter 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:Covering-more-AoIs"
-
-\end_inset
-
- could be modified to be more robust and usable in more maps with more than
- 2 AoIs.
- Generalization of this approach would require not crating a chain, which
- is good only for covering two AoIs, but tree structure, where each leaf
- covers one AoI.
- I will now propose principle of the generalized algorithm.
-\end_layout
-
-\begin_layout Standard
-In the first step, we need to decide, which AoIs can be covered by swarm.
- Some maps can have distant AoIs where all AoIs could not be covered at
- the same time.
- This requires finding shortest tree 
-\begin_inset Formula $T$
-\end_inset
-
- which connects middles of all AoIs.
- When sum of all edges in this tree 
-\begin_inset Formula $d_{total}$
-\end_inset
-
- is bigger than 
-\begin_inset Formula $d_{max}=\left(number\,of\,uavs-1\right)\cdot maximal\,distance\,between\,neighbouring\,uavs$
-\end_inset
-
-, which is maximal length of chain created by UAVs, some AoI and branch
- leading to its middle will be excluded.
- This results in shortening the value 
-\begin_inset Formula $d_{total}$
-\end_inset
-
-.
- This process will be repeated while 
-\begin_inset Formula $d_{total}$
-\end_inset
-
- will be bigger than maximal 
-\begin_inset Formula $d_{max}$
-\end_inset
-
-.
- When 
-\begin_inset Formula $d_{total}<d_{max}$
-\end_inset
-
-, we obtain set of AoIs which can be covered by swarm of UAVs.
- In the next step, UAVs will be split to multiple groups connected by relative
- localization constraints, one group for each AoI.
- Then the guiding paths will be planned for each groups to reach corresponding
- branches of 
-\begin_inset Formula $T$
-\end_inset
-
-.
- Then the RRT-Path algorithm will take place.
- The final step will be optimization by Dubins curves, described in this
- thesis.
- The exclusion of some AoIs could be used to split AoIs to more groups.
- Then each group will be covered by its own sub-swarm and trajectories will
- be planned independently.
 \end_layout
 
 \begin_layout Section
@@ -7141,6 +7051,87 @@ The presumed use of autonomous surveillance is monitoring of a parking lot
  Contrarily to GPS localized UAVs, swarm described in this thesis can even
  operate in hard to access areas, dense urban areas, inside buildings and
  other places with no GPS signal, thanks to the relative localization system.
+\end_layout
+
+\begin_layout Section
+Future work 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Future-work"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The approach described in chapter 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Covering-more-AoIs"
+
+\end_inset
+
+ could be modified to be more robust and usable in more maps with more than
+ 2 AoIs.
+ Generalization of this approach would require not crating a chain, which
+ is good only for covering two AoIs, but tree structure, where each leaf
+ covers one AoI.
+ I will now propose principle of the generalized algorithm.
+\end_layout
+
+\begin_layout Standard
+In the first step, we need to decide, which AoIs can be covered by swarm.
+ Some maps can have distant AoIs where all AoIs could not be covered at
+ the same time.
+ This requires finding shortest tree 
+\begin_inset Formula $T$
+\end_inset
+
+ which connects middles of all AoIs.
+ When sum of all edges in this tree 
+\begin_inset Formula $d_{total}$
+\end_inset
+
+ is bigger than 
+\begin_inset Formula $d_{max}=\left(number\,of\,uavs-1\right)\cdot maximal\,distance\,between\,neighbouring\,uavs$
+\end_inset
+
+, which is maximal length of chain created by UAVs, some AoI and branch
+ leading to its middle will be excluded.
+ This results in shortening the value 
+\begin_inset Formula $d_{total}$
+\end_inset
+
+.
+ This process will be repeated while 
+\begin_inset Formula $d_{total}$
+\end_inset
+
+ will be bigger than maximal 
+\begin_inset Formula $d_{max}$
+\end_inset
+
+.
+ When 
+\begin_inset Formula $d_{total}<d_{max}$
+\end_inset
+
+, we obtain set of AoIs which can be covered by swarm of UAVs.
+ In the next step, UAVs will be split to multiple groups connected by relative
+ localization constraints, one group for each AoI.
+ Then the guiding paths will be planned for each groups to reach corresponding
+ branches of 
+\begin_inset Formula $T$
+\end_inset
+
+.
+ Then the RRT-Path algorithm will take place.
+ The final step will be optimization by Dubins curves, described in this
+ thesis.
+ The exclusion of some AoIs could be used to split AoIs to more groups.
+ Then each group will be covered by its own sub-swarm and trajectories will
+ be planned independently.
 \end_layout
 
 \begin_layout Standard
