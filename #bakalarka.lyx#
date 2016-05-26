@@ -2964,7 +2964,32 @@ The classic cost function of node
 
  representing its proximity to the nearest obstacle.
  This function expresses obstacles avoidance.
- Example of such function is 
+ 
+\begin_inset Formula $o\left(\cdot\right)$
+\end_inset
+
+ function used in this thesis is following 
+\begin_inset Formula $o\left(q_{i}\right)=30s_{direct}\left(q_{i}\right)+15s_{diagonal}\left(q_{i}\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $s_{direct}\left(q_{i}\right)$
+\end_inset
+
+ is count of obstacles in direct neighbours of the node 
+\begin_inset Formula $q_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $s_{diagonal}\left(q_{i}\right)$
+\end_inset
+
+ is count of obstacles in diagonal neighbours of the node 
+\begin_inset Formula $q_{i}$
+\end_inset
+
+.
+ Another example of such function is 
 \begin_inset Formula $o\left(q_{i}\right)=\frac{const}{\left\Vert q_{i}-nearest\,obstacle\right\Vert }$
 \end_inset
 
@@ -2976,46 +3001,112 @@ The classic cost function of node
 \begin_inset Formula $o\left(q_{i}\right)$
 \end_inset
 
-.
- 
-\begin_inset Formula $o\left(\cdot\right)$
+ and determines how much obstacles should be avoided.
+ The map with nodes evaluation can be seen in the figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Example-of-the"
+
 \end_inset
 
- function used in this thesis is following 
-\begin_inset Formula $o\left(q_{i}\right)=30\cdot\sum direct\,neighbours\,of\,q_{i}+15\cdot\sum diagonal\,neighbours\,of\,q_{i}$
+.
+ For every two nodes 
+\begin_inset Formula $q_{i},q_{j}\in C_{free}$
 \end_inset
 
-.
- The map with vertices evaluation can be seen in the figure .
+ , the shortest path 
+\begin_inset Formula $p_{min}\left(q_{i},q_{j}\right)$
+\end_inset
+
+ of all paths is used as metric for the map.
  The length of path 
 \begin_inset Formula $p\left(q_{start},q_{goal}\right)$
 \end_inset
 
  in graph is calculated as 
-\begin_inset Formula $price\left(p\left(q_{start},q_{goal}\right)\right)=\stackrel[q_{i}=q_{start}]{q_{goal-1}}{\sum}d\left(q_{i},q_{i+1}\right)+\stackrel[q_{i}=q_{start+1}]{q_{goal-1}}{\sum}o\left(q_{i}\right)$
+\begin_inset Formula 
+\[
+length\left(p\left(q_{start},q_{goal}\right)\right)=\stackrel[q_{i}=q_{start}]{q_{goal-1}}{\sum}d\left(q_{i},q_{i+1}\right)+\stackrel[q_{i}=q_{start+1}]{q_{goal-1}}{\sum}o\left(q_{i}\right)
+\]
+
 \end_inset
 
- , where the 
+, where the 
 \begin_inset Formula $d\left(\cdot\right)$
 \end_inset
 
  is euclidean distance between neighbouring nodes.
- The larger the 
-\begin_inset Formula $const$
+ 
+\begin_inset Formula $o\left(q_{start}\right)$
 \end_inset
 
- in the example 
-\begin_inset Formula $o\left(\cdot\right)$
+ and 
+\begin_inset Formula $o\left(q_{goal}\right)$
 \end_inset
 
- function is, the more are obstacles avoided during the A* algorithm at
- the expense of the distances between nodes.
+ are not calculated because the metric needs to satisfy the condition 
+\begin_inset Formula $d(q_{i},q_{j})=0\Leftrightarrow q_{i}=q_{j}$
+\end_inset
+
+.
+ Then all conditions for the metric are satisfied.
  Because the 
 \begin_inset Formula $o\left(\cdot\right)$
 \end_inset
 
  is considered only in metric calculation and not in the heuristic estimate,
  the heuristic is admissible and thus it finds the optimal path.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/evaluatedVertices.png
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Example of the a map with nodes evaluated by 
+\begin_inset Formula $o\left(\cdot\right)$
+\end_inset
+
+ function.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Example-of-the"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Chapter
@@ -3039,7 +3130,7 @@ name "chap:Grouping-of-goals"
 \end_layout
 
 \begin_layout Standard
-During this processing of the map (method MapProcessor::getEndNodes in codebase)
+During the processing of the map (method MapProcessor::getEndNodes in codebase),
  all AoIs are grouped to one big AoI, which is the smallest rectangle covering
  all AoIs.
  
@@ -3053,34 +3144,34 @@ If this modification is enabled, only one goal is used for all AoIs instead
  swarm from splitting.
  The relative localization is the main reason to have only one big swarm
  instead of more smaller swarms (or individual UAVs in case of the same
- count of AoI and UAVs).
- Advantages of relative localization are more significant when we have only
- one big swarm.
-\end_layout
+ count of AoI and UAVs), due to increased stability and reduced possibility
+ of relative collisions as discussed in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "SaskaJINT2016"
 
-\begin_layout Standard
-Grouping of goals is done by finding the smallest rectangle containing all
- AoIs.
- Middle of this big rectangle is considered to be middle of the group of
- goals.
- When obstacle is in the middle, nearest node which is not obstacle is used
- as middle of goals group.
- The middle is used as target for guiding path.
+\end_inset
+
+.
+ When obstacle is in the middle, nearest node which is not occupied by an
+ obstacle is used as middle of goals group.
+ The middle is used as the target for the guiding path.
  
 \end_layout
 
 \begin_layout Standard
-This approach has the following advantage: when individual AoIs are near
- to a global goal of the whole group, as seen in 
+This approach has the following advantage.
+ When individual AoIs are near to a global goal of the whole group, as seen
+ in 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Maps-with-goals"
 
 \end_inset
 
-, then the whole swarm follows one guiding path without any splitting, which
- makes the RRT-Path run faster and also the advantage of relative localization
- is included.
+, then the whole swarm follows one guiding path without any splitting.
+ The grouping makes the RRT-Path run faster and also the advantage of relative
+ localization is included.
  
 \end_layout
 
@@ -3106,20 +3197,29 @@ reference "fig:Maps-with-goals"
 \begin_layout Standard
 The disadvantage of this method emerges when individual AoIs have a bigger
  distance from each other than can be covered by UAVs.
- Then this approach totally fails, because the goal of the RRT-Path, which
- is much faster than RRT, is very distant from AoIs, as can be seen in 
+ Then this approach may fail, because the goal of the RRT-Path is very distant
+ from AoIs, as can be seen in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Map-with-goals"
 
 \end_inset
 
- and the main part of the path is found by RRT algorithm, which is slower.
+ and the main part of the path is found by RRT algorithm.
+ The RRT-Path is able to find the trajectories much faster than the RRT
+ algorithm and thus finding trajectories by the RRT algorithm is much slower.
 \end_layout
 
 \begin_layout Standard
-Because of advantages of having only one swarm, all experiments in this
- thesis use grouping and all UAVs form one big swarm.
+Nevertheless such distribution of AoIs can be simply detected by measuring
+ distances between the rectangle centre and the AoIs and the swarm can be
+ split since all sub-swarms will operate in different parts of the environment
+ and therefore in safe relative distances.
+ The proposal of detection is mentioned The method proposed in this thesis
+ can be used independently for all sub-swarms.
+ This thesis is not focused on the distribution of AoIs to independent swarms
+ and therefore all situations presented here enable feasible grouping of
+ AoIs for a single swarm.
 \end_layout
 
 \begin_layout Standard
@@ -4555,6 +4655,13 @@ Covering more AoIs with one swarm
 \end_inset
 
 Covering more AoIs with one swarm
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Covering-more-AoIs"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4810,13 +4917,57 @@ name "fig:Maps-with-unsuccessful"
 
 \end_layout
 
-\begin_layout Section
-Proposition of improvement of the algorithm
+\begin_layout Chapter
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+V-REP simulations
+\end_layout
+
+\end_inset
+
+V-REP simulations
 \end_layout
 
 \begin_layout Standard
-This approach could be modified to be more robust and usable in more maps
- with more than 2 AoIs.
+V-REP is an acronym for Virtual robot experimentation platform, a simulator
+ developed by Coppelia Robotics, providing an advanced environment for testing
+ and simulations of robots of all types.
+ The V-REP environment is free and open-souce for educational purposes and
+ also has commercial licence.
+ The environment takes in account certain physical laws like gravity, inertia
+ or friction, which enables to truthfully verify applicability for deployment
+ of UAVs in the real world.
+ V-REP has many build-in models, but user can also create his own robot.
+ V-REP enables to control robots over API and has API clients for C, C++,
+ Python, Java, Lua, Matlab, Octave and Urbi.
+ 
+\end_layout
+
+\begin_layout Chapter
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Future work
+\end_layout
+
+\end_inset
+
+Future work 
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Future-work"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The approach described in chapter  could be modified to be more robust and
+ usable in more maps with more than 2 AoIs.
  Generalization of this approach would require not crating a chain, which
  is good only for covering two AoIs, but tree structure, where each leaf
  covers one AoI.
@@ -4872,34 +5023,6 @@ In the first step, we need to decide, which AoIs can be covered by swarm.
  Then the RRT-Path algorithm will take place.
  The final step will be optimization by Dubins curves, described in this
  thesis.
-\end_layout
-
-\begin_layout Chapter
-\begin_inset Argument 1
-status open
-
-\begin_layout Plain Layout
-V-REP simulations
-\end_layout
-
-\end_inset
-
-V-REP simulations
-\end_layout
-
-\begin_layout Standard
-V-REP is an acronym for Virtual robot experimentation platform, a simulator
- developed by Coppelia Robotics, providing an advanced environment for testing
- and simulations of robots of all types.
- The V-REP environment is free and open-souce for educational purposes and
- also has commercial licence.
- The environment takes in account certain physical laws like gravity, inertia
- or friction, which enables to truthfully verify applicability for deployment
- of UAVs in the real world.
- V-REP has many build-in models, but user can also create his own robot.
- V-REP enables to control robots over API and has API clients for C, C++,
- Python, Java, Lua, Matlab, Octave and Urbi.
- 
 \end_layout
 
 \begin_layout Section
