@@ -314,28 +314,7 @@ Dr.
 
 
 \family sans
-In Prague,
-\family default
- 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-the
-\backslash
-year % nebo doplňte rok vzniku vaší bakalářské práce
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
+In Prague, May 2016
 \end_layout
 
 \begin_layout Standard
@@ -3191,7 +3170,6 @@ reference "fig:Maps-with-goals"
 \end_inset
 
 .
- The goals are coloured green colour and obstacles grey.
 \end_layout
 
 \begin_layout Standard
@@ -3247,7 +3225,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename obrazky/map1.png
+	filename obrazky/map1-described.png
 	lyxscale 50
 	scale 30
 
@@ -3260,7 +3238,10 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-A map with the goals unsuitable for grouping 
+A map with the goals unsuitable for grouping.
+ Group is marked with blue rectangle.
+ Obstacles have grey colour and AoIs have green colour.
+ 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Map-with-goals"
@@ -3289,7 +3270,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename obrazky/map2.png
+	filename obrazky/map2-described.png
 	lyxscale 50
 	scale 30
 
@@ -3297,7 +3278,7 @@ status open
 
 
 \begin_inset Graphics
-	filename obrazky/map5.png
+	filename obrazky/map5-described.png
 	lyxscale 50
 	scale 30
 
@@ -3310,7 +3291,10 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Maps with the goals suitable for grouping 
+Maps with the goals suitable for grouping.
+ Groups are marked with blue rectangles.
+ Obstacles have grey colout and AoIs have green colour.
+ 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Maps-with-goals"
@@ -3351,9 +3335,9 @@ name "chap:Areas-of-Interest"
 \end_layout
 
 \begin_layout Standard
-Covering Areas of Interest (AoIs) with UAVs is key part of task of autonomous
- or cooperative surveillance.
- In task of surveillance, UAVs view space below them by on-board camera,
+Covering Areas of Interest (AoIs) with UAVs is the key part of the task
+ of autonomous cooperative surveillance.
+ In task of surveillance, UAVs observe space below them by on-board camera,
  as shown in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3419,10 +3403,10 @@ key "petrlik2015"
 \end_layout
 
 \begin_layout Standard
-Coverage of AoIs is optimization problem.
+Coverage of AoIs is an optimization problem.
  This optimization problem can be solved by finding minimum of cost function.
- The value of cost function should objectively reflect the quality of coverage,
- the lower value should represent better coverage.
+ The value of cost function should objectively reflect the quality of coverage.
+ The lower value should represent better coverage.
  In this thesis, cost function 
 \begin_inset Formula $f\left(q_{i}\right)$
 \end_inset
@@ -3437,11 +3421,11 @@ Coverage of AoIs is optimization problem.
 
  is set of UAV positions.
  The cost function 
-\begin_inset Formula $f$
+\begin_inset Formula $f\left(\cdot\right)$
 \end_inset
 
- in this thesis measures size of AoIs not covered by UAVs, which is equivalent
- to information not seen by UAVs.
+represents size of AoIs not covered by UAVs, which is equivalent to information
+ not seen by UAVs.
  That means if 
 \begin_inset Formula $f\left(q_{1}\right)<f\left(q_{2}\right)$
 \end_inset
@@ -3455,44 +3439,32 @@ Coverage of AoIs is optimization problem.
 \end_inset
 
 .
- The world 
-\begin_inset Formula $W=R^{2}$
-\end_inset
-
- is discretized to square grid represented by matrix 
+ The environment is discretized to square grid represented by matrix 
 \begin_inset Formula $A\in R^{2}$
 \end_inset
 
 .
- One of parameters for coverage optimization is size of one square in grid
+ One of parameters for coverage optimization is size of one square of grid
  
-\begin_inset Formula $a\,\left[map\right]units$
+\begin_inset Formula $a\,\left[map\,units\right]$
 \end_inset
 
 .
- Element 
-\begin_inset Formula $A_{j,k}$
+ Each element 
+\begin_inset Formula $A_{j,k}\in R$
 \end_inset
 
  represents square with size 
 \begin_inset Formula $a$
 \end_inset
 
- and left lower corner with coordinates 
-\begin_inset Formula $\left[j\cdot a,k\cdot a\right]$
-\end_inset
-
 .
  Before computing areas seen by UAVs, 
-\begin_inset Formula $A_{j,k}$
-\end_inset
-
-=
-\begin_inset Formula $A_{max}$
+\begin_inset Formula $A_{j,k}:=A_{max}$
 \end_inset
 
  if it contains AoI, and 
-\begin_inset Formula $A_{j,k}=0$
+\begin_inset Formula $A_{j,k}:=0$
 \end_inset
 
  otherwise.
@@ -3500,30 +3472,34 @@ Coverage of AoIs is optimization problem.
 \begin_inset Formula $A_{max}=100$
 \end_inset
 
- has been used in experiments, but the value is arbitrary.
- Then the 
-\begin_inset Formula 
-\[
-A_{j,k}:=A_{j,k}\cdot l^{m}
-\]
-
-\end_inset
-
- formula is applied to every element of the world representing matrix 
+ is used in experiments, but any value which does not cause overflow or
+ underflow in float representation will suffice.
+ Then the following formula is applied to every element of the world representin
+g matrix 
 \begin_inset Formula $A$
 \end_inset
 
-.
- Variable 
+: 
+\begin_inset Formula 
+\begin{equation}
+A_{j,k}:=A_{j,k}\cdot l^{m}\label{eq:coverage}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "Coverage-of-AoIs"
+
+\end_inset
+
+, where variable 
 \begin_inset Formula $l$
 \end_inset
 
- must be in range 
-\begin_inset Formula $1>l>0$
-\end_inset
-
- and represents amount of information not seen by UAV even if this UAV covers
- the element 
+ should indicate amount of information not seen by UAV even if this UAV
+ covers the element 
 \begin_inset Formula $A_{j,k}$
 \end_inset
 
@@ -3532,8 +3508,9 @@ A_{j,k}:=A_{j,k}\cdot l^{m}
  on many factors, such as time of day, weather conditions, flight altitude,
  camera chip resolution, lens parameters, stabilization, frame rate and
  so on.
+ Due to these factors, it is convenient to let more UAVs observe same area.
  In this implementation, 
-\begin_inset Formula $l=0.5$
+\begin_inset Formula $l:=0.5$
 \end_inset
 
 , but if the flight altitude will be considered in the optimization algorithm,
@@ -3547,7 +3524,7 @@ A_{j,k}:=A_{j,k}\cdot l^{m}
 
 .
  Variable 
-\begin_inset Formula $m\in N_{0}$
+\begin_inset Formula $m$
 \end_inset
 
  represents number of UAVs seeing the area of element 
@@ -3555,7 +3532,8 @@ A_{j,k}:=A_{j,k}\cdot l^{m}
 \end_inset
 
 .
- Example can be seen in figure 
+ Example of AoI with one UAV observing part of it can be seen in figure
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:AoI-matrix-with"
@@ -3563,8 +3541,7 @@ reference "fig:AoI-matrix-with"
 \end_inset
 
 .
- AoI is marked with green colour and UAV is marked with blue colour.
- As we can see, parts of AoI not seen by an UAV have value 
+ As we can see, parts of AoI not seen by a UAV have value 
 \begin_inset Formula $A_{j,k}=A_{max}=100$
 \end_inset
 
@@ -3573,6 +3550,40 @@ reference "fig:AoI-matrix-with"
 \end_inset
 
 .
+ In some applications, one UAV may observe everything in its observable
+ area and does not need another UAV observing same area.
+ In this case, 
+\begin_inset Formula $l:=0$
+\end_inset
+
+, so the cost of the element 
+\begin_inset Formula $A_{j,k}$
+\end_inset
+
+ will not change when more UAV will observe it, because 
+\begin_inset Formula $0^{m}$
+\end_inset
+
+ is same for every 
+\begin_inset Formula $m\in N$
+\end_inset
+
+.
+ The 
+\begin_inset Formula $l^{m}$
+\end_inset
+
+ where 
+\begin_inset Formula $1>l>0$
+\end_inset
+
+ and 
+\begin_inset Formula $m>1$
+\end_inset
+
+ evaluates the configuration where more UAVs observe the same area as better
+ than one UAV observing the area, but worse than each UAV observing its
+ own area.
 \end_layout
 
 \begin_layout Standard
@@ -3583,8 +3594,17 @@ status open
 
 \begin_layout Plain Layout
 \align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
 \begin_inset Graphics
-	filename obrazky/oneUAVcoverage.png
+	filename obrazky/aoiCoverage1uav.png
+	lyxscale 40
+	scale 40
 
 \end_inset
 
@@ -3595,21 +3615,114 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-AoI matrix with one UAV
+1 UAV
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/aoiCoverage2uav.png
+	lyxscale 40
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+2 UAVs
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/aoiCoverage3uav.png
+	lyxscale 40
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+3 UAVs
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+AoI matrix with one UAVs above it
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:AoI-matrix-with"
 
 \end_inset
 
-, source 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "petrlik2015"
+ represented by matrix with every cell evaluated by formula 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:coverage"
 
 \end_inset
 
-
+.
+ The AoI is marked with green colour and the areas observed by the UAVs
+ is marked with blue colour.
+ Area covered by more UAVs has smaller value as implies the formula.
+ 
 \end_layout
 
 \end_inset
@@ -3627,16 +3740,21 @@ key "petrlik2015"
 \end_layout
 
 \begin_layout Standard
-When UAV arrives above any AoI, the RRT-Path algorithm ends for this UAV
- and instead of it, RRT algorithm takes place.
+If UAV arrives above any AoI, the guiding path is not used for this UAV
+ anymore and instead of it, RRT algorithm continues by random searching
+ over the AoI.
  Random node for RRT algorithm is selected only from AoI beneath the UAV,
- not from whole world.
- When all UAVs arrive to their goal by the RRT-Path algorithm, RRT algorithm
- is run and it runs until being stopped.
+ not from whole environment.
+ The RRT algorithm is stopped when maximum number of nodes is reached.
  After stopping, all states found by RRT algorithm where UAVs are above
- AoIs, are gathered and their coverage cost function is calculated.
- State with lowest cost function is used as result of the path finding algorithm
- and used as input for Dubins curves optimization.
+ AoIs are evaluated by the coverage cost function.
+ Every node of the RRT algorithm contains configurations of all UAVs and
+ during the RRT, but every UAV has its own random point selected during
+ the RRT.
+ During the RRT algorithm, the feasibility and relative localization constraints
+ are being checked.
+ State with the lowest cost function is used as result of the path finding
+ algorithm and used as input for Dubins curves optimization.
 \end_layout
 
 \begin_layout Chapter
@@ -5722,7 +5840,7 @@ Due to time and memory consumption, each optimization is stopped after 200
 The algorithm also stops when consumed memory exceeds 1900 MB.
  This is right before shutting of program by operating system, because 32bit
  processes are not allowed to use more than 2 GB of RAM.
- This feature was implemented using an ugly platform-dependent hack.
+ 
 \end_layout
 
 \begin_layout Standard
