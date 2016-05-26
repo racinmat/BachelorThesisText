@@ -2901,7 +2901,7 @@ name "sec:Guiding-path"
 \begin_layout Standard
 The guiding path is obtained by transferring the map to a graph representation
  and then the path is found using the graph-search algorithms.
- The map can be transferred to graph representation by using the Voronoi
+ The map can be transferred to the graph representation by using the Voronoi
  diagram, a visibility graph or by discretization to a grid representation.
  
 \end_layout
@@ -2909,7 +2909,7 @@ The guiding path is obtained by transferring the map to a graph representation
 \begin_layout Standard
 Then the path can be found by using Dijkstra algorithm or A* algorithm.
  In this thesis, the A* algorithm has been used because of its ability to
- find optimal path and easy calculation of heuristic function is Euclidean
+ find optimal path and easy calculation of heuristic function in Euclidean
  space.
 \end_layout
 
@@ -2928,7 +2928,7 @@ The classic cost function of node
 \end_inset
 
  is sum of costs of all edges in shortest path between nodes and 
-\begin_inset Formula $q_{init}$
+\begin_inset Formula $q_{start}$
 \end_inset
 
  and 
@@ -2954,19 +2954,27 @@ The classic cost function of node
 \end_inset
 
 .
- This algorithm uses a modified cost function and in addition to a cost
- function of the A* algorithm.
- The modified cost function is 
-\begin_inset Formula $f\left(q_{i}\right)=g\left(q_{i}\right)+h\left(q_{i}\right)+j\left(q_{i}\right)$
+ In this thesis, a node 
+\begin_inset Formula $q_{i}$
 \end_inset
 
-, where 
-\begin_inset Formula $j\left(q_{i}\right)$
+ in the graph has a function 
+\begin_inset Formula $o\left(q_{i}\right)$
 \end_inset
 
- is number representing the proximity to the nearest obstacle.
- For example, it can be 
-\begin_inset Formula $j\left(q_{i}\right)=\frac{const}{\left\Vert q_{i}-nearest\,obstacle\right\Vert }$
+ representing its proximity to the nearest obstacle.
+ This function expresses obstacles avoidance.
+ 
+\begin_inset Formula $o\left(\cdot\right)$
+\end_inset
+
+ function used in this thesis is following 
+\begin_inset Formula $o\left(q_{i}\right)=30\cdot\sum obstacles\,in\,direct\,neighbours\,of\,q_{i}+15\cdot\sum obstacles\,in\,diagonal\,neighbours\,of\,q_{i}$
+\end_inset
+
+.
+ Another example of such function is 
+\begin_inset Formula $o\left(q_{i}\right)=\frac{const}{\left\Vert q_{i}-nearest\,obstacle\right\Vert }$
 \end_inset
 
 , where 
@@ -2974,11 +2982,92 @@ The classic cost function of node
 \end_inset
 
  is weight of the 
-\begin_inset Formula $j\left(q_{i}\right)$
+\begin_inset Formula $o\left(q_{i}\right)$
 \end_inset
 
- and expresses how much obstacles should be avoided with respect to length
- of the whole path.
+ and determines how much obstacles should be avoided.
+ The map with vertices evaluation can be seen in the figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Example-of-the"
+
+\end_inset
+
+.
+ The length of path 
+\begin_inset Formula $p\left(q_{start},q_{goal}\right)$
+\end_inset
+
+ in graph is calculated as 
+\begin_inset Formula 
+\[
+price\left(p\left(q_{start},q_{goal}\right)\right)=\stackrel[q_{i}=q_{start}]{q_{goal-1}}{\sum}d\left(q_{i},q_{i+1}\right)+\stackrel[q_{i}=q_{start+1}]{q_{goal-1}}{\sum}o\left(q_{i}\right)
+\]
+
+\end_inset
+
+, where the 
+\begin_inset Formula $d\left(\cdot\right)$
+\end_inset
+
+ is euclidean distance between neighbouring nodes.
+ Because the 
+\begin_inset Formula $o\left(\cdot\right)$
+\end_inset
+
+ is considered only in metric calculation and not in the heuristic estimate,
+ the heuristic is admissible and thus it finds the optimal path.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/evaluatedVertices.png
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Example of the a map with vertices evaluated by 
+\begin_inset Formula $o\left(\cdot\right)$
+\end_inset
+
+ function.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Example-of-the"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Chapter
