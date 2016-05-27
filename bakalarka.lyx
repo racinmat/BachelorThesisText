@@ -3756,143 +3756,6 @@ If UAV arrives above any AoI, the guiding path is not used for this UAV
 status open
 
 \begin_layout Plain Layout
-Paths straightening
-\end_layout
-
-\end_inset
-
-Paths straightening 
-\begin_inset CommandInset label
-LatexCommand label
-name "chap:Paths-straightening"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-In the RRT-Path algorithm, crossing paths between neighbouring states are
- checked, so no trajectories are crossing each other between the 
-\begin_inset Formula $n$
-\end_inset
-
--th state and the 
-\begin_inset Formula $n+1$
-\end_inset
-
--th state, but this does not solve the problem completely.
- In figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Crossing-paths"
-
-\end_inset
-
- trajectories found by the RRT-Path algorithm are shown.
- Every colour marks one state in a RRT-Path.
- As we can see, check in algorithm prevents from crossing path between neighbour
-ing states, but crossing of paths in different times can not be easily prevented.
- We can see in image, that paths cross between points J (yellow), M (light
- green) and H (orange), K (yellow), so there is no easy approach to prevent
- path collisions between 
-\begin_inset Formula $n-2$
-\end_inset
-
--th state and 
-\begin_inset Formula $n$
-\end_inset
-
--th state.
- Optimization by Dubins curves shortens trajectory of UAVs, so UAVs could
- be in these trajectories in different time.
- Considering that, there could be collisions after optimization.
- Another complication occurs, when time difference between two states is
- too low, then UAVs could collide, because in reality UAV can not follow
- path precisely, but only with some errors.
-\begin_inset Marginal
-status open
-
-\begin_layout Plain Layout
-todo: větší písmena u obrázku
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Crossing paths 
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Crossing-paths"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename obrazky/crossingPathReal1.png
-	lyxscale 40
-	scale 30
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-There were attempts to straighten crossing trajectories, but all of them
- failed.
- Straightening was done by switching parts of crossing paths from the earliest
- crossing state to the end.
- But then lengths of paths differed, which was unsuitable for path planning
- for a swarm.
- This can be done by adding 
-\begin_inset Quotes eld
-\end_inset
-
-waiting
-\begin_inset Quotes erd
-\end_inset
-
- points, points in different state but with the same position in different
- time.
- Due to these facts, it was really complicated to straighten a longer path
- with many crossings (this path is really short, paths in other maps are
- much longer and more complicated).
- Motion model with inertia is unable to stop immediately in one place, so
- path waiting states is hard to follow precisely.
- This fact complicates following the straightened trajectories.
- Due to all complications mentioned above, this part was removed from algorithm.
- But it is possible to add it, when better approach will be found.
- 
-\end_layout
-
-\begin_layout Chapter
-\begin_inset Argument 1
-status open
-
-\begin_layout Plain Layout
 UAV swarm properties
 \end_layout
 
@@ -5066,6 +4929,13 @@ V-REP simulations
 \end_inset
 
 V-REP simulations
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:V-REP-simulations"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -5102,33 +4972,23 @@ es in V-REP.
 UAVs in V-REP can be controlled over remote API only by changing location
  of their target.
  Then UAV tries to reach the location of its target.
- Unfortunately, UAVs only follow location, with speed proportional to distance.
+ Unfortunately, when using default UAV VREP controller, UAVs only follow
+ location, with speed proportional to distance.
  UAVs do not try to reach target and simultaneously to have zero speed when
  reaching their target, which causes overshoot.
- This fact leads to another disadvantage of UAV controller.
- When keeping target in same distance and direction from UAV, the UAV increases
- its speed, which causes overshoot when target changes its direction to
- UAV.
+ This fact leads to another disadvantage of such UAV controller.
+ In long and straight corridors the UAV increases its speed, which causes
+ overshoot when trajectory changes its direction because the UAV is not
+ able to slow down and follow its trajectory in turn.
  These overshoots were many times bigger than size of UAVs, so they could
  not be ignored and had to be fixed.
-\end_layout
-
-\begin_layout Standard
-During first, naive implementation, position of next state was set as target
- position for UAV, but due to overshoot and large distances between states
- UAVs failed to follow the trajectory.
- 
-\end_layout
-
-\begin_layout Standard
-Another implementation uses linear interpolated trajectory between UAV and
- its next state position.
+ During first, naive implementation, position of next state of the trajectory
+ was set as target position for UAV, but due to overshoot and large distances
+ between states UAVs failed to follow the trajectory.
+ Another implementation uses linear interpolated trajectory between UAV
+ and its next state position.
  The calculated target is placed in the line between UAV and next state
- position, in the constant distance to UAV.
-\end_layout
-
-\begin_layout Standard
-So the calculation was defined as follows
+ position, in the constant distance to UAV as 
 \begin_inset Formula 
 \begin{equation}
 \mathbf{X}\left(k+1\right)_{target}=\mathbf{X}\left(k\right)_{UAV}+\frac{\left(\mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right)}{\left\Vert \mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right\Vert }\cdot const
@@ -5140,19 +5000,23 @@ where
 \begin_inset Formula $\mathbf{X}\left(k\right)_{UAV}$
 \end_inset
 
- is UAV position in 
+ is UAV position in the 
 \begin_inset Formula $k$
 \end_inset
 
--th iteration of simulation, 
+-th iteration of the simulation, 
 \begin_inset Formula $\mathbf{X}\left(k\right)_{ns}$
 \end_inset
 
- is position of next state in planned trajectory in k-th iteration, 
+ is position of next state in planned trajectory in 
+\begin_inset Formula $k$
+\end_inset
+
+-th iteration, 
 \begin_inset Formula $\mathbf{X}\left(k+1\right)_{target}$
 \end_inset
 
- is position of UAV target in 
+ is position of UAV target in the 
 \begin_inset Formula $k+1$
 \end_inset
 
@@ -5167,7 +5031,7 @@ where
 \end_layout
 
 \begin_layout Standard
-But as mentioned earlier, even this approach did not go well.
+But as mentioned earlier, even this approach do not work well.
  In long passages, where trajectory did not turn, UAVs increased their velocity
  and inertia, which made them harder to turn.
  The problem of overshooting is shown in figure 
@@ -5178,27 +5042,26 @@ reference "fig:UAV-overshoot"
 \end_inset
 
 .
- Overshoot is at the end of long passage in the map 
+ The overshoot is at the end of long passage in the map 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:Map-with-UAV"
+reference "fig:VREP-simulation-of"
 
 \end_inset
 
 .
- Red and violet balls represent positions of next states and green balls
- represent UAV targets.
+ Red and violet balls represent positions of next states in trajectory and
+ green balls represent UAV targets.
  In the first image, we can see UAVs leaving the narrow passage.
- As you can see in second and third image, positions of next state are still,
- but because of constant distance of target and UAV, the target is dragged
- by UAVs inertia.
+ As you can see in second and third image, positions of next state are in
+ same place, but because of constant distance of target and UAV, the target
+ is dragged by UAVs inertia.
 \end_layout
 
 \begin_layout Standard
 This has been fixed by not updating the position of the target when distance
- between UAV and next state is bigger than in previous iteration and the
- position of next state is still the same, so the equation describing target
- position is
+ between UAV and the next state is bigger than in previous iteration and
+ the position of the next state is still the same, as
 \begin_inset Formula 
 \begin{equation}
 \mathbf{X}\left(k+1\right)_{target}=\begin{cases}
@@ -5212,8 +5075,7 @@ else
 
 \end_inset
 
-.
- This prevents the target from dragging by UAV with big inertia.
+This prevents the target from dragging by UAV with big inertia.
 \end_layout
 
 \begin_layout Standard
@@ -5332,11 +5194,15 @@ status open
 \begin_layout Plain Layout
 UAV overshoot.
  In a) we see UAVs flying from the right to the left.
- Every UAV follows its target, marked with a coloured circle.
- In the b) the planned trajectory has a curve and targets start heading
+ Every UAV follows its target.
+ Red and violet balls represent positions of next states in trajectory and
+ green balls represent UAV targets.
+ In the b) the planned trajectory has a curve and next states start heading
  upwards.
  In c) all UAVs have too big inertia to follow its targets precisely and
  they overshoot.
+ The targets are dragged by UAVs and they become more distant from the next
+ state.
  
 \begin_inset CommandInset label
 LatexCommand label
@@ -5586,7 +5452,10 @@ t = 192 s
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-VREP simulation of trajectories
+VREP simulation of trajectories in complex map.
+ All UAVs proceeded successfully from the initial position to the AoI, marked
+ with white rectangle.
+ Video with the simulation can be seen in enclosed CD.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:VREP-simulation-of"
@@ -5732,9 +5601,17 @@ Code structure and services
 \end_layout
 
 \begin_layout Standard
-Here is shown brief UML scheme demonstrating dependency diagram of codebase.
- To keep diagram simple, only services are displayed, other classes, which
- are not services, were left out for readability.
+A brief UML scheme demonstrating dependency diagram of codebase is shown
+ in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Dependency-diagram"
+
+\end_inset
+
+.
+ To keep diagram simple, only services are displayed.
+ Other classes, which are not services, were left out for readability.
  Diagram was generated using software 
 \begin_inset CommandInset href
 LatexCommand href
@@ -5903,7 +5780,7 @@ reference "fig:Map-used-for"
  UAVs start in the lower left corner.
  In this figure, we can also see the trajectory found by RRT-Path algorithm.
  The algorithm follows the guiding path quite precisely, and whole searching
- tree for each UAV looks like one long branch.
+ tree for each UAV has small branching factor.
  Only the AoI is covered by branches of searching trees.
  The algorithm is run 1000 times.
  The algorithm found the trajectory to AoI in every run.
@@ -5948,7 +5825,7 @@ reference "fig:Distances-between-UAVS"
  Distances between the UAV and its nearest neighbour is shown in the graph.
  This information is important for the relative localization.
  The minimal and maximal distance are 24 and 180 map units, in this experiment.
- During the whole flight, UAVs fly really close to each other.
+ During the whole flight, UAVs fly very close to each other.
  But in the end, they fly away from each other, because they can cover bigger
  part of AoI when they have bigger distance between each other.
 \end_layout
@@ -6099,24 +5976,14 @@ g and optimization experiments.
  These trajectories were re-sampled and optimized 100 times to obtain relevant
  results because of using random numbers during the optimization and avoiding
  getting stuck in local optima.
-\end_layout
-
-\begin_layout Standard
-Due to time and memory consumption, each optimization is stopped after 200
- iterations where optimization did not shorten the trajectory or when speed
- of trajectory shortening was slower than 5% of original trajectory length
- per 1000 iterations.
-\end_layout
-
-\begin_layout Standard
-The algorithm also stops when consumed memory exceeds 1900 MB.
+ Due to time and memory consumption, each optimization is stopped after
+ 200 iterations where optimization did not shorten the trajectory or when
+ speed of trajectory shortening was slower than 5% of original trajectory
+ length per 1000 iterations.
+ The algorithm also stops when consumed memory exceeds 1900 MB.
  This is right before shutting of program by operating system, because 32bit
  processes are not allowed to use more than 2 GB of RAM.
- 
-\end_layout
-
-\begin_layout Standard
-In next sections, maps with obstacles, AoIs and trajectories will be shown.
+ In next sections, maps with obstacles, AoIs and trajectories will be shown.
  Obstacles are grey rectangles, AoI is green rectangle and each UAV has
  trajectory marked with different colour.
  For measuring of influence of re-sampling of trajectory to Dubins curves
@@ -6168,7 +6035,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Trajectory before Dubins curves optimization
+Trajectory before Dubins curves optimization.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Path-before-Dubins"
@@ -6245,7 +6112,14 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Trajectory after Dubins curves optimization
+Trajectory after Dubins curves optimization.
+ In the left upper corner the trajectories are not optimized enough.
+ This happened because the optimization got stuck in local minimum.
+ The local minimum was caused by relative localization constraints, which
+ complicates the optimization.
+ The crossing trajectories are very difficult to optimize due to relative
+ localization constraints.
+ 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Path-after-Dubins"
@@ -6749,7 +6623,15 @@ Average distance [m]
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Re-sampling and optimization results
+Re-sampling and optimization results of the experiment 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:First-experiment"
+
+\end_inset
+
+.
+ The initial frequency has 
 \begin_inset CommandInset label
 LatexCommand label
 name "tab:Re-sampling-and-optimization"
@@ -7488,6 +7370,20 @@ In the first step, we need to decide, which AoIs can be covered by swarm.
  The exclusion of some AoIs could be used to split AoIs to more groups.
  Then each group will be covered by its own sub-swarm and trajectories will
  be planned independently.
+\end_layout
+
+\begin_layout Standard
+Another proposal of future work is implementing better controller for the
+ UAV in VREP environment.
+ Controller which is able to control both position and speed of UAV would
+ solve problems described in the chapter 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:V-REP-simulations"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard

@@ -3756,143 +3756,6 @@ If UAV arrives above any AoI, the guiding path is not used for this UAV
 status open
 
 \begin_layout Plain Layout
-Paths straightening
-\end_layout
-
-\end_inset
-
-Paths straightening 
-\begin_inset CommandInset label
-LatexCommand label
-name "chap:Paths-straightening"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-In the RRT-Path algorithm, crossing paths between neighbouring states are
- checked, so no trajectories are crossing each other between the 
-\begin_inset Formula $n$
-\end_inset
-
--th state and the 
-\begin_inset Formula $n+1$
-\end_inset
-
--th state, but this does not solve the problem completely.
- In figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Crossing-paths"
-
-\end_inset
-
- trajectories found by the RRT-Path algorithm are shown.
- Every colour marks one state in a RRT-Path.
- As we can see, check in algorithm prevents from crossing path between neighbour
-ing states, but crossing of paths in different times can not be easily prevented.
- We can see in image, that paths cross between points J (yellow), M (light
- green) and H (orange), K (yellow), so there is no easy approach to prevent
- path collisions between 
-\begin_inset Formula $n-2$
-\end_inset
-
--th state and 
-\begin_inset Formula $n$
-\end_inset
-
--th state.
- Optimization by Dubins curves shortens trajectory of UAVs, so UAVs could
- be in these trajectories in different time.
- Considering that, there could be collisions after optimization.
- Another complication occurs, when time difference between two states is
- too low, then UAVs could collide, because in reality UAV can not follow
- path precisely, but only with some errors.
-\begin_inset Marginal
-status open
-
-\begin_layout Plain Layout
-todo: větší písmena u obrázku
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Crossing paths 
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Crossing-paths"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename obrazky/crossingPathReal1.png
-	lyxscale 40
-	scale 30
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-There were attempts to straighten crossing trajectories, but all of them
- failed.
- Straightening was done by switching parts of crossing paths from the earliest
- crossing state to the end.
- But then lengths of paths differed, which was unsuitable for path planning
- for a swarm.
- This can be done by adding 
-\begin_inset Quotes eld
-\end_inset
-
-waiting
-\begin_inset Quotes erd
-\end_inset
-
- points, points in different state but with the same position in different
- time.
- Due to these facts, it was really complicated to straighten a longer path
- with many crossings (this path is really short, paths in other maps are
- much longer and more complicated).
- Motion model with inertia is unable to stop immediately in one place, so
- path waiting states is hard to follow precisely.
- This fact complicates following the straightened trajectories.
- Due to all complications mentioned above, this part was removed from algorithm.
- But it is possible to add it, when better approach will be found.
- 
-\end_layout
-
-\begin_layout Chapter
-\begin_inset Argument 1
-status open
-
-\begin_layout Plain Layout
 UAV swarm properties
 \end_layout
 
@@ -5066,6 +4929,13 @@ V-REP simulations
 \end_inset
 
 V-REP simulations
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:V-REP-simulations"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -5102,33 +4972,23 @@ es in V-REP.
 UAVs in V-REP can be controlled over remote API only by changing location
  of their target.
  Then UAV tries to reach the location of its target.
- Unfortunately, UAVs only follow location, with speed proportional to distance.
+ Unfortunately, when using default UAV VREP controller, UAVs only follow
+ location, with speed proportional to distance.
  UAVs do not try to reach target and simultaneously to have zero speed when
  reaching their target, which causes overshoot.
- This fact leads to another disadvantage of UAV controller.
- When keeping target in same distance and direction from UAV, the UAV increases
- its speed, which causes overshoot when target changes its direction to
- UAV.
+ This fact leads to another disadvantage of such UAV controller.
+ In long and straight corridors the UAV increases its speed, which causes
+ overshoot when trajectory changes its direction because the UAV is not
+ able to slow down and follow its trajectory in turn.
  These overshoots were many times bigger than size of UAVs, so they could
  not be ignored and had to be fixed.
-\end_layout
-
-\begin_layout Standard
-During first, naive implementation, position of next state was set as target
- position for UAV, but due to overshoot and large distances between states
- UAVs failed to follow the trajectory.
- 
-\end_layout
-
-\begin_layout Standard
-Another implementation uses linear interpolated trajectory between UAV and
- its next state position.
+ During first, naive implementation, position of next state of the trajectory
+ was set as target position for UAV, but due to overshoot and large distances
+ between states UAVs failed to follow the trajectory.
+ Another implementation uses linear interpolated trajectory between UAV
+ and its next state position.
  The calculated target is placed in the line between UAV and next state
- position, in the constant distance to UAV.
-\end_layout
-
-\begin_layout Standard
-So the calculation was defined as follows
+ position, in the constant distance to UAV as 
 \begin_inset Formula 
 \begin{equation}
 \mathbf{X}\left(k+1\right)_{target}=\mathbf{X}\left(k\right)_{UAV}+\frac{\left(\mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right)}{\left\Vert \mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right\Vert }\cdot const
@@ -5140,15 +5000,19 @@ where
 \begin_inset Formula $\mathbf{X}\left(k\right)_{UAV}$
 \end_inset
 
- is UAV position in 
+ is UAV position in the 
 \begin_inset Formula $k$
 \end_inset
 
--th iteration of simulation, 
+-th iteration of the simulation, 
 \begin_inset Formula $\mathbf{X}\left(k\right)_{ns}$
 \end_inset
 
- is position of next state in planned trajectory in k-th iteration, 
+ is position of next state in planned trajectory in 
+\begin_inset Formula $k$
+\end_inset
+
+-th iteration, 
 \begin_inset Formula $\mathbf{X}\left(k+1\right)_{target}$
 \end_inset
 
@@ -5212,8 +5076,7 @@ else
 
 \end_inset
 
-.
- This prevents the target from dragging by UAV with big inertia.
+This prevents the target from dragging by UAV with big inertia.
 \end_layout
 
 \begin_layout Standard
@@ -7490,434 +7353,18 @@ In the first step, we need to decide, which AoIs can be covered by swarm.
  be planned independently.
 \end_layout
 
-\begin_layout Chapter
-\start_of_appendix
-Contents of the enclosed CD
-\end_layout
-
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{minipage}[t]{.35
-\backslash
-textwidth}
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{Verbatim}
-\end_layout
-
-\begin_layout Plain Layout
-
-├── SwarmDeployment
-\end_layout
-
-\begin_layout Plain Layout
-
-│   ├── fw-esp
-\end_layout
-
-\begin_layout Plain Layout
-
-│   ├── fw-stm32
-\end_layout
-
-\begin_layout Plain Layout
-
-│   └── pcb
-\end_layout
-
-\begin_layout Plain Layout
-
-│
-\end_layout
-
-\begin_layout Plain Layout
-
-├── UtilityScripts
-\end_layout
-
-\begin_layout Plain Layout
-
-│   ├── fw-esp
-\end_layout
-
-\begin_layout Plain Layout
-
-│   ├── fw-stm32
-\end_layout
-
-\begin_layout Plain Layout
-
-│   └── pcb
-\end_layout
-
-\begin_layout Plain Layout
-
-│       ├── rev23b
-\end_layout
-
-\begin_layout Plain Layout
-
-│       └── rev24
-\end_layout
-
-\begin_layout Plain Layout
-
-│
-\end_layout
-
-\begin_layout Plain Layout
-
-├── bibliography
-\end_layout
-
-\begin_layout Plain Layout
-
-│   ├── datasheets
-\end_layout
-
-\begin_layout Plain Layout
-
-│   └── papers
-\end_layout
-
-\begin_layout Plain Layout
-
-│
-\end_layout
-
-\begin_layout Plain Layout
-
-├── figures
-\end_layout
-
-\begin_layout Plain Layout
-
-│   ├── diagrams
-\end_layout
-
-\begin_layout Plain Layout
-
-│   ├── photo
-\end_layout
-
-\begin_layout Plain Layout
-
-│   ├── plots
-\end_layout
-
-\begin_layout Plain Layout
-
-│   ├── schema
-\end_layout
-
-\begin_layout Plain Layout
-
-│   └── screnshots
-\end_layout
-
-\begin_layout Plain Layout
-
-│
-\end_layout
-
-\begin_layout Plain Layout
-
-├── README.txt
-\end_layout
-
-\begin_layout Plain Layout
-
-└── bachelor_thesis.pdf
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{Verbatim}
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{minipage}
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{minipage}[t]{.65
-\backslash
-textwidth}
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-textbf{Firmware a hardware zkušebního prototypu} 
-\backslash
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-
-Firmware ESP8266 
-\backslash
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-
-Firmware STM32 
-\backslash
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-
-Schéma a výrobní podklady desky plošných spojů 
-\backslash
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-textbf{Firmware a hardware finální verze přístroje} 
-\backslash
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-
-Firmware ESP8266 
-\backslash
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-
-Firmware STM32 
-\backslash
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-
-Schéma a výrobní podklady desky plošných spojů 
-\backslash
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-
-- Revize 23b - vyrobená verze desky 
-\backslash
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-
-- Revize 24 - verze s opravami chyb 
-\backslash
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-textbf{Použitá literatura} 
-\backslash
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-
-Datasheety použitých součástek 
-\backslash
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-
-Odkazované vědecké články (volně šiřitelné) 
-\backslash
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-textbf{Ilustrace použité v práci} 
-\backslash
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-
-Blokové diagramy (SVG) 
-\backslash
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-
-Fotografie 
-\backslash
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-
-Grafy 
-\backslash
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-
-Schémata zapojení 
-\backslash
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-
-Snímky obrazovky (uživatelské rozhraní) 
-\backslash
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-
-Doprovodná informace k CD 
-\backslash
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-
-Elektronická verze bakalářské práce
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{minipage}
-\end_layout
+Another proposal of future work is implementing better controller for the
+ UAV in VREP environment.
+ Controller which is able to control both position and speed of UAV would
+ solve problems described in the chapter 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:V-REP-simulations"
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Standard
@@ -7925,6 +7372,61 @@ end{minipage}
 LatexCommand bibtex
 bibfiles "bibliography"
 options "bibtotoc,plainnat"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+\start_of_appendix
+Contents of the enclosed CD
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+SwarmDeployment 	Main application
+\end_layout
+
+\begin_layout Plain Layout
+
+  SwarmDeployment   	Source code of application in C++
+\end_layout
+
+\begin_layout Plain Layout
+
+  Win32 		Compiled binaries for 32bit Windows
+\end_layout
+
+\begin_layout Plain Layout
+
+UtilityScripts  	PHP utility scripts
+\end_layout
+
+\begin_layout Plain Layout
+
+VRepPathBuilder 	Source code of VREP simulation program
+\end_layout
+
+\begin_layout Plain Layout
+
+bibliography		Used bibliography
+\end_layout
+
+\begin_layout Plain Layout
+
+videos  		Videos of VREP simulations
+\end_layout
+
+\begin_layout Plain Layout
+
+bachelor_thesis.pdf 	Electronic version of bachelor thesis
+\end_layout
 
 \end_inset
 
