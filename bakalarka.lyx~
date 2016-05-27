@@ -650,7 +650,7 @@ status open
 \end_layout
 
 \begin_layout Subparagraph*
-Prohlášení autora práce 
+Author statement for the undergraduate thesis: 
 \begin_inset Newline newline
 \end_inset
 
@@ -658,9 +658,10 @@ Prohlášení autora práce
 \end_layout
 
 \begin_layout Standard
-Prohlašuji, že jsem předloženou práci vypracoval samostatně a že jsem uvedl
- veškeré použité informační zdroje v souladu s Metodickým pokynem o dodržování
- etických principů při přípravě vysokoškolských závěrečných prací.
+I declare that the presented work was developed independently and that I
+ have listed all the sources of information used within it in accordance
+ with the methodical instructions for observing the ethical principles in
+ the presentation of university theses.
  
 \end_layout
 
@@ -687,7 +688,7 @@ noindent
 
 
 \size small
- V Praze dne 
+ Prague, date 
 \size default
 ________
 \size small
@@ -716,7 +717,7 @@ $
 \backslash
 overline{
 \backslash
-textrm{~~~~~~~~~Podpis autora práce~~~}}$
+textrm{~~~~~~~~~signature~~~}}$
 \end_layout
 
 \end_inset
@@ -5363,6 +5364,14 @@ Simulations
 \begin_layout Standard
 Trajectories provided by the algorithm proposed in this theses were simulated
  and verified in the V-REP environment.
+ Screenshots from the simulation are in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:VREP-simulation-of"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -5578,6 +5587,13 @@ t = 192 s
 
 \begin_layout Plain Layout
 VREP simulation of trajectories
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:VREP-simulation-of"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -7479,6 +7495,61 @@ In the first step, we need to decide, which AoIs can be covered by swarm.
 LatexCommand bibtex
 bibfiles "bibliography"
 options "bibtotoc,plainnat"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+\start_of_appendix
+Contents of the enclosed CD
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+SwarmDeployment 	Main application
+\end_layout
+
+\begin_layout Plain Layout
+
+  SwarmDeployment    Source code of application in C++
+\end_layout
+
+\begin_layout Plain Layout
+
+  Win32 	Compiled binaries for 32bit Windows
+\end_layout
+
+\begin_layout Plain Layout
+
+UtilityScripts  	PHP utility scripts
+\end_layout
+
+\begin_layout Plain Layout
+
+VRepPathBuilder 	Source code of VREP simulation program
+\end_layout
+
+\begin_layout Plain Layout
+
+bibliography		Used bibliography
+\end_layout
+
+\begin_layout Plain Layout
+
+videos  		Videos of VREP simulations
+\end_layout
+
+\begin_layout Plain Layout
+
+bachelor_thesis.pdf 	Electronic version of bachelor thesis
+\end_layout
 
 \end_inset
 

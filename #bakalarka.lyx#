@@ -650,7 +650,7 @@ status open
 \end_layout
 
 \begin_layout Subparagraph*
-Prohlášení autora práce 
+Author statement for the undergraduate thesis: 
 \begin_inset Newline newline
 \end_inset
 
@@ -658,9 +658,10 @@ Prohlášení autora práce
 \end_layout
 
 \begin_layout Standard
-Prohlašuji, že jsem předloženou práci vypracoval samostatně a že jsem uvedl
- veškeré použité informační zdroje v souladu s Metodickým pokynem o dodržování
- etických principů při přípravě vysokoškolských závěrečných prací.
+I declare that the presented work was developed independently and that I
+ have listed all the sources of information used within it in accordance
+ with the methodical instructions for observing the ethical principles in
+ the presentation of university theses.
  
 \end_layout
 
@@ -687,7 +688,7 @@ noindent
 
 
 \size small
- V Praze dne 
+ Prague, date 
 \size default
 ________
 \size small
@@ -716,7 +717,7 @@ $
 \backslash
 overline{
 \backslash
-textrm{~~~~~~~~~Podpis autora práce~~~}}$
+textrm{~~~~~~~~~signature~~~}}$
 \end_layout
 
 \end_inset
@@ -3482,19 +3483,12 @@ g matrix
 : 
 \begin_inset Formula 
 \begin{equation}
-A_{j,k}:=A_{j,k}\cdot l^{m}\label{eq:coverage}
+A_{j,k}:=A_{j,k}\cdot l^{m},\label{eq:coverage}
 \end{equation}
 
 \end_inset
 
-
-\begin_inset CommandInset label
-LatexCommand label
-name "Coverage-of-AoIs"
-
-\end_inset
-
-, where variable 
+ where variable 
 \begin_inset Formula $l$
 \end_inset
 
@@ -3934,7 +3928,7 @@ key "Saska14:218644"
 \dot{y}\left(t\right) & = & v\left(t\right)\cos\left(t\right)\\
 \dot{z}\left(t\right) & = & w\left(t\right)\\
 \dot{\varphi}\left(t\right) & = & K\left(t\right)v\left(t\right)
-\end{array}
+\end{array}\label{eq:car-like}
 \end{equation}
 
 \end_inset
@@ -4221,12 +4215,12 @@ key "Dubins1957"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\ensuremath{{\displaystyle L(\tilde{q},\tilde{u})=\int_{0}^{t_{F}}\sqrt{\dot{x}(t)^{2}+\dot{y}(t)^{2}}dt}}
+\ensuremath{{\displaystyle L(\tilde{q}\left(t\right),\tilde{u}\left(t\right))=\int_{0}^{t_{F}}\sqrt{\dot{x}(t)^{2}+\dot{y}(t)^{2}}dt},}
 \end{equation}
 
 \end_inset
 
-, where 
+where 
 \begin_inset Formula $t_{F}$
 \end_inset
 
@@ -4235,25 +4229,23 @@ key "Dubins1957"
 \end_inset
 
  is reached, and a configuration is denoted as 
-\begin_inset Formula $q=(x,y,\theta)$
+\begin_inset Formula $q\left(t\right)=(x\left(t\right),y\left(t\right),\varphi\left(t\right))$
 \end_inset
 
 , 
-\begin_inset Formula $\tilde{x}_{t}$
+\begin_inset Formula $\tilde{q}\left(t\right)$
 \end_inset
 
  denotes the function 
-\begin_inset Formula $\tilde{x}_{t}:[0,t]\rightarrow X$
+\begin_inset Formula $\tilde{q}:[0,t]\rightarrow X$
 \end_inset
 
 , which is called the state trajectory (or state history).
- This is a continuous-time version of the state history, which was defined
- previously for problems that have discrete stages.
  Similarly, 
-\begin_inset Formula $\tilde{u}_{t}$
+\begin_inset Formula $\tilde{u}\left(t\right)$
 \end_inset
 
- denotes the action trajectory (or action history),.
+ denotes the action trajectory (or action history).
  If 
 \begin_inset Formula $q_{G}$
 \end_inset
@@ -4282,9 +4274,9 @@ When considering constraints of inputs (actions) for motion model, the system
 \begin_inset Formula 
 \begin{equation}
 \begin{array}{ccc}
-\dot{x} & = & \cos\theta\\
-\dot{y} & = & \sin\theta\\
-\dot{\theta} & = & u
+\dot{x}\left(t\right) & = & \cos\varphi\left(t\right)\\
+\dot{y}\left(t\right) & = & \sin\varphi\left(t\right)\\
+\dot{\varphi}\left(t\right) & = & u\left(t\right)
 \end{array}
 \end{equation}
 
@@ -4303,17 +4295,18 @@ in which
 \end_inset
 
 .
- For simplicity, assume that 
-\begin_inset Formula $\tan\phi=1$
+ As we can see, the simplified system is identical to equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:car-like"
+
+\end_inset
+
+ with 
+\begin_inset Formula $v=1$
 \end_inset
 
 .
- The following results also hold for any 
-\begin_inset Formula $\phi_{max}\in(0,\pi/2)$
-\end_inset
-
-.
- 
 \end_layout
 
 \begin_layout Standard
@@ -4323,27 +4316,7 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-The three motion primitives from which all optimal curves for the Dubins
- car can be constructed.
- 
-\begin_inset CommandInset label
-LatexCommand label
-name "tab:The-three-motion"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
+\align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="2">
 <features rotate="0" tabularvalignment="middle">
@@ -4363,7 +4336,11 @@ Symbol
 \begin_inset Text
 
 \begin_layout Plain Layout
-Steering u
+Steering 
+\begin_inset Formula $u$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -4383,7 +4360,10 @@ L
 \begin_inset Text
 
 \begin_layout Plain Layout
--1
+\begin_inset Formula $-\tan\phi_{max}$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -4423,13 +4403,34 @@ R
 \begin_inset Text
 
 \begin_layout Plain Layout
-1
+\begin_inset Formula $\tan\phi_{max}$
+\end_inset
+
+
 \end_layout
 
 \end_inset
 </cell>
 </row>
 </lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The three motion primitives from which all optimal curves for the Dubins
+ car can be constructed.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:The-three-motion"
+
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
@@ -4453,13 +4454,15 @@ key "Dubins1957"
  can always be expressed as a combination of no more than three motion primitive
 s.
  Each motion primitive applies a constant action over an interval of time.
+ This interval of time is not constant and it may differ for each primitive
+ during the path.
  Furthermore, the only actions that are needed to traverse the shortest
  paths are 
-\begin_inset Formula $u\in\{-1,0,1\}$
+\begin_inset Formula $u\in\{-\tan\phi_{max},0,\tan\phi_{max}\}$
 \end_inset
 
 .
- The primitives and their associated symbols are shown in 
+ The primitives and their associated symbols are shown in table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:The-three-motion"
@@ -4481,10 +4484,10 @@ reference "tab:The-three-motion"
 \end_inset
 
  primitives turn as sharply as possible to the left and right, respectively.
- Using these symbols, each possible kind of shortest path can be designated
- as a sequence of three symbols that corresponds to the order in which the
- primitives are applied.
- Let such a sequence be called a word .
+ Using these symbols, each possible kind of shortest path can be determined
+ as a sequence of three symbols in the order in which the primitives are
+ applied.
+ Let such a sequence be called a word.
  There is no need to have two consecutive primitives of the same kind because
  they can be merged into one.
  Under this observation, ten possible words of length three are possible.
@@ -4504,8 +4507,7 @@ reference "tab:The-three-motion"
 
 \begin_layout Standard
 The shortest path between any two configurations can always be characterized
- by one of these words.
- These are called the Dubins curves.
+ by one of these words, which are called the Dubins curves.
 \end_layout
 
 \begin_layout Section
@@ -4513,31 +4515,25 @@ The shortest path between any two configurations can always be characterized
 status open
 
 \begin_layout Plain Layout
-Optimization using Dubins curves
+Trajectories optimization using Dubins curves
 \end_layout
 
 \end_inset
 
-Optimization using Dubins curves
+Trajectories optimization using Dubins curves
 \end_layout
 
 \begin_layout Standard
-Because of the fact that Dubins curves provide us optimal trajectory, they
- can be used to optimize trajectory found with the RRT-Path algorithm.
-\end_layout
-
-\begin_layout Standard
-For only one UAV, the situation is quite simple and optimization works as
- follows.
-\end_layout
-
-\begin_layout Standard
-Two random points of trajectory are chosen and Dubins curves are calculated
+Because of the fact that Dubins curves provide us an optimal path, they
+ can be used to optimize the trajectory found with the RRT-Path algorithm.
+ For only one UAV, the proposed optimization algorithm works as follows.
+ Two random points of trajectory are chosen and Dubins curves are calculated
  between them.
  If calculated curves do not collide with the obstacles, they are used instead
- of original trajectory between chosen points.
- This points choosing and trajectory replacing is repeated until the whole
- trajectory can not be shortened more and thus is optimal.
+ of the original trajectory between the points.
+ This step is repeated until the whole trajectory can not be shortened more
+ after e.g.
+ 2000 iterations and thus is sub-optimal.
 \end_layout
 
 \begin_layout Standard
@@ -4554,24 +4550,31 @@ In a real situation, we do not know whether found trajectory is optimal
 \end_layout
 
 \begin_layout Standard
-But in a swarm, the situation is complicated because of relative localization
- and minimal and maximal distances between individual UAVs.
- 
-\end_layout
+For a swarm, the situation is complicated because of relative localization
+ constraints, i.e.
+ minimal and maximal distances between individual UAVs.
+ Dubins curves must be sampled in the same frequency as the trajectory found
+ by the RRT-Path algorithm.
+ The motion model in the RRT-Path algorithm uses constant control input
+ for a fixed time interval 
+\begin_inset Formula $T$
+\end_inset
 
-\begin_layout Standard
-So the algorithm must be modified.
- Dubins curves must be sampled with same frequency as the rest of trajectory
- (this is frequency of the RRT-Path algorithm or higher frequency when a
- trajectory is being re-sampled) and each point has to be validated for
- feasibility in terms of minimal and maximal distance from another UAVs.
+.
+ The frequency of sampling is 
+\begin_inset Formula $\frac{1}{T}$
+\end_inset
+
+ or its integral multiply when a trajectory is being re-sampled.
+ Each point has to be validated for feasibility in terms of minimal and
+ maximal distance from another UAVs.
  So the curves can be used only when all trajectories between minimal and
  maximal distance of relative localization.
 \end_layout
 
 \begin_layout Standard
-Due to using random points during optimization, the optimization is stochastic
- and non-deterministic.
+Due to using randomly chosen points, the optimization is stochastic and
+ non-deterministic.
 \end_layout
 
 \begin_layout Subsection
@@ -4588,28 +4591,29 @@ One UAV demonstration
 \end_layout
 
 \begin_layout Standard
-In 
+In figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:One-UAV-before"
 
 \end_inset
 
- we have trajectory of one UAV found by the RRT-Path algorithm in map with
- one obstacle marked by a dark grey rectangle.
+ a trajectory of one UAV found by the RRT-Path algorithm in map with one
+ obstacle marked by a dark grey rectangle is depicted.
  Obstacle amplification is marked by a light grey rectangle.
- In 
+ In figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:One-UAV-after"
 
 \end_inset
 
- we can see optimal trajectory found using Dubins curves.
+ optimal trajectory found using Dubins curves is shown.
  The resulting trajectory consists of many Dubins curves and it was obtained
  by algorithm mentioned above.
  Random points have been replaced by Dubins curves and after many iterations,
- an optimal trajectory was found.
+ e.g.
+ 2000, the optimal trajectory was found.
 \end_layout
 
 \begin_layout Standard
@@ -4619,10 +4623,20 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/oneUAV.json.png
+	lyxscale 60
+	scale 60
+
+\end_inset
+
+
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-One UAV before Dubins curves optimization
+Trajectory of one UAV found by the RRT-Path algorithm before Dubins curves
+ optimization
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:One-UAV-before"
@@ -4637,18 +4651,6 @@ name "fig:One-UAV-before"
 
 \end_layout
 
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename obrazky/oneUAV.json.png
-	lyxscale 60
-	scale 60
-
-\end_inset
-
-
-\end_layout
-
 \end_inset
 
 
@@ -4665,30 +4667,29 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/oneUAVoptimized.json.png
+	lyxscale 60
+	scale 60
+
+\end_inset
+
+
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-One UAV after Dubins curves optimization
+Trajectory of one UAV found by the RRT-Path algorithm after Dubins curves
+ optimization
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:One-UAV-after"
 
 \end_inset
 
-
+.
+ 
 \end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename obrazky/oneUAVoptimized.json.png
-	lyxscale 60
-	scale 60
 
 \end_inset
 
@@ -4721,8 +4722,8 @@ name "chap:Path-resampling"
 \end_layout
 
 \begin_layout Standard
-Motion model in the RRT-Path algorithm uses constant input in range from
- 0.5 to 1 second.
+Motion model in the RRT-Path algorithm uses constant control input in time
+ interval from 0.5 to 1 second.
  Smaller interval for constant input causes RRT-Path algorithm to run for
  too long.
  When using too short constant input interval, the tree has too many nodes,
@@ -5068,11 +5069,16 @@ V-REP simulations
 \end_layout
 
 \begin_layout Standard
-V-REP is an acronym for Virtual robot experimentation platform, a simulator
- developed by Coppelia Robotics, providing an advanced environment for testing
- and simulations of robots of all types.
- The V-REP environment is free and open-souce for educational purposes and
- also has commercial licence.
+V-REP is an acronym for Virtual robot experimentation platform 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "vrep"
+
+\end_inset
+
+, a simulator developed by Coppelia Robotics, providing an advanced environment
+ for testing and simulations of robots of all types.
+ The V-REP environment is free and open-souce for educational purposes.
  The environment takes in account certain physical laws like gravity, inertia
  or friction, which enables to truthfully verify applicability for deployment
  of UAVs in the real world.
@@ -5164,14 +5170,7 @@ where
 But as mentioned earlier, even this approach did not go well.
  In long passages, where trajectory did not turn, UAVs increased their velocity
  and inertia, which made them harder to turn.
- The problem of overshooting is shown in figures 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Map-with-UAV"
-
-\end_inset
-
- and 
+ The problem of overshooting is shown in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:UAV-overshoot"
@@ -5225,41 +5224,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-\begin_inset Graphics
-	filename obrazky/mapWithPassage.png
-	lyxscale 40
-	scale 40
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Map with UAV overshoot 
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Map-with-UAV"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
@@ -5278,6 +5242,30 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
 \align center
 \begin_inset Graphics
 	filename obrazky/overshoot3_2.png
@@ -5287,14 +5275,30 @@ status open
 \end_inset
 
 
-\begin_inset space ~
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
 \end_inset
 
 
-\begin_inset space ~
+\end_layout
+
 \end_inset
 
 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename obrazky/overshoot4.png
 	lyxscale 50
@@ -5309,7 +5313,31 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-UAV overshoot
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+UAV overshoot.
+ In a) we see UAVs flying from the right to the left.
+ Every UAV follows its target, marked with a coloured circle.
+ In the b) the planned trajectory has a curve and targets start heading
+ upwards.
+ In c) all UAVs have too big inertia to follow its targets precisely and
+ they overshoot.
+ 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:UAV-overshoot"
@@ -5324,9 +5352,253 @@ name "fig:UAV-overshoot"
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Simulations
+\end_layout
+
+\begin_layout Standard
+Trajectories provided by the algorithm proposed in this theses were simulated
+ and verified in the V-REP environment.
+ Screenshots from the simulation are in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:VREP-simulation-of"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
 \begin_layout Plain Layout
-Here can be seen 3 iterations.
- Next state is changed during 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/bscap0000.jpg
+	lyxscale 30
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+t = 0 s
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/bscap0001.jpg
+	lyxscale 30
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+t = 25 s
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/bscap0002.jpg
+	lyxscale 30
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+t = 45 s
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/bscap0003.jpg
+	lyxscale 30
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+t = 71 s
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/bscap0005.jpg
+	lyxscale 30
+	scale 29.5
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+t = 133 s
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/bscap0006.jpg
+	lyxscale 30
+	scale 29.5
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+t = 192 s
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+VREP simulation of trajectories
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:VREP-simulation-of"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -5481,6 +5753,14 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/umlSchema.svg
+	scale 40
+
+\end_inset
+
+
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -5493,17 +5773,6 @@ name "fig:Dependency-diagram"
 
 
 \end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename obrazky/umlSchema.svg
-	scale 40
 
 \end_inset
 
@@ -5888,6 +6157,14 @@ status open
 
 \begin_layout Plain Layout
 \align center
+\begin_inset Graphics
+	filename obrazky/pathBeforeDubins.png
+	lyxscale 40
+	scale 28
+
+\end_inset
+
+
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -5900,14 +6177,6 @@ name "fig:Path-before-Dubins"
 
 
 \end_layout
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename obrazky/pathBeforeDubins.png
-	lyxscale 40
-	scale 28
 
 \end_inset
 
@@ -5964,10 +6233,15 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/pathAfterDubins20Hz.png
+	lyxscale 40
+	scale 28
 
-\end_layout
+\end_inset
 
-\begin_layout Plain Layout
+
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -5980,18 +6254,6 @@ name "fig:Path-after-Dubins"
 
 
 \end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename obrazky/pathAfterDubins20Hz.png
-	lyxscale 40
-	scale 28
 
 \end_inset
 
@@ -6015,25 +6277,7 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Re-sampling and optimization results
-\begin_inset CommandInset label
-LatexCommand label
-name "tab:Re-sampling-and-optimization"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
+\align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="12" columns="4">
 <features rotate="0" tabularvalignment="middle">
@@ -6502,6 +6746,22 @@ Average distance [m]
 \end_inset
 
 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Re-sampling and optimization results
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Re-sampling-and-optimization"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -6539,6 +6799,15 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/experiment1-frequencyDependence.png
+	lyxscale 40
+	scale 65
+
+\end_inset
+
+
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -6551,18 +6820,6 @@ name "fig:Re-sampling-and-optimization"
 
 
 \end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename obrazky/experiment1-frequencyDependence.png
-	lyxscale 40
-	scale 65
 
 \end_inset
 
@@ -6623,11 +6880,15 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
 \align center
+\begin_inset Graphics
+	filename obrazky/experiment1-lowFrequenciesErrors.png
+	lyxscale 40
+	scale 65
+
+\end_inset
+
+
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -6640,14 +6901,6 @@ name "fig:Time-course-of"
 
  
 \end_layout
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename obrazky/experiment1-lowFrequenciesErrors.png
-	lyxscale 40
-	scale 65
 
 \end_inset
 
@@ -6670,6 +6923,15 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/experiment1-middleFrequenciesErrors.png
+	lyxscale 40
+	scale 65
+
+\end_inset
+
+
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -6688,18 +6950,6 @@ name "fig:Time-course-of-1"
 
 \end_layout
 
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename obrazky/experiment1-middleFrequenciesErrors.png
-	lyxscale 40
-	scale 65
-
-\end_inset
-
-
-\end_layout
-
 \end_inset
 
 
@@ -6712,6 +6962,15 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/experiment1-highFrequenciesErrors.png
+	lyxscale 40
+	scale 65
+
+\end_inset
+
+
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -6724,18 +6983,6 @@ name "fig:Time-course-of-2"
 
  
 \end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename obrazky/experiment1-highFrequenciesErrors.png
-	lyxscale 40
-	scale 65
 
 \end_inset
 
@@ -6766,6 +7013,14 @@ status open
 
 \begin_layout Plain Layout
 \align center
+\begin_inset Graphics
+	filename obrazky/path-03-27-17-49-16-before-dubins.json.png
+	lyxscale 40
+	scale 28
+
+\end_inset
+
+
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -6778,14 +7033,6 @@ name "fig:Path-before-Dubins-1"
 
 
 \end_layout
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename obrazky/path-03-27-17-49-16-before-dubins.json.png
-	lyxscale 40
-	scale 28
 
 \end_inset
 
@@ -6830,6 +7077,15 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/path-04-25-16-23-37-05-optimized.json.png
+	lyxscale 40
+	scale 28
+
+\end_inset
+
+
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -6842,18 +7098,6 @@ name "fig:Path-after-Dubins-1"
 
 
 \end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename obrazky/path-04-25-16-23-37-05-optimized.json.png
-	lyxscale 40
-	scale 28
 
 \end_inset
 
@@ -6903,6 +7147,15 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/experiment2-frequencyDependence.png
+	lyxscale 40
+	scale 65
+
+\end_inset
+
+
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -6915,18 +7168,6 @@ name "fig:Re-sampling-and-optimization-1"
 
 
 \end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename obrazky/experiment2-frequencyDependence.png
-	lyxscale 40
-	scale 65
 
 \end_inset
 
@@ -6986,6 +7227,14 @@ status open
 
 \begin_layout Plain Layout
 \align center
+\begin_inset Graphics
+	filename obrazky/experiment2-lowFrequenciesErrors.png
+	lyxscale 40
+	scale 65
+
+\end_inset
+
+
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -6998,14 +7247,6 @@ name "fig:Time-course-of-3"
 
  
 \end_layout
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename obrazky/experiment2-lowFrequenciesErrors.png
-	lyxscale 40
-	scale 65
 
 \end_inset
 
@@ -7024,6 +7265,15 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/experiment2-middleFrequenciesErrors.png
+	lyxscale 40
+	scale 65
+
+\end_inset
+
+
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -7042,18 +7292,6 @@ name "fig:Time-course-of-1-1"
 
 \end_layout
 
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename obrazky/experiment2-middleFrequenciesErrors.png
-	lyxscale 40
-	scale 65
-
-\end_inset
-
-
-\end_layout
-
 \end_inset
 
 
@@ -7066,6 +7304,15 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/experiment2-highFrequenciesErrors.png
+	lyxscale 40
+	scale 70
+
+\end_inset
+
+
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -7078,18 +7325,6 @@ name "fig:Time-course-of-2-1"
 
  
 \end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename obrazky/experiment2-highFrequenciesErrors.png
-	lyxscale 40
-	scale 70
 
 \end_inset
 
@@ -7123,23 +7358,23 @@ This thesis contributes to the problems of autonomous surveillance with
 \end_layout
 
 \begin_layout Standard
-The goal of this thesis was to design and implement and algorithm based
- on RRT-Path algorithm for motion planning of a swarm of cooperating unmanned
+The goal of this thesis was to design and implement a method based on the
+ RRT-Path algorithm for motion planning of a swarm of cooperating unmanned
  aerial vehicles in the task of autonomous surveillance, optimize it by
  Dubins curves and simulate the flight of the swarm in V-REP platform.
  The algorithm provides trajectories from a depot station to optimal positions
  in Areas of Interest in two internationally standardized formats (CSV and
  JSON).
  An easy computable cost function had to be created and implemented.
- Feasibility of trajectory in each point has been ensured by an appropriate
- motion model and relative localization system.
+ Feasibility of trajectory in each point was ensured by an appropriate motion
+ model and relative localization system.
 \end_layout
 
 \begin_layout Standard
 The task was approached by separating the task to more smaller subtasks.
- The first subtask is finding a trajectory to a position, in which all UAVs
- are located above Areas of Interest.
- The trajectory finding is realized by using A* algorithm to find the optimal
+ The first subtask is finding a path to a position, in which all UAVs are
+ located above Areas of Interest.
+ The path finding is realized by using A* algorithm to find the optimal
  guiding path and the RRT-Path algorithm uses this path to guide the space-filli
 ng tree.
  The second subtask is optimization of AoIs coverage using the RRT algorithm.
@@ -7253,6 +7488,436 @@ In the first step, we need to decide, which AoIs can be covered by swarm.
  The exclusion of some AoIs could be used to split AoIs to more groups.
  Then each group will be covered by its own sub-swarm and trajectories will
  be planned independently.
+\end_layout
+
+\begin_layout Chapter
+\start_of_appendix
+Contents of the enclosed CD
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{minipage}[t]{.35
+\backslash
+textwidth}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{Verbatim}
+\end_layout
+
+\begin_layout Plain Layout
+
+├── SwarmDeployment
+\end_layout
+
+\begin_layout Plain Layout
+
+│   ├── fw-esp
+\end_layout
+
+\begin_layout Plain Layout
+
+│   ├── fw-stm32
+\end_layout
+
+\begin_layout Plain Layout
+
+│   └── pcb
+\end_layout
+
+\begin_layout Plain Layout
+
+│
+\end_layout
+
+\begin_layout Plain Layout
+
+├── UtilityScripts
+\end_layout
+
+\begin_layout Plain Layout
+
+│   ├── fw-esp
+\end_layout
+
+\begin_layout Plain Layout
+
+│   ├── fw-stm32
+\end_layout
+
+\begin_layout Plain Layout
+
+│   └── pcb
+\end_layout
+
+\begin_layout Plain Layout
+
+│       ├── rev23b
+\end_layout
+
+\begin_layout Plain Layout
+
+│       └── rev24
+\end_layout
+
+\begin_layout Plain Layout
+
+│
+\end_layout
+
+\begin_layout Plain Layout
+
+├── bibliography
+\end_layout
+
+\begin_layout Plain Layout
+
+│   ├── datasheets
+\end_layout
+
+\begin_layout Plain Layout
+
+│   └── papers
+\end_layout
+
+\begin_layout Plain Layout
+
+│
+\end_layout
+
+\begin_layout Plain Layout
+
+├── figures
+\end_layout
+
+\begin_layout Plain Layout
+
+│   ├── diagrams
+\end_layout
+
+\begin_layout Plain Layout
+
+│   ├── photo
+\end_layout
+
+\begin_layout Plain Layout
+
+│   ├── plots
+\end_layout
+
+\begin_layout Plain Layout
+
+│   ├── schema
+\end_layout
+
+\begin_layout Plain Layout
+
+│   └── screnshots
+\end_layout
+
+\begin_layout Plain Layout
+
+│
+\end_layout
+
+\begin_layout Plain Layout
+
+├── README.txt
+\end_layout
+
+\begin_layout Plain Layout
+
+└── bachelor_thesis.pdf
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{Verbatim}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{minipage}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{minipage}[t]{.65
+\backslash
+textwidth}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+textbf{Firmware a hardware zkušebního prototypu} 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Firmware ESP8266 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Firmware STM32 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Schéma a výrobní podklady desky plošných spojů 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+textbf{Firmware a hardware finální verze přístroje} 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Firmware ESP8266 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Firmware STM32 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Schéma a výrobní podklady desky plošných spojů 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+- Revize 23b - vyrobená verze desky 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+- Revize 24 - verze s opravami chyb 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+textbf{Použitá literatura} 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Datasheety použitých součástek 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Odkazované vědecké články (volně šiřitelné) 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+textbf{Ilustrace použité v práci} 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Blokové diagramy (SVG) 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Fotografie 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Grafy 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Schémata zapojení 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Snímky obrazovky (uživatelské rozhraní) 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Doprovodná informace k CD 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Elektronická verze bakalářské práce
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{minipage}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
