@@ -3004,9 +3004,9 @@ reference "fig:Example-of-the"
 
  in graph is calculated as 
 \begin_inset Formula 
-\[
+\begin{equation}
 length\left(p\left(q_{start},q_{goal}\right)\right)=\stackrel[q_{i}=q_{start}]{q_{goal-1}}{\sum}d\left(q_{i},q_{i+1}\right)+\stackrel[q_{i}=q_{start+1}]{q_{goal-1}}{\sum}o\left(q_{i}\right)
-\]
+\end{equation}
 
 \end_inset
 
@@ -3721,7 +3721,7 @@ reference "eq:coverage"
 .
  The AoI is marked with green colour and the areas observed by the UAVs
  is marked with blue colour.
- Area covered by more UAVs has smaller value.
+ Area covered by more UAVs has smaller value as implies the formula.
  
 \end_layout
 
@@ -3914,12 +3914,15 @@ Motion model
 \begin_layout Standard
 The RRT-Path algorithm is universal and works with any motion model, which
  allows us to find paths feasible for swarm of UAVs.
+ The motion model in RRT-Path is important for obtaining configurations
+ of UAVs in the next state.
+ In order to obtain smooth trajectories that are easy to follow, the trajectory
+ planning in space of circles and lines is chosen.
  For this purpose, car-like model was chosen.
- Car like model is very fast to compute and can be computed analytically.
  Differential equations of motion model in 3D from 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "SaskaVonasek"
+key "Saska14:218644"
 
 \end_inset
 
@@ -3961,11 +3964,9 @@ where
 \begin_inset Formula $\begin{bmatrix}K\left(t\right) & w\left(t\right) & v\left(t\right)\end{bmatrix}$
 \end_inset
 
- represent the input vector of motion model.
- Differential equations are readable and useful for representation in equations,
- but they are not so useful for computer algorithm due to time consumption.
- Difference equations are better for usage in algorithm instead of differential
- equations because they are much faster and scalable.
+ represents the input vector of motion model.
+ Difference equations are used for calculation of next state in RRT-Path
+ and RRT algorithms.
  When inputs are held constant in each time interval between two time steps,
  difference equations are 
 \begin_inset Formula 
@@ -4005,11 +4006,10 @@ name "sec:Relative-localization"
 \end_layout
 
 \begin_layout Standard
-When swarm consists of only one UAV, no relative localization is needed.
- But when more UAVS are in swarm, every UAV has to be aware of its neighbours
- in order to remain together in one swarm.
- In this thesis, relative localization is implemented by setting the minimal
- distance 
+In compact swarms, every UAV has to be aware of its neighbours in order
+ to remain together in one swarm and reduce the possibility of collision.
+ In this thesis, constraints of relative localization are implemented by
+ setting the minimal distance 
 \begin_inset Formula $d_{min}$
 \end_inset
 
@@ -4018,17 +4018,15 @@ When swarm consists of only one UAV, no relative localization is needed.
 \end_inset
 
 .
- The minimal distance is set because UAV push air beneath them when they
- fly.
- UAVs in the Multi-Robot Systems group at CTU have weight around 3 kg, which
- means 3 kg of air needs to be pushed below UAV in order to keep it flying.
+ The minimal distance is set to avoid collisions and because UAVs push air
+ beneath them when they fly.
+ Large amount of air needs to be pushed below UAV in order to keep it flying.
  Because of this, UAVs can not fly too close to each other because of air
  currents they produce.
- The minimal distance is minimal distance in which UAVs do not affect each
- other by air currents.
- In last measurements, the minimal distance was 2 meters.
- The maximal distance needs to be set because of sensors range.
- UAVs in the Multi-Robot Systems group at CTU use on-board camera based
+ UAVs in minimal distance do not affect each other by air currents.
+ By real experiments, the minimal distance was identified as 2 meters.
+ The maximal distance needs to be set to respect the sensors range.
+ UAVs in the Multi-Robot Systems group at CTU use on-board vision based
  localization system, published in 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -4037,19 +4035,22 @@ key "Faigl2013"
 \end_inset
 
 .
- Sensors have maximal range and UAVs in bigger distance than this maximal
- range can not be seen.
- In experiments, the maximal distance was 5 meters.
+ In 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Faigl2013"
+
+\end_inset
+
+ a maximal range of sensors is specified and UAVs in bigger distance than
+ this maximal range can not be seen.
+ In experiments in this thesis, the maximal distance was assumed to be 5
+ meters.
  
 \end_layout
 
 \begin_layout Standard
-In configuration of whole algorithm, number of neighbours 
-\begin_inset Formula $n$
-\end_inset
-
- is set.
- Every UAV must have 
+Each UAV must have 
 \begin_inset Formula $n$
 \end_inset
 
@@ -4061,20 +4062,20 @@ In configuration of whole algorithm, number of neighbours
 \begin_inset Formula $d_{min}<d<d_{max}$
 \end_inset
 
- in every step of configuration.
- Default setting is 
+ in each step of the motion planning.
+ Default setting 
 \begin_inset Formula $n=2$
 \end_inset
 
-.
- Computation of this relative localization is fast, but unusable for more
- than 5 UAVs.
+ was used in presented experiments.
+ Computation of this relative localization constraint is fast, but this
+ constraint is unusable for more than 5 UAVs.
  Swarm of 6 or more UAVs can split to 2 or more groups and still fit this
  relative localization constraint.
- The only solution to check whether all UAVs are in same swarm can be obtained
- by using following algorithm, which consists of two steps and uses graph
- representation.
- Every UAV is node and every pair of UAVs with distance 
+ The following algorithm, which consists of two steps and uses graph representat
+ion, is proposed to check whether all UAVs are in the same swarm.
+ Every UAV is considered as a node and every pair of UAVs with distance
+ 
 \begin_inset Formula $d$
 \end_inset
 
@@ -4082,14 +4083,14 @@ In configuration of whole algorithm, number of neighbours
 \begin_inset Formula $d_{min}<d<d_{max}$
 \end_inset
 
- are connected by an edge.
+, are connected by an edge.
  If the graph has only one connected component, all UAVs are in one swarm.
  Otherwise, the graph has more connected components, which implies UAVs
  are split into more swarms.
 \end_layout
 
 \begin_layout Standard
-In the first step, the adjacency matrix 
+In the first step of the algorithm, the adjacency matrix 
 \begin_inset Formula $A$
 \end_inset
 
@@ -4099,14 +4100,14 @@ In the first step, the adjacency matrix
 \begin_inset Formula $A$
 \end_inset
 
- is built by following pattern.
+ is built as
 \begin_inset Formula 
-\[
+\begin{equation}
 A_{i,j}=\begin{cases}
 1 & if\,d_{min}<d_{i,j}<d_{max}\\
 0 & otherwise
 \end{cases}
-\]
+\end{equation}
 
 \end_inset
 
@@ -4136,9 +4137,9 @@ is distance between
 \end_inset
 
 .
- When all nodes are visited during the traversing, the graph has only one
+ If all nodes are visited during the traversing, the graph has only one
  connected component and all UAVs are in one swarm.
- In configuration can be set whether swarm splitting is enabled or not.
+ The swarming method can be enabled or not in configuration.
 \end_layout
 
 \begin_layout Chapter
@@ -5121,9 +5122,9 @@ Another implementation uses linear interpolated trajectory between UAV and
 \begin_layout Standard
 So the calculation was defined as follows
 \begin_inset Formula 
-\[
+\begin{equation}
 \mathbf{X}\left(k+1\right)_{target}=\mathbf{X}\left(k\right)_{UAV}+\frac{\left(\mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right)}{\left\Vert \mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right\Vert }\cdot const
-\]
+\end{equation}
 
 \end_inset
 
@@ -5198,7 +5199,7 @@ This has been fixed by not updating the position of the target when distance
  position of next state is still the same, so the equation describing target
  position is
 \begin_inset Formula 
-\[
+\begin{equation}
 \mathbf{X}\left(k+1\right)_{target}=\begin{cases}
 \mathbf{X}\left(k\right)_{UAV}+\frac{\left(\mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right)}{\left\Vert \mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right\Vert }\cdot const\\
 if\left\Vert \mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right\Vert <\left\Vert \mathbf{X}\left(k-1\right)_{ns}-\mathbf{X}\left(k-1\right)_{UAV}\right\Vert \\
@@ -5206,7 +5207,7 @@ if\left\Vert \mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right\
 \mathbf{X}\left(k\right)_{target}\\
 else
 \end{cases}
-\]
+\end{equation}
 
 \end_inset
 
