@@ -3482,19 +3482,12 @@ g matrix
 : 
 \begin_inset Formula 
 \begin{equation}
-A_{j,k}:=A_{j,k}\cdot l^{m}\label{eq:coverage}
+A_{j,k}:=A_{j,k}\cdot l^{m},\label{eq:coverage}
 \end{equation}
 
 \end_inset
 
-
-\begin_inset CommandInset label
-LatexCommand label
-name "Coverage-of-AoIs"
-
-\end_inset
-
-, where variable 
+ where variable 
 \begin_inset Formula $l$
 \end_inset
 
@@ -3934,7 +3927,7 @@ key "Saska14:218644"
 \dot{y}\left(t\right) & = & v\left(t\right)\cos\left(t\right)\\
 \dot{z}\left(t\right) & = & w\left(t\right)\\
 \dot{\varphi}\left(t\right) & = & K\left(t\right)v\left(t\right)
-\end{array}
+\end{array}\label{eq:car-like}
 \end{equation}
 
 \end_inset
@@ -4221,12 +4214,12 @@ key "Dubins1957"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\ensuremath{{\displaystyle L(\tilde{q}\left(t\right),\tilde{u}\left(t\right))=\int_{0}^{t_{F}}\sqrt{\dot{x}(t)^{2}+\dot{y}(t)^{2}}dt}}
+\ensuremath{{\displaystyle L(\tilde{q}\left(t\right),\tilde{u}\left(t\right))=\int_{0}^{t_{F}}\sqrt{\dot{x}(t)^{2}+\dot{y}(t)^{2}}dt},}
 \end{equation}
 
 \end_inset
 
-, where 
+where 
 \begin_inset Formula $t_{F}$
 \end_inset
 
@@ -4301,17 +4294,18 @@ in which
 \end_inset
 
 .
- For simplicity, assume that 
-\begin_inset Formula $\tan\phi=1$
+ As we can see, the simplified system is identical to equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:car-like"
+
+\end_inset
+
+ with 
+\begin_inset Formula $v=1$
 \end_inset
 
 .
- The following results also hold for any 
-\begin_inset Formula $\phi_{max}\in(0,\pi/2)$
-\end_inset
-
-.
- 
 \end_layout
 
 \begin_layout Standard
@@ -4341,7 +4335,11 @@ Symbol
 \begin_inset Text
 
 \begin_layout Plain Layout
-Steering u
+Steering 
+\begin_inset Formula $u$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -4361,7 +4359,10 @@ L
 \begin_inset Text
 
 \begin_layout Plain Layout
--1
+\begin_inset Formula $-\tan\phi_{max}$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -4401,7 +4402,10 @@ R
 \begin_inset Text
 
 \begin_layout Plain Layout
-1
+\begin_inset Formula $\tan\phi_{max}$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -4449,13 +4453,15 @@ key "Dubins1957"
  can always be expressed as a combination of no more than three motion primitive
 s.
  Each motion primitive applies a constant action over an interval of time.
+ This interval of time is not constant and it may differ for each primitive
+ during the path.
  Furthermore, the only actions that are needed to traverse the shortest
  paths are 
-\begin_inset Formula $u\in\{-1,0,1\}$
+\begin_inset Formula $u\in\{-\tan\phi_{max},0,\tan\phi_{max}\}$
 \end_inset
 
 .
- The primitives and their associated symbols are shown in 
+ The primitives and their associated symbols are shown in table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:The-three-motion"
@@ -4477,10 +4483,10 @@ reference "tab:The-three-motion"
 \end_inset
 
  primitives turn as sharply as possible to the left and right, respectively.
- Using these symbols, each possible kind of shortest path can be designated
- as a sequence of three symbols that corresponds to the order in which the
- primitives are applied.
- Let such a sequence be called a word .
+ Using these symbols, each possible kind of shortest path can be determined
+ as a sequence of three symbols in the order in which the primitives are
+ applied.
+ Let such a sequence be called a word.
  There is no need to have two consecutive primitives of the same kind because
  they can be merged into one.
  Under this observation, ten possible words of length three are possible.
@@ -4500,8 +4506,7 @@ reference "tab:The-three-motion"
 
 \begin_layout Standard
 The shortest path between any two configurations can always be characterized
- by one of these words.
- These are called the Dubins curves.
+ by one of these words, which are called the Dubins curves.
 \end_layout
 
 \begin_layout Section
@@ -4509,31 +4514,25 @@ The shortest path between any two configurations can always be characterized
 status open
 
 \begin_layout Plain Layout
-Optimization using Dubins curves
+Trajectories optimization using Dubins curves
 \end_layout
 
 \end_inset
 
-Optimization using Dubins curves
+Trajectories optimization using Dubins curves
 \end_layout
 
 \begin_layout Standard
-Because of the fact that Dubins curves provide us optimal trajectory, they
- can be used to optimize trajectory found with the RRT-Path algorithm.
-\end_layout
-
-\begin_layout Standard
-For only one UAV, the situation is quite simple and optimization works as
- follows.
-\end_layout
-
-\begin_layout Standard
-Two random points of trajectory are chosen and Dubins curves are calculated
+Because of the fact that Dubins curves provide us an optimal path, they
+ can be used to optimize the trajectory found with the RRT-Path algorithm.
+ For only one UAV, the proposed optimization algorithm works as follows.
+ Two random points of trajectory are chosen and Dubins curves are calculated
  between them.
  If calculated curves do not collide with the obstacles, they are used instead
- of original trajectory between chosen points.
- This points choosing and trajectory replacing is repeated until the whole
- trajectory can not be shortened more and thus is optimal.
+ of the original trajectory between the points.
+ This step is repeated until the whole trajectory can not be shortened more
+ after e.g.
+ 2000 iterations and thus is sub-optimal.
 \end_layout
 
 \begin_layout Standard
@@ -4550,24 +4549,31 @@ In a real situation, we do not know whether found trajectory is optimal
 \end_layout
 
 \begin_layout Standard
-But in a swarm, the situation is complicated because of relative localization
- and minimal and maximal distances between individual UAVs.
- 
-\end_layout
+For a swarm, the situation is complicated because of relative localization
+ constraints, i.e.
+ minimal and maximal distances between individual UAVs.
+ Dubins curves must be sampled in the same frequency as the trajectory found
+ by the RRT-Path algorithm.
+ The motion model in the RRT-Path algorithm uses constant control input
+ for a fixed time interval 
+\begin_inset Formula $T$
+\end_inset
 
-\begin_layout Standard
-So the algorithm must be modified.
- Dubins curves must be sampled with same frequency as the rest of trajectory
- (this is frequency of the RRT-Path algorithm or higher frequency when a
- trajectory is being re-sampled) and each point has to be validated for
- feasibility in terms of minimal and maximal distance from another UAVs.
+.
+ The frequency of sampling is 
+\begin_inset Formula $\frac{1}{T}$
+\end_inset
+
+ or its integral multiply when a trajectory is being re-sampled.
+ Each point has to be validated for feasibility in terms of minimal and
+ maximal distance from another UAVs.
  So the curves can be used only when all trajectories between minimal and
  maximal distance of relative localization.
 \end_layout
 
 \begin_layout Standard
-Due to using random points during optimization, the optimization is stochastic
- and non-deterministic.
+Due to using randomly chosen points, the optimization is stochastic and
+ non-deterministic.
 \end_layout
 
 \begin_layout Subsection
@@ -4584,28 +4590,29 @@ One UAV demonstration
 \end_layout
 
 \begin_layout Standard
-In 
+In figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:One-UAV-before"
 
 \end_inset
 
- we have trajectory of one UAV found by the RRT-Path algorithm in map with
- one obstacle marked by a dark grey rectangle.
+ a trajectory of one UAV found by the RRT-Path algorithm in map with one
+ obstacle marked by a dark grey rectangle is depicted.
  Obstacle amplification is marked by a light grey rectangle.
- In 
+ In figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:One-UAV-after"
 
 \end_inset
 
- we can see optimal trajectory found using Dubins curves.
+ optimal trajectory found using Dubins curves is shown.
  The resulting trajectory consists of many Dubins curves and it was obtained
  by algorithm mentioned above.
  Random points have been replaced by Dubins curves and after many iterations,
- an optimal trajectory was found.
+ e.g.
+ 2000, an optimal trajectory was found.
 \end_layout
 
 \begin_layout Standard
@@ -4627,7 +4634,8 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-One UAV before Dubins curves optimization
+Trajectory of one UAV found by the RRT-Path algorithm before Dubins curves
+ optimization
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:One-UAV-before"
@@ -4670,14 +4678,16 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-One UAV after Dubins curves optimization
+Trajectory of one UAV found by the RRT-Path algorithm after Dubins curves
+ optimization
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:One-UAV-after"
 
 \end_inset
 
-
+.
+ 
 \end_layout
 
 \end_inset
@@ -7022,6 +7032,15 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/experiment2-highFrequenciesErrors.png
+	lyxscale 40
+	scale 70
+
+\end_inset
+
+
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -7034,18 +7053,6 @@ name "fig:Time-course-of-2-1"
 
  
 \end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename obrazky/experiment2-highFrequenciesErrors.png
-	lyxscale 40
-	scale 70
 
 \end_inset
 
