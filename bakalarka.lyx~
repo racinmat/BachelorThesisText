@@ -5228,12 +5228,43 @@ Simulations
 \end_layout
 
 \begin_layout Standard
-Trajectories provided by the algorithm proposed in this theses were simulated
+Trajectories obtained from the algorithm proposed in this thesis were simulated
  and verified in the V-REP environment.
  Screenshots from the simulation are in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:VREP-simulation-of"
+
+\end_inset
+
+.
+ All videos with simulations can be seen in enclosed DVD.
+ Screenshots of trajectories verification on map 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Path-before-Dubins"
+
+\end_inset
+
+ are shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:VREP-simulation-of"
+
+\end_inset
+
+.
+ Screenshots of trajectories verification on map 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Path-before-Dubins-1"
+
+\end_inset
+
+ are shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:VREP-simulation-of-1"
 
 \end_inset
 
@@ -5260,8 +5291,8 @@ status open
 \align center
 \begin_inset Graphics
 	filename obrazky/bscap0000.jpg
-	lyxscale 30
-	scale 30
+	lyxscale 40
+	scale 40
 
 \end_inset
 
@@ -5280,21 +5311,21 @@ t = 0 s
 \end_inset
 
 
+\begin_inset space \hfill{}
+\end_inset
+
+
 \begin_inset Float figure
 wide false
 sideways false
 status open
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
 \align center
 \begin_inset Graphics
 	filename obrazky/bscap0001.jpg
-	lyxscale 30
-	scale 30
+	lyxscale 40
+	scale 40
 
 \end_inset
 
@@ -5322,15 +5353,11 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
 \align center
 \begin_inset Graphics
 	filename obrazky/bscap0002.jpg
-	lyxscale 30
-	scale 30
+	lyxscale 40
+	scale 50
 
 \end_inset
 
@@ -5349,21 +5376,21 @@ t = 45 s
 \end_inset
 
 
+\begin_inset space \hfill{}
+\end_inset
+
+
 \begin_inset Float figure
 wide false
 sideways false
 status open
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
 \align center
 \begin_inset Graphics
 	filename obrazky/bscap0003.jpg
-	lyxscale 30
-	scale 30
+	lyxscale 40
+	scale 40
 
 \end_inset
 
@@ -5385,6 +5412,20 @@ t = 71 s
 \end_layout
 
 \begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
 \begin_inset Float figure
 wide false
 sideways false
@@ -5394,8 +5435,8 @@ status open
 \align center
 \begin_inset Graphics
 	filename obrazky/bscap0005.jpg
-	lyxscale 30
-	scale 29.5
+	lyxscale 40
+	scale 40
 
 \end_inset
 
@@ -5419,6 +5460,26 @@ t = 133 s
 
 \end_layout
 
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
 \begin_layout Plain Layout
 \begin_inset Float figure
 wide false
@@ -5429,8 +5490,8 @@ status open
 \align center
 \begin_inset Graphics
 	filename obrazky/bscap0006.jpg
-	lyxscale 30
-	scale 29.5
+	lyxscale 40
+	scale 40
 
 \end_inset
 
@@ -5449,16 +5510,322 @@ t = 192 s
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
 VREP simulation of trajectories in complex map.
  All UAVs proceeded successfully from the initial position to the AoI, marked
  with white rectangle.
- Video with the simulation can be seen in enclosed CD.
+ Video with the simulation can be seen in enclosed DVD in the file videos/map0_n
+ew.avi.
+ Map used in this simulation is also used in experiments 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:RRT-Path"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:First-experiment"
+
+\end_inset
+
+ 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:VREP-simulation-of"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/bscap0007.jpg
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+t = 0 s
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/bscap0008.jpg
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+t = 21 s
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/bscap0009.jpg
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+t = 36 s
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/bscap0010.jpg
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+t = 40 s
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/bscap0011.jpg
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+t = 45 s
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/bscap0012.jpg
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+t = 50 s
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+VREP simulation of trajectories in complex map.
+ All UAVs proceeded successfully from the initial position to the AoI, marked
+ with white rectangle.
+ Video with the simulation can be seen in enclosed DVD in the file videos/map3_n
+ew.avi.
+ Map used in this simulation is also used in experiments 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:RRT-Path"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:First-experiment"
+
+\end_inset
+
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:VREP-simulation-of-1"
 
 \end_inset
 
@@ -5491,11 +5858,14 @@ Implementation
 \begin_layout Standard
 This part will cover implementation of the algorithm, which was used for
  simulations.
- Whole codebase in C++ can be found at 
-\begin_inset CommandInset href
-LatexCommand href
-name "this github repository"
-target "https://github.com/racinmat/AutonomousSurveillanceBachelorThesis"
+ Whole codebase in C++ can be found at Github repository 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://github.com/racinmat/AutonomousSurveillanceBachelorThesis
+\end_layout
 
 \end_inset
 
@@ -5504,21 +5874,27 @@ target "https://github.com/racinmat/AutonomousSurveillanceBachelorThesis"
  drawing map and trajectories from the JSON representation, batch running
  of Dubins curves optimization and concatenation of the experiment results
  before plotting them in Matlab.
- These can be seen at 
-\begin_inset CommandInset href
-LatexCommand href
-name "this github repository"
-target "https://github.com/racinmat/UAVUtils"
+ These can be seen at
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://github.com/racinmat/UAVUtils
+\end_layout
 
 \end_inset
 
 .
  V-REP simulations were made by communicating with V-REP through remote
- API, the client is written in Python and can be seen 
-\begin_inset CommandInset href
-LatexCommand href
-name "here"
-target "https://github.com/racinmat/VRepPathBuilder"
+ API, the client is written in Python and can be seen ar
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://github.com/racinmat/VRepPathBuilder
+\end_layout
 
 \end_inset
 
@@ -5536,17 +5912,20 @@ External libraries
 
 \begin_layout Standard
 Some external libraries are used in the implementation.
- Every used library is mentioned here.
- 
-\begin_inset CommandInset href
-LatexCommand href
-name "Boost libraries"
-target "http://www.boost.org/"
+ Every used external library is mentioned here.
+ Boost libraries, downloaded from 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://www.boost.org/
+\end_layout
 
 \end_inset
 
- are used for smart pointers, libraries for Dubins curves are from Master
- Thesis by Petr Váňa 
+, are used for smart pointers and matrix operations, libraries for Dubins
+ curves are from Master Thesis by Petr Váňa 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Vana2015"
@@ -5554,40 +5933,39 @@ key "Vana2015"
 \end_inset
 
 .
- Generating of JSON from C++ object is done via 
-\begin_inset CommandInset href
-LatexCommand href
-name "Json Spirit"
-target "http://www.codeproject.com/Articles/20027/JSON-Spirit-A-C-JSON-Parser-Generator-Implemented"
+ Generating of JSON from C++ object is done via Json spirit library.
+ Another external library is V_Collide from The University of North Carolina
+ at Chapel Hill.
+ The source code of the V_Collide library can be found at 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://gamma.cs.unc.edu/V-COLLIDE/
+\end_layout
 
 \end_inset
 
- library.
- Another external library is 
-\begin_inset CommandInset href
-LatexCommand href
-name "V-Collide"
-target "http://gamma.cs.unc.edu/V-COLLIDE/"
-
-\end_inset
-
- from The University of North Carolina at Chapel Hill.
- 
+.
 \end_layout
 
 \begin_layout Standard
 Because V-Collide sources were written in 1997 and because I used C++11
  compiler to compile my source codes, I had to rewrite part of this library
  for compatibility and to make public API easier to use.
- Modifications can be seen in 
-\begin_inset CommandInset href
-LatexCommand href
-name "this github repository"
-target "https://github.com/racinmat/VCollide2"
+ Modifications can be seen at 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://github.com/racinmat/VCollide2
+\end_layout
 
 \end_inset
 
-.
+ .
  
 \end_layout
 
@@ -5612,15 +5990,7 @@ reference "fig:Dependency-diagram"
 .
  To keep diagram simple, only services are displayed.
  Other classes, which are not services, were left out for readability.
- Diagram was generated using software 
-\begin_inset CommandInset href
-LatexCommand href
-name "StarUML"
-target "http://staruml.io/"
-
-\end_inset
-
-
+ Diagram was generated using software StarUML.
 \end_layout
 
 \begin_layout Standard
@@ -5765,6 +6135,13 @@ name "chap:Experiments"
 
 \begin_layout Section
 RRT-Path
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:RRT-Path"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -5775,44 +6152,24 @@ reference "fig:Map-used-for"
 
 \end_inset
 
-, is searched by using the RRT-Path algorithm.
- As we can see, the map is quite complex and has many obstacles.
+ is searched by using the RRT-Path algorithm.
  UAVs start in the lower left corner.
- In this figure, we can also see the trajectory found by RRT-Path algorithm.
+ In this figure, we can also see the trajectory found by the RRT-Path algorithm.
  The algorithm follows the guiding path quite precisely, and whole searching
  tree for each UAV has small branching factor.
  Only the AoI is covered by branches of searching trees.
- The algorithm is run 1000 times.
- The algorithm found the trajectory to AoI in every run.
- The results can be seen in the figures 
+ The algorithm is run 1000 times and a feasible solution was found in every
+ run.
+ The results can be seen in the figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Distances-between-UAVS"
 
 \end_inset
 
- and 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Distance-between-UAVs"
-
-\end_inset
-
-, where can be seen mean value and standard deviation in each iteration
+, where the mean value and standard deviation can be seen for each iteration
  of all 1000 runs.
- In the graph 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Distance-between-UAVs"
-
-\end_inset
-
- we can see total distance between current position of UAVs and their final
- position above AoI.
- As we can see, in the beginning, the UAVs are very distant from AoI, but
- they get closer to goal and try to minimize the distance.
- The increase of distance to goal corresponds with obstacles avoidance.
- The graph 
+ The figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Distances-between-UAVS"
@@ -5821,8 +6178,16 @@ reference "fig:Distances-between-UAVS"
 
 , describes distance to nearest neighbour.
  This experiment has been run with 3 UAVs.
- In every iteration of the algorithm, each UAV has some nearest neighbour.
- Distances between the UAV and its nearest neighbour is shown in the graph.
+ In every iteration of the algorithm, each UAV has a nearest neighbour.
+ Distances between each UAV and its nearest neighbour is shown in the figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Distances-between-UAVS"
+
+\end_inset
+
+.
  This information is important for the relative localization.
  The minimal and maximal distance are 24 and 180 map units, in this experiment.
  During the whole flight, UAVs fly very close to each other.
@@ -5859,7 +6224,9 @@ name "fig:Map-used-for"
 
 \end_inset
 
-
+.
+ Low branching factor can be found along the whole guiding path.
+ When UAVs arrive above AoI, branching factor is higher.
 \end_layout
 
 \end_inset
@@ -5895,56 +6262,21 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Distances between nearest UAVs in swarm and distance to AoI 
+Distances between nearest UAVs in swarm and distance to AoI in experiment
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:RRT-Path"
+
+\end_inset
+
+.
+ Relative distance is small along the whole guiding path.
+ Only the covering of AoI lets UAVs get more distant from each other.
+ 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Distances-between-UAVS"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename obrazky/experiment3-distanceToGoal.png
-	lyxscale 40
-	scale 65
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Distance between UAVs ans AoI 
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Distance-between-UAVs"
 
 \end_inset
 
@@ -6140,8 +6472,8 @@ name "fig:Path-after-Dubins"
 \end_layout
 
 \begin_layout Standard
-The following table shows average total, minimal and maximal distance of
- all trajectories from 100 optimizations after the re-sampling and optimization.
+The following table shows average total, minimal and maximal length of all
+ trajectories from 100 optimizations after the re-sampling and optimization.
 \end_layout
 
 \begin_layout Standard
@@ -6623,7 +6955,15 @@ Average distance [m]
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Re-sampling and optimization results
+Re-sampling and optimization results of the experiment 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:First-experiment"
+
+\end_inset
+
+.
+ The initial frequency has 
 \begin_inset CommandInset label
 LatexCommand label
 name "tab:Re-sampling-and-optimization"
@@ -6685,7 +7025,16 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Re-sampling and optimization results graph 
+Re-sampling and optimization results graph.
+ This is visualization of data from table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Re-sampling-and-optimization"
+
+\end_inset
+
+.
+ 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Re-sampling-and-optimization"
@@ -6742,7 +7091,7 @@ reference "fig:Time-course-of-2"
  frequency before re-sampling.
  As we can see, frequencies 14, 16, 18 and 20 Hz have almost zero standard
  deviation and converge to lower value than the initial frequency.
- High standard deviation can be seen in frequency 10 Hz.
+ High standard deviation can be seen for frequency 10 Hz.
  That means the optimization got stuck in local optimum and was not able
  to shorten any trajectory for many iterations.
 \end_layout
@@ -6766,7 +7115,15 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Time course of optimization for 2 Hz, 4 Hz, 6 Hz
+rogress of length of paths during the optimization of trajectory in figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Path-before-Dubins"
+
+\end_inset
+
+ for 2 Hz, 4 Hz, 6 Hz
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Time-course-of"
@@ -6809,7 +7166,15 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Time course of optimization for 8 Hz, 10 Hz, 12 Hz
+Progress of length of paths during the optimization of trajectory in figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Path-before-Dubins"
+
+\end_inset
+
+ for 8 Hz, 10 Hz, 12 Hz
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Time-course-of-1"
@@ -6848,7 +7213,15 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Time course of optimization for 14 Hz, 16 Hz, 18 Hz, 20 Hz
+Progress of length of paths during the optimization of trajectory in figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Path-before-Dubins"
+
+\end_inset
+
+ for 14 Hz, 16 Hz, 18 Hz, 20 Hz
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Time-course-of-2"
@@ -6898,7 +7271,14 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Trajectory before Dubins curves optimization
+Trajectory in experiment 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Second-experiment"
+
+\end_inset
+
+ before Dubins curves optimization
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Path-before-Dubins-1"
@@ -6920,7 +7300,7 @@ name "fig:Path-before-Dubins-1"
 
 \begin_layout Standard
 The best result of Dubins curves optimization (re-sampling of 4Hz) is shown
- in 
+ in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Path-after-Dubins-1"
@@ -6929,7 +7309,7 @@ reference "fig:Path-after-Dubins-1"
 
 .
  As we can see, trajectories are much shorter than trajectories before optimizat
-ion in 
+ion in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Path-before-Dubins-1"
@@ -6939,6 +7319,16 @@ reference "fig:Path-before-Dubins-1"
 , as in experiment 1, but curves in the upper part of figure still were
  not optimized.
  This was caused by optimization algorithm getting stuck in local optimum.
+ As shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Path-after-Dubins"
+
+\end_inset
+
+, optimizing trajectory for one UAV does not get stuck in local optimum.
+ The local optimum is caused by relative localization constraints and crossing
+ paths.
  The algorithm tried to optimize other parts and ended due to stopping condition
 s mentioned above.
  Light grey colour represents obstacle amplification.
@@ -6963,7 +7353,14 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Trajectory after Dubins curves optimization
+Trajectory in experiment 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Second-experiment"
+
+\end_inset
+
+ after Dubins curves optimization
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Path-after-Dubins-1"
@@ -6984,7 +7381,7 @@ name "fig:Path-after-Dubins-1"
 \end_layout
 
 \begin_layout Standard
-The results are shown in graph 
+The results are shown in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Re-sampling-and-optimization-1"
@@ -6993,10 +7390,10 @@ reference "fig:Re-sampling-and-optimization-1"
 
 .
  On the graph can be seen interesting results.
- Contrary to the graph from experiment 1 
+ Contrary to the graph from first experiment 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:Re-sampling-and-optimization"
+reference "sub:First-experiment"
 
 \end_inset
 
@@ -7033,7 +7430,18 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Re-sampling and optimization results graph 
+Re-sampling and optimization results graph of experiment 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Second-experiment"
+
+\end_inset
+
+.
+ Mean distance, maximal distance and minimal distance are overlapping in
+ this graph.
+ This is caused by zero standard deviation of results at the end of optimization.
+ 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Re-sampling-and-optimization-1"
@@ -7054,12 +7462,12 @@ name "fig:Re-sampling-and-optimization-1"
 \end_layout
 
 \begin_layout Standard
-Depending on re-sampling frequency, the courses of optimization are also
- different.
+Depending on re-sampling frequency, the progresses of length of paths during
+ the optimization are also different.
 \end_layout
 
 \begin_layout Standard
-In 
+In figures 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Time-course-of-3"
@@ -7080,14 +7488,14 @@ reference "fig:Time-course-of-2-1"
 
 \end_inset
 
- we can see mean values and standard deviations for different frequencies,
+, we can see mean values and standard deviations for different frequencies,
  divided into three graphs for better readability.
  The vertical lines are error bars, they show standard deviation during
  the optimization.
- Because the error bars would be too dense if they were shown for each iteration
-, only every 10th iteration is shown on graphs.
- For comparison, on each graph is shown also frequency 1 Hz, the initial
- frequency before re-sampling.
+ The error bars are shown only in every 10th iteration n graphs for better
+ readibility.
+ For comparison, frequency 1 Hz, the initial frequency before re-sampling,
+ is also shown on each graph.
  As we can see, in comparison to experiment 1, standard deviations are zero,
  so the optimization algorithm exhibits deterministic behaviour even if
  this optimization method is stochastic.
@@ -7112,7 +7520,18 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Time course of optimization for 2 Hz, 4 Hz, 6 Hz
+Progress of length of paths during the optimization of trajectory in figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Path-before-Dubins-1"
+
+\end_inset
+
+ for 2 Hz, 4 Hz, 6 Hz.
+ As shown in figure, the optimization got stuck in local optima very soon
+ for frequency 6 Hz.
+ 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Time-course-of-3"
@@ -7151,7 +7570,15 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Time course of optimization for 8 Hz, 10 Hz, 12 Hz
+Progress of length of paths during the optimization of trajectory in figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Path-before-Dubins-1"
+
+\end_inset
+
+ for 8 Hz, 10 Hz, 12 Hz.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Time-course-of-1-1"
@@ -7190,7 +7617,15 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Time course of optimization for 14 Hz, 16 Hz, 18 Hz, 20 Hz
+Progress of length of paths during the optimization of trajectory in figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Path-before-Dubins-1"
+
+\end_inset
+
+ for 14 Hz, 16 Hz, 18 Hz, 20 Hz.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Time-course-of-2-1"
@@ -7226,7 +7661,8 @@ Conclusion
 \begin_layout Standard
 This thesis contributes to the problems of autonomous surveillance with
  a novel approach by using a sampling-based algorithm for trajectory planning
- of a UAVs swarm and optimizing by Dubins curves.
+ of a swarm of UAVs and consequence optimizing of obtained trajectories
+ by Dubins curves.
  This thesis also examined the possibility of re-sampling of trajectories
  and influence of re-sampling on the optimization process.
 \end_layout
@@ -7239,18 +7675,18 @@ The goal of this thesis was to design and implement a method based on the
  The algorithm provides trajectories from a depot station to optimal positions
  in Areas of Interest in two internationally standardized formats (CSV and
  JSON).
- An easy computable cost function had to be created and implemented.
- Feasibility of trajectory in each point was ensured by an appropriate motion
- model and relative localization system.
+ An easy computable cost function was created and implemented.
+ 
 \end_layout
 
 \begin_layout Standard
-The task was approached by separating the task to more smaller subtasks.
+The task of autonomous surveillance was approached by separating the it
+ to more smaller subtasks.
  The first subtask is finding a path to a position, in which all UAVs are
  located above Areas of Interest.
- The path finding is realized by using A* algorithm to find the optimal
- guiding path and the RRT-Path algorithm uses this path to guide the space-filli
-ng tree.
+ The path finding is realized by using A* algorithm to obtain the optimal
+ guiding path.
+ The RRT-Path algorithm uses this path to guide the space-filling tree.
  The second subtask is optimization of AoIs coverage using the RRT algorithm.
  The next subtask is re-sampling of trajectories and optimizing trajectories
  by Dubins manoeuvrers, which provide us shorter trajectories than trajectories
@@ -7263,7 +7699,7 @@ ng tree.
 
 \begin_layout Standard
 The presumed use of autonomous surveillance is monitoring of a parking lot
- near supermarket, shopping centre or a company campus.
+ near supermarket, shopping centre, company campus, etc.
  The advantage of an autonomous system over static cameras is the fact the
  UAV swarm can operatively change the distribution of individual UAVs according
  to the position of cars and minimize dead angles by moving UAVs.
@@ -7281,6 +7717,8 @@ The presumed use of autonomous surveillance is monitoring of a parking lot
  Contrarily to GPS localized UAVs, swarm described in this thesis can even
  operate in hard to access areas, dense urban areas, inside buildings and
  other places with no GPS signal, thanks to the relative localization system.
+ The relative localization also enables the UAVs to fly in compact swarm,
+ which could not be achieved by using GPS due to its errors and inaccuracy.
 \end_layout
 
 \begin_layout Section
@@ -7432,6 +7870,11 @@ bibliography		Used bibliography
 \begin_layout Plain Layout
 
 videos  		Videos of VREP simulations
+\end_layout
+
+\begin_layout Plain Layout
+
+readme.txt		Brief manual for binaries
 \end_layout
 
 \begin_layout Plain Layout
