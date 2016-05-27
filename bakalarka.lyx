@@ -6003,7 +6003,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename obrazky/umlSchema.svg
-	scale 40
+	scale 37
 
 \end_inset
 
@@ -7396,7 +7396,6 @@ reference "fig:Re-sampling-and-optimization-1"
 \end_inset
 
 .
- On the graph can be seen interesting results.
  Contrary to the graph from first experiment 
 \begin_inset CommandInset ref
 LatexCommand ref

@@ -6003,7 +6003,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename obrazky/umlSchema.svg
-	scale 40
+	scale 38
 
 \end_inset
 
@@ -6472,8 +6472,15 @@ name "fig:Path-after-Dubins"
 \end_layout
 
 \begin_layout Standard
-The following table shows average total, minimal and maximal length of all
- trajectories from 100 optimizations after the re-sampling and optimization.
+The table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Re-sampling-and-optimization"
+
+\end_inset
+
+ shows average, minimal and maximal length of all trajectories from 100
+ optimizations after the re-sampling and optimization.
 \end_layout
 
 \begin_layout Standard
@@ -7389,7 +7396,6 @@ reference "fig:Re-sampling-and-optimization-1"
 \end_inset
 
 .
- On the graph can be seen interesting results.
  Contrary to the graph from first experiment 
 \begin_inset CommandInset ref
 LatexCommand ref
