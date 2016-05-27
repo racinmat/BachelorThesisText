@@ -322,198 +322,6 @@ In Prague, May 2016
 \end_inset
 
 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-thispagestyle{empty}
-\end_layout
-
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\size small
-\begin_inset space \space{}
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\noindent
-
-\size small
-\begin_inset VSpace vfill
-\end_inset
-
- 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-% nastavuje dynamické umístění následujícího textu do spodní části stránky
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subparagraph*
-Author statement for the undergraduate thesis: 
-\begin_inset Newline newline
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-I declare that the presented work was developed independently and that I
- have listed all the sources of information used within it in accordance
- with the methodical instructions for observing the ethical principles in
- the presentation of university theses.
- 
-\end_layout
-
-\begin_layout Standard
-
-\size small
-\begin_inset VSpace bigskip
-\end_inset
-
-
-\size default
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-noindent 
-\end_layout
-
-\end_inset
-
-
-\size small
- Prague, date 
-\size default
-________
-\size small
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-hspace{
-\backslash
-fill}
-\end_layout
-
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-$
-\backslash
-overline{
-\backslash
-textrm{~~~~~~~~~signature~~~}}$
-\end_layout
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
- 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-% doplňte patřičné datum, jméno a příjmení
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\size small
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-%%%   Výtisk pak na tomto míste nezapomeňte PODEPSAT!
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-%%%                                         *********
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage cleardoublepage
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -532,39 +340,6 @@ thispagestyle{plain}
 \end_inset
 
  
-\end_layout
-
-\begin_layout Standard
-
-\size small
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-%
-\backslash
-setcounter{page}{3}
-\end_layout
-
-\end_inset
-
- 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-% nastavení číslování stránek
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -766,6 +541,242 @@ In this thesis we study deployment of a swarm consisting of Unmanned Aerial
 
 \size small
 Keywords: RRT, RRT-Path, Dubins curves, UAV, swarm
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage cleardoublepage
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{plain}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\size small
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%
+\backslash
+setcounter{page}{3}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% nastavení číslování stránek
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \space{}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\size small
+\begin_inset VSpace vfill
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% nastavuje dynamické umístění následujícího textu do spodní části stránky
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subparagraph*
+Author statement for the undergraduate thesis: 
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+I declare that the presented work was developed independently and that I
+ have listed all the sources of information used within it in accordance
+ with the methodical instructions for observing the ethical principles in
+ the presentation of university theses.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\size small
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\size default
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+noindent 
+\end_layout
+
+\end_inset
+
+
+\size small
+ Prague, date 
+\size default
+________
+\size small
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hspace{
+\backslash
+fill}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+overline{
+\backslash
+textrm{~~~~~~~~~signature~~~}}$
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% doplňte patřičné datum, jméno a příjmení
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\size small
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%%%   Výtisk pak na tomto míste nezapomeňte PODEPSAT!
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%%%                                         *********
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
