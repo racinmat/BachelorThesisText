@@ -3004,9 +3004,9 @@ reference "fig:Example-of-the"
 
  in graph is calculated as 
 \begin_inset Formula 
-\[
+\begin{equation}
 length\left(p\left(q_{start},q_{goal}\right)\right)=\stackrel[q_{i}=q_{start}]{q_{goal-1}}{\sum}d\left(q_{i},q_{i+1}\right)+\stackrel[q_{i}=q_{start+1}]{q_{goal-1}}{\sum}o\left(q_{i}\right)
-\]
+\end{equation}
 
 \end_inset
 
@@ -4018,17 +4018,15 @@ In compact swarms, every UAV has to be aware of its neighbours in order
 \end_inset
 
 .
- The minimal distance is set to avoid the  UAV push air beneath them when
- they fly.
- UAVs in the Multi-Robot Systems group at CTU have weight around 3 kg, which
- means 3 kg of air needs to be pushed below UAV in order to keep it flying.
+ The minimal distance is set to avoid collisions and because UAVs push air
+ beneath them when they fly.
+ Large amount of air needs to be pushed below UAV in order to keep it flying.
  Because of this, UAVs can not fly too close to each other because of air
  currents they produce.
- The minimal distance is minimal distance in which UAVs do not affect each
- other by air currents.
- In last measurements, the minimal distance was 2 meters.
- The maximal distance needs to be set because of sensors range.
- UAVs in the Multi-Robot Systems group at CTU use on-board camera based
+ UAVs in minimal distance do not affect each other by air currents.
+ By real experiments, the minimal distance was identified as 2 meters.
+ The maximal distance needs to be set to respect the sensors range.
+ UAVs in the Multi-Robot Systems group at CTU use on-board vision based
  localization system, published in 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -4037,19 +4035,23 @@ key "Faigl2013"
 \end_inset
 
 .
- Sensors have maximal range and UAVs in bigger distance than this maximal
- range can not be seen.
- In experiments, the maximal distance was 5 meters.
+ In 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Faigl2013"
+
+\end_inset
+
+ a maximal range of sensors is specified based on pattern size and camera
+ resolution and UAVs in bigger distance than this maximal range can not
+ be seen.
+ In experiments in this thesis, the maximal distance was assumed to be 5
+ meters.
  
 \end_layout
 
 \begin_layout Standard
-In configuration of whole algorithm, number of neighbours 
-\begin_inset Formula $n$
-\end_inset
-
- is set.
- Every UAV must have 
+Each UAV must have 
 \begin_inset Formula $n$
 \end_inset
 
@@ -4061,20 +4063,20 @@ In configuration of whole algorithm, number of neighbours
 \begin_inset Formula $d_{min}<d<d_{max}$
 \end_inset
 
- in every step of configuration.
- Default setting is 
+ in each step of the motion planning.
+ Default setting 
 \begin_inset Formula $n=2$
 \end_inset
 
-.
- Computation of this relative localization is fast, but unusable for more
- than 5 UAVs.
+ was used in presented experiments.
+ Computation of this relative localization constraint is fast, but this
+ constraint is unusable for more than 5 UAVs.
  Swarm of 6 or more UAVs can split to 2 or more groups and still fit this
  relative localization constraint.
- The only solution to check whether all UAVs are in same swarm can be obtained
- by using following algorithm, which consists of two steps and uses graph
- representation.
- Every UAV is node and every pair of UAVs with distance 
+ The following algorithm, which consists of two steps and uses graph representat
+ion, is proposed to check whether all UAVs are in the same swarm.
+ Every UAV is considered as a node and every pair of UAVs with distance
+ 
 \begin_inset Formula $d$
 \end_inset
 
@@ -4082,14 +4084,14 @@ In configuration of whole algorithm, number of neighbours
 \begin_inset Formula $d_{min}<d<d_{max}$
 \end_inset
 
- are connected by an edge.
+, are connected by an edge.
  If the graph has only one connected component, all UAVs are in one swarm.
  Otherwise, the graph has more connected components, which implies UAVs
  are split into more swarms.
 \end_layout
 
 \begin_layout Standard
-In the first step, the adjacency matrix 
+In the first step of the algorithm, the adjacency matrix 
 \begin_inset Formula $A$
 \end_inset
 
@@ -4099,14 +4101,14 @@ In the first step, the adjacency matrix
 \begin_inset Formula $A$
 \end_inset
 
- is built by following pattern.
+ is built as
 \begin_inset Formula 
-\[
+\begin{equation}
 A_{i,j}=\begin{cases}
 1 & if\,d_{min}<d_{i,j}<d_{max}\\
 0 & otherwise
 \end{cases}
-\]
+\end{equation}
 
 \end_inset
 
@@ -4136,9 +4138,9 @@ is distance between
 \end_inset
 
 .
- When all nodes are visited during the traversing, the graph has only one
+ If all nodes are visited during the traversing, the graph has only one
  connected component and all UAVs are in one swarm.
- In configuration can be set whether swarm splitting is enabled or not.
+ The swarming method can be enabled or disabled in configuration.
 \end_layout
 
 \begin_layout Chapter
@@ -4162,7 +4164,7 @@ name "chap:Dubins-curves"
 \end_layout
 
 \begin_layout Standard
-Dubins curves, also called Dubins manoeuvrers or Dubins path were published
+Dubins curves, also called Dubins manoeuvrers or Dubins path, were published
  by Lester Eli Dubins in 1957 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -4171,9 +4173,10 @@ key "Dubins1957"
 \end_inset
 
 .
- Dubins path is optimal path for car-like motion model.
- Path is optimal, when car moves at constant forward speed.
- The other important constraint is the maximum steering angle 
+ Length of Dubins path is optimal path for car-like motion model and can
+ be efficiently applied also for control UAVs if the robot moves at constant
+ forward speed.
+ The important constraint is the maximum steering angle 
 \begin_inset Formula $\phi_{max}$
 \end_inset
 
@@ -5121,9 +5124,9 @@ Another implementation uses linear interpolated trajectory between UAV and
 \begin_layout Standard
 So the calculation was defined as follows
 \begin_inset Formula 
-\[
+\begin{equation}
 \mathbf{X}\left(k+1\right)_{target}=\mathbf{X}\left(k\right)_{UAV}+\frac{\left(\mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right)}{\left\Vert \mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right\Vert }\cdot const
-\]
+\end{equation}
 
 \end_inset
 
@@ -5198,7 +5201,7 @@ This has been fixed by not updating the position of the target when distance
  position of next state is still the same, so the equation describing target
  position is
 \begin_inset Formula 
-\[
+\begin{equation}
 \mathbf{X}\left(k+1\right)_{target}=\begin{cases}
 \mathbf{X}\left(k\right)_{UAV}+\frac{\left(\mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right)}{\left\Vert \mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right\Vert }\cdot const\\
 if\left\Vert \mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right\Vert <\left\Vert \mathbf{X}\left(k-1\right)_{ns}-\mathbf{X}\left(k-1\right)_{UAV}\right\Vert \\
@@ -5206,7 +5209,7 @@ if\left\Vert \mathbf{X}\left(k\right)_{ns}-\mathbf{X}\left(k\right)_{UAV}\right\
 \mathbf{X}\left(k\right)_{target}\\
 else
 \end{cases}
-\]
+\end{equation}
 
 \end_inset
 
