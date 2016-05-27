@@ -4721,8 +4721,8 @@ name "chap:Path-resampling"
 \end_layout
 
 \begin_layout Standard
-Motion model in the RRT-Path algorithm uses constant input in range from
- 0.5 to 1 second.
+Motion model in the RRT-Path algorithm uses constant control input in time
+ interval from 0.5 to 1 second.
  Smaller interval for constant input causes RRT-Path algorithm to run for
  too long.
  When using too short constant input interval, the tree has too many nodes,
@@ -5068,11 +5068,16 @@ V-REP simulations
 \end_layout
 
 \begin_layout Standard
-V-REP is an acronym for Virtual robot experimentation platform, a simulator
- developed by Coppelia Robotics, providing an advanced environment for testing
- and simulations of robots of all types.
- The V-REP environment is free and open-souce for educational purposes and
- also has commercial licence.
+V-REP is an acronym for Virtual robot experimentation platform 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "vrep"
+
+\end_inset
+
+, a simulator developed by Coppelia Robotics, providing an advanced environment
+ for testing and simulations of robots of all types.
+ The V-REP environment is free and open-souce for educational purposes.
  The environment takes in account certain physical laws like gravity, inertia
  or friction, which enables to truthfully verify applicability for deployment
  of UAVs in the real world.
@@ -5164,14 +5169,7 @@ where
 But as mentioned earlier, even this approach did not go well.
  In long passages, where trajectory did not turn, UAVs increased their velocity
  and inertia, which made them harder to turn.
- The problem of overshooting is shown in figures 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Map-with-UAV"
-
-\end_inset
-
- and 
+ The problem of overshooting is shown in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:UAV-overshoot"
@@ -5225,41 +5223,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-\begin_inset Graphics
-	filename obrazky/mapWithPassage.png
-	lyxscale 40
-	scale 40
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Map with UAV overshoot 
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Map-with-UAV"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
@@ -5278,6 +5241,30 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
 \align center
 \begin_inset Graphics
 	filename obrazky/overshoot3_2.png
@@ -5287,14 +5274,30 @@ status open
 \end_inset
 
 
-\begin_inset space ~
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
 \end_inset
 
 
-\begin_inset space ~
+\end_layout
+
 \end_inset
 
 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename obrazky/overshoot4.png
 	lyxscale 50
@@ -5309,7 +5312,31 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-UAV overshoot
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+UAV overshoot.
+ In a) we see UAVs flying from the right to the left.
+ Every UAV follows its target, marked with a coloured circle.
+ In the b) the planned trajectory has a curve and targets start heading
+ upwards.
+ In c) all UAVs have too big inertia to follow its targets precisely and
+ they overshoot.
+ 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:UAV-overshoot"
@@ -5324,9 +5351,253 @@ name "fig:UAV-overshoot"
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Simulations
+\end_layout
+
+\begin_layout Standard
+Trajectories provided by the algorithm proposed in this theses were simulated
+ and verified in the V-REP environment.
+ Screenshots from the simulation are in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:VREP-simulation-of"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
 \begin_layout Plain Layout
-Here can be seen 3 iterations.
- Next state is changed during 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/bscap0000.jpg
+	lyxscale 30
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+t = 0 s
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/bscap0001.jpg
+	lyxscale 30
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+t = 25 s
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/bscap0002.jpg
+	lyxscale 30
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+t = 45 s
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/bscap0003.jpg
+	lyxscale 30
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+t = 71 s
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/bscap0005.jpg
+	lyxscale 30
+	scale 29.5
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+t = 133 s
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obrazky/bscap0006.jpg
+	lyxscale 30
+	scale 29.5
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+t = 192 s
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+VREP simulation of trajectories
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:VREP-simulation-of"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -7086,23 +7357,23 @@ This thesis contributes to the problems of autonomous surveillance with
 \end_layout
 
 \begin_layout Standard
-The goal of this thesis was to design and implement and algorithm based
- on RRT-Path algorithm for motion planning of a swarm of cooperating unmanned
+The goal of this thesis was to design and implement a method based on the
+ RRT-Path algorithm for motion planning of a swarm of cooperating unmanned
  aerial vehicles in the task of autonomous surveillance, optimize it by
  Dubins curves and simulate the flight of the swarm in V-REP platform.
  The algorithm provides trajectories from a depot station to optimal positions
  in Areas of Interest in two internationally standardized formats (CSV and
  JSON).
  An easy computable cost function had to be created and implemented.
- Feasibility of trajectory in each point has been ensured by an appropriate
- motion model and relative localization system.
+ Feasibility of trajectory in each point was ensured by an appropriate motion
+ model and relative localization system.
 \end_layout
 
 \begin_layout Standard
 The task was approached by separating the task to more smaller subtasks.
- The first subtask is finding a trajectory to a position, in which all UAVs
- are located above Areas of Interest.
- The trajectory finding is realized by using A* algorithm to find the optimal
+ The first subtask is finding a path to a position, in which all UAVs are
+ located above Areas of Interest.
+ The path finding is realized by using A* algorithm to find the optimal
  guiding path and the RRT-Path algorithm uses this path to guide the space-filli
 ng tree.
  The second subtask is optimization of AoIs coverage using the RRT algorithm.

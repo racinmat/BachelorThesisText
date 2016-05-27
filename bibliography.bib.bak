@@ -240,6 +240,20 @@
   url =   {https://droneapps.co/case-study-drones-to-transform-viticulture/}
 }
 
+@InProceedings{Vonasek09:158239,
+  author =    {Vonasek, V. and Faigl, J. and Krajnik, T. and Preucil, L.},
+  title =     {{RRT-Path: a guided Rapidly exploring Random Tree}},
+  booktitle = {{Robot Motion and Control 2009}},
+  year =      {2009},
+  pages =     {307--316},
+  address =   {Heidelberg},
+  publisher = {Springer},
+  file =      {romoco2009rrtpath.pdf:data/papers/romoco2009rrtpath.pdf:PDF},
+  isbn =      {978-1-84882-984-8},
+  issn =      {0302-9743},
+  language =  {English}
+}
+
 @PhdThesis{Vonasek2015,
   author = {Vojtěch Vonásek},
   title =  {A guided approach to sampling-based motion planning},
@@ -255,7 +269,14 @@
   year =    {2015},
   volume =  {68},
   pages =   {116 - 128},
-  pdf =     {data/papers/rasmod2015modular.pdf}
+  file =    {rasmod2015modular.pdf:data/papers/rasmod2015modular.pdf:PDF}
+}
+
+@Misc{vrep,
+  title = {V-REP},
+  month = jul,
+  year =  {2015},
+  url =   {https://droneapps.co/case-study-drones-to-transform-viticulture/}
 }
 
 @Misc{washingtonpost2013,
